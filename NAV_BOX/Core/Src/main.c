@@ -35,8 +35,7 @@
 #include "ubx_nav_sol.h"
 #include "nslp_dma.h"
 
-#include "ekfNavINS.h"
-
+#include "NBKF.h"
 
 /* USER CODE END Includes */
 
@@ -56,6 +55,7 @@
 #define type_GPS 0x0a 		//10
 #define type_BNO055 0x0b	//11
 #define type_BMP 0x0c		//12
+#define type_KF 0x0d		//13
 
 #define rx_buffer_size 60 //GPS uart 1 recieve NAV-SOL packed size
 
@@ -76,7 +76,7 @@ DMA_HandleTypeDef hdma_usart2_rx;
 
 float temperature;
 int32_t pressure;
-bno055_vector_t v;
+bno055_vector_t g;
 bno055_vector_t ac;
 bno055_vector_t mag;
 bno055_calibration_state_t cal;
@@ -100,11 +100,11 @@ struct Position {
 	float altitude;
 	uint32_t fixType;
 	uint32_t numSV;
+  bool valid;
 
 	uint32_t time;
 };
-
-struct Position pos = {
+struct Position GPS_data = {
 		.latitude = 1.0,
 		.longitude = 0.0,
 		.altitude = 0.0,
@@ -114,12 +114,11 @@ struct Position pos = {
 
 //structure of BNO055 payload (variables of type DOUBLE)
 struct BNO055_payload {
-
 	//uint32_t calib; //8 --> 32 bit
 
-	double vx;
-	double vy;
-	double vz;
+	double gx;
+	double gy;
+	double gz;
 
 	double ax;
 	double ay;
@@ -139,11 +138,22 @@ struct BMP_payload {
 
 	uint32_t time;
 };
-
 struct BMP_payload BMP_data;
 
+struct KF_payload {
+  double latitude;
+  double longitude;
+  float altitude;
+  float vx;
+  float vy;
+  float vz;
+
+  uint32_t time;
+};
+struct KF_payload KF_data;
 
 //----------------------------------------------------------------------------
+//GPS
 UBX_NavSol rawData;
 UBX_NavSolData solData;
 
@@ -151,6 +161,11 @@ uint8_t rx_buffer[rx_buffer_size]; //size of data recieved from GPS
 uint8_t tx_buffer[sizeof(struct Position)]; //recieving size of DMA message
 
 nslp_instance_t nslp;
+
+//NBKF - KF kalman filter variables
+NBKF_t navFilter;
+NBKF_Output_t navOutput;
+float dt = 10; //10ms time step
 
 /* USER CODE END PV */
 
@@ -187,415 +202,6 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
 	nslp_uart_tx_cplt_handler(huart);
-}
-
-void ekfNavINS::ekf_init(uint64_t time, double vn,double ve,double vd,double lat,double lon,double alt,float p,float q,float r,float ax,float ay,float az,float hx,float hy, float hz) {
-  // grab initial gyro values for biases
-  gbx = p;
-  gby = q;
-  gbz = r;
-  std::tie(theta,phi,psi) = getPitchRollYaw(ax, ay, az, hx, hy, hz);
-  // euler to quaternion
-  quat = toQuaternion(phi, theta, psi);
-  // Assemble the matrices
-  // ... gravity
-  grav(2,0) = G;
-  // ... H
-  H.block(0,0,5,5) = Eigen::Matrix<float,5,5>::Identity();
-  // ... Rw
-  Rw.block(0,0,3,3) = powf(SIG_W_A,2.0f) * Eigen::Matrix<float,3,3>::Identity();
-  Rw.block(3,3,3,3) = powf(SIG_W_G,2.0f) * Eigen::Matrix<float,3,3>::Identity();
-  Rw.block(6,6,3,3) = 2.0f * powf(SIG_A_D,2.0f) / TAU_A*Eigen::Matrix<float,3,3>::Identity();
-  Rw.block(9,9,3,3) = 2.0f * powf(SIG_G_D,2.0f) / TAU_G*Eigen::Matrix<float,3,3>::Identity();
-  // ... P
-  P.block(0,0,3,3) = powf(P_P_INIT,2.0f) * Eigen::Matrix<float,3,3>::Identity();
-  P.block(3,3,3,3) = powf(P_V_INIT,2.0f) * Eigen::Matrix<float,3,3>::Identity();
-  P.block(6,6,2,2) = powf(P_A_INIT,2.0f) * Eigen::Matrix<float,2,2>::Identity();
-  P(8,8) = powf(P_HDG_INIT,2.0f);
-  P.block(9,9,3,3) = powf(P_AB_INIT,2.0f) * Eigen::Matrix<float,3,3>::Identity();
-  P.block(12,12,3,3) = powf(P_GB_INIT,2.0f) * Eigen::Matrix<float,3,3>::Identity();
-  // ... R
-  R.block(0,0,2,2) = powf(SIG_GPS_P_NE,2.0f) * Eigen::Matrix<float,2,2>::Identity();
-  R(2,2) = powf(SIG_GPS_P_D,2.0f);
-  R.block(3,3,2,2) = powf(SIG_GPS_V_NE,2.0f) * Eigen::Matrix<float,2,2>::Identity();
-  R(5,5) = powf(SIG_GPS_V_D,2.0f);
-  // .. then initialize states with GPS Data
-  lat_ins = lat;
-  lon_ins = lon;
-  alt_ins = alt;
-  vn_ins = vn;
-  ve_ins = ve;
-  vd_ins = vd;
-  // specific force
-  f_b(0,0) = ax;
-  f_b(1,0) = ay;
-  f_b(2,0) = az;
-  /* initialize the time */
-  _tprev = time;
-}
-
-void ekfNavINS::ekf_update( uint64_t time/*, unsigned long TOW*/, double vn,double ve,double vd,double lat,double lon,double alt,
-                          float p,float q,float r,float ax,float ay,float az,float hx,float hy, float hz ) {
-  if (!initialized_) {
-    ekf_init(time, vn, ve, vd, lat, lon, alt, p, q, r, ax, ay, az, hx, hy, hz);
-    // initialized flag
-    initialized_ = true;
-  } else {
-    // get the change in time
-    float _dt = ((float)(time - _tprev)) / 1e6;
-    // Update Gyro and Accelerometer biases
-    updateBias(ax, ay, az, p, q, r);
-    // Update INS values
-    updateINS();
-    // Attitude Update
-    dq(0) = 1.0f;
-    dq(1) = 0.5f*om_ib(0,0)*_dt;
-    dq(2) = 0.5f*om_ib(1,0)*_dt;
-    dq(3) = 0.5f*om_ib(2,0)*_dt;
-    quat = qmult(quat,dq);
-    quat.normalize();
-    // Avoid quaternion flips sign
-    if (quat(0) < 0) {
-      quat = -1.0f*quat;
-    }
-    // AHRS Transformations
-    C_N2B = quat2dcm(quat);
-    C_B2N = C_N2B.transpose();
-    // obtain euler angles from quaternion
-    std::tie(phi, theta, psi) = toEulerAngles(quat);
-    // Velocity Update
-    dx = C_B2N*f_b + grav;
-    vn_ins += _dt*dx(0,0);
-    ve_ins += _dt*dx(1,0);
-    vd_ins += _dt*dx(2,0);
-    // Position Update
-    dxd = llarate(V_ins,lla_ins);
-    lat_ins += _dt*dxd(0,0);
-    lon_ins += _dt*dxd(1,0);
-    alt_ins += _dt*dxd(2,0);
-    // Jacobian update
-    updateJacobianMatrix();
-    // Update process noise and covariance time
-    updateProcessNoiseCovarianceTime(_dt);
-    // Gps measurement update
-    //if ((TOW - previousTOW) > 0) {
-    if ((time - _tprev) > 0) {
-      //previousTOW = TOW;
-      lla_gps(0,0) = lat;
-      lla_gps(1,0) = lon;
-      lla_gps(2,0) = alt;
-      V_gps(0,0) = vn;
-      V_gps(1,0) = ve;
-      V_gps(2,0) = vd;
-      // Update INS values
-      updateINS();
-      // Create measurement Y
-      updateCalculatedVsPredicted();
-      // Kalman gain
-      K = P*H.transpose()*(H*P*H.transpose() + R).inverse();
-      // Covariance update
-      P = (Eigen::Matrix<float,15,15>::Identity()-K*H)*P*(Eigen::Matrix<float,15,15>::Identity()-K*H).transpose() + K*R*K.transpose();
-      // State update
-      x = K*y;
-      // Update the results
-      update15statesAfterKF();
-      _tprev = time;
-    }
-    // Get the new Specific forces and Rotation Rate
-    updateBias(ax, ay, az, p, q, r);
-  }
-}
-
-void ekfNavINS::ekf_update(uint64_t time) {
-  std::shared_lock lock(shMutex);
-  ekf_update(time, /*0,*/ pGpsVelDat->vN, pGpsVelDat->vE, pGpsVelDat->vD,
-                      pGpsPosDat->lat, pGpsPosDat->lon, pGpsPosDat->alt,
-                      pImuDat->gyroX, pImuDat->gyroY, pImuDat->gyroZ,
-                      pImuDat->acclX, pImuDat->acclY, pImuDat->acclZ,
-                      pMagDat->hX, pMagDat->hY, pMagDat->hZ);
-}
-
-bool ekfNavINS::imuDataUpdateEKF(const imuDataPtr imu, ekfState* ekfOut) {
-  {
-    std::unique_lock lock(shMutex);
-    pImuDat = imu;
-    is_imu_initialized = true;
-  }
-  if (is_gps_pos_initialized && is_gps_vel_initialized && is_mag_initialized && is_imu_initialized) {
-    ekf_update(pImuDat->imu_time);
-    //
-    // Update ekf output
-    //
-    ekfOut->timestamp = pImuDat->imu_time;
-    ekfOut->lla = Eigen::Vector3d(getLatitude_rad(), getLongitude_rad(), getAltitude_m());
-    ekfOut->velNED = Eigen::Vector3d(getVelNorth_ms(), getVelEast_ms(), getVelDown_ms());
-    ekfOut->linear = f_b;
-    ekfOut->angular = om_ib;
-    ekfOut->quat = toQuaternion(getHeading_rad(), getPitch_rad(), getRoll_rad());
-    ekfOut->cov = P;
-    ekfOut->accl_bias = Eigen::Vector3d(getAccelBiasX_mss(), getAccelBiasY_mss(), getAccelBiasZ_mss());
-    ekfOut->gyro_bias = Eigen::Vector3d(getGyroBiasX_rads(), getGyroBiasY_rads(), getGyroBiasZ_rads());
-    return true;
-  } else {
-    return false;
-  }
-}
-
-void ekfNavINS::magDataUpdateEKF(const magDataPtr mag) {
-  std::unique_lock lock(shMutex);
-  pMagDat = mag;
-  is_mag_initialized = true;
-}
-
-void ekfNavINS::gpsPosDataUpdateEKF(const gpsPosDataPtr pos) {
-  std::unique_lock lock(shMutex);
-  pGpsPosDat = pos;
-  is_gps_pos_initialized = true;
-}
-
-void ekfNavINS::gpsVelDataUpdateEKF(const gpsVelDataPtr vel) {
-  std::unique_lock lock(shMutex);
-  pGpsVelDat = vel;
-  is_gps_vel_initialized = true;
-}
-
-void ekfNavINS::updateINS() {
-  // Update lat, lng, alt, velocity INS values to matrix
-  lla_ins(0,0) = lat_ins;
-  lla_ins(1,0) = lon_ins;
-  lla_ins(2,0) = alt_ins;
-  V_ins(0,0) = vn_ins;
-  V_ins(1,0) = ve_ins;
-  V_ins(2,0) = vd_ins;
-}
-
-std::tuple<float,float,float> ekfNavINS::getPitchRollYaw(float ax, float ay, float az, float hx, float hy, float hz) {
-  // initial attitude and heading
-  theta = asinf(ax/G);
-  phi = -asinf(ay/(G*cosf(theta)));
-  // magnetic heading correction due to roll and pitch angle
-  Bxc = hx*cosf(theta) + (hy*sinf(phi) + hz*cosf(phi))*sinf(theta);
-  Byc = hy*cosf(phi) - hz*sinf(phi);
-  // finding initial heading
-  psi = -atan2f(Byc,Bxc);
-  return (std::make_tuple(theta,phi,psi));
-}
-
-void ekfNavINS::updateCalculatedVsPredicted() {
-  // Position, converted to NED
-  pos_ecef_ins = lla2ecef(lla_ins);
-  pos_ecef_gps = lla2ecef(lla_gps);
-  pos_ned_gps = ecef2ned(pos_ecef_gps - pos_ecef_ins, lla_ins);
-  // Update the difference between calculated and predicted
-  y(0,0) = (float)(pos_ned_gps(0,0));
-  y(1,0) = (float)(pos_ned_gps(1,0));
-  y(2,0) = (float)(pos_ned_gps(2,0));
-  y(3,0) = (float)(V_gps(0,0) - V_ins(0,0));
-  y(4,0) = (float)(V_gps(1,0) - V_ins(1,0));
-  y(5,0) = (float)(V_gps(2,0) - V_ins(2,0));
-}
-
-void ekfNavINS::update15statesAfterKF() {
-  estmimated_ins = llarate ((x.block(0,0,3,1)).cast<double>(), lat_ins, alt_ins);
-  lat_ins += estmimated_ins(0,0);
-  lon_ins += estmimated_ins(1,0);
-  alt_ins += estmimated_ins(2,0);
-  vn_ins = vn_ins + x(3,0);
-  ve_ins = ve_ins + x(4,0);
-  vd_ins = vd_ins + x(5,0);
-  // Attitude correction
-  dq(0,0) = 1.0f;
-  dq(1,0) = x(6,0);
-  dq(2,0) = x(7,0);
-  dq(3,0) = x(8,0);
-  quat = qmult(quat,dq);
-  quat.normalize();
-  // obtain euler angles from quaternion
-  std::tie(phi, theta, psi) = toEulerAngles(quat);
-  abx = abx + x(9,0);
-  aby = aby + x(10,0);
-  abz = abz + x(11,0);
-  gbx = gbx + x(12,0);
-  gby = gby + x(13,0);
-  gbz = gbz + x(14,0);
-}
-
-void ekfNavINS::updateBias(float ax,float ay,float az,float p,float q, float r) {
-  f_b(0,0) = ax - abx;
-  f_b(1,0) = ay - aby;
-  f_b(2,0) = az - abz;
-  om_ib(0,0) = p - gbx;
-  om_ib(1,0) = q - gby;
-  om_ib(2,0) = r - gbz;
-}
-
-void ekfNavINS::updateProcessNoiseCovarianceTime(float _dt) {
-  PHI = Eigen::Matrix<float,15,15>::Identity()+Fs*_dt;
-  // Process Noise
-  Gs.setZero();
-  Gs.block(3,0,3,3) = -C_B2N;
-  Gs.block(6,3,3,3) = -0.5f*Eigen::Matrix<float,3,3>::Identity();
-  Gs.block(9,6,6,6) = Eigen::Matrix<float,6,6>::Identity();
-  // Discrete Process Noise
-  Q = PHI*_dt*Gs*Rw*Gs.transpose();
-  Q = 0.5f*(Q+Q.transpose());
-  // Covariance Time Update
-  P = PHI*P*PHI.transpose()+Q;
-  P = 0.5f*(P+P.transpose());
-}
-
-void ekfNavINS::updateJacobianMatrix() {
-    // Jacobian
-  Fs.setZero();
-  // ... pos2gs
-  Fs.block(0,3,3,3) = Eigen::Matrix<float,3,3>::Identity();
-  // ... gs2pos
-  Fs(5,2) = -2.0f*G/EARTH_RADIUS;
-  // ... gs2att
-  Fs.block(3,6,3,3) = -2.0f*C_B2N*sk(f_b);
-  // ... gs2acc
-  Fs.block(3,9,3,3) = -C_B2N;
-  // ... att2att
-  Fs.block(6,6,3,3) = -sk(om_ib);
-  // ... att2gyr
-  Fs.block(6,12,3,3) = -0.5f*Eigen::Matrix<float,3,3>::Identity();
-  // ... Accel Markov Bias
-  Fs.block(9,9,3,3) = -1.0f/TAU_A*Eigen::Matrix<float,3,3>::Identity();
-  Fs.block(12,12,3,3) = -1.0f/TAU_G*Eigen::Matrix<float,3,3>::Identity();
-}
-
-// This function gives a skew symmetric matrix from a given vector w
-Eigen::Matrix<float,3,3> ekfNavINS::sk(Eigen::Matrix<float,3,1> w) {
-  Eigen::Matrix<float,3,3> C;
-  C(0,0) = 0.0f;    C(0,1) = -w(2,0); C(0,2) = w(1,0);
-  C(1,0) = w(2,0);  C(1,1) = 0.0f;    C(1,2) = -w(0,0);
-  C(2,0) = -w(1,0); C(2,1) = w(0,0);  C(2,2) = 0.0f;
-  return C;
-}
-
-constexpr std::pair<double, double> ekfNavINS::earthradius(double lat) {
-  double denom = fabs(1.0 - (ECC2 * pow(sin(lat),2.0)));
-  double Rew = EARTH_RADIUS / sqrt(denom);
-  double Rns = EARTH_RADIUS * (1.0-ECC2) / (denom*sqrt(denom));
-  return (std::make_pair(Rew, Rns));
-}
-
-// This function calculates the rate of change of latitude, longitude, and altitude.
-Eigen::Matrix<double,3,1> ekfNavINS::llarate(Eigen::Matrix<double,3,1> V,Eigen::Matrix<double,3,1> lla) {
-  double Rew, Rns, denom;
-  Eigen::Matrix<double,3,1> lla_dot;
-  std::tie(Rew, Rns) = earthradius(lla(0,0));
-  lla_dot(0,0) = V(0,0)/(Rns + lla(2,0));
-  lla_dot(1,0) = V(1,0)/((Rew + lla(2,0))*cos(lla(0,0)));
-  lla_dot(2,0) = -V(2,0);
-  return lla_dot;
-}
-
-// This function calculates the rate of change of latitude, longitude, and altitude.
-Eigen::Matrix<double,3,1> ekfNavINS::llarate(Eigen::Matrix<double,3,1> V, double lat, double alt) {
-  Eigen::Matrix<double,3,1> lla;
-  lla(0,0) = lat;
-  lla(1,0) = 0.0; // Not used
-  lla(2,0) = alt;
-  return llarate(V, lla);
-}
-
-// This function calculates the ECEF Coordinate given the Latitude, Longitude and Altitude.
-Eigen::Matrix<double,3,1> ekfNavINS::lla2ecef(Eigen::Matrix<double,3,1> lla) {
-  double Rew, denom;
-  Eigen::Matrix<double,3,1> ecef;
-  std::tie(Rew, std::ignore) = earthradius(lla(0,0));
-  ecef(0,0) = (Rew + lla(2,0)) * cos(lla(0,0)) * cos(lla(1,0));
-  ecef(1,0) = (Rew + lla(2,0)) * cos(lla(0,0)) * sin(lla(1,0));
-  ecef(2,0) = (Rew * (1.0 - ECC2) + lla(2,0)) * sin(lla(0,0));
-  return ecef;
-}
-
-// This function converts a vector in ecef to ned coordinate centered at pos_ref.
-Eigen::Matrix<double,3,1> ekfNavINS::ecef2ned(Eigen::Matrix<double,3,1> ecef,Eigen::Matrix<double,3,1> pos_ref) {
-  Eigen::Matrix<double,3,1> ned;
-  ned(1,0)=-sin(pos_ref(1,0))*ecef(0,0) + cos(pos_ref(1,0))*ecef(1,0);
-  ned(0,0)=-sin(pos_ref(0,0))*cos(pos_ref(1,0))*ecef(0,0)-sin(pos_ref(0,0))*sin(pos_ref(1,0))*ecef(1,0)+cos(pos_ref(0,0))*ecef(2,0);
-  ned(2,0)=-cos(pos_ref(0,0))*cos(pos_ref(1,0))*ecef(0,0)-cos(pos_ref(0,0))*sin(pos_ref(1,0))*ecef(1,0)-sin(pos_ref(0,0))*ecef(2,0);
-  return ned;
-}
-
-// quaternion to dcm
-Eigen::Matrix<float,3,3> ekfNavINS::quat2dcm(Eigen::Matrix<float,4,1> q) {
-  Eigen::Matrix<float,3,3> C_N2B;
-  C_N2B(0,0) = 2.0f*powf(q(0,0),2.0f)-1.0f + 2.0f*powf(q(1,0),2.0f);
-  C_N2B(1,1) = 2.0f*powf(q(0,0),2.0f)-1.0f + 2.0f*powf(q(2,0),2.0f);
-  C_N2B(2,2) = 2.0f*powf(q(0,0),2.0f)-1.0f + 2.0f*powf(q(3,0),2.0f);
-
-  C_N2B(0,1) = 2.0f*q(1,0)*q(2,0) + 2.0f*q(0,0)*q(3,0);
-  C_N2B(0,2) = 2.0f*q(1,0)*q(3,0) - 2.0f*q(0,0)*q(2,0);
-
-  C_N2B(1,0) = 2.0f*q(1,0)*q(2,0) - 2.0f*q(0,0)*q(3,0);
-  C_N2B(1,2) = 2.0f*q(2,0)*q(3,0) + 2.0f*q(0,0)*q(1,0);
-
-  C_N2B(2,0) = 2.0f*q(1,0)*q(3,0) + 2.0f*q(0,0)*q(2,0);
-  C_N2B(2,1) = 2.0f*q(2,0)*q(3,0) - 2.0f*q(0,0)*q(1,0);
-  return C_N2B;
-}
-
-// quaternion multiplication
-Eigen::Matrix<float,4,1> ekfNavINS::qmult(Eigen::Matrix<float,4,1> p, Eigen::Matrix<float,4,1> q) {
-  Eigen::Matrix<float,4,1> r;
-  r(0,0) = p(0,0)*q(0,0) - (p(1,0)*q(1,0) + p(2,0)*q(2,0) + p(3,0)*q(3,0));
-  r(1,0) = p(0,0)*q(1,0) + q(0,0)*p(1,0) + p(2,0)*q(3,0) - p(3,0)*q(2,0);
-  r(2,0) = p(0,0)*q(2,0) + q(0,0)*p(2,0) + p(3,0)*q(1,0) - p(1,0)*q(3,0);
-  r(3,0) = p(0,0)*q(3,0) + q(0,0)*p(3,0) + p(1,0)*q(2,0) - p(2,0)*q(1,0);
-  return r;
-}
-
-// bound angle between -180 and 180
-float ekfNavINS::constrainAngle180(float dta) {
-  if(dta >  M_PI) dta -= (M_PI*2.0f);
-  if(dta < -M_PI) dta += (M_PI*2.0f);
-  return dta;
-}
-
-// bound angle between 0 and 360
-float ekfNavINS::constrainAngle360(float dta){
-  dta = fmod(dta,2.0f*M_PI);
-  if (dta < 0)
-    dta += 2.0f*M_PI;
-  return dta;
-}
-
-Eigen::Matrix<float,4,1> ekfNavINS::toQuaternion(float yaw, float pitch, float roll) {
-    float cy = cosf(yaw * 0.5f);
-    float sy = sinf(yaw * 0.5f);
-    float cp = cosf(pitch * 0.5f);
-    float sp = sinf(pitch * 0.5f);
-    float cr = cosf(roll * 0.5f);
-    float sr = sinf(roll * 0.5f);
-    Eigen::Matrix<float,4,1> q;
-    q(0) = cr * cp * cy + sr * sp * sy; // w
-    q(1) = cr * cp * sy - sr * sp * cy; // x
-    q(2) = cr * sp * cy + sr * cp * sy; // y
-    q(3) = sr * cp * cy - cr * sp * sy; // z
-    return q;
-}
-
-std::tuple<float, float, float> ekfNavINS::toEulerAngles(Eigen::Matrix<float,4,1> quat) {
-    float roll, pitch, yaw;
-    // roll (x-axis rotation)
-    float sinr_cosp = 2.0f * (quat(0,0)*quat(1,0)+quat(2,0)*quat(3,0));
-    float cosr_cosp = 1.0f - 2.0f * (quat(1,0)*quat(1,0)+quat(2,0)*quat(2,0));
-    roll = atan2f(sinr_cosp, cosr_cosp);
-    // pitch (y-axis rotation)
-    double sinp = 2.0f * (quat(0,0)*quat(2,0) - quat(1,0)*quat(3,0));
-    //angles.pitch = asinf(-2.0f*(quat(1,0)*quat(3,0)-quat(0,0)*quat(2,0)));
-    if (std::abs(sinp) >= 1)
-        pitch = std::copysign(M_PI / 2.0f, sinp); // use 90 degrees if out of range
-    else
-        pitch = asinf(sinp);
-    // yaw (z-axis rotation)
-    float siny_cosp = 2.0f * (quat(1,0)*quat(2,0)+quat(0,0)*quat(3,0));
-    float cosy_cosp = 1.0f - 2.0f * (quat(2,0)*quat(2,0)+quat(3,0)*quat(3,0));
-    yaw = atan2f(siny_cosp, cosy_cosp);
-    return std::make_tuple(roll, pitch, yaw);
 }
 
 /* USER CODE END PFP */
@@ -640,7 +246,9 @@ int main(void)
 	MX_USART2_UART_Init();
 	MX_I2C1_Init();
 	MX_CRC_Init();
+
 	/* USER CODE BEGIN 2 */
+
 	//------------------------NSLP CODE------------------------
 	nslp_init(&nslp, &huart2, &hcrc, 16, 0xAA);
 	uint32_t lastTime = 0;
@@ -650,24 +258,30 @@ int main(void)
 	//format and fill the nslp_packet for transmition UART2
 	nslp_packet_t pos_packet = {
 			.receiver = 0xFF,
-			.type = type_GPS,
+			.type = type_GPS, //10 - A
 			.size = sizeof(struct Position),
-			.payload = (uint8_t*)&pos
+			.payload = (uint8_t*)&GPS_data
 	};
 
 	nslp_packet_t BNO_packet = {
 			.receiver = 0xFF,
-			.type = type_BNO055,
+			.type = type_BNO055, //11 - B
 			.size = sizeof(struct BNO055_payload),
 			.payload = (uint8_t*)&BNO055_data
 	};
 
 	nslp_packet_t BMP_packet = {
 			.receiver = 0xFF,
-			.type = type_BMP,
+			.type = type_BMP, // 12 - C
 			.size = sizeof(struct BMP_payload),
 			.payload = (uint8_t*)&BMP_data
 	};
+
+  nslp_packet_t KF_packet = {
+      .receiver = 0xFF,
+      .type = type_KF, //13 - D
+      .size = sizeof(struct KF_payload),
+      .payload = (uint8_t*)&KF_data
 	//------------------------NSLP CODE------------------------
 
 	__HAL_DMA_ENABLE_IT(&hdma_usart1_rx, DMA_IT_TC | DMA_IT_HT);
@@ -684,6 +298,9 @@ int main(void)
 	bno055_assignI2C(&hi2c1);
 	bno055_setup();
 	bno055_setOperationModeNDOF();
+
+	//NBKF Kalman filter inplementation innitialization
+	NBKF_Init(&navFilter, dt);
 
 	/* USER CODE END 2 */
 
@@ -718,51 +335,65 @@ int main(void)
 			uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
 
 			//pass the parsed data to Position pos packet frame
-			pos.latitude = solData.latitude_deg;
-			pos.longitude = solData.longitude_deg;
-			pos.altitude = solData.height_m;
-			pos.fixType = solData.gpsFix;
-			pos.numSV = solData.numSV;
+			GPS_data.latitude = solData.latitude_deg;
+			GPS_data.longitude = solData.longitude_deg;
+			GPS_data.altitude = solData.height_m;
+			GPS_data.fixType = solData.gpsFix;
+			GPS_data.numSV = solData.numSV;
+			GPS_data.valid = (GPS_data.fixType > 0) ? true : false; //valid if fixType is greater than 0
 
-			pos.time = HAL_GetTick();
+			GPS_data.time = HAL_GetTick();
 
 			parsed_GPS = true;
+
+      //update NBKF KF kalman filter with ne data
+      NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
 		}
 //-------------------parse data from GPS------------------------
 
 //-------------------parse data from I2C------------------------
 		/* Reads BNO055 absolute position sensor*/
-		//cal = bno055_getCalibrationState();		//calibration state 0-3 how good the estimate is
-		v = bno055_getVectorEuler(); 			//absolute position
-		ac = bno055_getVectorAccelerometer(); 	//acceleration
-		mag = bno055_getVectorMagnetometer(); 	//magnetic vector
+      //cal = bno055_getCalibrationState();		//calibration state 0-3 how good the estimate is
+      g = bno055_getVectorGyroscope(); 			//absolute position
+      ac = bno055_getVectorAccelerometer(); 	//acceleration
+      mag = bno055_getVectorMagnetometer(); 	//magnetic vector
 
-		//BNO055_data.calib = cal.sys;
+		  //BNO055_data.calib = cal.sys;
+      BNO055_data.gx = g.x;
+      BNO055_data.gy = g.y;
+      BNO055_data.gz = g.z;
 
-		BNO055_data.vx = v.x;
-		BNO055_data.vy = v.y;
-		BNO055_data.vz = v.z;
+      BNO055_data.ax = ac.x;
+      BNO055_data.ay = ac.y;
+      BNO055_data.az = ac.z;
 
-		BNO055_data.ax = ac.x;
-		BNO055_data.ay = ac.y;
-		BNO055_data.az = ac.z;
+      BNO055_data.mx = mag.x;
+      BNO055_data.my = mag.y;
+      BNO055_data.mz = mag.z;
 
-		BNO055_data.mx = mag.x;
-		BNO055_data.my = mag.y;
-		BNO055_data.mz = mag.z;
-		
-		BNO055_data.time = HAL_GetTick();
+      BNO055_data.time = HAL_GetTick();
 
-		/* Reads temperature. */
+    //-------------------parse data from I2C------------------------
+		//reads pressure and temperature from BMP180 sensor
 		temperature = BMP180_GetRawTemperature();
-		/* Reads pressure. */
 		pressure = BMP180_GetPressure();
-
+    //write data to NSLP paylaod
 		BMP_data.temp = temperature;
 		BMP_data.press = pressure;
 
 		BMP_data.time = HAL_GetTick();
-//-------------------parse data from I2C------------------------
+
+    //NBKF Kalman filter inplementation
+      NBKF_Predict(&navFilter, &BNO055_data); //Run at qC rate
+      NBKF_GetOutput(&navFilter, &navOutput); //write state estimate for output
+    //write data to NSLP payload
+      KF_data.latitude = navOutput.latitude;
+      KF_data.longitude = navOutput.longitude;
+      KF_data.altitude = navOutput.altitude;
+      KF_data.vx = navOutput.vx;
+      KF_data.vy = navOutput.vy;
+      KF_data.vz = navOutput.vz;
+      KF_data.time = HAL_GetTick();
 
 		/* USER CODE END WHILE */
 

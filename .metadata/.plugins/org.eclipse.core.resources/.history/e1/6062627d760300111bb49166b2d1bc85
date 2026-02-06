@@ -35,6 +35,7 @@
 #include "ubx_nav_sol.h"
 #include "nslp_dma.h"
 
+#include "NBKF.h"
 
 /* USER CODE END Includes */
 
@@ -98,11 +99,12 @@ struct Position {
 	float altitude;
 	uint32_t fixType;
 	uint32_t numSV;
+  bool valid;
 
 	uint32_t time;
 };
 
-struct Position pos = {
+struct Position GPS_data = {
 		.latitude = 1.0,
 		.longitude = 0.0,
 		.altitude = 0.0,
@@ -115,9 +117,9 @@ struct BNO055_payload {
 
 	//uint32_t calib; //8 --> 32 bit
 
-	double vx;
-	double vy;
-	double vz;
+	double gx;
+	double gy;
+	double gz;
 
 	double ax;
 	double ay;
@@ -142,6 +144,7 @@ struct BMP_payload BMP_data;
 
 
 //----------------------------------------------------------------------------
+//GPS
 UBX_NavSol rawData;
 UBX_NavSolData solData;
 
@@ -149,6 +152,11 @@ uint8_t rx_buffer[rx_buffer_size]; //size of data recieved from GPS
 uint8_t tx_buffer[sizeof(struct Position)]; //recieving size of DMA message
 
 nslp_instance_t nslp;
+
+//NBKF - KF kalman filter variables
+NBKF_t navFilter;
+NBKF_Output_t navOutput;
+int8_t dt = 10; //10ms time step
 
 /* USER CODE END PV */
 
@@ -229,7 +237,9 @@ int main(void)
 	MX_USART2_UART_Init();
 	MX_I2C1_Init();
 	MX_CRC_Init();
+
 	/* USER CODE BEGIN 2 */
+
 	//------------------------NSLP CODE------------------------
 	nslp_init(&nslp, &huart2, &hcrc, 16, 0xAA);
 	uint32_t lastTime = 0;
@@ -241,7 +251,7 @@ int main(void)
 			.receiver = 0xFF,
 			.type = type_GPS,
 			.size = sizeof(struct Position),
-			.payload = (uint8_t*)&pos
+			.payload = (uint8_t*)&GPS_data
 	};
 
 	nslp_packet_t BNO_packet = {
@@ -273,6 +283,9 @@ int main(void)
 	bno055_assignI2C(&hi2c1);
 	bno055_setup();
 	bno055_setOperationModeNDOF();
+
+	//NBKF Kalman filter inplementation innitialization
+	NBKF_Init(navFilter, dt)
 
 	/* USER CODE END 2 */
 
@@ -307,30 +320,34 @@ int main(void)
 			uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
 
 			//pass the parsed data to Position pos packet frame
-			pos.latitude = solData.latitude_deg;
-			pos.longitude = solData.longitude_deg;
-			pos.altitude = solData.height_m;
-			pos.fixType = solData.gpsFix;
-			pos.numSV = solData.numSV;
+			GPS_data.latitude = solData.latitude_deg;
+			GPS_data.longitude = solData.longitude_deg;
+			GPS_data.altitude = solData.height_m;
+			GPS_data.fixType = solData.gpsFix;
+			GPS_data.numSV = solData.numSV;
+      GPS_data.valid = (GPS_data.fixType > 0) ? true : false; //valid if fixType is greater than 0
 
-			pos.time = HAL_GetTick();
+			GPS_data.timestamp = HAL_GetTick();
 
 			parsed_GPS = true;
+
+      //update NBKF KF kalman filter with ne data
+      NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
 		}
 //-------------------parse data from GPS------------------------
 
 //-------------------parse data from I2C------------------------
 		/* Reads BNO055 absolute position sensor*/
 		//cal = bno055_getCalibrationState();		//calibration state 0-3 how good the estimate is
-		v = bno055_getVectorEuler(); 			//absolute position
+		g = bno055_getVectorGyroscope(); 			//absolute position
 		ac = bno055_getVectorAccelerometer(); 	//acceleration
 		mag = bno055_getVectorMagnetometer(); 	//magnetic vector
 
 		//BNO055_data.calib = cal.sys;
 
-		BNO055_data.vx = v.x;
-		BNO055_data.vy = v.y;
-		BNO055_data.vz = v.z;
+		BNO055_data.gx = g.x;
+		BNO055_data.gy = g.y;
+		BNO055_data.gz = g.z;
 
 		BNO055_data.ax = ac.x;
 		BNO055_data.ay = ac.y;
@@ -339,9 +356,10 @@ int main(void)
 		BNO055_data.mx = mag.x;
 		BNO055_data.my = mag.y;
 		BNO055_data.mz = mag.z;
-		
+
 		BNO055_data.time = HAL_GetTick();
 
+    //-------------------parse data from I2C------------------------
 		/* Reads temperature. */
 		temperature = BMP180_GetRawTemperature();
 		/* Reads pressure. */
@@ -351,7 +369,11 @@ int main(void)
 		BMP_data.press = pressure;
 
 		BMP_data.time = HAL_GetTick();
-//-------------------parse data from I2C------------------------
+
+    //NBKF Kalman filter inplementation
+    NBKF_Predict(&navFilter, &BNO055_data); //Run at qC rate
+    NBKF_GetOutput(&navFilter, &navOutput); //write state estimate for output
+
 
 		/* USER CODE END WHILE */
 

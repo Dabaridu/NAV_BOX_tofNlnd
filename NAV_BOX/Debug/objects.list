@@ -1,3 +1,4 @@
+"./Core/Src/NBKF.o"
 "./Core/Src/bmp180_for_stm32_hal.o"
 "./Core/Src/bno055.o"
 "./Core/Src/main.o"
