@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<item key="hasShownOverlayPopupBefore" value="true"/>
-	<item key="replaceBarOpen" value="false"/>
+	<item key="replaceBarOpen" value="true"/>
 	<list key="searchhistory">
+		<item value="recieved_GPS"/>
+		<item value="pos_packet"/>
+		<item value="BNO055_data"/>
+		<item value="dt"/>
 		<item value="rawData"/>
+	</list>
+	<list key="replacehistory">
+		<item value="BNO055_data_KF"/>
 	</list>
 </section>

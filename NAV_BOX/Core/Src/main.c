@@ -81,6 +81,7 @@ int32_t pressure;
 bno055_vector_t g;
 bno055_vector_t ac;
 bno055_vector_t mag;
+bno055_vector_t abs;
 bno055_calibration_state_t cal;
 
 //dirty flags
@@ -254,14 +255,12 @@ int main(void)
 			GPS_data.altitude = solData.height_m;
 			GPS_data.fixType = solData.gpsFix;
 			GPS_data.numSV = solData.numSV;
+			GPS_data.time = HAL_GetTick();
 
 			GPS_data_KF.latitude = solData.latitude_deg;
 			GPS_data_KF.longitude = solData.longitude_deg;
 			GPS_data_KF.altitude = solData.height_m;
 			GPS_data_KF.valid = (GPS_data.fixType > 0) ? true : false; //valid if fixType is greater than 0
-
-
-			GPS_data.time = HAL_GetTick();
 
 			parsed_GPS = true;
 
@@ -273,11 +272,9 @@ int main(void)
 //-------------------parse data from I2C------------------------
 		/* Reads BNO055 absolute position sensor*/
       //cal = bno055_getCalibrationState();		//calibration state 0-3 how good the estimate is
-      g = bno055_getVectorGyroscope(); 			//absolute position
-      ac = bno055_getVectorAccelerometer(); 	//acceleration
-      mag = bno055_getVectorMagnetometer(); 	//magnetic vector
 
 		  //BNO055_data_KF.calib = cal.sys;
+      g = bno055_getVectorGyroscope(); 			//absolute position
       BNO055_data_KF.gx = g.x;
       BNO055_data_KF.gy = g.y;
       BNO055_data_KF.gz = g.z;
@@ -286,6 +283,7 @@ int main(void)
       BNO055_data_g.gy = g.y;
       BNO055_data_g.gz = g.z;
 
+      ac = bno055_getVectorAccelerometer(); 	//acceleration
       BNO055_data_KF.ax = ac.x;
       BNO055_data_KF.ay = ac.y;
       BNO055_data_KF.az = ac.z;
@@ -294,6 +292,7 @@ int main(void)
       BNO055_data_a.ay = ac.y;
       BNO055_data_a.az = ac.z;
 
+      mag = bno055_getVectorMagnetometer(); 	//magnetic vector
       BNO055_data_KF.mx = mag.x;
       BNO055_data_KF.my = mag.y;
       BNO055_data_KF.mz = mag.z;
@@ -303,6 +302,8 @@ int main(void)
       BNO055_data_m.mz = mag.z;
 
       BNO055_data_a.time = HAL_GetTick();
+
+      abs = bno055_getVectorAbsoluteOrientation(); //absolute orientation as quaternion
 
     //-------------------parse data from I2C------------------------
 		//reads pressure and temperature from BMP180 sensor
