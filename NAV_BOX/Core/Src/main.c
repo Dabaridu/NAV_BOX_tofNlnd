@@ -37,6 +37,8 @@
 
 #include "NBKF.h"
 
+#include "nslp_packets.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -52,10 +54,10 @@
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
 
-#define type_GPS 0x0a 		//10
-#define type_BNO055 0x0b	//11
-#define type_BMP 0x0c		//12
-#define type_KF 0x0d		//13
+// #define type_GPS 0x0a 		//10
+// #define type_BNO055 0x0b	//11
+// #define type_BMP 0x0c		//12
+// #define type_KF 0x0d		//13
 
 #define rx_buffer_size 60 //GPS uart 1 recieve NAV-SOL packed size
 
@@ -94,63 +96,6 @@ bool parsed_GPS = false;
  *It this struct define the data you want to send from the STM machine
  *It
  * */
-struct Position {
-	float latitude;
-	float longitude;
-	float altitude;
-	uint32_t fixType;
-	uint32_t numSV;
-  bool valid;
-
-	uint32_t time;
-};
-struct Position GPS_data = {
-		.latitude = 1.0,
-		.longitude = 0.0,
-		.altitude = 0.0,
-		.fixType = 0,
-		.numSV = 0
-};
-
-//structure of BNO055 payload (variables of type DOUBLE)
-struct BNO055_payload {
-	//uint32_t calib; //8 --> 32 bit
-
-	double gx;
-	double gy;
-	double gz;
-
-	double ax;
-	double ay;
-	double az;
-
-	double mx;
-	double my;
-	double mz;
-
-	uint32_t time;
-};
-struct BNO055_payload BNO055_data;
-
-struct BMP_payload {
-	float temp;
-	uint32_t press;
-
-	uint32_t time;
-};
-struct BMP_payload BMP_data;
-
-struct KF_payload {
-  double latitude;
-  double longitude;
-  float altitude;
-  float vx;
-  float vy;
-  float vz;
-
-  uint32_t time;
-};
-struct KF_payload KF_data;
 
 //----------------------------------------------------------------------------
 //GPS
@@ -165,6 +110,8 @@ nslp_instance_t nslp;
 //NBKF - KF kalman filter variables
 NBKF_t navFilter;
 NBKF_Output_t navOutput;
+IMU_Data_t BNO055_data_KF;
+GPS_Data_t GPS_data_KF;
 float dt = 10; //10ms time step
 
 /* USER CODE END PV */
@@ -192,14 +139,9 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 		/* restart the DMA  */
 		HAL_UARTEx_ReceiveToIdle_DMA(&huart1, (uint8_t *) rx_buffer, sizeof(rx_buffer)); //Restart interupt
 		__HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_HT); //Dont interupt on half buffer
-
-
 	}
-
 	nslp_uart_rx_event_handler(huart, Size);
-
 }
-
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
 	nslp_uart_tx_cplt_handler(huart);
 }
@@ -252,42 +194,11 @@ int main(void)
 	//------------------------NSLP CODE------------------------
 	nslp_init(&nslp, &huart2, &hcrc, 16, 0xAA);
 	uint32_t lastTime = 0;
-	//initialize a Position struct as pos
-
-
-	//format and fill the nslp_packet for transmition UART2
-	nslp_packet_t pos_packet = {
-			.receiver = 0xFF,
-			.type = type_GPS, //10 - A
-			.size = sizeof(struct Position),
-			.payload = (uint8_t*)&GPS_data
-	};
-
-	nslp_packet_t BNO_packet = {
-			.receiver = 0xFF,
-			.type = type_BNO055, //11 - B
-			.size = sizeof(struct BNO055_payload),
-			.payload = (uint8_t*)&BNO055_data
-	};
-
-	nslp_packet_t BMP_packet = {
-			.receiver = 0xFF,
-			.type = type_BMP, // 12 - C
-			.size = sizeof(struct BMP_payload),
-			.payload = (uint8_t*)&BMP_data
-	};
-
-  nslp_packet_t KF_packet = {
-      .receiver = 0xFF,
-      .type = type_KF, //13 - D
-      .size = sizeof(struct KF_payload),
-      .payload = (uint8_t*)&KF_data
 	//------------------------NSLP CODE------------------------
 
 	__HAL_DMA_ENABLE_IT(&hdma_usart1_rx, DMA_IT_TC | DMA_IT_HT);
 	HAL_UARTEx_ReceiveToIdle_DMA(&huart1, (uint8_t *) rx_buffer, sizeof(rx_buffer));
 	__HAL_DMA_DISABLE_IT(&hdma_usart1_rx,DMA_IT_HT); //DMA half transfer interupt
-
 
 	/* Initializes BMP180 sensor and oversampling settings. */
 	BMP180_Init(&hi2c1);
@@ -297,7 +208,7 @@ int main(void)
 
 	bno055_assignI2C(&hi2c1);
 	bno055_setup();
-	bno055_setOperationModeNDOF();
+	bno055_setOperationModeNDOF(); //all raw sensor data gyro accel mag
 
 	//NBKF Kalman filter inplementation innitialization
 	NBKF_Init(&navFilter, dt);
@@ -314,14 +225,17 @@ int main(void)
 
 			if((parsed_GPS == true)/*&&(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE))*/){
 				//__HAL_UART_CLEAR_IDLEFLAG(&huart1);
-
-				nslp_send_packet(&nslp, &pos_packet);
+				nslp_send_packet(&nslp, &GPS_packet);
 				parsed_GPS = false;
 
 			}
 
-			nslp_send_packet(&nslp, &BNO_packet);
+			nslp_send_packet(&nslp, &BNO_packet_g);
+			nslp_send_packet(&nslp, &BNO_packet_a);
+			nslp_send_packet(&nslp, &BNO_packet_m);
+
 			nslp_send_packet(&nslp, &BMP_packet);
+			nslp_send_packet(&nslp, &KF_packet);
 
 			lastTime = HAL_GetTick();
 		}
@@ -340,14 +254,19 @@ int main(void)
 			GPS_data.altitude = solData.height_m;
 			GPS_data.fixType = solData.gpsFix;
 			GPS_data.numSV = solData.numSV;
-			GPS_data.valid = (GPS_data.fixType > 0) ? true : false; //valid if fixType is greater than 0
+
+			GPS_data_KF.latitude = solData.latitude_deg;
+			GPS_data_KF.longitude = solData.longitude_deg;
+			GPS_data_KF.altitude = solData.height_m;
+			GPS_data_KF.valid = (GPS_data.fixType > 0) ? true : false; //valid if fixType is greater than 0
+
 
 			GPS_data.time = HAL_GetTick();
 
 			parsed_GPS = true;
 
       //update NBKF KF kalman filter with ne data
-      NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
+      NBKF_Update(&navFilter, &GPS_data_KF, &BNO055_data_KF); //update with GPS rate
 		}
 //-------------------parse data from GPS------------------------
 
@@ -358,20 +277,32 @@ int main(void)
       ac = bno055_getVectorAccelerometer(); 	//acceleration
       mag = bno055_getVectorMagnetometer(); 	//magnetic vector
 
-		  //BNO055_data.calib = cal.sys;
-      BNO055_data.gx = g.x;
-      BNO055_data.gy = g.y;
-      BNO055_data.gz = g.z;
+		  //BNO055_data_KF.calib = cal.sys;
+      BNO055_data_KF.gx = g.x;
+      BNO055_data_KF.gy = g.y;
+      BNO055_data_KF.gz = g.z;
 
-      BNO055_data.ax = ac.x;
-      BNO055_data.ay = ac.y;
-      BNO055_data.az = ac.z;
+      BNO055_data_g.gx = g.x;
+      BNO055_data_g.gy = g.y;
+      BNO055_data_g.gz = g.z;
 
-      BNO055_data.mx = mag.x;
-      BNO055_data.my = mag.y;
-      BNO055_data.mz = mag.z;
+      BNO055_data_KF.ax = ac.x;
+      BNO055_data_KF.ay = ac.y;
+      BNO055_data_KF.az = ac.z;
 
-      BNO055_data.time = HAL_GetTick();
+      BNO055_data_a.ax = ac.x;
+      BNO055_data_a.ay = ac.y;
+      BNO055_data_a.az = ac.z;
+
+      BNO055_data_KF.mx = mag.x;
+      BNO055_data_KF.my = mag.y;
+      BNO055_data_KF.mz = mag.z;
+
+      BNO055_data_m.mx = mag.x;
+      BNO055_data_m.my = mag.y;
+      BNO055_data_m.mz = mag.z;
+
+      BNO055_data_a.time = HAL_GetTick();
 
     //-------------------parse data from I2C------------------------
 		//reads pressure and temperature from BMP180 sensor
@@ -384,7 +315,7 @@ int main(void)
 		BMP_data.time = HAL_GetTick();
 
     //NBKF Kalman filter inplementation
-      NBKF_Predict(&navFilter, &BNO055_data); //Run at qC rate
+      NBKF_Predict(&navFilter, &BNO055_data_KF); //Run at qC rate
       NBKF_GetOutput(&navFilter, &navOutput); //write state estimate for output
     //write data to NSLP payload
       KF_data.latitude = navOutput.latitude;

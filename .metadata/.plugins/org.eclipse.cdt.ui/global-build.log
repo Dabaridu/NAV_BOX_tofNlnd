@@ -694,3 +694,628 @@ Finished building: default.size.stdout
  
 Finished building: NAV_BOX.list
  
+18:12:37 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:284:29: error: called object 'KF_data' is not a function or function pointer
+  284 |       .payload = (uint8_t*)&KF_data
+      |                             ^~~~~~~
+../Core/Src/main.c:153:19: note: declared here
+  153 | struct KF_payload KF_data;
+      |                   ^~~~~~~
+../Core/Src/main.c:287:68: error: expected '}' before ';' token
+  287 |         __HAL_DMA_ENABLE_IT(&hdma_usart1_rx, DMA_IT_TC | DMA_IT_HT);
+      |                                                                    ^
+../Core/Src/main.c:280:29: note: to match this '{'
+  280 |   nslp_packet_t KF_packet = {
+      |                             ^
+../Core/Src/main.c:409:1: error: expected ',' or ';' before 'void'
+  409 | void SystemClock_Config(void)
+      | ^~~~
+../Core/Src/main.c:454:13: error: invalid storage class for function 'MX_CRC_Init'
+  454 | static void MX_CRC_Init(void)
+      |             ^~~~~~~~~~~
+../Core/Src/main.c:485:13: error: invalid storage class for function 'MX_I2C1_Init'
+  485 | static void MX_I2C1_Init(void)
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c:533:13: error: invalid storage class for function 'MX_USART1_UART_Init'
+  533 | static void MX_USART1_UART_Init(void)
+      |             ^~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:568:13: error: invalid storage class for function 'MX_USART2_UART_Init'
+  568 | static void MX_USART2_UART_Init(void)
+      |             ^~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:601:13: error: invalid storage class for function 'MX_DMA_Init'
+  601 | static void MX_DMA_Init(void)
+      |             ^~~~~~~~~~~
+../Core/Src/main.c:625:13: error: invalid storage class for function 'MX_GPIO_Init'
+  625 | static void MX_GPIO_Init(void)
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c:658:1: error: expected declaration or statement at end of input
+  658 | }
+      | ^
+../Core/Src/main.c:280:17: warning: unused variable 'KF_packet' [-Wunused-variable]
+  280 |   nslp_packet_t KF_packet = {
+      |                 ^~~~~~~~~
+../Core/Src/main.c:273:23: warning: unused variable 'BMP_packet' [-Wunused-variable]
+  273 |         nslp_packet_t BMP_packet = {
+      |                       ^~~~~~~~~~
+../Core/Src/main.c:266:23: warning: unused variable 'BNO_packet' [-Wunused-variable]
+  266 |         nslp_packet_t BNO_packet = {
+      |                       ^~~~~~~~~~
+../Core/Src/main.c:259:23: warning: unused variable 'pos_packet' [-Wunused-variable]
+  259 |         nslp_packet_t pos_packet = {
+      |                       ^~~~~~~~~~
+../Core/Src/main.c:254:18: warning: unused variable 'lastTime' [-Wunused-variable]
+  254 |         uint32_t lastTime = 0;
+      |                  ^~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:174:13: warning: 'MX_GPIO_Init' used but never defined
+  174 | static void MX_GPIO_Init(void);
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c:175:13: warning: 'MX_DMA_Init' used but never defined
+  175 | static void MX_DMA_Init(void);
+      |             ^~~~~~~~~~~
+../Core/Src/main.c:176:13: warning: 'MX_USART1_UART_Init' used but never defined
+  176 | static void MX_USART1_UART_Init(void);
+      |             ^~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:177:13: warning: 'MX_USART2_UART_Init' used but never defined
+  177 | static void MX_USART2_UART_Init(void);
+      |             ^~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:178:13: warning: 'MX_I2C1_Init' used but never defined
+  178 | static void MX_I2C1_Init(void);
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c:179:13: warning: 'MX_CRC_Init' used but never defined
+  179 | static void MX_CRC_Init(void);
+      |             ^~~~~~~~~~~
+../Core/Src/main.c:649:6: warning: 'Error_Handler' defined but not used [-Wunused-function]
+  649 | void Error_Handler(void)
+      |      ^~~~~~~~~~~~~
+../Core/Src/main.c:625:13: warning: 'MX_GPIO_Init' defined but not used [-Wunused-function]
+  625 | static void MX_GPIO_Init(void)
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c:601:13: warning: 'MX_DMA_Init' defined but not used [-Wunused-function]
+  601 | static void MX_DMA_Init(void)
+      |             ^~~~~~~~~~~
+../Core/Src/main.c:568:13: warning: 'MX_USART2_UART_Init' defined but not used [-Wunused-function]
+  568 | static void MX_USART2_UART_Init(void)
+      |             ^~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:533:13: warning: 'MX_USART1_UART_Init' defined but not used [-Wunused-function]
+  533 | static void MX_USART1_UART_Init(void)
+      |             ^~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:485:13: warning: 'MX_I2C1_Init' defined but not used [-Wunused-function]
+  485 | static void MX_I2C1_Init(void)
+      |             ^~~~~~~~~~~~
+../Core/Src/main.c:454:13: warning: 'MX_CRC_Init' defined but not used [-Wunused-function]
+  454 | static void MX_CRC_Init(void)
+      |             ^~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:52: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+18:13:28 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:351:31: warning: passing argument 2 of 'NBKF_Update' from incompatible pointer type [-Wincompatible-pointer-types]
+  351 |       NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
+      |                               ^~~~~~~~~
+      |                               |
+      |                               struct Position *
+In file included from ../Core/Src/main.c:38:
+../Core/Inc/NBKF.h:47:42: note: expected 'GPS_Data_t *' but argument is of type 'struct Position *'
+   47 | void NBKF_Update(NBKF_t *kf, GPS_Data_t *gps, IMU_Data_t *imu);
+      |                              ~~~~~~~~~~~~^~~
+../Core/Src/main.c:351:42: warning: passing argument 3 of 'NBKF_Update' from incompatible pointer type [-Wincompatible-pointer-types]
+  351 |       NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
+      |                                          ^~~~~~~~~~~~
+      |                                          |
+      |                                          struct BNO055_payload *
+../Core/Inc/NBKF.h:47:59: note: expected 'IMU_Data_t *' but argument is of type 'struct BNO055_payload *'
+   47 | void NBKF_Update(NBKF_t *kf, GPS_Data_t *gps, IMU_Data_t *imu);
+      |                                               ~~~~~~~~~~~~^~~
+../Core/Src/main.c:336:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  336 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+      |                                 ^~~~~~~~~~
+../Core/Src/main.c:388:32: warning: passing argument 2 of 'NBKF_Predict' from incompatible pointer type [-Wincompatible-pointer-types]
+  388 |       NBKF_Predict(&navFilter, &BNO055_data); //Run at qC rate
+      |                                ^~~~~~~~~~~~
+      |                                |
+      |                                struct BNO055_payload *
+../Core/Inc/NBKF.h:46:43: note: expected 'IMU_Data_t *' but argument is of type 'struct BNO055_payload *'
+   46 | void NBKF_Predict(NBKF_t *kf, IMU_Data_t *imu);
+      |                               ~~~~~~~~~~~~^~~
+../Core/Src/main.c:280:17: warning: unused variable 'KF_packet' [-Wunused-variable]
+  280 |   nslp_packet_t KF_packet = {
+      |                 ^~~~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  51872	    148	   4640	  56660	   dd54	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+18:13:46 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  51872	    148	   4640	  56660	   dd54	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+18:30:34 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:352:31: warning: passing argument 2 of 'NBKF_Update' from incompatible pointer type [-Wincompatible-pointer-types]
+  352 |       NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
+      |                               ^~~~~~~~~
+      |                               |
+      |                               struct Position *
+In file included from ../Core/Src/main.c:38:
+../Core/Inc/NBKF.h:47:42: note: expected 'GPS_Data_t *' but argument is of type 'struct Position *'
+   47 | void NBKF_Update(NBKF_t *kf, GPS_Data_t *gps, IMU_Data_t *imu);
+      |                              ~~~~~~~~~~~~^~~
+../Core/Src/main.c:352:42: warning: passing argument 3 of 'NBKF_Update' from incompatible pointer type [-Wincompatible-pointer-types]
+  352 |       NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
+      |                                          ^~~~~~~~~~~~
+      |                                          |
+      |                                          struct BNO055_payload *
+../Core/Inc/NBKF.h:47:59: note: expected 'IMU_Data_t *' but argument is of type 'struct BNO055_payload *'
+   47 | void NBKF_Update(NBKF_t *kf, GPS_Data_t *gps, IMU_Data_t *imu);
+      |                                               ~~~~~~~~~~~~^~~
+../Core/Src/main.c:337:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  337 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+      |                                 ^~~~~~~~~~
+../Core/Src/main.c:389:32: warning: passing argument 2 of 'NBKF_Predict' from incompatible pointer type [-Wincompatible-pointer-types]
+  389 |       NBKF_Predict(&navFilter, &BNO055_data); //Run at qC rate
+      |                                ^~~~~~~~~~~~
+      |                                |
+      |                                struct BNO055_payload *
+../Core/Inc/NBKF.h:46:43: note: expected 'IMU_Data_t *' but argument is of type 'struct BNO055_payload *'
+   46 | void NBKF_Predict(NBKF_t *kf, IMU_Data_t *imu);
+      |                               ~~~~~~~~~~~~^~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  51880	    148	   4640	  56668	   dd5c	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+18:30:39 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  51880	    148	   4640	  56668	   dd5c	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+19:06:25 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:363:43: error: 'BNO055_data' undeclared (first use in this function); did you mean 'BNO055_data_m'?
+  363 |       NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
+      |                                           ^~~~~~~~~~~
+      |                                           BNO055_data_m
+../Core/Src/main.c:363:43: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:363:31: warning: passing argument 2 of 'NBKF_Update' from incompatible pointer type [-Wincompatible-pointer-types]
+  363 |       NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
+      |                               ^~~~~~~~~
+      |                               |
+      |                               struct Position *
+In file included from ../Core/Src/main.c:38:
+../Core/Inc/NBKF.h:47:42: note: expected 'GPS_Data_t *' but argument is of type 'struct Position *'
+   47 | void NBKF_Update(NBKF_t *kf, GPS_Data_t *gps, IMU_Data_t *imu);
+      |                              ~~~~~~~~~~~~^~~
+../Core/Src/main.c:348:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  348 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+      |                                 ^~~~~~~~~~
+make: *** [Core/Src/subdir.mk:52: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+19:53:14 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:378:31: warning: passing argument 2 of 'NBKF_Update' from incompatible pointer type [-Wincompatible-pointer-types]
+  378 |       NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
+      |                               ^~~~~~~~~
+      |                               |
+      |                               struct Position *
+In file included from ../Core/Src/main.c:38:
+../Core/Inc/NBKF.h:47:42: note: expected 'GPS_Data_t *' but argument is of type 'struct Position *'
+   47 | void NBKF_Update(NBKF_t *kf, GPS_Data_t *gps, IMU_Data_t *imu);
+      |                              ~~~~~~~~~~~~^~~
+../Core/Src/main.c:378:42: warning: passing argument 3 of 'NBKF_Update' from incompatible pointer type [-Wincompatible-pointer-types]
+  378 |       NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
+      |                                          ^~~~~~~~~~~~
+      |                                          |
+      |                                          struct BNO055_payload *
+../Core/Inc/NBKF.h:47:59: note: expected 'IMU_Data_t *' but argument is of type 'struct BNO055_payload *'
+   47 | void NBKF_Update(NBKF_t *kf, GPS_Data_t *gps, IMU_Data_t *imu);
+      |                                               ~~~~~~~~~~~~^~~
+../Core/Src/main.c:363:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  363 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+      |                                 ^~~~~~~~~~
+../Core/Src/main.c:402:18: error: 'struct BNO055_payload' has no member named 'time'
+  402 |       BNO055_data.time = HAL_GetTick();
+      |                  ^
+../Core/Src/main.c:415:32: warning: passing argument 2 of 'NBKF_Predict' from incompatible pointer type [-Wincompatible-pointer-types]
+  415 |       NBKF_Predict(&navFilter, &BNO055_data); //Run at qC rate
+      |                                ^~~~~~~~~~~~
+      |                                |
+      |                                struct BNO055_payload *
+../Core/Inc/NBKF.h:46:43: note: expected 'IMU_Data_t *' but argument is of type 'struct BNO055_payload *'
+   46 | void NBKF_Predict(NBKF_t *kf, IMU_Data_t *imu);
+      |                               ~~~~~~~~~~~~^~~
+make: *** [Core/Src/subdir.mk:52: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+19:53:37 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:378:31: warning: passing argument 2 of 'NBKF_Update' from incompatible pointer type [-Wincompatible-pointer-types]
+  378 |       NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
+      |                               ^~~~~~~~~
+      |                               |
+      |                               struct Position *
+In file included from ../Core/Src/main.c:38:
+../Core/Inc/NBKF.h:47:42: note: expected 'GPS_Data_t *' but argument is of type 'struct Position *'
+   47 | void NBKF_Update(NBKF_t *kf, GPS_Data_t *gps, IMU_Data_t *imu);
+      |                              ~~~~~~~~~~~~^~~
+../Core/Src/main.c:378:42: warning: passing argument 3 of 'NBKF_Update' from incompatible pointer type [-Wincompatible-pointer-types]
+  378 |       NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
+      |                                          ^~~~~~~~~~~~
+      |                                          |
+      |                                          struct BNO055_payload *
+../Core/Inc/NBKF.h:47:59: note: expected 'IMU_Data_t *' but argument is of type 'struct BNO055_payload *'
+   47 | void NBKF_Update(NBKF_t *kf, GPS_Data_t *gps, IMU_Data_t *imu);
+      |                                               ~~~~~~~~~~~~^~~
+../Core/Src/main.c:363:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  363 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+      |                                 ^~~~~~~~~~
+../Core/Src/main.c:415:32: warning: passing argument 2 of 'NBKF_Predict' from incompatible pointer type [-Wincompatible-pointer-types]
+  415 |       NBKF_Predict(&navFilter, &BNO055_data); //Run at qC rate
+      |                                ^~~~~~~~~~~~
+      |                                |
+      |                                struct BNO055_payload *
+../Core/Inc/NBKF.h:46:43: note: expected 'IMU_Data_t *' but argument is of type 'struct BNO055_payload *'
+   46 | void NBKF_Predict(NBKF_t *kf, IMU_Data_t *imu);
+      |                               ~~~~~~~~~~~~^~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  51816	    180	   4672	  56668	   dd5c	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+19:53:42 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  51816	    180	   4672	  56668	   dd5c	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+20:11:17 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:378:31: warning: passing argument 2 of 'NBKF_Update' from incompatible pointer type [-Wincompatible-pointer-types]
+  378 |       NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
+      |                               ^~~~~~~~~
+      |                               |
+      |                               struct Position *
+In file included from ../Core/Src/main.c:38:
+../Core/Inc/NBKF.h:47:42: note: expected 'GPS_Data_t *' but argument is of type 'struct Position *'
+   47 | void NBKF_Update(NBKF_t *kf, GPS_Data_t *gps, IMU_Data_t *imu);
+      |                              ~~~~~~~~~~~~^~~
+../Core/Src/main.c:378:42: warning: passing argument 3 of 'NBKF_Update' from incompatible pointer type [-Wincompatible-pointer-types]
+  378 |       NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
+      |                                          ^~~~~~~~~~~~
+      |                                          |
+      |                                          struct BNO055_payload *
+../Core/Inc/NBKF.h:47:59: note: expected 'IMU_Data_t *' but argument is of type 'struct BNO055_payload *'
+   47 | void NBKF_Update(NBKF_t *kf, GPS_Data_t *gps, IMU_Data_t *imu);
+      |                                               ~~~~~~~~~~~~^~~
+../Core/Src/main.c:363:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  363 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+      |                                 ^~~~~~~~~~
+../Core/Src/main.c:418:32: warning: passing argument 2 of 'NBKF_Predict' from incompatible pointer type [-Wincompatible-pointer-types]
+  418 |       NBKF_Predict(&navFilter, &BNO055_data); //Run at qC rate
+      |                                ^~~~~~~~~~~~
+      |                                |
+      |                                struct BNO055_payload *
+../Core/Inc/NBKF.h:46:43: note: expected 'IMU_Data_t *' but argument is of type 'struct BNO055_payload *'
+   46 | void NBKF_Predict(NBKF_t *kf, IMU_Data_t *imu);
+      |                               ~~~~~~~~~~~~^~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  51816	    180	   4672	  56668	   dd5c	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+20:53:44 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:378:31: warning: passing argument 2 of 'NBKF_Update' from incompatible pointer type [-Wincompatible-pointer-types]
+  378 |       NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
+      |                               ^~~~~~~~~
+      |                               |
+      |                               struct Position *
+In file included from ../Core/Src/main.c:38:
+../Core/Inc/NBKF.h:47:42: note: expected 'GPS_Data_t *' but argument is of type 'struct Position *'
+   47 | void NBKF_Update(NBKF_t *kf, GPS_Data_t *gps, IMU_Data_t *imu);
+      |                              ~~~~~~~~~~~~^~~
+../Core/Src/main.c:378:42: warning: passing argument 3 of 'NBKF_Update' from incompatible pointer type [-Wincompatible-pointer-types]
+  378 |       NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
+      |                                          ^~~~~~~~~~~~
+      |                                          |
+      |                                          struct BNO055_payload *
+../Core/Inc/NBKF.h:47:59: note: expected 'IMU_Data_t *' but argument is of type 'struct BNO055_payload *'
+   47 | void NBKF_Update(NBKF_t *kf, GPS_Data_t *gps, IMU_Data_t *imu);
+      |                                               ~~~~~~~~~~~~^~~
+../Core/Src/main.c:363:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  363 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+      |                                 ^~~~~~~~~~
+../Core/Src/main.c:418:32: warning: passing argument 2 of 'NBKF_Predict' from incompatible pointer type [-Wincompatible-pointer-types]
+  418 |       NBKF_Predict(&navFilter, &BNO055_data); //Run at qC rate
+      |                                ^~~~~~~~~~~~
+      |                                |
+      |                                struct BNO055_payload *
+../Core/Inc/NBKF.h:46:43: note: expected 'IMU_Data_t *' but argument is of type 'struct BNO055_payload *'
+   46 | void NBKF_Predict(NBKF_t *kf, IMU_Data_t *imu);
+      |                               ~~~~~~~~~~~~^~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  51832	    196	   4736	  56764	   ddbc	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+20:58:08 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:378:31: warning: passing argument 2 of 'NBKF_Update' from incompatible pointer type [-Wincompatible-pointer-types]
+  378 |       NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
+      |                               ^~~~~~~~~
+      |                               |
+      |                               struct Position *
+In file included from ../Core/Src/main.c:38:
+../Core/Inc/NBKF.h:47:42: note: expected 'GPS_Data_t *' but argument is of type 'struct Position *'
+   47 | void NBKF_Update(NBKF_t *kf, GPS_Data_t *gps, IMU_Data_t *imu);
+      |                              ~~~~~~~~~~~~^~~
+../Core/Src/main.c:378:42: warning: passing argument 3 of 'NBKF_Update' from incompatible pointer type [-Wincompatible-pointer-types]
+  378 |       NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
+      |                                          ^~~~~~~~~~~~
+      |                                          |
+      |                                          struct BNO055_payload *
+../Core/Inc/NBKF.h:47:59: note: expected 'IMU_Data_t *' but argument is of type 'struct BNO055_payload *'
+   47 | void NBKF_Update(NBKF_t *kf, GPS_Data_t *gps, IMU_Data_t *imu);
+      |                                               ~~~~~~~~~~~~^~~
+../Core/Src/main.c:363:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  363 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+      |                                 ^~~~~~~~~~
+../Core/Src/main.c:427:32: warning: passing argument 2 of 'NBKF_Predict' from incompatible pointer type [-Wincompatible-pointer-types]
+  427 |       NBKF_Predict(&navFilter, &BNO055_data); //Run at qC rate
+      |                                ^~~~~~~~~~~~
+      |                                |
+      |                                struct BNO055_payload *
+../Core/Inc/NBKF.h:46:43: note: expected 'IMU_Data_t *' but argument is of type 'struct BNO055_payload *'
+   46 | void NBKF_Predict(NBKF_t *kf, IMU_Data_t *imu);
+      |                               ~~~~~~~~~~~~^~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  51920	    196	   4736	  56852	   de14	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+21:31:17 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:265:31: warning: passing argument 2 of 'NBKF_Update' from incompatible pointer type [-Wincompatible-pointer-types]
+  265 |       NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
+      |                               ^~~~~~~~~
+      |                               |
+      |                               struct Position *
+In file included from ../Core/Src/main.c:38:
+../Core/Inc/NBKF.h:47:42: note: expected 'GPS_Data_t *' but argument is of type 'struct Position *'
+   47 | void NBKF_Update(NBKF_t *kf, GPS_Data_t *gps, IMU_Data_t *imu);
+      |                              ~~~~~~~~~~~~^~~
+../Core/Src/main.c:265:42: warning: passing argument 3 of 'NBKF_Update' from incompatible pointer type [-Wincompatible-pointer-types]
+  265 |       NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
+      |                                          ^~~~~~~~~~~~
+      |                                          |
+      |                                          struct IMU_Data_t *
+../Core/Inc/NBKF.h:47:59: note: expected 'IMU_Data_t *' but argument is of type 'struct IMU_Data_t *'
+   47 | void NBKF_Update(NBKF_t *kf, GPS_Data_t *gps, IMU_Data_t *imu);
+      |                                               ~~~~~~~~~~~~^~~
+../Core/Src/main.c:250:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  250 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+      |                                 ^~~~~~~~~~
+../Core/Src/main.c:277:18: error: invalid use of undefined type 'struct IMU_Data_t'
+  277 |       BNO055_data.gx = g.x;
+      |                  ^
+../Core/Src/main.c:278:18: error: invalid use of undefined type 'struct IMU_Data_t'
+  278 |       BNO055_data.gy = g.y;
+      |                  ^
+../Core/Src/main.c:279:18: error: invalid use of undefined type 'struct IMU_Data_t'
+  279 |       BNO055_data.gz = g.z;
+      |                  ^
+../Core/Src/main.c:289:18: error: invalid use of undefined type 'struct IMU_Data_t'
+  289 |       BNO055_data.ax = ac.x;
+      |                  ^
+../Core/Src/main.c:290:18: error: invalid use of undefined type 'struct IMU_Data_t'
+  290 |       BNO055_data.ay = ac.y;
+      |                  ^
+../Core/Src/main.c:291:18: error: invalid use of undefined type 'struct IMU_Data_t'
+  291 |       BNO055_data.az = ac.z;
+      |                  ^
+../Core/Src/main.c:293:18: error: invalid use of undefined type 'struct IMU_Data_t'
+  293 |       BNO055_data.mx = mag.x;
+      |                  ^
+../Core/Src/main.c:294:18: error: invalid use of undefined type 'struct IMU_Data_t'
+  294 |       BNO055_data.my = mag.y;
+      |                  ^
+../Core/Src/main.c:295:18: error: invalid use of undefined type 'struct IMU_Data_t'
+  295 |       BNO055_data.mz = mag.z;
+      |                  ^
+../Core/Src/main.c:314:32: warning: passing argument 2 of 'NBKF_Predict' from incompatible pointer type [-Wincompatible-pointer-types]
+  314 |       NBKF_Predict(&navFilter, &BNO055_data); //Run at qC rate
+      |                                ^~~~~~~~~~~~
+      |                                |
+      |                                struct IMU_Data_t *
+../Core/Inc/NBKF.h:46:43: note: expected 'IMU_Data_t *' but argument is of type 'struct IMU_Data_t *'
+   46 | void NBKF_Predict(NBKF_t *kf, IMU_Data_t *imu);
+      |                               ~~~~~~~~~~~~^~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:100:19: error: storage size of 'BNO055_data' isn't known
+  100 | struct IMU_Data_t BNO055_data;
+      |                   ^~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:52: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:31:43 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:265:31: warning: passing argument 2 of 'NBKF_Update' from incompatible pointer type [-Wincompatible-pointer-types]
+  265 |       NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
+      |                               ^~~~~~~~~
+      |                               |
+      |                               struct Position *
+In file included from ../Core/Src/main.c:38:
+../Core/Inc/NBKF.h:47:42: note: expected 'GPS_Data_t *' but argument is of type 'struct Position *'
+   47 | void NBKF_Update(NBKF_t *kf, GPS_Data_t *gps, IMU_Data_t *imu);
+      |                              ~~~~~~~~~~~~^~~
+../Core/Src/main.c:250:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  250 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+      |                                 ^~~~~~~~~~
+../Core/Src/main.c:277:20: error: expected identifier before '=' token
+  277 |       BNO055_data. = g.x;
+      |                    ^
+make: *** [Core/Src/subdir.mk:52: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:31:51 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:265:31: warning: passing argument 2 of 'NBKF_Update' from incompatible pointer type [-Wincompatible-pointer-types]
+  265 |       NBKF_Update(&navFilter, &GPS_data, &BNO055_data); //update with GPS rate
+      |                               ^~~~~~~~~
+      |                               |
+      |                               struct Position *
+In file included from ../Core/Src/main.c:38:
+../Core/Inc/NBKF.h:47:42: note: expected 'GPS_Data_t *' but argument is of type 'struct Position *'
+   47 | void NBKF_Update(NBKF_t *kf, GPS_Data_t *gps, IMU_Data_t *imu);
+      |                              ~~~~~~~~~~~~^~~
+../Core/Src/main.c:250:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  250 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+      |                                 ^~~~~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  51992	    196	   4696	  56884	   de34	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+21:34:30 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:250:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  250 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+      |                                 ^~~~~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  52000	    196	   4720	  56916	   de54	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+21:35:51 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:250:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  250 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+      |                                 ^~~~~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  52000	    196	   4720	  56916	   de54	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+21:37:23 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:261:39: error: 'GPS_Data_t' has no member named 'fixType'
+  261 |       GPS_data_KF.valid = (GPS_data_KF.fixType > 0) ? true : false; //valid if fixType is greater than 0
+      |                                       ^
+../Core/Src/main.c:249:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  249 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+      |                                 ^~~~~~~~~~
+make: *** [Core/Src/subdir.mk:52: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:37:39 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:249:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  249 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+      |                                 ^~~~~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  52048	    192	   4720	  56960	   de80	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+21:37:57 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  52048	    192	   4720	  56960	   de80	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
