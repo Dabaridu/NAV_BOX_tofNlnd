@@ -1,0 +1,3 @@
+../Core/Src/ubx_nav_sol.c:10:13:UBX_CalculateChecksum	2
+../Core/Src/ubx_nav_sol.c:20:13:ecefToGeodetic	1
+../Core/Src/ubx_nav_sol.c:39:6:UBX_ParseNavSolFrame	9

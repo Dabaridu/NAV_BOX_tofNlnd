@@ -1,0 +1,18 @@
+{
+    "address": "COM20",
+    "mockTypes" : {
+        "12": {
+            "name": "BMP_payload",
+            "fields": [
+                {
+                    "name": "temp",
+                    "type": "FLOAT"
+                },
+                {
+                    "name": "press",
+                    "type": "INT"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,3 @@
+../Core/Src/ubx_nav_sol.c:10:13:UBX_CalculateChecksum	32	static
+../Core/Src/ubx_nav_sol.c:20:13:ecefToGeodetic	120	static
+../Core/Src/ubx_nav_sol.c:39:6:UBX_ParseNavSolFrame	56	static

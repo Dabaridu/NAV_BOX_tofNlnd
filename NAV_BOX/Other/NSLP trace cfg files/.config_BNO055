@@ -1,0 +1,50 @@
+{
+    "address": "COM20",
+    "mockTypes" : {
+        "11": {
+            "name": "BNO055_payload",
+            "fields": [
+                {
+                    "name": "calib",
+                    "type": "INT"
+                },
+                {
+                    "name": "vx",
+                    "type": "FLOAT"
+                },
+                {
+                    "name": "vy",
+                    "type": "FLOAT"
+                },
+                {
+                    "name": "vz",
+                    "type": "FLOAT"
+                },
+                {
+                    "name": "ax",
+                    "type": "FLOAT"
+                },
+                {
+                    "name": "ay",
+                    "type": "FLOAT"
+                },
+                {
+                    "name": "az",
+                    "type": "FLOAT"
+                },
+                {
+                    "name": "mx",
+                    "type": "FLOAT"
+                },
+                {
+                    "name": "my",
+                    "type": "FLOAT"
+                },
+                {
+                    "name": "mz",
+                    "type": "FLOAT"
+                }
+            ]
+        }
+    }
+}

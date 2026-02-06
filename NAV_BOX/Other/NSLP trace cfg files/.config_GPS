@@ -1,0 +1,30 @@
+{
+    "address": "COM20",
+    "mockTypes" : {
+        "10": {
+            "name": "Position_GPS",
+            "fields": [
+                {
+                    "name": "latitude",
+                    "type": "FLOAT"
+                },
+                {
+                    "name": "longitude",
+                    "type": "FLOAT"
+                },
+                {
+                    "name": "altitude",
+                    "type": "FLOAT"
+                },
+                {
+                    "name": "fixType",
+                    "type": "INT"
+                },
+                {
+                    "name": "numSV",
+                    "type": "INT"
+                }
+            ]
+        }
+    }
+}
