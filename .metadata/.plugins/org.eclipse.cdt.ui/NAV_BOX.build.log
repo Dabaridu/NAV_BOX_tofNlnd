@@ -1,10 +1,10 @@
-22:14:46 **** Incremental Build of configuration Debug for project NAV_BOX ****
+10:19:38 **** Incremental Build of configuration Debug for project NAV_BOX ****
 make -j12 all 
 arm-none-eabi-size  NAV_BOX.elf 
    text	   data	    bss	    dec	    hex	filename
-  52048	    192	   4720	  56960	   de80	NAV_BOX.elf
+  52240	    192	   4752	  57184	   df60	NAV_BOX.elf
 Finished building: default.size.stdout
  
 
-22:14:46 Build Finished. 0 errors, 0 warnings. (took 322ms)
+10:19:39 Build Finished. 0 errors, 0 warnings. (took 332ms)
 

@@ -81,7 +81,7 @@ int32_t pressure;
 bno055_vector_t g;
 bno055_vector_t ac;
 bno055_vector_t mag;
-bno055_vector_t abs;
+bno055_vector_t absolute_vector;
 bno055_calibration_state_t cal;
 
 //dirty flags
@@ -303,7 +303,7 @@ int main(void)
 
       BNO055_data_a.time = HAL_GetTick();
 
-      abs = bno055_getVectorAbsoluteOrientation(); //absolute orientation as quaternion
+      absolute_vector = bno055_getVectorQuaternion(); //absolute orientation as quaternion
 
     //-------------------parse data from I2C------------------------
 		//reads pressure and temperature from BMP180 sensor
