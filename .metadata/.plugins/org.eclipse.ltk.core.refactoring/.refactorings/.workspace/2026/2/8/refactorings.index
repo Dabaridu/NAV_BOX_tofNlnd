@@ -1,0 +1,4 @@
+1771595198564	Rename resource 'I2C_BNO_BMP_Example'
+1771595263174	Rename resource 'I2Csens_UART'
+1771595269668	Rename resource 'I2Csens_UARTs'
+1771601765030	Delete resource 'I2Csens_UART'

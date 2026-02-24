@@ -35,15 +35,16 @@
 #include "ubx_nav_sol.h"
 #include "nslp_dma.h"
 
-#include "NBKF.h"
+//#include "NBKF.h"
 
 #include "nslp_packets.h"
+
+#include "sens_fusion.h"
 
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -81,7 +82,7 @@ int32_t pressure;
 bno055_vector_t g;
 bno055_vector_t ac;
 bno055_vector_t mag;
-bno055_vector_t absolute_vector;
+bno055_vector_t abs_q_bno055;
 bno055_calibration_state_t cal;
 
 //dirty flags
@@ -109,11 +110,11 @@ uint8_t tx_buffer[sizeof(struct Position)]; //recieving size of DMA message
 nslp_instance_t nslp;
 
 //NBKF - KF kalman filter variables
-NBKF_t navFilter;
-NBKF_Output_t navOutput;
-IMU_Data_t BNO055_data_KF;
-GPS_Data_t GPS_data_KF;
-float dt = 10; //10ms time step
+//NBKF_t navFilter;
+//NBKF_Output_t navOutput;
+//IMU_Data_t BNO055_data_KF;
+//GPS_Data_t GPS_data_KF;
+//float dt = 10; //10ms time step
 
 /* USER CODE END PV */
 
@@ -147,6 +148,96 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
 	nslp_uart_tx_cplt_handler(huart);
 }
 
+void parse_i2c_data(){
+	/* Reads BNO055 absolute position sensor*/
+      //cal = bno055_getCalibrationState();		//calibration state 0-3 how good the estimate is
+
+		  //BNO055_data_KF.calib = cal.sys;
+      //g = bno055_getVectorGyroscope(); 			//absolute position
+    //   BNO055_data_KF.gx = g.x;
+    //   BNO055_data_KF.gy = g.y;
+    //   BNO055_data_KF.gz = g.z;
+
+    //   BNO055_data_g.gx = g.x;
+    //   BNO055_data_g.gy = g.y;
+    //   BNO055_data_g.gz = g.z;
+
+      ac = bno055_getVectorAccelerometer(); 	//acceleration
+      acc.x = ac.x;
+      acc.y = ac.y;
+      acc.z = ac.z;
+    //   BNO055_data_KF.ax = ac.x;
+    //   BNO055_data_KF.ay = ac.y;
+    //   BNO055_data_KF.az = ac.z;
+
+    //   BNO055_data_a.ax = ac.x;
+    //   BNO055_data_a.ay = ac.y;
+    //   BNO055_data_a.az = ac.z;
+
+      //mag = bno055_getVectorMagnetometer(); 	//magnetic vector
+    //   BNO055_data_KF.mx = mag.x;
+    //   BNO055_data_KF.my = mag.y;
+    //   BNO055_data_KF.mz = mag.z;
+
+    //   BNO055_data_m.mx = mag.x;
+    //   BNO055_data_m.my = mag.y;
+    //   BNO055_data_m.mz = mag.z;
+
+      BNO055_data_a.time = HAL_GetTick();
+
+      abs_q_bno055 = bno055_getVectorQuaternion(); //absolute orientation as quaternion
+      abs_q.x = abs_q_bno055.x;
+      abs_q.y = abs_q_bno055.y;
+      abs_q.z = abs_q_bno055.z;
+	//reads pressure and temperature from BMP180 sensor
+		temperature = BMP180_GetRawTemperature();
+		pressure = BMP180_GetPressure();
+    //write data to NSLP paylaod
+		BMP_data.temp = temperature;
+		BMP_data.press = pressure;
+
+		BMP_data.time = HAL_GetTick();
+}
+void parse_gps_data(){
+		if(recieved_GPS == true){
+
+			recieved_GPS = false;
+
+			//parse rx_buffer to usefull navigation data
+			uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+
+			//pass the parsed data to Position pos packet frame
+			GPS_data.latitude = solData.latitude_deg;
+			GPS_data.longitude = solData.longitude_deg;
+			GPS_data.altitude = solData.height_m;
+			GPS_data.fixType = solData.gpsFix;
+			GPS_data.numSV = solData.numSV;
+			GPS_data.time = HAL_GetTick();
+
+			//---------------sensor fusion GPS readings--------------------
+			pos.x = GPS_data.latitude;
+			pos.y = GPS_data.longitude;
+			pos.z = GPS_data.altitude;
+			pos_prec.x = 0;
+			pos_prec.y = 0; 
+			pos_prec.z = 0; 
+
+			joined_position_estimation(&X_hat_estimation, &pos, &X_global_translation, &pos_prec, &acc_prec);
+			joined_precision_calculation(&X_hat_precision, &pos_prec, &acc_prec);
+			reset_IMU_precision(&X_hat_precision, &X_global_translation_precision, &X_hat_estimation, &X_global_translation);
+			//----------------implements sensor fusion----------------------
+
+			// GPS_data_KF.latitude = solData.latitude_deg;
+			// GPS_data_KF.longitude = solData.longitude_deg;
+			// GPS_data_KF.altitude = solData.height_m;
+			// GPS_data_KF.valid = (GPS_data.fixType > 0) ? true : false; //valid if fixType is greater than 0
+
+			parsed_GPS = true;
+
+      //update NBKF KF kalman filter with ne data
+      //NBKF_Update(&navFilter, &GPS_data_KF, &BNO055_data_KF); //update with GPS rate
+		}
+}
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -212,7 +303,7 @@ int main(void)
 	bno055_setOperationModeNDOF(); //all raw sensor data gyro accel mag
 
 	//NBKF Kalman filter inplementation innitialization
-	NBKF_Init(&navFilter, dt);
+	//NBKF_Init(&navFilter, dt);
 
 	/* USER CODE END 2 */
 
@@ -220,112 +311,62 @@ int main(void)
 	/* USER CODE BEGIN WHILE */
 	while (1)
 	{
-		
-		//in this throw all packet sends for NSLP, the function will handle delays
-		if (HAL_GetTick() - lastTime > nslp_min_delay(&nslp)){
+		//------------------------------choose comunication type-----------------------------------
+		if(false){
+			//in this throw all packet sends for NSLP, the function will handle delays
+			if (HAL_GetTick() - lastTime > nslp_min_delay(&nslp)){
 
-			if((parsed_GPS == true)/*&&(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE))*/){
-				//__HAL_UART_CLEAR_IDLEFLAG(&huart1);
-				nslp_send_packet(&nslp, &GPS_packet);
-				parsed_GPS = false;
+				if((parsed_GPS == true)/*&&(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE))*/){
+					//__HAL_UART_CLEAR_IDLEFLAG(&huart1);
+					nslp_send_packet(&nslp, &GPS_packet);
+					parsed_GPS = false;
 
+				}
+
+				nslp_send_packet(&nslp, &BNO_packet_g);
+				nslp_send_packet(&nslp, &BNO_packet_a);
+				nslp_send_packet(&nslp, &BNO_packet_m);
+
+				nslp_send_packet(&nslp, &BMP_packet);
+				nslp_send_packet(&nslp, &KF_packet);
+
+				lastTime = HAL_GetTick();
 			}
-
-			nslp_send_packet(&nslp, &BNO_packet_g);
-			nslp_send_packet(&nslp, &BNO_packet_a);
-			nslp_send_packet(&nslp, &BNO_packet_m);
-
-			nslp_send_packet(&nslp, &BMP_packet);
-			nslp_send_packet(&nslp, &KF_packet);
-
-			lastTime = HAL_GetTick();
+		}else{
+			char buffer[120];
+			sprintf(buffer,
+				"%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f \n\r",
+				X_global_translation.x, X_global_translation.y, X_global_translation.z,abs_q.x,
+				X_hat_estimation.x, X_hat_estimation.y, X_hat_estimation.z,
+				abs_q.y, abs_q.z,abs_q.w);
+			HAL_UART_Transmit(&huart2, buffer, strlen(buffer), 1000);
 		}
 
-//-------------------parse data from GPS------------------------
-		if(recieved_GPS == true){
+		//-------------------parse data from GPS------------------------
+		void parse_gps_data();
+		//-------------------parse data from GPS------------------------
 
-			recieved_GPS = false;
+		//-------------------parse data from I2C------------------------
+		void parse_i2c_data();
+		//-------------------parse data from I2C------------------------
 
-			//parse rx_buffer to usefull navigation data
-			uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+		//------------sensor fusion------------------------------------
+		ts = update_ts(&lt, (int)HAL_GetTick());
+		update_IMU_global_position(starting_position_offset, starting_orientation_offset, &acc, &abs_q, ts, &X_global_translation, &O_global_orientation_euller);
+		update_position_precision_calculation(&X_global_translation_precision, &acc_prec, ts);
+		//----------------implements sensor fusion----------------------
 
-			//pass the parsed data to Position pos packet frame
-			GPS_data.latitude = solData.latitude_deg;
-			GPS_data.longitude = solData.longitude_deg;
-			GPS_data.altitude = solData.height_m;
-			GPS_data.fixType = solData.gpsFix;
-			GPS_data.numSV = solData.numSV;
-			GPS_data.time = HAL_GetTick();
-
-			GPS_data_KF.latitude = solData.latitude_deg;
-			GPS_data_KF.longitude = solData.longitude_deg;
-			GPS_data_KF.altitude = solData.height_m;
-			GPS_data_KF.valid = (GPS_data.fixType > 0) ? true : false; //valid if fixType is greater than 0
-
-			parsed_GPS = true;
-
-      //update NBKF KF kalman filter with ne data
-      NBKF_Update(&navFilter, &GPS_data_KF, &BNO055_data_KF); //update with GPS rate
-		}
-//-------------------parse data from GPS------------------------
-
-//-------------------parse data from I2C------------------------
-		/* Reads BNO055 absolute position sensor*/
-      //cal = bno055_getCalibrationState();		//calibration state 0-3 how good the estimate is
-
-		  //BNO055_data_KF.calib = cal.sys;
-      g = bno055_getVectorGyroscope(); 			//absolute position
-      BNO055_data_KF.gx = g.x;
-      BNO055_data_KF.gy = g.y;
-      BNO055_data_KF.gz = g.z;
-
-      BNO055_data_g.gx = g.x;
-      BNO055_data_g.gy = g.y;
-      BNO055_data_g.gz = g.z;
-
-      ac = bno055_getVectorAccelerometer(); 	//acceleration
-      BNO055_data_KF.ax = ac.x;
-      BNO055_data_KF.ay = ac.y;
-      BNO055_data_KF.az = ac.z;
-
-      BNO055_data_a.ax = ac.x;
-      BNO055_data_a.ay = ac.y;
-      BNO055_data_a.az = ac.z;
-
-      mag = bno055_getVectorMagnetometer(); 	//magnetic vector
-      BNO055_data_KF.mx = mag.x;
-      BNO055_data_KF.my = mag.y;
-      BNO055_data_KF.mz = mag.z;
-
-      BNO055_data_m.mx = mag.x;
-      BNO055_data_m.my = mag.y;
-      BNO055_data_m.mz = mag.z;
-
-      BNO055_data_a.time = HAL_GetTick();
-
-      absolute_vector = bno055_getVectorQuaternion(); //absolute orientation as quaternion
-
-    //-------------------parse data from I2C------------------------
-		//reads pressure and temperature from BMP180 sensor
-		temperature = BMP180_GetRawTemperature();
-		pressure = BMP180_GetPressure();
-    //write data to NSLP paylaod
-		BMP_data.temp = temperature;
-		BMP_data.press = pressure;
-
-		BMP_data.time = HAL_GetTick();
-
-    //NBKF Kalman filter inplementation
-      NBKF_Predict(&navFilter, &BNO055_data_KF); //Run at qC rate
-      NBKF_GetOutput(&navFilter, &navOutput); //write state estimate for output
-    //write data to NSLP payload
-      KF_data.latitude = navOutput.latitude;
-      KF_data.longitude = navOutput.longitude;
-      KF_data.altitude = navOutput.altitude;
-      KF_data.vx = navOutput.vx;
-      KF_data.vy = navOutput.vy;
-      KF_data.vz = navOutput.vz;
-      KF_data.time = HAL_GetTick();
+		//NBKF Kalman filter inplementation
+		//NBKF_Predict(&navFilter, &BNO055_data_KF); //Run at qC rate
+		//NBKF_GetOutput(&navFilter, &navOutput); //write state estimate for output
+		//write data to NSLP payload
+		//   KF_data.latitude = navOutput.latitude;
+		//   KF_data.longitude = navOutput.longitude;
+		//   KF_data.altitude = navOutput.altitude;
+		//   KF_data.vx = navOutput.vx;
+		//   KF_data.vy = navOutput.vy;
+		//   KF_data.vz = navOutput.vz;
+		//   KF_data.time = HAL_GetTick();
 
 		/* USER CODE END WHILE */
 

@@ -1,0 +1,46 @@
+#ifndef SENS_FUSION_H
+#define SENS_FUSION_H
+
+#include <math.h>
+
+//standart BNO055 quaternion & vector struct
+//(for ease of use)
+typedef struct {
+  double w;
+  double x;
+  double y;
+  double z;
+} vector_t;
+
+//IMU data
+vector_t acc; //LINEAR acceleration (allready sensor fusion)
+vector_t acc_prec; //acceleration and its precision from IMU
+vector_t abs_q; //ABSOLUTE orientation as quaternion (allready sensor fusion)
+//GPS data
+vector_t pos; //lat, long, alt
+vector_t pos_prec; //precision of position estimation
+
+//Fusion data
+vector_t X_global_translation = {0,0,0,0}; //global position estimation from IMU
+vector_t O_global_orientation_euller = {0,0,0,0}; //global orientation estimation from IMU in euller angles
+// vector_t O_global_orientation_DCM;
+// vector_t O_global_orientation_quaternion;
+
+//estimation data
+vector_t X_hat_estimation;
+vector_t X_hat_precision;
+vector_t O_hat_estimation;
+vector_t O_hat_precision;
+
+//-----------------------------------------------------------------------------
+
+void update_IMU_global_position(vector_t *acc, vector_t *acc_p, vector_t *abs_q, int time_step, vector_t *X_global_translation, vector_t *O_global_orientation_euller);
+
+//merge GPS and IMU guesses in weighted average position estimation
+vector_t joined_position_estimation(GPS_Position *gps_X, vector_t *imu_X, GPS_Precision *gps_prec, IMU_Precision *imu_prec);
+vector_t joined_precision_calculation(GPS_Precision *gps, IMU_Precision *imu);
+
+//support functions
+int update_time_step(int *last_time, int *current_time);
+
+#endif /* SENS_FUSION_H */
