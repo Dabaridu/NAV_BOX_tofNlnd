@@ -77,6 +77,9 @@ DMA_HandleTypeDef hdma_usart2_rx;
 
 /* USER CODE BEGIN PV */
 
+//selct communication over huart2, (false -> AsyncSerial, true -> NSLP)
+#define coms_select false
+
 float temperature;
 int32_t pressure;
 bno055_vector_t g;
@@ -89,8 +92,14 @@ bno055_calibration_state_t cal;
 bool recieved_GPS = false;
 bool parsed_GPS = false;
 
-bool flag_T = true;
-bool flag_R = true;
+bool flag_T_I2C = true;
+bool flag_R_I2C = true;
+bno055_vector_t I2C_data;
+uint8_t flag_I2C_taken_token = 0; //0 free, 1. reading, 2. reading....
+uint32_t time_s1_I2C = 100;
+uint32_t time_s1_last_I2C;
+uint32_t time_s2_I2C = 100;
+uint32_t time_s2_last_I2C;
 
 //---------------REVIEVING PACKET FROM GPS VIA UBX raw bytes---------------
 /*
@@ -131,20 +140,18 @@ static void MX_I2C1_Init(void);
 static void MX_CRC_Init(void);
 /* USER CODE BEGIN PFP */
 
-/*
+
 void HAL_I2C_MasterTxCpltCallback (I2C_HandleTypeDef * hi2c)
 {
   // TX Done .. Do Something!
-	flag_T = true;
+	flag_T_I2C = true;
 }
 
 void HAL_I2C_MasterRxCpltCallback (I2C_HandleTypeDef * hi2c)
 {
   // RX Done .. Do Something!
-	flag_R = true;
+	flag_R_I2C = true;
 }
-
-*/
 
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart) {
 	nslp_uart_error_handler(huart);
@@ -170,54 +177,75 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
 void parse_i2c_data(){
 	//if more than 100ms have passed reset flag_T and flag_R to true.
 
+	uint32_t current_time = HAL_GetTick();
+
 	/* Reads BNO055 absolute position sensor*/
-      //cal = bno055_getCalibrationState();		//calibration state 0-3 how good the estimate is
 
-		  //BNO055_data_KF.calib = cal.sys;
-      //g = bno055_getVectorGyroscope(); 			//absolute position
-    //   BNO055_data_KF.gx = g.x;
-    //   BNO055_data_KF.gy = g.y;
-    //   BNO055_data_KF.gz = g.z;
+	switch (flag_I2C_taken_token) {
+		case 1:
+			if (flag_T_I2C == true && flag_R_I2C == false){ //check if we have completed previous transmition
+				flag_T_I2C = false;
+				bno055_getVectorAccelerometer(I2C_data); //acceleration
+			}
+			if (flag_R_I2C == true){//parse data when recieved
+				acc.x = I2C_data.x;
+				acc.y = I2C_data.y;
+				acc.z = I2C_data.z;
+				acc.w = I2C_data.w;
 
-    //   BNO055_data_g.gx = g.x;
-    //   BNO055_data_g.gy = g.y;
-    //   BNO055_data_g.gz = g.z;
+				flag_R_I2C = false;
+				flag_I2C_taken_token = 0; //release token
+			}
+			break;
+		case 2:
+		  	if (flag_T_I2C == true && flag_R_I2C == false){ //check if we have completed previous transmition
+		  		bno055_getVectorQuaternion(I2C_data); //absolute orientation as quaternion
+		  		flag_T_I2C = false;
+		  	}
+		  	if (flag_R_I2C == true){//parse data when recieved
+		        abs_q.x = I2C_data.x;
+		        abs_q.y = I2C_data.y;
+		        abs_q.z = I2C_data.z;
+		        abs_q.w = I2C_data.w;
 
-      ac = bno055_getVectorAccelerometer(); 	//acceleration
-      acc.x = ac.x;
-      acc.y = ac.y;
-      acc.z = ac.z;
-    //   BNO055_data_KF.ax = ac.x;
-    //   BNO055_data_KF.ay = ac.y;
-    //   BNO055_data_KF.az = ac.z;
+		  		flag_R_I2C = false;
+		  		flag_I2C_taken_token = 0; //release token
+		  	}
+			break;
+		default:
+			//allocate token for reading
+			if (current_time-time_s1_last_I2C >= time_s1_I2C){
+				flag_I2C_taken_token = 1;
+				time_s1_last_I2C = current_time;
+			}
+			else if (current_time-time_s2_last_I2C >= time_s2_I2C){
+				flag_I2C_taken_token = 2;
+				time_s2_last_I2C = current_time;
+			}else{
+				flag_I2C_taken_token = 0;
+			}
 
-    //   BNO055_data_a.ax = ac.x;
-    //   BNO055_data_a.ay = ac.y;
-    //   BNO055_data_a.az = ac.z;
+			break;
+		}
+		//cal = bno055_getCalibrationState();		//calibration state 0-3 how good the estimate is
+		//BNO055_data_KF.calib = cal.sys;
+		//g = bno055_getVectorGyroscope(); 			//absolute position
+		//mag = bno055_getVectorMagnetometer(); 	//magnetic vector
 
-      //mag = bno055_getVectorMagnetometer(); 	//magnetic vector
-    //   BNO055_data_KF.mx = mag.x;
-    //   BNO055_data_KF.my = mag.y;
-    //   BNO055_data_KF.mz = mag.z;
+  		BNO055_data_a.time = HAL_GetTick(); //update time at this time of reading
 
-    //   BNO055_data_m.mx = mag.x;
-    //   BNO055_data_m.my = mag.y;
-    //   BNO055_data_m.mz = mag.z;
+		if (false){ //THIS IS STILL BLOCKING FUNCTION BMP180 we disable it
+			//reads pressure and temperature from BMP180 sensor
+				temperature = BMP180_GetRawTemperature();
+				pressure = BMP180_GetPressure();
+			//write data to NSLP paylaod
+				BMP_data.temp = temperature;
+				BMP_data.press = pressure;
 
-      BNO055_data_a.time = HAL_GetTick();
+				BMP_data.time = HAL_GetTick();
+		}
+	}
 
-      abs_q_bno055 = bno055_getVectorQuaternion(); //absolute orientation as quaternion
-      abs_q.x = abs_q_bno055.x;
-      abs_q.y = abs_q_bno055.y;
-      abs_q.z = abs_q_bno055.z;
-	//reads pressure and temperature from BMP180 sensor
-		temperature = BMP180_GetRawTemperature();
-		pressure = BMP180_GetPressure();
-    //write data to NSLP paylaod
-		BMP_data.temp = temperature;
-		BMP_data.press = pressure;
-
-		BMP_data.time = HAL_GetTick();
 }
 void parse_gps_data(){
 		if(recieved_GPS == true){
@@ -305,13 +333,21 @@ int main(void)
 	/* USER CODE BEGIN 2 */
 
 	//------------------------NSLP CODE------------------------
-	nslp_init(&nslp, &huart2, &hcrc, 16, 0xAA);
-	uint32_t lastTime = 0;
+	if (coms_select){ //innitialize coms parameters
+		nslp_init(&nslp, &huart2, &hcrc, 16, 0xAA);
+		uint32_t lastTime = 0;
+	}else{
+
+	}
 	//------------------------NSLP CODE------------------------
 
+	//initialize DMA on uart1, rx for GPS
 	__HAL_DMA_ENABLE_IT(&hdma_usart1_rx, DMA_IT_TC | DMA_IT_HT);
 	HAL_UARTEx_ReceiveToIdle_DMA(&huart1, (uint8_t *) rx_buffer, sizeof(rx_buffer));
 	__HAL_DMA_DISABLE_IT(&hdma_usart1_rx,DMA_IT_HT); //DMA half transfer interupt
+
+	//innitialize DMA on I2C
+
 
 	/* Initializes BMP180 sensor and oversampling settings. */
 	BMP180_Init(&hi2c1);
@@ -333,15 +369,16 @@ int main(void)
 	while (1)
 	{
 		//------------------------------choose comunication type-----------------------------------
-		if(false){
+		if(coms_select){
 			//in this throw all packet sends for NSLP, the function will handle delays
 			if (HAL_GetTick() - lastTime > nslp_min_delay(&nslp)){
+
+				//-----------------------------Send packets for NSLP----------------- START
 
 				if((parsed_GPS == true)/*&&(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE))*/){
 					//__HAL_UART_CLEAR_IDLEFLAG(&huart1);
 					nslp_send_packet(&nslp, &GPS_packet);
 					parsed_GPS = false;
-
 				}
 
 				nslp_send_packet(&nslp, &BNO_packet_g);
@@ -351,10 +388,12 @@ int main(void)
 				nslp_send_packet(&nslp, &BMP_packet);
 				nslp_send_packet(&nslp, &KF_packet);
 
+				//-----------------------------Send packets for NSLP----------------- END
+
 				lastTime = HAL_GetTick();
 			}
 		}else{
-			char buffer[120];
+			char buffer[120]; //create new empty buffer
 			sprintf(buffer,
 				"%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f \n\r",
 				X_global_translation.x, X_global_translation.y, X_global_translation.z,abs_q.x,

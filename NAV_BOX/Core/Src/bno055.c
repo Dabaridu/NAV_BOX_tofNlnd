@@ -169,7 +169,7 @@ void bno055_setCalibrationData(bno055_calibration_data_t calData) {
   bno055_setOperationMode(operationMode);
 }
 
-bno055_vector_t bno055_getVector(uint8_t vec) {
+void bno055_getVector(uint8_t vec, bno055_vector_t *data) {
   bno055_setPage(0);
   uint8_t buffer[8];    // Quaternion need 8 bytes
 
@@ -199,36 +199,47 @@ bno055_vector_t bno055_getVector(uint8_t vec) {
     xyz.x = (int16_t)((buffer[3] << 8) | buffer[2]) / scale;
     xyz.y = (int16_t)((buffer[5] << 8) | buffer[4]) / scale;
     xyz.z = (int16_t)((buffer[7] << 8) | buffer[6]) / scale;
+
+    data->x = xyz.x;
+    data->y = xyz.y;
+    data->z = xyz.z;
+    data->w = xyz.w;
   } else {
     xyz.x = (int16_t)((buffer[1] << 8) | buffer[0]) / scale;
     xyz.y = (int16_t)((buffer[3] << 8) | buffer[2]) / scale;
     xyz.z = (int16_t)((buffer[5] << 8) | buffer[4]) / scale;
+
+    data->x = xyz.x;
+    data->y = xyz.y;
+    data->z = xyz.z;
   }
 
-  return xyz;
+  //return xyz;
 }
 
-bno055_vector_t bno055_getVectorAccelerometer() {
-  return bno055_getVector(BNO055_VECTOR_ACCELEROMETER);
+void bno055_getVectorAccelerometer(bno055_vector_t *data) {
+  return bno055_getVector(BNO055_VECTOR_ACCELEROMETER, data);
 }
-bno055_vector_t bno055_getVectorMagnetometer() {
-  return bno055_getVector(BNO055_VECTOR_MAGNETOMETER);
+void bno055_getVectorMagnetometer(bno055_vector_t *data) {
+  return bno055_getVector(BNO055_VECTOR_MAGNETOMETER, data);
 }
-bno055_vector_t bno055_getVectorGyroscope() {
-  return bno055_getVector(BNO055_VECTOR_GYROSCOPE);
+void bno055_getVectorGyroscope(bno055_vector_t *data) {
+  return bno055_getVector(BNO055_VECTOR_GYROSCOPE, data);
 }
-bno055_vector_t bno055_getVectorEuler() {
-  return bno055_getVector(BNO055_VECTOR_EULER);
+void bno055_getVectorEuler(bno055_vector_t *data) {
+  return bno055_getVector(BNO055_VECTOR_EULER, data);
 }
-bno055_vector_t bno055_getVectorLinearAccel() {
-  return bno055_getVector(BNO055_VECTOR_LINEARACCEL);
+void bno055_getVectorLinearAccel(bno055_vector_t *data) {
+  return bno055_getVector(BNO055_VECTOR_LINEARACCEL, data);
 }
-bno055_vector_t bno055_getVectorGravity() {
-  return bno055_getVector(BNO055_VECTOR_GRAVITY);
+void bno055_getVectorGravity(bno055_vector_t *data) {
+  return bno055_getVector(BNO055_VECTOR_GRAVITY, data);
 }
-bno055_vector_t bno055_getVectorQuaternion() {
-  return bno055_getVector(BNO055_VECTOR_QUATERNION);
+void bno055_getVectorQuaternion(bno055_vector_t *data) {
+  return bno055_getVector(BNO055_VECTOR_QUATERNION, data);
 }
+
+
 
 void bno055_setAxisMap(bno055_axis_map_t axis) {
   uint8_t axisRemap = (axis.z << 4) | (axis.y << 2) | (axis.x);
