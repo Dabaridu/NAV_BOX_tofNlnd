@@ -90,7 +90,7 @@ bool recieved_GPS = false;
 bool parsed_GPS = false;
 
 bool flag_T = true;
-bool flag_R = true;
+bool flah_R = true;
 
 //---------------REVIEVING PACKET FROM GPS VIA UBX raw bytes---------------
 /*
@@ -131,7 +131,6 @@ static void MX_I2C1_Init(void);
 static void MX_CRC_Init(void);
 /* USER CODE BEGIN PFP */
 
-/*
 void HAL_I2C_MasterTxCpltCallback (I2C_HandleTypeDef * hi2c)
 {
   // TX Done .. Do Something!
@@ -143,8 +142,6 @@ void HAL_I2C_MasterRxCpltCallback (I2C_HandleTypeDef * hi2c)
   // RX Done .. Do Something!
 	flag_R = true;
 }
-
-*/
 
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart) {
 	nslp_uart_error_handler(huart);
@@ -168,8 +165,6 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
 }
 
 void parse_i2c_data(){
-	//if more than 100ms have passed reset flag_T and flag_R to true.
-
 	/* Reads BNO055 absolute position sensor*/
       //cal = bno055_getCalibrationState();		//calibration state 0-3 how good the estimate is
 

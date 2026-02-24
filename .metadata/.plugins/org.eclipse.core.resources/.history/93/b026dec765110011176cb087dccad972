@@ -145,7 +145,6 @@ void HAL_I2C_MasterRxCpltCallback (I2C_HandleTypeDef * hi2c)
 }
 
 */
-
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart) {
 	nslp_uart_error_handler(huart);
 }
@@ -169,6 +168,10 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
 
 void parse_i2c_data(){
 	//if more than 100ms have passed reset flag_T and flag_R to true.
+
+	if(flag_R == true){
+
+	}
 
 	/* Reads BNO055 absolute position sensor*/
       //cal = bno055_getCalibrationState();		//calibration state 0-3 how good the estimate is

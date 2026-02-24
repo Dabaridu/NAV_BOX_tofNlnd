@@ -1,13 +1,13 @@
-01:01:16 **** Incremental Build of configuration Debug for project NAV_BOX ****
+10:41:17 **** Incremental Build of configuration Debug for project NAV_BOX ****
 make -j12 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 ../Core/Src/main.c: In function 'parse_gps_data':
-../Core/Src/main.c:207:33: warning: unused variable 'parsecheck' [-Wunused-variable]
-  207 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+../Core/Src/main.c:223:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  223 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
       |                                 ^~~~~~~~~~
 ../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:342:52: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
-  342 |                         HAL_UART_Transmit(&huart2, buffer, strlen(buffer), 1000);
+../Core/Src/main.c:358:52: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  358 |                         HAL_UART_Transmit(&huart2, buffer, strlen(buffer), 1000);
       |                                                    ^~~~~~
       |                                                    |
       |                                                    char *
@@ -18,8 +18,8 @@ In file included from ../Core/Inc/stm32f3xx_hal_conf.h:328,
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
  1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
       |                                                                ~~~~~~~~~~~~~~~^~~~~
-../Core/Src/main.c:355:44: warning: passing argument 1 of 'update_IMU_global_position' from incompatible pointer type [-Wincompatible-pointer-types]
-  355 |                 update_IMU_global_position(starting_position_offset, starting_orientation_offset, &acc, &abs_q, ts, &X_global_translation, &O_global_orientation_euller);
+../Core/Src/main.c:371:44: warning: passing argument 1 of 'update_IMU_global_position' from incompatible pointer type [-Wincompatible-pointer-types]
+  371 |                 update_IMU_global_position(starting_position_offset, starting_orientation_offset, &acc, &abs_q, ts, &X_global_translation, &O_global_orientation_euller);
       |                                            ^~~~~~~~~~~~~~~~~~~~~~~~
       |                                            |
       |                                            float *
@@ -33,11 +33,11 @@ Finished building target: NAV_BOX.elf
 arm-none-eabi-size  NAV_BOX.elf 
 arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
    text	   data	    bss	    dec	    hex	filename
-  51032	    504	   3168	  54704	   d5b0	NAV_BOX.elf
+  57768	    508	   3168	  61444	   f004	NAV_BOX.elf
 Finished building: default.size.stdout
  
 Finished building: NAV_BOX.list
  
 
-01:01:25 Build Finished. 0 errors, 3 warnings. (took 9s.160ms)
+10:41:21 Build Finished. 0 errors, 3 warnings. (took 4s.56ms)
 

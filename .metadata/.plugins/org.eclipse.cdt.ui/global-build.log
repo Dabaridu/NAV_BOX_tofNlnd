@@ -7310,3 +7310,235 @@ Finished building: default.size.stdout
  
 Finished building: NAV_BOX.list
  
+10:36:06 **** Build of configuration Debug for project I2C_BNO_BMP_UPDATED ****
+make -j12 all 
+arm-none-eabi-size  I2C_BNO_BMP_UPDATED.elf 
+   text	   data	    bss	    dec	    hex	filename
+  44008	    480	   2360	  46848	   b700	I2C_BNO_BMP_UPDATED.elf
+Finished building: default.size.stdout
+ 
+10:36:08 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/bno055.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/bno055.d" -MT"Core/Src/bno055.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/bno055.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:33:
+../Core/Inc/bno055_stm32.h: In function 'HAL_I2C_MasterTxCpltCallback':
+../Core/Inc/bno055_stm32.h:109:9: error: 'flag_T' undeclared (first use in this function)
+  109 |         flag_T = 1;
+      |         ^~~~~~
+../Core/Inc/bno055_stm32.h:109:9: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Inc/bno055_stm32.h: In function 'HAL_I2C_MasterRxCpltCallback':
+../Core/Inc/bno055_stm32.h:115:9: error: 'flag_R' undeclared (first use in this function)
+  115 |         flag_R = 1;
+      |         ^~~~~~
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:207:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  207 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+      |                                 ^~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:342:52: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  342 |                         HAL_UART_Transmit(&huart2, buffer, strlen(buffer), 1000);
+      |                                                    ^~~~~~
+      |                                                    |
+      |                                                    char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:328,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:355:44: warning: passing argument 1 of 'update_IMU_global_position' from incompatible pointer type [-Wincompatible-pointer-types]
+  355 |                 update_IMU_global_position(starting_position_offset, starting_orientation_offset, &acc, &abs_q, ts, &X_global_translation, &O_global_orientation_euller);
+      |                                            ^~~~~~~~~~~~~~~~~~~~~~~~
+      |                                            |
+      |                                            float *
+In file included from ../Core/Src/main.c:42:
+../Core/Inc/sens_fusion.h:43:39: note: expected 'float (*)[3]' but argument is of type 'float *'
+   43 | void update_IMU_global_position(float starting_position_offset[1][3],float starting_orientation_offset[3][3],vector_t *acc, vector_t *abs_q, int time_step, vector_t *X_global_translation, vector_t *O_global_orientation_euller);
+      |                                 ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:55: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+10:37:50 **** Incremental Build of configuration Debug for project I2C_BNO_BMP_UPDATED ****
+make -j12 all 
+arm-none-eabi-size  I2C_BNO_BMP_UPDATED.elf 
+   text	   data	    bss	    dec	    hex	filename
+  44008	    480	   2360	  46848	   b700	I2C_BNO_BMP_UPDATED.elf
+Finished building: default.size.stdout
+ 
+10:37:51 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/bno055.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/bno055.d" -MT"Core/Src/bno055.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/bno055.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/bno055.c:17:36: error: unknown type name 'I2C_HandleTypeDef'
+   17 | void HAL_I2C_MasterTxCpltCallback (I2C_HandleTypeDef * hi2c)
+      |                                    ^~~~~~~~~~~~~~~~~
+../Core/Src/bno055.c:23:36: error: unknown type name 'I2C_HandleTypeDef'
+   23 | void HAL_I2C_MasterRxCpltCallback (I2C_HandleTypeDef * hi2c)
+      |                                    ^~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:55: Core/Src/bno055.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:207:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  207 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+      |                                 ^~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:342:52: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  342 |                         HAL_UART_Transmit(&huart2, buffer, strlen(buffer), 1000);
+      |                                                    ^~~~~~
+      |                                                    |
+      |                                                    char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:328,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:355:44: warning: passing argument 1 of 'update_IMU_global_position' from incompatible pointer type [-Wincompatible-pointer-types]
+  355 |                 update_IMU_global_position(starting_position_offset, starting_orientation_offset, &acc, &abs_q, ts, &X_global_translation, &O_global_orientation_euller);
+      |                                            ^~~~~~~~~~~~~~~~~~~~~~~~
+      |                                            |
+      |                                            float *
+In file included from ../Core/Src/main.c:42:
+../Core/Inc/sens_fusion.h:43:39: note: expected 'float (*)[3]' but argument is of type 'float *'
+   43 | void update_IMU_global_position(float starting_position_offset[1][3],float starting_orientation_offset[3][3],vector_t *acc, vector_t *abs_q, int time_step, vector_t *X_global_translation, vector_t *O_global_orientation_euller);
+      |                                 ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+10:39:30 **** Incremental Build of configuration Debug for project I2C_BNO_BMP_UPDATED ****
+make -j12 all 
+arm-none-eabi-size  I2C_BNO_BMP_UPDATED.elf 
+   text	   data	    bss	    dec	    hex	filename
+  44008	    480	   2360	  46848	   b700	I2C_BNO_BMP_UPDATED.elf
+Finished building: default.size.stdout
+ 
+10:39:31 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/bno055.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/bno055.d" -MT"Core/Src/bno055.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/bno055.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_I2C_MasterRxCpltCallback':
+../Core/Src/main.c:143:9: error: 'flag_R' undeclared (first use in this function); did you mean 'flah_R'?
+  143 |         flag_R = 1;
+      |         ^~~~~~
+      |         flah_R
+../Core/Src/main.c:143:9: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:223:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  223 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+      |                                 ^~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:358:52: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  358 |                         HAL_UART_Transmit(&huart2, buffer, strlen(buffer), 1000);
+      |                                                    ^~~~~~
+      |                                                    |
+      |                                                    char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:328,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:371:44: warning: passing argument 1 of 'update_IMU_global_position' from incompatible pointer type [-Wincompatible-pointer-types]
+  371 |                 update_IMU_global_position(starting_position_offset, starting_orientation_offset, &acc, &abs_q, ts, &X_global_translation, &O_global_orientation_euller);
+      |                                            ^~~~~~~~~~~~~~~~~~~~~~~~
+      |                                            |
+      |                                            float *
+In file included from ../Core/Src/main.c:42:
+../Core/Inc/sens_fusion.h:43:39: note: expected 'float (*)[3]' but argument is of type 'float *'
+   43 | void update_IMU_global_position(float starting_position_offset[1][3],float starting_orientation_offset[3][3],vector_t *acc, vector_t *abs_q, int time_step, vector_t *X_global_translation, vector_t *O_global_orientation_euller);
+      |                                 ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:55: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+10:40:57 **** Incremental Build of configuration Debug for project I2C_BNO_BMP_UPDATED ****
+make -j12 all 
+arm-none-eabi-size  I2C_BNO_BMP_UPDATED.elf 
+   text	   data	    bss	    dec	    hex	filename
+  44008	    480	   2360	  46848	   b700	I2C_BNO_BMP_UPDATED.elf
+Finished building: default.size.stdout
+ 
+10:40:57 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_I2C_MasterRxCpltCallback':
+../Core/Src/main.c:143:9: error: 'flag_R' undeclared (first use in this function); did you mean 'flah_R'?
+  143 |         flag_R = true;
+      |         ^~~~~~
+      |         flah_R
+../Core/Src/main.c:143:9: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:223:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  223 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+      |                                 ^~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:358:52: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  358 |                         HAL_UART_Transmit(&huart2, buffer, strlen(buffer), 1000);
+      |                                                    ^~~~~~
+      |                                                    |
+      |                                                    char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:328,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:371:44: warning: passing argument 1 of 'update_IMU_global_position' from incompatible pointer type [-Wincompatible-pointer-types]
+  371 |                 update_IMU_global_position(starting_position_offset, starting_orientation_offset, &acc, &abs_q, ts, &X_global_translation, &O_global_orientation_euller);
+      |                                            ^~~~~~~~~~~~~~~~~~~~~~~~
+      |                                            |
+      |                                            float *
+In file included from ../Core/Src/main.c:42:
+../Core/Inc/sens_fusion.h:43:39: note: expected 'float (*)[3]' but argument is of type 'float *'
+   43 | void update_IMU_global_position(float starting_position_offset[1][3],float starting_orientation_offset[3][3],vector_t *acc, vector_t *abs_q, int time_step, vector_t *X_global_translation, vector_t *O_global_orientation_euller);
+      |                                 ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:55: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+10:41:17 **** Incremental Build of configuration Debug for project I2C_BNO_BMP_UPDATED ****
+make -j12 all 
+arm-none-eabi-size  I2C_BNO_BMP_UPDATED.elf 
+   text	   data	    bss	    dec	    hex	filename
+  44008	    480	   2360	  46848	   b700	I2C_BNO_BMP_UPDATED.elf
+Finished building: default.size.stdout
+ 
+10:41:17 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:223:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  223 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
+      |                                 ^~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:358:52: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  358 |                         HAL_UART_Transmit(&huart2, buffer, strlen(buffer), 1000);
+      |                                                    ^~~~~~
+      |                                                    |
+      |                                                    char *
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:328,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:1486:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+ 1486 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:371:44: warning: passing argument 1 of 'update_IMU_global_position' from incompatible pointer type [-Wincompatible-pointer-types]
+  371 |                 update_IMU_global_position(starting_position_offset, starting_orientation_offset, &acc, &abs_q, ts, &X_global_translation, &O_global_orientation_euller);
+      |                                            ^~~~~~~~~~~~~~~~~~~~~~~~
+      |                                            |
+      |                                            float *
+In file included from ../Core/Src/main.c:42:
+../Core/Inc/sens_fusion.h:43:39: note: expected 'float (*)[3]' but argument is of type 'float *'
+   43 | void update_IMU_global_position(float starting_position_offset[1][3],float starting_orientation_offset[3][3],vector_t *acc, vector_t *abs_q, int time_step, vector_t *X_global_translation, vector_t *O_global_orientation_euller);
+      |                                 ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  57768	    508	   3168	  61444	   f004	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
