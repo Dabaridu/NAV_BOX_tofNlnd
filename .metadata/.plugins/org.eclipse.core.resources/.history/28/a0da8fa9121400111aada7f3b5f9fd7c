@@ -199,7 +199,7 @@ void parse_gps_data(){
 
 			//parse rx_buffer to usefull navigation data
 			uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
-
+/*
 			//pass the parsed data to Position pos packet frame
 			GPS_data.latitude = solData.latitude_deg;
 			GPS_data.longitude = solData.longitude_deg;
@@ -207,7 +207,7 @@ void parse_gps_data(){
 			GPS_data.fixType = solData.gpsFix;
 			GPS_data.numSV = solData.numSV;
 			GPS_data.time = HAL_GetTick();
-
+*/
 
 			//---------------sensor fusion GPS readings--------------------
 /*
