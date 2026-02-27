@@ -1,5 +1,7 @@
 #include "sens_fusion.h"
 
+//complie size aprox 4KB
+
 
 //IMU data
 vector_t acc;

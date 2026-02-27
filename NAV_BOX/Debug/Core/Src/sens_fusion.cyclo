@@ -1,7 +1,7 @@
-../Core/Src/sens_fusion.c:33:6:update_IMU_global_position	13
-../Core/Src/sens_fusion.c:117:6:update_position_precision_calculation	1
-../Core/Src/sens_fusion.c:124:6:update_orientation_precision_calculation	1
-../Core/Src/sens_fusion.c:133:6:joined_position_estimation	1
-../Core/Src/sens_fusion.c:148:6:joined_precision_calculation	1
-../Core/Src/sens_fusion.c:158:6:reset_IMU_precision	1
-../Core/Src/sens_fusion.c:166:7:update_ts	1
+../Core/Src/sens_fusion.c:35:6:update_IMU_global_position	9
+../Core/Src/sens_fusion.c:119:6:update_position_precision_calculation	1
+../Core/Src/sens_fusion.c:126:6:update_orientation_precision_calculation	1
+../Core/Src/sens_fusion.c:135:6:joined_position_estimation	1
+../Core/Src/sens_fusion.c:150:6:joined_precision_calculation	1
+../Core/Src/sens_fusion.c:160:6:reset_IMU_precision	1
+../Core/Src/sens_fusion.c:168:7:update_ts	1

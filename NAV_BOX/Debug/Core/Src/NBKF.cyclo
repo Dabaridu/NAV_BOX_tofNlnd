@@ -1,11 +1,7 @@
+../Core/Src/NBKF.c:173:13:matrix_multiply.constprop	4
+../Core/Src/NBKF.c:32:6:NBKF_SetProcessNoise	1
+../Core/Src/NBKF.c:51:6:NBKF_SetMeasurementNoise	2
 ../Core/Src/NBKF.c:16:6:NBKF_Init	2
-../Core/Src/NBKF.c:32:6:NBKF_SetProcessNoise	4
-../Core/Src/NBKF.c:51:6:NBKF_SetMeasurementNoise	3
-../Core/Src/NBKF.c:65:6:NBKF_Predict	4
+../Core/Src/NBKF.c:65:6:NBKF_Predict	8
 ../Core/Src/NBKF.c:118:6:NBKF_Update	4
 ../Core/Src/NBKF.c:161:6:NBKF_GetOutput	1
-../Core/Src/NBKF.c:173:13:matrix_multiply	4
-../Core/Src/NBKF.c:184:13:matrix_add	2
-../Core/Src/NBKF.c:190:13:matrix_transpose	3
-../Core/Src/NBKF.c:198:13:matrix_identity	2
-../Core/Src/NBKF.c:205:12:matrix_inverse	1

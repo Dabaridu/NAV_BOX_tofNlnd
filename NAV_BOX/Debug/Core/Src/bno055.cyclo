@@ -1,5 +1,4 @@
-../Core/Src/bno055.c:4:18:bno055_write_reg	2
-../Core/Src/bno055.c:11:18:bno055_read_reg	2
+../Core/Src/bno055.c:4:18:bno055_write_reg	1
 ../Core/Src/bno055.c:18:11:bno055_set_page	4
 ../Core/Src/bno055.c:28:11:bno055_set_opmode	2
 ../Core/Src/bno055.c:35:11:bno055_set_pwr_mode	2
@@ -9,12 +8,12 @@
 ../Core/Src/bno055.c:91:11:bno055_acc_conf	1
 ../Core/Src/bno055.c:101:11:bno055_gyr_conf	1
 ../Core/Src/bno055.c:111:11:bno055_mag_conf	1
-../Core/Src/bno055.c:121:11:bno055_start_dma_read	2
-../Core/Src/bno055.c:130:6:bno055_get_acc	2
+../Core/Src/bno055.c:121:11:bno055_start_dma_read	1
+../Core/Src/bno055.c:130:6:bno055_get_acc	1
 ../Core/Src/bno055.c:137:6:bno055_get_mag	1
-../Core/Src/bno055.c:143:6:bno055_get_gyro	2
-../Core/Src/bno055.c:150:6:bno055_get_euler	2
+../Core/Src/bno055.c:143:6:bno055_get_gyro	1
+../Core/Src/bno055.c:150:6:bno055_get_euler	1
 ../Core/Src/bno055.c:157:6:bno055_get_quaternion	1
-../Core/Src/bno055.c:164:6:bno055_get_linear_acc	2
-../Core/Src/bno055.c:171:6:bno055_get_gravity	2
+../Core/Src/bno055.c:164:6:bno055_get_linear_acc	1
+../Core/Src/bno055.c:171:6:bno055_get_gravity	1
 ../Core/Src/bno055.c:178:6:bno055_get_temp	2
