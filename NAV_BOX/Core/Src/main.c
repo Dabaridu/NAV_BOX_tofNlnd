@@ -130,6 +130,14 @@ void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c) {
     }
 }
 
+void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c) {
+    if (hi2c->Instance == I2C1) {
+        // I2C error occurred, restart the DMA read
+        bno.dma_data_ready = false;
+        // Optionally, you can add a counter here to track errors
+    }
+}
+
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart) {
 	nslp_uart_error_handler(huart);
 }

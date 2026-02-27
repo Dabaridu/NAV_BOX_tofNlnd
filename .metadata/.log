@@ -1406,3 +1406,197 @@ java.lang.ArithmeticException: / by zero
 	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:164)
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.cdt.core 4 0 2026-02-27 20:17:01.185
+!MESSAGE Error while parsing /C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Core/Src/main.c.
+!STACK 0
+java.lang.ArithmeticException: / by zero
+	at org.eclipse.cdt.internal.core.dom.parser.SizeofCalculator.sizeAndAlignment(SizeofCalculator.java:352)
+	at org.eclipse.cdt.internal.core.dom.parser.SizeofCalculator.sizeAndAlignment(SizeofCalculator.java:214)
+	at org.eclipse.cdt.internal.core.dom.parser.SizeofCalculator.getSizeAndAlignment(SizeofCalculator.java:98)
+	at org.eclipse.cdt.internal.core.dom.parser.ValueFactory.getSize(ValueFactory.java:508)
+	at org.eclipse.cdt.internal.core.dom.parser.ValueFactory.applyUnaryTypeIdOperator(ValueFactory.java:436)
+	at org.eclipse.cdt.internal.core.dom.parser.ValueFactory.evaluate(ValueFactory.java:390)
+	at org.eclipse.cdt.internal.core.dom.parser.ValueFactory.create(ValueFactory.java:98)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CArrayType.getSize(CArrayType.java:149)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CArrayType.marshal(CArrayType.java:190)
+	at org.eclipse.cdt.internal.core.pdom.dom.TypeMarshalBuffer.marshalType(TypeMarshalBuffer.java:135)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMLinkage.storeType(PDOMLinkage.java:468)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMLinkage.storeType(PDOMLinkage.java:462)
+	at org.eclipse.cdt.internal.core.pdom.dom.c.PDOMCVariable.update(PDOMCVariable.java:76)
+	at org.eclipse.cdt.internal.core.pdom.dom.c.PDOMCLinkage.addBinding(PDOMCLinkage.java:124)
+	at org.eclipse.cdt.internal.core.pdom.dom.c.PDOMCLinkage.addBinding(PDOMCLinkage.java:209)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMFile.createPDOMName(PDOMFile.java:524)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMFile.addNames(PDOMFile.java:490)
+	at org.eclipse.cdt.internal.core.pdom.WritablePDOM.addFileContent(WritablePDOM.java:158)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.setFileContent(WritableCIndex.java:90)
+	at org.eclipse.cdt.internal.core.pdom.PDOMWriter.storeFileInIndex(PDOMWriter.java:692)
+	at org.eclipse.cdt.internal.core.pdom.PDOMWriter.storeSymbolsInIndex(PDOMWriter.java:330)
+	at org.eclipse.cdt.internal.core.pdom.PDOMWriter.addSymbols(PDOMWriter.java:287)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.writeToIndex(AbstractIndexerTask.java:1295)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.parseFile(AbstractIndexerTask.java:1107)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.parseLinkage(AbstractIndexerTask.java:910)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:572)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:164)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.cdt.core 4 0 2026-02-27 20:17:09.101
+!MESSAGE Error while parsing /C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Core/Src/main.c.
+!STACK 0
+java.lang.ArithmeticException: / by zero
+	at org.eclipse.cdt.internal.core.dom.parser.SizeofCalculator.sizeAndAlignment(SizeofCalculator.java:352)
+	at org.eclipse.cdt.internal.core.dom.parser.SizeofCalculator.sizeAndAlignment(SizeofCalculator.java:214)
+	at org.eclipse.cdt.internal.core.dom.parser.SizeofCalculator.getSizeAndAlignment(SizeofCalculator.java:98)
+	at org.eclipse.cdt.internal.core.dom.parser.ValueFactory.getSize(ValueFactory.java:508)
+	at org.eclipse.cdt.internal.core.dom.parser.ValueFactory.applyUnaryTypeIdOperator(ValueFactory.java:436)
+	at org.eclipse.cdt.internal.core.dom.parser.ValueFactory.evaluate(ValueFactory.java:390)
+	at org.eclipse.cdt.internal.core.dom.parser.ValueFactory.create(ValueFactory.java:98)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CArrayType.getSize(CArrayType.java:149)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CArrayType.marshal(CArrayType.java:190)
+	at org.eclipse.cdt.internal.core.pdom.dom.TypeMarshalBuffer.marshalType(TypeMarshalBuffer.java:135)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMLinkage.storeType(PDOMLinkage.java:468)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMLinkage.storeType(PDOMLinkage.java:462)
+	at org.eclipse.cdt.internal.core.pdom.dom.c.PDOMCVariable.update(PDOMCVariable.java:76)
+	at org.eclipse.cdt.internal.core.pdom.dom.c.PDOMCLinkage.addBinding(PDOMCLinkage.java:124)
+	at org.eclipse.cdt.internal.core.pdom.dom.c.PDOMCLinkage.addBinding(PDOMCLinkage.java:209)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMFile.createPDOMName(PDOMFile.java:524)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMFile.addNames(PDOMFile.java:490)
+	at org.eclipse.cdt.internal.core.pdom.WritablePDOM.addFileContent(WritablePDOM.java:158)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.setFileContent(WritableCIndex.java:90)
+	at org.eclipse.cdt.internal.core.pdom.PDOMWriter.storeFileInIndex(PDOMWriter.java:692)
+	at org.eclipse.cdt.internal.core.pdom.PDOMWriter.storeSymbolsInIndex(PDOMWriter.java:330)
+	at org.eclipse.cdt.internal.core.pdom.PDOMWriter.addSymbols(PDOMWriter.java:287)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.writeToIndex(AbstractIndexerTask.java:1295)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.parseFile(AbstractIndexerTask.java:1107)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.parseLinkage(AbstractIndexerTask.java:910)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:572)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:164)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2026-02-27 20:17:13.990
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 57 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2026-02-27 20:17:13.991
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2026-02-27 20:17:13.992
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 57 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2026-02-27 20:17:13.992
+!MESSAGE Existing sessions are:
+
+!ENTRY org.eclipse.cdt.core 4 0 2026-02-27 20:20:40.160
+!MESSAGE Error while parsing /C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Core/Src/main.c.
+!STACK 0
+java.lang.ArithmeticException: / by zero
+	at org.eclipse.cdt.internal.core.dom.parser.SizeofCalculator.sizeAndAlignment(SizeofCalculator.java:352)
+	at org.eclipse.cdt.internal.core.dom.parser.SizeofCalculator.sizeAndAlignment(SizeofCalculator.java:214)
+	at org.eclipse.cdt.internal.core.dom.parser.SizeofCalculator.getSizeAndAlignment(SizeofCalculator.java:98)
+	at org.eclipse.cdt.internal.core.dom.parser.ValueFactory.getSize(ValueFactory.java:508)
+	at org.eclipse.cdt.internal.core.dom.parser.ValueFactory.applyUnaryTypeIdOperator(ValueFactory.java:436)
+	at org.eclipse.cdt.internal.core.dom.parser.ValueFactory.evaluate(ValueFactory.java:390)
+	at org.eclipse.cdt.internal.core.dom.parser.ValueFactory.create(ValueFactory.java:98)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CArrayType.getSize(CArrayType.java:149)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CArrayType.marshal(CArrayType.java:190)
+	at org.eclipse.cdt.internal.core.pdom.dom.TypeMarshalBuffer.marshalType(TypeMarshalBuffer.java:135)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMLinkage.storeType(PDOMLinkage.java:468)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMLinkage.storeType(PDOMLinkage.java:462)
+	at org.eclipse.cdt.internal.core.pdom.dom.c.PDOMCVariable.update(PDOMCVariable.java:76)
+	at org.eclipse.cdt.internal.core.pdom.dom.c.PDOMCLinkage.addBinding(PDOMCLinkage.java:124)
+	at org.eclipse.cdt.internal.core.pdom.dom.c.PDOMCLinkage.addBinding(PDOMCLinkage.java:209)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMFile.createPDOMName(PDOMFile.java:524)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMFile.addNames(PDOMFile.java:490)
+	at org.eclipse.cdt.internal.core.pdom.WritablePDOM.addFileContent(WritablePDOM.java:158)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.setFileContent(WritableCIndex.java:90)
+	at org.eclipse.cdt.internal.core.pdom.PDOMWriter.storeFileInIndex(PDOMWriter.java:692)
+	at org.eclipse.cdt.internal.core.pdom.PDOMWriter.storeSymbolsInIndex(PDOMWriter.java:330)
+	at org.eclipse.cdt.internal.core.pdom.PDOMWriter.addSymbols(PDOMWriter.java:287)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.writeToIndex(AbstractIndexerTask.java:1295)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.parseFile(AbstractIndexerTask.java:1107)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.parseLinkage(AbstractIndexerTask.java:910)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:572)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:164)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.cdt.core 4 0 2026-02-27 20:20:46.111
+!MESSAGE Error while parsing /C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Core/Src/main.c.
+!STACK 0
+java.lang.ArithmeticException: / by zero
+	at org.eclipse.cdt.internal.core.dom.parser.SizeofCalculator.sizeAndAlignment(SizeofCalculator.java:352)
+	at org.eclipse.cdt.internal.core.dom.parser.SizeofCalculator.sizeAndAlignment(SizeofCalculator.java:214)
+	at org.eclipse.cdt.internal.core.dom.parser.SizeofCalculator.getSizeAndAlignment(SizeofCalculator.java:98)
+	at org.eclipse.cdt.internal.core.dom.parser.ValueFactory.getSize(ValueFactory.java:508)
+	at org.eclipse.cdt.internal.core.dom.parser.ValueFactory.applyUnaryTypeIdOperator(ValueFactory.java:436)
+	at org.eclipse.cdt.internal.core.dom.parser.ValueFactory.evaluate(ValueFactory.java:390)
+	at org.eclipse.cdt.internal.core.dom.parser.ValueFactory.create(ValueFactory.java:98)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CArrayType.getSize(CArrayType.java:149)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CArrayType.marshal(CArrayType.java:190)
+	at org.eclipse.cdt.internal.core.pdom.dom.TypeMarshalBuffer.marshalType(TypeMarshalBuffer.java:135)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMLinkage.storeType(PDOMLinkage.java:468)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMLinkage.storeType(PDOMLinkage.java:462)
+	at org.eclipse.cdt.internal.core.pdom.dom.c.PDOMCVariable.update(PDOMCVariable.java:76)
+	at org.eclipse.cdt.internal.core.pdom.dom.c.PDOMCLinkage.addBinding(PDOMCLinkage.java:124)
+	at org.eclipse.cdt.internal.core.pdom.dom.c.PDOMCLinkage.addBinding(PDOMCLinkage.java:209)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMFile.createPDOMName(PDOMFile.java:524)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMFile.addNames(PDOMFile.java:490)
+	at org.eclipse.cdt.internal.core.pdom.WritablePDOM.addFileContent(WritablePDOM.java:158)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.setFileContent(WritableCIndex.java:90)
+	at org.eclipse.cdt.internal.core.pdom.PDOMWriter.storeFileInIndex(PDOMWriter.java:692)
+	at org.eclipse.cdt.internal.core.pdom.PDOMWriter.storeSymbolsInIndex(PDOMWriter.java:330)
+	at org.eclipse.cdt.internal.core.pdom.PDOMWriter.addSymbols(PDOMWriter.java:287)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.writeToIndex(AbstractIndexerTask.java:1295)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.parseFile(AbstractIndexerTask.java:1107)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.parseLinkage(AbstractIndexerTask.java:910)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:572)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:164)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.cdt.core 4 0 2026-02-27 20:20:49.818
+!MESSAGE Error while parsing /C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Core/Src/main.c.
+!STACK 0
+java.lang.ArithmeticException: / by zero
+	at org.eclipse.cdt.internal.core.dom.parser.SizeofCalculator.sizeAndAlignment(SizeofCalculator.java:352)
+	at org.eclipse.cdt.internal.core.dom.parser.SizeofCalculator.sizeAndAlignment(SizeofCalculator.java:214)
+	at org.eclipse.cdt.internal.core.dom.parser.SizeofCalculator.getSizeAndAlignment(SizeofCalculator.java:98)
+	at org.eclipse.cdt.internal.core.dom.parser.ValueFactory.getSize(ValueFactory.java:508)
+	at org.eclipse.cdt.internal.core.dom.parser.ValueFactory.applyUnaryTypeIdOperator(ValueFactory.java:436)
+	at org.eclipse.cdt.internal.core.dom.parser.ValueFactory.evaluate(ValueFactory.java:390)
+	at org.eclipse.cdt.internal.core.dom.parser.ValueFactory.create(ValueFactory.java:98)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CArrayType.getSize(CArrayType.java:149)
+	at org.eclipse.cdt.internal.core.dom.parser.c.CArrayType.marshal(CArrayType.java:190)
+	at org.eclipse.cdt.internal.core.pdom.dom.TypeMarshalBuffer.marshalType(TypeMarshalBuffer.java:135)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMLinkage.storeType(PDOMLinkage.java:468)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMLinkage.storeType(PDOMLinkage.java:462)
+	at org.eclipse.cdt.internal.core.pdom.dom.c.PDOMCVariable.update(PDOMCVariable.java:76)
+	at org.eclipse.cdt.internal.core.pdom.dom.c.PDOMCLinkage.addBinding(PDOMCLinkage.java:124)
+	at org.eclipse.cdt.internal.core.pdom.dom.c.PDOMCLinkage.addBinding(PDOMCLinkage.java:209)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMFile.createPDOMName(PDOMFile.java:524)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMFile.addNames(PDOMFile.java:490)
+	at org.eclipse.cdt.internal.core.pdom.WritablePDOM.addFileContent(WritablePDOM.java:158)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.setFileContent(WritableCIndex.java:90)
+	at org.eclipse.cdt.internal.core.pdom.PDOMWriter.storeFileInIndex(PDOMWriter.java:692)
+	at org.eclipse.cdt.internal.core.pdom.PDOMWriter.storeSymbolsInIndex(PDOMWriter.java:330)
+	at org.eclipse.cdt.internal.core.pdom.PDOMWriter.addSymbols(PDOMWriter.java:287)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.writeToIndex(AbstractIndexerTask.java:1295)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.parseFile(AbstractIndexerTask.java:1107)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.parseLinkage(AbstractIndexerTask.java:910)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:572)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:164)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2026-02-27 20:20:59.947
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 58 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2026-02-27 20:20:59.947
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2026-02-27 20:20:59.949
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 58 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2026-02-27 20:20:59.950
+!MESSAGE Existing sessions are:
