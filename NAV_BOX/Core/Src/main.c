@@ -21,25 +21,19 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "string.h"
-#include "stdbool.h"
-#include "string.h"
+//#include "string.h"
+//#include "stdbool.h"
 #include "stdlib.h"
 #include "stdio.h"
 
 //include the library
 //#include "nmea_parse.h"
-
-#include "bno055_stm32.h"
-#include "bmp180_for_stm32_hal.h"
+#include "bno055.h"
+//#include "bmp180_for_stm32_hal.h"
 #include "ubx_nav_sol.h"
 #include "nslp_dma.h"
-
-//#include "NBKF.h"
-
 #include "nslp_packets.h"
-
-#include "sens_fusion.h"
+//#include "sens_fusion.h"
 
 /* USER CODE END Includes */
 
@@ -68,6 +62,8 @@
 CRC_HandleTypeDef hcrc;
 
 I2C_HandleTypeDef hi2c1;
+DMA_HandleTypeDef hdma_i2c1_rx;
+DMA_HandleTypeDef hdma_i2c1_tx;
 
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
@@ -78,28 +74,22 @@ DMA_HandleTypeDef hdma_usart2_rx;
 /* USER CODE BEGIN PV */
 
 //selct communication over huart2, (false -> AsyncSerial, true -> NSLP)
-#define coms_select false
+#define coms_select 1
 
+/*
 float temperature;
 int32_t pressure;
-bno055_vector_t g;
-bno055_vector_t ac;
-bno055_vector_t mag;
-bno055_vector_t abs_q_bno055;
-bno055_calibration_state_t cal;
+*/
+
+bno055_t bno;
+bno055_vec3_t accel;
+//bno055_vec4_t quat;
+bno055_euler_t euler;
 
 //dirty flags
 bool recieved_GPS = false;
 bool parsed_GPS = false;
 
-bool flag_T_I2C = true;
-bool flag_R_I2C = true;
-bno055_vector_t I2C_data;
-uint8_t flag_I2C_taken_token = 0; //0 free, 1. reading, 2. reading....
-uint32_t time_s1_I2C = 100;
-uint32_t time_s1_last_I2C;
-uint32_t time_s2_I2C = 100;
-uint32_t time_s2_last_I2C;
 
 //---------------REVIEVING PACKET FROM GPS VIA UBX raw bytes---------------
 /*
@@ -111,22 +101,16 @@ uint32_t time_s2_last_I2C;
  *It
  * */
 
-//----------------------------------------------------------------------------
-//GPS
+//-------------------------------GPS---------------------------------------------
 UBX_NavSol rawData;
 UBX_NavSolData solData;
-
 uint8_t rx_buffer[rx_buffer_size]; //size of data recieved from GPS
+
+//--------------------------nslp--------------------------------------------
+nslp_instance_t nslp;
 uint8_t tx_buffer[sizeof(struct Position)]; //recieving size of DMA message
 
-nslp_instance_t nslp;
 
-//NBKF - KF kalman filter variables
-//NBKF_t navFilter;
-//NBKF_Output_t navOutput;
-//IMU_Data_t BNO055_data_KF;
-//GPS_Data_t GPS_data_KF;
-//float dt = 10; //10ms time step
 
 /* USER CODE END PV */
 
@@ -140,17 +124,10 @@ static void MX_I2C1_Init(void);
 static void MX_CRC_Init(void);
 /* USER CODE BEGIN PFP */
 
-
-void HAL_I2C_MasterTxCpltCallback (I2C_HandleTypeDef * hi2c)
-{
-  // TX Done .. Do Something!
-	flag_T_I2C = true;
-}
-
-void HAL_I2C_MasterRxCpltCallback (I2C_HandleTypeDef * hi2c)
-{
-  // RX Done .. Do Something!
-	flag_R_I2C = true;
+void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c) {
+    if (hi2c->Instance == I2C1) {
+        bno.dma_data_ready = true;
+    }
 }
 
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart) {
@@ -170,91 +147,51 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 	}
 	nslp_uart_rx_event_handler(huart, Size);
 }
+
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
 	nslp_uart_tx_cplt_handler(huart);
 }
 
 void parse_i2c_data(){
-	//if more than 100ms have passed reset flag_T and flag_R to true.
 
-	uint32_t current_time = HAL_GetTick();
+		if (bno.dma_data_ready) {
 
-	/* Reads BNO055 absolute position sensor*/
+			bno055_get_acc(&bno, &accel);
+			bno055_get_euler(&bno, &euler);
+			//bno055_get_quaternion(&bno, &quat);
 
-	switch (flag_I2C_taken_token) {
-		case 1:
-			if (flag_T_I2C == true && flag_R_I2C == false){ //check if we have completed previous transmition
-				flag_T_I2C = false;
-				bno055_getVectorAccelerometer(I2C_data); //acceleration
-			}
-			if (flag_R_I2C == true){//parse data when recieved
-				acc.x = I2C_data.x;
-				acc.y = I2C_data.y;
-				acc.z = I2C_data.z;
-				acc.w = I2C_data.w;
+			// Copy accelerometer data to transmission structure
+			BNO055_data_a.ax = accel.x;
+			BNO055_data_a.ay = accel.y;
+			BNO055_data_a.az = accel.z;
+			BNO055_data_a.time = HAL_GetTick();
 
-				flag_R_I2C = false;
-				flag_I2C_taken_token = 0; //release token
-			}
-			break;
-		case 2:
-		  	if (flag_T_I2C == true && flag_R_I2C == false){ //check if we have completed previous transmition
-		  		bno055_getVectorQuaternion(I2C_data); //absolute orientation as quaternion
-		  		flag_T_I2C = false;
-		  	}
-		  	if (flag_R_I2C == true){//parse data when recieved
-		        abs_q.x = I2C_data.x;
-		        abs_q.y = I2C_data.y;
-		        abs_q.z = I2C_data.z;
-		        abs_q.w = I2C_data.w;
-
-		  		flag_R_I2C = false;
-		  		flag_I2C_taken_token = 0; //release token
-		  	}
-			break;
-		default:
-			//allocate token for reading
-			if (current_time-time_s1_last_I2C >= time_s1_I2C){
-				flag_I2C_taken_token = 1;
-				time_s1_last_I2C = current_time;
-			}
-			else if (current_time-time_s2_last_I2C >= time_s2_I2C){
-				flag_I2C_taken_token = 2;
-				time_s2_last_I2C = current_time;
-			}else{
-				flag_I2C_taken_token = 0;
-			}
-
-			break;
+			bno055_start_dma_read(&bno);
 		}
-		//cal = bno055_getCalibrationState();		//calibration state 0-3 how good the estimate is
-		//BNO055_data_KF.calib = cal.sys;
-		//g = bno055_getVectorGyroscope(); 			//absolute position
-		//mag = bno055_getVectorMagnetometer(); 	//magnetic vector
-
-  		BNO055_data_a.time = HAL_GetTick(); //update time at this time of reading
-
-		if (false){ //THIS IS STILL BLOCKING FUNCTION BMP180 we disable it
+/*
+		if (0){ //THIS IS STILL BLOCKING FUNCTION BMP180 we disable it
 			//reads pressure and temperature from BMP180 sensor
 				temperature = BMP180_GetRawTemperature();
 				pressure = BMP180_GetPressure();
-			//write data to NSLP paylaod
+
+				//write data to NSLP paylaod
 				BMP_data.temp = temperature;
 				BMP_data.press = pressure;
 
 				BMP_data.time = HAL_GetTick();
 		}
+*/
 	}
 
-}
 void parse_gps_data(){
+
 		if(recieved_GPS == true){
 
 			recieved_GPS = false;
 
 			//parse rx_buffer to usefull navigation data
-			uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData,&solData);
-
+			uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+/*
 			//pass the parsed data to Position pos packet frame
 			GPS_data.latitude = solData.latitude_deg;
 			GPS_data.longitude = solData.longitude_deg;
@@ -262,8 +199,10 @@ void parse_gps_data(){
 			GPS_data.fixType = solData.gpsFix;
 			GPS_data.numSV = solData.numSV;
 			GPS_data.time = HAL_GetTick();
+*/
 
 			//---------------sensor fusion GPS readings--------------------
+/*
 			pos.x = GPS_data.latitude;
 			pos.y = GPS_data.longitude;
 			pos.z = GPS_data.altitude;
@@ -274,17 +213,11 @@ void parse_gps_data(){
 			joined_position_estimation(&X_hat_estimation, &pos, &X_global_translation, &pos_prec, &acc_prec);
 			joined_precision_calculation(&X_hat_precision, &pos_prec, &acc_prec);
 			reset_IMU_precision(&X_hat_precision, &X_global_translation_precision, &X_hat_estimation, &X_global_translation);
+*/
 			//----------------implements sensor fusion----------------------
-
-			// GPS_data_KF.latitude = solData.latitude_deg;
-			// GPS_data_KF.longitude = solData.longitude_deg;
-			// GPS_data_KF.altitude = solData.height_m;
-			// GPS_data_KF.valid = (GPS_data.fixType > 0) ? true : false; //valid if fixType is greater than 0
 
 			parsed_GPS = true;
 
-      //update NBKF KF kalman filter with ne data
-      //NBKF_Update(&navFilter, &GPS_data_KF, &BNO055_data_KF); //update with GPS rate
 		}
 }
 /* USER CODE END PFP */
@@ -296,49 +229,45 @@ void parse_gps_data(){
 /* USER CODE END 0 */
 
 /**
- * @brief  The application entry point.
- * @retval int
- */
+  * @brief  The application entry point.
+  * @retval int
+  */
 int main(void)
 {
 
-	/* USER CODE BEGIN 1 */
+  /* USER CODE BEGIN 1 */
 
-	/* USER CODE END 1 */
+  /* USER CODE END 1 */
 
-	/* MCU Configuration--------------------------------------------------------*/
+  /* MCU Configuration--------------------------------------------------------*/
 
-	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-	HAL_Init();
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
 
-	/* USER CODE BEGIN Init */
+  /* USER CODE BEGIN Init */
 
-	/* USER CODE END Init */
+  /* USER CODE END Init */
 
-	/* Configure the system clock */
-	SystemClock_Config();
+  /* Configure the system clock */
+  SystemClock_Config();
 
-	/* USER CODE BEGIN SysInit */
+  /* USER CODE BEGIN SysInit */
 
-	/* USER CODE END SysInit */
+  /* USER CODE END SysInit */
 
-	/* Initialize all configured peripherals */
-	MX_GPIO_Init();
-	MX_DMA_Init();
-	MX_USART1_UART_Init();
-	MX_USART2_UART_Init();
-	MX_I2C1_Init();
-	MX_CRC_Init();
-
-	/* USER CODE BEGIN 2 */
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_DMA_Init();
+  MX_USART1_UART_Init();
+  MX_USART2_UART_Init();
+  MX_I2C1_Init();
+  MX_CRC_Init();
+  /* USER CODE BEGIN 2 */
 
 	//------------------------NSLP CODE------------------------
-	if (coms_select){ //innitialize coms parameters
-		nslp_init(&nslp, &huart2, &hcrc, 16, 0xAA);
-		uint32_t lastTime = 0;
-	}else{
 
-	}
+	uint32_t lastTime = 0;
+	nslp_init(&nslp, &huart2, &hcrc, 16, 0xAA);
 	//------------------------NSLP CODE------------------------
 
 	//initialize DMA on uart1, rx for GPS
@@ -346,329 +275,346 @@ int main(void)
 	HAL_UARTEx_ReceiveToIdle_DMA(&huart1, (uint8_t *) rx_buffer, sizeof(rx_buffer));
 	__HAL_DMA_DISABLE_IT(&hdma_usart1_rx,DMA_IT_HT); //DMA half transfer interupt
 
-	//innitialize DMA on I2C
-
-
-	/* Initializes BMP180 sensor and oversampling settings. */
+	/*
+	//Initializes BMP180 sensor and oversampling settings.
 	BMP180_Init(&hi2c1);
 	BMP180_SetOversampling(BMP180_STANDARD); //BMP180_LOW, BMP180_STANDARD, BMP180_HIGH, BMP180_ULTRA,
-	/* Update calibration data. Must be called once before entering main loop. */
+	// Update calibration data. Must be called once before entering main loop.
 	BMP180_UpdateCalibrationData();
+	*/
 
-	bno055_assignI2C(&hi2c1);
-	bno055_setup();
-	bno055_setOperationModeNDOF(); //all raw sensor data gyro accel mag
+	//innitialize DMA on I2C
+	bno.i2c = &hi2c1;
+	bno.addr = BNO_ADDR_ALT;
+	bno.mode = BNO_MODE_NDOF;
+	HAL_Delay(500);
+	if (bno055_init(&bno) != BNO_OK) {
+		while (1) { }
+	}
 
-	//NBKF Kalman filter inplementation innitialization
-	//NBKF_Init(&navFilter, dt);
+	bno055_set_unit(&bno, BNO_TEMP_UNIT_C, BNO_GYR_UNIT_DPS, BNO_ACC_UNITSEL_M_S2, BNO_EUL_UNIT_DEG);
+	bno055_start_dma_read(&bno);
 
-	/* USER CODE END 2 */
 
-	/* Infinite loop */
-	/* USER CODE BEGIN WHILE */
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
 	while (1)
 	{
 		//------------------------------choose comunication type-----------------------------------
+
+		if (HAL_GetTick() - lastTime > nslp_min_delay(&nslp)){
+
+			//-----------------------------Send packets for NSLP----------------- START
+
+			if((parsed_GPS == true)/*&&(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE))*/){
+				//__HAL_UART_CLEAR_IDLEFLAG(&huart1);
+				nslp_send_packet(&nslp, &GPS_packet);
+				parsed_GPS = false;
+			}
+
+			//-----------------------------Send packets for NSLP----------------- END
+			nslp_send_packet(&nslp, &BNO_packet_a);
+
+			lastTime = HAL_GetTick();
+		}
+/*
 		if(coms_select){
 			//in this throw all packet sends for NSLP, the function will handle delays
+
 			if (HAL_GetTick() - lastTime > nslp_min_delay(&nslp)){
 
 				//-----------------------------Send packets for NSLP----------------- START
 
-				if((parsed_GPS == true)/*&&(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE))*/){
+				if((parsed_GPS == true)){
 					//__HAL_UART_CLEAR_IDLEFLAG(&huart1);
 					nslp_send_packet(&nslp, &GPS_packet);
 					parsed_GPS = false;
 				}
 
-				nslp_send_packet(&nslp, &BNO_packet_g);
-				nslp_send_packet(&nslp, &BNO_packet_a);
-				nslp_send_packet(&nslp, &BNO_packet_m);
-
-				nslp_send_packet(&nslp, &BMP_packet);
-				nslp_send_packet(&nslp, &KF_packet);
-
 				//-----------------------------Send packets for NSLP----------------- END
+				nslp_send_packet(&nslp, &BNO_packet_a);
 
 				lastTime = HAL_GetTick();
 			}
 		}else{
+
+			if((parsed_GPS == true)){
+				//__HAL_UART_CLEAR_IDLEFLAG(&huart1);
+				parsed_GPS = false;
+			}
+
 			char buffer[120]; //create new empty buffer
 			sprintf(buffer,
-				"%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f \n\r",
-				X_global_translation.x, X_global_translation.y, X_global_translation.z,abs_q.x,
-				X_hat_estimation.x, X_hat_estimation.y, X_hat_estimation.z,
-				abs_q.y, abs_q.z,abs_q.w);
-			HAL_UART_Transmit(&huart2, buffer, strlen(buffer), 1000);
+				"%.2f,%.2f,%.2f,%.2f,%.2f,%.2f \n\r",
+				accel.x, accel.y, accel.z,
+				euler.roll, euler.pitch, euler.yaw);
+			HAL_UART_Transmit(&huart2, buffer, strlen(buffer), 100);
 		}
-
+*/
 		//-------------------parse data from GPS------------------------
-		void parse_gps_data();
+		parse_gps_data();
 		//-------------------parse data from GPS------------------------
 
 		//-------------------parse data from I2C------------------------
-		void parse_i2c_data();
+		parse_i2c_data();
 		//-------------------parse data from I2C------------------------
 
 		//------------sensor fusion------------------------------------
-		ts = update_ts(&lt, (int)HAL_GetTick());
+/*
+		ts = update_ts(&lt,HAL_GetTick());
 		update_IMU_global_position(starting_position_offset, starting_orientation_offset, &acc, &abs_q, ts, &X_global_translation, &O_global_orientation_euller);
 		update_position_precision_calculation(&X_global_translation_precision, &acc_prec, ts);
+*/
 		//----------------implements sensor fusion----------------------
 
-		//NBKF Kalman filter inplementation
-		//NBKF_Predict(&navFilter, &BNO055_data_KF); //Run at qC rate
-		//NBKF_GetOutput(&navFilter, &navOutput); //write state estimate for output
-		//write data to NSLP payload
-		//   KF_data.latitude = navOutput.latitude;
-		//   KF_data.longitude = navOutput.longitude;
-		//   KF_data.altitude = navOutput.altitude;
-		//   KF_data.vx = navOutput.vx;
-		//   KF_data.vy = navOutput.vy;
-		//   KF_data.vz = navOutput.vz;
-		//   KF_data.time = HAL_GetTick();
+    /* USER CODE END WHILE */
 
-		/* USER CODE END WHILE */
-
-		/* USER CODE BEGIN 3 */
+    /* USER CODE BEGIN 3 */
 	}
-	/* USER CODE END 3 */
+  /* USER CODE END 3 */
 }
-
 /**
- * @brief System Clock Configuration
- * @retval None
- */
+  * @brief System Clock Configuration
+  * @retval None
+  */
 void SystemClock_Config(void)
 {
-	RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-	RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-	RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
-	/** Initializes the RCC Oscillators according to the specified parameters
-	 * in the RCC_OscInitTypeDef structure.
-	 */
-	RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-	RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-	RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-	RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
-	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-	{
-		Error_Handler();
-	}
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
+  */
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
-	/** Initializes the CPU, AHB and APB buses clocks
-	 */
-	RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-			|RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
-	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  /** Initializes the CPU, AHB and APB buses clocks
+  */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
-	{
-		Error_Handler();
-	}
-	PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART1|RCC_PERIPHCLK_I2C1;
-	PeriphClkInit.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK1;
-	PeriphClkInit.I2c1ClockSelection = RCC_I2C1CLKSOURCE_HSI;
-	if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
-	{
-		Error_Handler();
-	}
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART1|RCC_PERIPHCLK_I2C1;
+  PeriphClkInit.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK1;
+  PeriphClkInit.I2c1ClockSelection = RCC_I2C1CLKSOURCE_HSI;
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+  {
+    Error_Handler();
+  }
 }
 
 /**
- * @brief CRC Initialization Function
- * @param None
- * @retval None
- */
+  * @brief CRC Initialization Function
+  * @param None
+  * @retval None
+  */
 static void MX_CRC_Init(void)
 {
 
-	/* USER CODE BEGIN CRC_Init 0 */
+  /* USER CODE BEGIN CRC_Init 0 */
 
-	/* USER CODE END CRC_Init 0 */
+  /* USER CODE END CRC_Init 0 */
 
-	/* USER CODE BEGIN CRC_Init 1 */
+  /* USER CODE BEGIN CRC_Init 1 */
 
-	/* USER CODE END CRC_Init 1 */
-	hcrc.Instance = CRC;
-	hcrc.Init.DefaultPolynomialUse = DEFAULT_POLYNOMIAL_ENABLE;
-	hcrc.Init.DefaultInitValueUse = DEFAULT_INIT_VALUE_ENABLE;
-	hcrc.Init.InputDataInversionMode = CRC_INPUTDATA_INVERSION_NONE;
-	hcrc.Init.OutputDataInversionMode = CRC_OUTPUTDATA_INVERSION_DISABLE;
-	hcrc.InputDataFormat = CRC_INPUTDATA_FORMAT_BYTES;
-	if (HAL_CRC_Init(&hcrc) != HAL_OK)
-	{
-		Error_Handler();
-	}
-	/* USER CODE BEGIN CRC_Init 2 */
+  /* USER CODE END CRC_Init 1 */
+  hcrc.Instance = CRC;
+  hcrc.Init.DefaultPolynomialUse = DEFAULT_POLYNOMIAL_ENABLE;
+  hcrc.Init.DefaultInitValueUse = DEFAULT_INIT_VALUE_ENABLE;
+  hcrc.Init.InputDataInversionMode = CRC_INPUTDATA_INVERSION_NONE;
+  hcrc.Init.OutputDataInversionMode = CRC_OUTPUTDATA_INVERSION_DISABLE;
+  hcrc.InputDataFormat = CRC_INPUTDATA_FORMAT_BYTES;
+  if (HAL_CRC_Init(&hcrc) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN CRC_Init 2 */
 
-	/* USER CODE END CRC_Init 2 */
+  /* USER CODE END CRC_Init 2 */
 
 }
 
 /**
- * @brief I2C1 Initialization Function
- * @param None
- * @retval None
- */
+  * @brief I2C1 Initialization Function
+  * @param None
+  * @retval None
+  */
 static void MX_I2C1_Init(void)
 {
 
-	/* USER CODE BEGIN I2C1_Init 0 */
+  /* USER CODE BEGIN I2C1_Init 0 */
 
-	/* USER CODE END I2C1_Init 0 */
+  /* USER CODE END I2C1_Init 0 */
 
-	/* USER CODE BEGIN I2C1_Init 1 */
+  /* USER CODE BEGIN I2C1_Init 1 */
 
-	/* USER CODE END I2C1_Init 1 */
-	hi2c1.Instance = I2C1;
-	hi2c1.Init.Timing = 0x00201D2B;
-	hi2c1.Init.OwnAddress1 = 0;
-	hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-	hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-	hi2c1.Init.OwnAddress2 = 0;
-	hi2c1.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
-	hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-	hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
-	if (HAL_I2C_Init(&hi2c1) != HAL_OK)
-	{
-		Error_Handler();
-	}
+  /* USER CODE END I2C1_Init 1 */
+  hi2c1.Instance = I2C1;
+  hi2c1.Init.Timing = 0x00201D2B;
+  hi2c1.Init.OwnAddress1 = 0;
+  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c1.Init.OwnAddress2 = 0;
+  hi2c1.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
-	/** Configure Analogue filter
-	 */
-	if (HAL_I2CEx_ConfigAnalogFilter(&hi2c1, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
-	{
-		Error_Handler();
-	}
+  /** Configure Analogue filter
+  */
+  if (HAL_I2CEx_ConfigAnalogFilter(&hi2c1, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
-	/** Configure Digital filter
-	 */
-	if (HAL_I2CEx_ConfigDigitalFilter(&hi2c1, 0) != HAL_OK)
-	{
-		Error_Handler();
-	}
-	/* USER CODE BEGIN I2C1_Init 2 */
+  /** Configure Digital filter
+  */
+  if (HAL_I2CEx_ConfigDigitalFilter(&hi2c1, 0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C1_Init 2 */
 
-	/* USER CODE END I2C1_Init 2 */
+  /* USER CODE END I2C1_Init 2 */
 
 }
 
 /**
- * @brief USART1 Initialization Function
- * @param None
- * @retval None
- */
+  * @brief USART1 Initialization Function
+  * @param None
+  * @retval None
+  */
 static void MX_USART1_UART_Init(void)
 {
 
-	/* USER CODE BEGIN USART1_Init 0 */
+  /* USER CODE BEGIN USART1_Init 0 */
 
-	/* USER CODE END USART1_Init 0 */
+  /* USER CODE END USART1_Init 0 */
 
-	/* USER CODE BEGIN USART1_Init 1 */
+  /* USER CODE BEGIN USART1_Init 1 */
 
-	/* USER CODE END USART1_Init 1 */
-	huart1.Instance = USART1;
-	huart1.Init.BaudRate = 9600;
-	huart1.Init.WordLength = UART_WORDLENGTH_8B;
-	huart1.Init.StopBits = UART_STOPBITS_1;
-	huart1.Init.Parity = UART_PARITY_NONE;
-	huart1.Init.Mode = UART_MODE_TX_RX;
-	huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-	huart1.Init.OverSampling = UART_OVERSAMPLING_16;
-	huart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
-	huart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
-	if (HAL_UART_Init(&huart1) != HAL_OK)
-	{
-		Error_Handler();
-	}
-	/* USER CODE BEGIN USART1_Init 2 */
+  /* USER CODE END USART1_Init 1 */
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 9600;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  if (HAL_UART_Init(&huart1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART1_Init 2 */
 
-	/* USER CODE END USART1_Init 2 */
+  /* USER CODE END USART1_Init 2 */
 
 }
 
 /**
- * @brief USART2 Initialization Function
- * @param None
- * @retval None
- */
+  * @brief USART2 Initialization Function
+  * @param None
+  * @retval None
+  */
 static void MX_USART2_UART_Init(void)
 {
 
-	/* USER CODE BEGIN USART2_Init 0 */
+  /* USER CODE BEGIN USART2_Init 0 */
 
-	/* USER CODE END USART2_Init 0 */
+  /* USER CODE END USART2_Init 0 */
 
-	/* USER CODE BEGIN USART2_Init 1 */
+  /* USER CODE BEGIN USART2_Init 1 */
 
-	/* USER CODE END USART2_Init 1 */
-	huart2.Instance = USART2;
-	huart2.Init.BaudRate = 9600;
-	huart2.Init.WordLength = UART_WORDLENGTH_8B;
-	huart2.Init.StopBits = UART_STOPBITS_1;
-	huart2.Init.Parity = UART_PARITY_NONE;
-	huart2.Init.Mode = UART_MODE_TX_RX;
-	huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-	huart2.Init.OverSampling = UART_OVERSAMPLING_16;
-	huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
-	huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
-	if (HAL_UART_Init(&huart2) != HAL_OK)
-	{
-		Error_Handler();
-	}
-	/* USER CODE BEGIN USART2_Init 2 */
+  /* USER CODE END USART2_Init 1 */
+  huart2.Instance = USART2;
+  huart2.Init.BaudRate = 9600;
+  huart2.Init.WordLength = UART_WORDLENGTH_8B;
+  huart2.Init.StopBits = UART_STOPBITS_1;
+  huart2.Init.Parity = UART_PARITY_NONE;
+  huart2.Init.Mode = UART_MODE_TX_RX;
+  huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  if (HAL_UART_Init(&huart2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART2_Init 2 */
 
-	/* USER CODE END USART2_Init 2 */
+  /* USER CODE END USART2_Init 2 */
 
 }
 
 /**
- * Enable DMA controller clock
- */
+  * Enable DMA controller clock
+  */
 static void MX_DMA_Init(void)
 {
 
-	/* DMA controller clock enable */
-	__HAL_RCC_DMA1_CLK_ENABLE();
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA1_CLK_ENABLE();
 
-	/* DMA interrupt init */
-	/* DMA1_Channel5_IRQn interrupt configuration */
-	HAL_NVIC_SetPriority(DMA1_Channel5_IRQn, 0, 0);
-	HAL_NVIC_EnableIRQ(DMA1_Channel5_IRQn);
-	/* DMA1_Channel6_IRQn interrupt configuration */
-	HAL_NVIC_SetPriority(DMA1_Channel6_IRQn, 0, 0);
-	HAL_NVIC_EnableIRQ(DMA1_Channel6_IRQn);
-	/* DMA1_Channel7_IRQn interrupt configuration */
-	HAL_NVIC_SetPriority(DMA1_Channel7_IRQn, 0, 0);
-	HAL_NVIC_EnableIRQ(DMA1_Channel7_IRQn);
+  /* DMA interrupt init */
+  /* DMA1_Channel2_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel2_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel2_IRQn);
+  /* DMA1_Channel3_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel3_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel3_IRQn);
+  /* DMA1_Channel5_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel5_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel5_IRQn);
+  /* DMA1_Channel6_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel6_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel6_IRQn);
+  /* DMA1_Channel7_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel7_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel7_IRQn);
 
 }
 
 /**
- * @brief GPIO Initialization Function
- * @param None
- * @retval None
- */
+  * @brief GPIO Initialization Function
+  * @param None
+  * @retval None
+  */
 static void MX_GPIO_Init(void)
 {
-	/* USER CODE BEGIN MX_GPIO_Init_1 */
+  /* USER CODE BEGIN MX_GPIO_Init_1 */
 
-	/* USER CODE END MX_GPIO_Init_1 */
+  /* USER CODE END MX_GPIO_Init_1 */
 
-	/* GPIO Ports Clock Enable */
-	__HAL_RCC_GPIOF_CLK_ENABLE();
-	__HAL_RCC_GPIOA_CLK_ENABLE();
-	__HAL_RCC_GPIOB_CLK_ENABLE();
+  /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOF_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
 
-	/* USER CODE BEGIN MX_GPIO_Init_2 */
+  /* USER CODE BEGIN MX_GPIO_Init_2 */
 
-	/* USER CODE END MX_GPIO_Init_2 */
+  /* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */
@@ -676,32 +622,32 @@ static void MX_GPIO_Init(void)
 /* USER CODE END 4 */
 
 /**
- * @brief  This function is executed in case of error occurrence.
- * @retval None
- */
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
 void Error_Handler(void)
 {
-	/* USER CODE BEGIN Error_Handler_Debug */
+  /* USER CODE BEGIN Error_Handler_Debug */
 	/* User can add his own implementation to report the HAL error return state */
 	__disable_irq();
 	while (1)
 	{
 	}
-	/* USER CODE END Error_Handler_Debug */
+  /* USER CODE END Error_Handler_Debug */
 }
 #ifdef USE_FULL_ASSERT
 /**
- * @brief  Reports the name of the source file and the source line number
- *         where the assert_param error has occurred.
- * @param  file: pointer to the source file name
- * @param  line: assert_param error line source number
- * @retval None
- */
+  * @brief  Reports the name of the source file and the source line number
+  *         where the assert_param error has occurred.
+  * @param  file: pointer to the source file name
+  * @param  line: assert_param error line source number
+  * @retval None
+  */
 void assert_failed(uint8_t *file, uint32_t line)
 {
-	/* USER CODE BEGIN 6 */
+  /* USER CODE BEGIN 6 */
 	/* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-	/* USER CODE END 6 */
+  /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

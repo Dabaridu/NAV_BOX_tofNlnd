@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;NAV_BOX/Core/Inc/bno055_stm32.h&apos;" deleteContents="false" description="Delete resource &apos;NAV_BOX/Core/Inc/bno055_stm32.h&apos;" element1="/NAV_BOX/Core/Inc/bno055_stm32.h" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1772205524674"/>
+</session>

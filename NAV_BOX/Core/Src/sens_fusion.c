@@ -1,13 +1,14 @@
 #include "sens_fusion.h"
 
+
 //IMU data
 vector_t acc;
-vector_t acc_prec;
+vector_t acc_prec = {1e-5, 1e-5, 1e-5, 1e-5};
 vector_t abs_q;
 vector_t abs_q_prec;
 //GPS data
 vector_t pos;
-vector_t pos_prec;
+vector_t pos_prec = {1e-3, 1e-3, 1e-3, 1e-3};
 
 //imu integration data
 vector_t X_global_translation;
@@ -32,6 +33,7 @@ float starting_orientation_offset[3][3] = {{1.0f, 0.0f, 0.0f},
 void update_IMU_global_position(float starting_position_offset[1][3],float starting_orientation_offset[3][3],vector_t *acc, vector_t *abs_q, int time_step, vector_t *X_global_translation, vector_t *O_global_orientation_euller){
     // Rotation matrix from quaternion (4x4 homogeneous transformation matrix)
     float H[4][4];
+    time_step = time_step / 1000; //convert to seconds
     
     // Quaternion components: abs_q->w, abs_q->x, abs_q->y, abs_q->z
     float w = abs_q->w;
@@ -100,7 +102,7 @@ void update_IMU_global_position(float starting_position_offset[1][3],float start
 
     // Convert rotation part of H back to Euler angles (roll, pitch, yaw)
     float sy = sqrt(H[0][0] * H[0][0] + H[1][0] * H[1][0]);
-    bool singular = sy < 1e-6; // If
+    uint8_t singular = sy < 1e-6; // If
     if (!singular) {
         O_global_orientation_euller->x = atan2(H[2][1], H[2][2]); // roll
         O_global_orientation_euller->y = atan2(-H[2][0], sy); // pitch
@@ -113,13 +115,15 @@ void update_IMU_global_position(float starting_position_offset[1][3],float start
 }
 
 void update_position_precision_calculation(vector_t *X_global_translation_precision, vector_t *acc_prec,int time_step){
+	time_step = time_step / 1000; //convert to seconds
     // Simple model: precision degrades over time due to drift
 	X_global_translation_precision->x += acc_prec->x * 1/sqrt(3) * sqrt(time_step*time_step*time_step); // Increase variance in x
 	X_global_translation_precision->y += acc_prec->y * 1/sqrt(3) * sqrt(time_step*time_step*time_step); // Increase variance in y
 	X_global_translation_precision->z += acc_prec->z * 1/sqrt(3) * sqrt(time_step*time_step*time_step); // Increase variance in z
 }
 void update_orientation_precision_calculation(vector_t *O_global_orientation_euller_precision, vector_t *abs_q_prec,int time_step){
-    // Simple model: precision degrades over time due to drift
+	time_step = time_step / 1000; //convert to seconds
+	// Simple model: precision degrades over time due to drift
 	O_global_orientation_euller_precision->x += abs_q_prec->x * 1/sqrt(3) * sqrt(time_step*time_step*time_step); // Increase variance in x
 	O_global_orientation_euller_precision->y += abs_q_prec->y * 1/sqrt(3) * sqrt(time_step*time_step*time_step); // Increase variance in y
 	O_global_orientation_euller_precision->z += abs_q_prec->z * 1/sqrt(3) * sqrt(time_step*time_step*time_step); // Increase variance in z
@@ -159,8 +163,8 @@ void reset_IMU_precision(vector_t *X_hat_precision, vector_t *X_global_translati
 
 //-----------------------------------------------------Support functions------------------------------------------------------------------------------------------------------
 
-int update_ts(int *last_time, int current_time){
-    int time_step = current_time - *last_time;
+float update_ts(int *last_time, int current_time){
+    float time_step = (float) current_time - (float) *last_time;
     *last_time = current_time;
     return time_step;
 }

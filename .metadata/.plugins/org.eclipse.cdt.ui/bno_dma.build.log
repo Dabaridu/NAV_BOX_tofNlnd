@@ -1,0 +1,10 @@
+19:12:55 **** Incremental Build of configuration Debug for project bno_dma ****
+make -j12 all 
+arm-none-eabi-size  bno_dma.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20840	     12	   1892	  22744	   58d8	bno_dma.elf
+Finished building: default.size.stdout
+ 
+
+19:12:56 Build Finished. 0 errors, 0 warnings. (took 276ms)
+

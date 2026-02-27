@@ -1,7 +1,7 @@
 #ifndef SENS_FUSION_H
 #define SENS_FUSION_H
 
-#include <stdbool.h>
+#include "main.h"
 
 //standart BNO055 quaternion & vector struct
 //(for ease of use)
@@ -50,6 +50,6 @@ void joined_precision_calculation(vector_t *X_hat_precision, vector_t *pos_prec,
 void reset_IMU_precision(vector_t *X_hat_precision, vector_t *X_global_translation_precision, vector_t *X_hat_estimation, vector_t *X_global_translation);
 
 //support functions
-int update_ts(int *last_time, int current_time);
+float update_ts(int *last_time, int current_time);
 
 #endif /* SENS_FUSION_H */

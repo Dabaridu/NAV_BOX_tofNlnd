@@ -1,249 +1,180 @@
 #include "bno055.h"
-#include <string.h>
+#include "bno_config.h"
 
-uint16_t accelScale = 100;
-uint16_t tempScale = 1;
-uint16_t angularRateScale = 16;
-uint16_t eulerScale = 16;
-uint16_t magScale = 16;
-uint16_t quaScale = (1<<14);    // 2^14
-
-void bno055_setPage(uint8_t page) { bno055_writeData(BNO055_PAGE_ID, page); }
-
-bno055_opmode_t bno055_getOperationMode() {
-  bno055_opmode_t mode;
-  bno055_readData(BNO055_OPR_MODE, &mode, 1);
-  return mode;
+static error_bno bno055_write_reg(bno055_t* imu, u32 addr, u8* buf, u32 size) {
+    if (HAL_I2C_Mem_Write(imu->i2c, imu->addr, addr, I2C_MEMADD_SIZE_8BIT, buf, size, HAL_MAX_DELAY) != HAL_OK) {
+        return BNO_ERR_I2C;
+    }
+    return BNO_OK;
 }
 
-void bno055_setOperationMode(bno055_opmode_t mode) {
-  bno055_writeData(BNO055_OPR_MODE, mode);
-  if (mode == BNO055_OPERATION_MODE_CONFIG) {
-    bno055_delay(19);
-  } else {
-    bno055_delay(7);
-  }
+static error_bno bno055_read_reg(bno055_t* imu, u8 addr, u8* buf, u32 size) {
+    if (HAL_I2C_Mem_Read(imu->i2c, imu->addr, addr, I2C_MEMADD_SIZE_8BIT, buf, size, HAL_MAX_DELAY) != HAL_OK) {
+        return BNO_ERR_I2C;
+    }
+    return BNO_OK;
 }
 
-void bno055_setOperationModeConfig() {
-  bno055_setOperationMode(BNO055_OPERATION_MODE_CONFIG);
+error_bno bno055_set_page(bno055_t* imu, const bno055_page_t page) {
+    if (imu->_page != page) {
+        if (page > 0x01) return BNO_ERR_PAGE_TOO_HIGH;
+        if (bno055_write_reg(imu, BNO_PAGE_ID, (u8*)&page, 1) != BNO_OK) return BNO_ERR_I2C;
+        imu->_page = page;
+        HAL_Delay(2);
+    }
+    return BNO_OK;
 }
 
-void bno055_setOperationModeNDOF() {
-  bno055_setOperationMode(BNO055_OPERATION_MODE_NDOF);
+error_bno bno055_set_opmode(bno055_t* imu, const bno055_opmode_t mode) {
+    bno055_set_page(imu, BNO_PAGE_0);
+    if (bno055_write_reg(imu, BNO_OPR_MODE, (u8*)&mode, 1) != BNO_OK) return BNO_ERR_I2C;
+    HAL_Delay(BNO_ANY_TIME_DELAY + 5);
+    return BNO_OK;
 }
 
-void bno055_setExternalCrystalUse(bool state) {
-  bno055_setPage(0);
-  uint8_t tmp = 0;
-  bno055_readData(BNO055_SYS_TRIGGER, &tmp, 1);
-  tmp |= (state == true) ? 0x80 : 0x0;
-  bno055_writeData(BNO055_SYS_TRIGGER, tmp);
-  bno055_delay(700);
+error_bno bno055_set_pwr_mode(bno055_t* imu, bno055_pwr_t pwr_mode) {
+    bno055_set_opmode(imu, BNO_MODE_CONFIG);
+    bno055_set_page(imu, BNO_PAGE_0);
+    if (bno055_write_reg(imu, BNO_PWR_MODE, (u8*)&pwr_mode, 1) != BNO_OK) return BNO_ERR_I2C;
+    bno055_set_opmode(imu, imu->mode);
+    HAL_Delay(2);
+    return BNO_OK;
 }
 
-void bno055_enableExternalCrystal() { bno055_setExternalCrystalUse(true); }
-void bno055_disableExternalCrystal() { bno055_setExternalCrystalUse(false); }
-
-void bno055_reset() {
-  bno055_writeData(BNO055_SYS_TRIGGER, 0x20);
-  bno055_delay(700);
+error_bno bno055_reset(bno055_t* imu) {
+    u8 data = 0x20U;
+    return bno055_write_reg(imu, BNO_SYS_TRIGGER, &data, 1);
 }
 
-int8_t bno055_getTemp() {
-  bno055_setPage(0);
-  uint8_t t;
-  bno055_readData(BNO055_TEMP, &t, 1);
-  return t;
+error_bno bno055_init(bno055_t* imu) {
+    u8 id = 0;
+
+    imu->addr = (imu->addr << 1);
+
+    if (bno055_read_reg(imu, BNO_CHIP_ID, &id, 1) != BNO_OK) return BNO_ERR_I2C;
+    if (id != BNO_DEF_CHIP_ID) return BNO_ERR_WRONG_CHIP_ID;
+
+    bno055_set_opmode(imu, BNO_MODE_CONFIG);
+    HAL_Delay(2);
+    bno055_reset(imu);
+    HAL_Delay(800); // Reset takes time
+
+    bno055_set_pwr_mode(imu, BNO_PWR_NORMAL);
+    bno055_set_page(imu, BNO_PAGE_0);
+
+    // Trigger internal clock
+    u8 trigger = 0x00U;
+    bno055_write_reg(imu, BNO_SYS_TRIGGER, &trigger, 1);
+
+    bno055_set_opmode(imu, imu->mode);
+
+    imu->dma_data_ready = false;
+    return BNO_OK;
 }
 
-void bno055_setup() {
-  bno055_reset();
+error_bno bno055_set_unit(bno055_t* bno, const bno055_temp_unitsel_t t_unit, const bno055_gyr_unitsel_t g_unit, const bno055_acc_unitsel_t a_unit, const bno055_eul_unitsel_t e_unit) {
+    bno055_set_opmode(bno, BNO_MODE_CONFIG);
+    bno055_set_page(bno, BNO_PAGE_0);
 
-  uint8_t id = 0;
-  bno055_readData(BNO055_CHIP_ID, &id, 1);
-  if (id != BNO055_ID) {
-    printf("Can't find BNO055, id: 0x%02x. Please check your wiring.\r\n", id);
-  }
-  bno055_setPage(0);
-  bno055_writeData(BNO055_SYS_TRIGGER, 0x0);
+    u8 data = t_unit | g_unit | a_unit | e_unit;
+    if (bno055_write_reg(bno, BNO_UNIT_SEL, &data, 1) != BNO_OK) return BNO_ERR_I2C;
 
-  // Select BNO055 config mode
-  bno055_setOperationModeConfig();
-  bno055_delay(10);
+    bno->_gyr_unit = g_unit;
+    bno->_acc_unit = a_unit;
+    bno->_eul_unit = e_unit;
+    bno->_temp_unit = t_unit;
+
+    bno055_set_opmode(bno, bno->mode);
+    return BNO_OK;
 }
 
-int16_t bno055_getSWRevision() {
-  bno055_setPage(0);
-  uint8_t buffer[2];
-  bno055_readData(BNO055_SW_REV_ID_LSB, buffer, 2);
-  return (int16_t)((buffer[1] << 8) | buffer[0]);
+error_bno bno055_acc_conf(bno055_t* bno, const bno055_acc_range_t range, const bno055_acc_band_t bandwidth, const bno055_acc_mode_t mode) {
+    bno055_set_page(bno, BNO_PAGE_1);
+    bno055_set_opmode(bno, BNO_MODE_CONFIG);
+    u8 config = range | bandwidth | mode;
+    bno055_write_reg(bno, BNO_ACC_CONFIG, &config, 1);
+    bno055_set_opmode(bno, bno->mode);
+    bno055_set_page(bno, BNO_PAGE_0);
+    return BNO_OK;
 }
 
-uint8_t bno055_getBootloaderRevision() {
-  bno055_setPage(0);
-  uint8_t tmp;
-  bno055_readData(BNO055_BL_REV_ID, &tmp, 1);
-  return tmp;
+error_bno bno055_gyr_conf(bno055_t* bno, const bno055_gyr_range_t range, const bno055_gyr_band_t bandwidth, const bno055_gyr_mode_t mode) {
+    bno055_set_page(bno, BNO_PAGE_1);
+    bno055_set_opmode(bno, BNO_MODE_CONFIG);
+    u8 config[2] = {range | bandwidth, mode};
+    bno055_write_reg(bno, BNO_GYR_CONFIG_0, config, 2);
+    bno055_set_opmode(bno, bno->mode);
+    bno055_set_page(bno, BNO_PAGE_0);
+    return BNO_OK;
 }
 
-uint8_t bno055_getSystemStatus() {
-  bno055_setPage(0);
-  uint8_t tmp;
-  bno055_readData(BNO055_SYS_STATUS, &tmp, 1);
-  return tmp;
+error_bno bno055_mag_conf(bno055_t* bno, const bno055_mag_rate_t out_rate, const bno055_mag_pwr_t pwr_mode, const bno055_mag_mode_t mode) {
+    bno055_set_page(bno, BNO_PAGE_1);
+    bno055_set_opmode(bno, BNO_MODE_CONFIG);
+    u8 config = out_rate | pwr_mode | mode;
+    bno055_write_reg(bno, BNO_MAG_CONFIG, &config, 1);
+    bno055_set_opmode(bno, bno->mode);
+    bno055_set_page(bno, BNO_PAGE_0);
+    return BNO_OK;
 }
 
-bno055_self_test_result_t bno055_getSelfTestResult() {
-  bno055_setPage(0);
-  uint8_t tmp;
-  bno055_self_test_result_t res = {
-      .mcuState = 0, .gyrState = 0, .magState = 0, .accState = 0};
-  bno055_readData(BNO055_ST_RESULT, &tmp, 1);
-  res.mcuState = (tmp >> 3) & 0x01;
-  res.gyrState = (tmp >> 2) & 0x01;
-  res.magState = (tmp >> 1) & 0x01;
-  res.accState = (tmp >> 0) & 0x01;
-  return res;
-}
-
-uint8_t bno055_getSystemError() {
-  bno055_setPage(0);
-  uint8_t tmp;
-  bno055_readData(BNO055_SYS_ERR, &tmp, 1);
-  return tmp;
-}
-
-bno055_calibration_state_t bno055_getCalibrationState() {
-  bno055_setPage(0);
-  bno055_calibration_state_t cal = {.sys = 0, .gyro = 0, .mag = 0, .accel = 0};
-  uint8_t calState = 0;
-  bno055_readData(BNO055_CALIB_STAT, &calState, 1);
-  cal.sys = (calState >> 6) & 0x03;
-  cal.gyro = (calState >> 4) & 0x03;
-  cal.accel = (calState >> 2) & 0x03;
-  cal.mag = calState & 0x03;
-  return cal;
-}
-
-
-bno055_calibration_data_t bno055_getCalibrationData() {
-  bno055_calibration_data_t calData;
-  uint8_t buffer[22];
-  bno055_opmode_t operationMode = bno055_getOperationMode();
-  bno055_setOperationModeConfig();
-  bno055_setPage(0);
-
-  bno055_readData(BNO055_ACC_OFFSET_X_LSB, buffer, 22);
-
-  // Assumes little endian processor
-  memcpy(&calData.offset.accel, buffer, 6);
-  memcpy(&calData.offset.mag, buffer + 6, 6);
-  memcpy(&calData.offset.gyro, buffer + 12, 6);
-  memcpy(&calData.radius.accel, buffer + 18, 2);
-  memcpy(&calData.radius.mag, buffer + 20, 2);
-
-  bno055_setOperationMode(operationMode);
-
-  return calData;
-}
-
-void bno055_setCalibrationData(bno055_calibration_data_t calData) {
-  uint8_t buffer[22];
-  bno055_opmode_t operationMode = bno055_getOperationMode();
-  bno055_setOperationModeConfig();
-  bno055_setPage(0);
-
-  // Assumes litle endian processor
-  memcpy(buffer, &calData.offset.accel, 6);
-  memcpy(buffer + 6, &calData.offset.mag, 6);
-  memcpy(buffer + 12, &calData.offset.gyro, 6);
-  memcpy(buffer + 18, &calData.radius.accel, 2);
-  memcpy(buffer + 20, &calData.radius.mag, 2);
-
-  for (uint8_t i=0; i < 22; i++) {
-    // TODO(oliv4945): create multibytes write
-    bno055_writeData(BNO055_ACC_OFFSET_X_LSB+i, buffer[i]);
-  }
-
-  bno055_setOperationMode(operationMode);
-}
-
-void bno055_getVector(uint8_t vec, bno055_vector_t *data) {
-  bno055_setPage(0);
-  uint8_t buffer[8];    // Quaternion need 8 bytes
-
-  if (vec == BNO055_VECTOR_QUATERNION)
-    bno055_readData(vec, buffer, 8);
-  else
-    bno055_readData(vec, buffer, 6);
-
-  double scale = 1;
-
-  if (vec == BNO055_VECTOR_MAGNETOMETER) {
-    scale = magScale;
-  } else if (vec == BNO055_VECTOR_ACCELEROMETER ||
-           vec == BNO055_VECTOR_LINEARACCEL || vec == BNO055_VECTOR_GRAVITY) {
-    scale = accelScale;
-  } else if (vec == BNO055_VECTOR_GYROSCOPE) {
-    scale = angularRateScale;
-  } else if (vec == BNO055_VECTOR_EULER) {
-    scale = eulerScale;
-  } else if (vec == BNO055_VECTOR_QUATERNION) {
-    scale = quaScale;
-  }
-
-  bno055_vector_t xyz = {.w = 0, .x = 0, .y = 0, .z = 0};
-  if (vec == BNO055_VECTOR_QUATERNION) {
-    xyz.w = (int16_t)((buffer[1] << 8) | buffer[0]) / scale;
-    xyz.x = (int16_t)((buffer[3] << 8) | buffer[2]) / scale;
-    xyz.y = (int16_t)((buffer[5] << 8) | buffer[4]) / scale;
-    xyz.z = (int16_t)((buffer[7] << 8) | buffer[6]) / scale;
-
-    data->x = xyz.x;
-    data->y = xyz.y;
-    data->z = xyz.z;
-    data->w = xyz.w;
-  } else {
-    xyz.x = (int16_t)((buffer[1] << 8) | buffer[0]) / scale;
-    xyz.y = (int16_t)((buffer[3] << 8) | buffer[2]) / scale;
-    xyz.z = (int16_t)((buffer[5] << 8) | buffer[4]) / scale;
-
-    data->x = xyz.x;
-    data->y = xyz.y;
-    data->z = xyz.z;
-  }
-
-  //return xyz;
-}
-
-void bno055_getVectorAccelerometer(bno055_vector_t *data) {
-  return bno055_getVector(BNO055_VECTOR_ACCELEROMETER, data);
-}
-void bno055_getVectorMagnetometer(bno055_vector_t *data) {
-  return bno055_getVector(BNO055_VECTOR_MAGNETOMETER, data);
-}
-void bno055_getVectorGyroscope(bno055_vector_t *data) {
-  return bno055_getVector(BNO055_VECTOR_GYROSCOPE, data);
-}
-void bno055_getVectorEuler(bno055_vector_t *data) {
-  return bno055_getVector(BNO055_VECTOR_EULER, data);
-}
-void bno055_getVectorLinearAccel(bno055_vector_t *data) {
-  return bno055_getVector(BNO055_VECTOR_LINEARACCEL, data);
-}
-void bno055_getVectorGravity(bno055_vector_t *data) {
-  return bno055_getVector(BNO055_VECTOR_GRAVITY, data);
-}
-void bno055_getVectorQuaternion(bno055_vector_t *data) {
-  return bno055_getVector(BNO055_VECTOR_QUATERNION, data);
+error_bno bno055_start_dma_read(bno055_t* imu) {
+    imu->dma_data_ready = false;
+    if (HAL_I2C_Mem_Read_DMA(imu->i2c, imu->addr, BNO_ACC_DATA_X_LSB, I2C_MEMADD_SIZE_8BIT, imu->rx_buf, 45) != HAL_OK) {
+        return BNO_ERR_I2C;
+    }
+    return BNO_OK;
 }
 
 
+void bno055_get_acc(bno055_t* imu, bno055_vec3_t* buf) {
+    float scale = (imu->_acc_unit == BNO_ACC_UNITSEL_M_S2) ? BNO_ACC_SCALE_M_2 : BNO_ACC_SCALE_MG;
+    buf->x = (s16)((imu->rx_buf[1] << 8) | imu->rx_buf[0]) / scale;
+    buf->y = (s16)((imu->rx_buf[3] << 8) | imu->rx_buf[2]) / scale;
+    buf->z = (s16)((imu->rx_buf[5] << 8) | imu->rx_buf[4]) / scale;
+}
 
-void bno055_setAxisMap(bno055_axis_map_t axis) {
-  uint8_t axisRemap = (axis.z << 4) | (axis.y << 2) | (axis.x);
-  uint8_t axisMapSign = (axis.x_sign << 2) | (axis.y_sign << 1) | (axis.z_sign);
-  bno055_writeData(BNO055_AXIS_MAP_CONFIG, axisRemap);
-  bno055_writeData(BNO055_AXIS_MAP_SIGN, axisMapSign);
+void bno055_get_mag(bno055_t* imu, bno055_vec3_t* buf) {
+    buf->x = (s16)((imu->rx_buf[7] << 8)  | imu->rx_buf[6])  / BNO_MAG_SCALE;
+    buf->y = (s16)((imu->rx_buf[9] << 8)  | imu->rx_buf[8])  / BNO_MAG_SCALE;
+    buf->z = (s16)((imu->rx_buf[11] << 8) | imu->rx_buf[10]) / BNO_MAG_SCALE;
+}
+
+void bno055_get_gyro(bno055_t* imu, bno055_vec3_t* buf) {
+    f32 scale = (imu->_gyr_unit == BNO_GYR_UNIT_DPS) ? BNO_GYR_SCALE_DPS : BNO_GYR_SCALE_RPS;
+    buf->x = (s16)((imu->rx_buf[13] << 8) | imu->rx_buf[12]) / scale;
+    buf->y = (s16)((imu->rx_buf[15] << 8) | imu->rx_buf[14]) / scale;
+    buf->z = (s16)((imu->rx_buf[17] << 8) | imu->rx_buf[16]) / scale;
+}
+
+void bno055_get_euler(bno055_t* imu, bno055_euler_t* buf) {
+    f32 scale = (imu->_eul_unit == BNO_EUL_UNIT_DEG) ? BNO_EUL_SCALE_DEG : BNO_EUL_SCALE_RAD;
+    buf->yaw   = (s16)((imu->rx_buf[19] << 8) | imu->rx_buf[18]) / scale;
+    buf->roll  = (s16)((imu->rx_buf[21] << 8) | imu->rx_buf[20]) / scale;
+    buf->pitch = (s16)((imu->rx_buf[23] << 8) | imu->rx_buf[22]) / scale;
+}
+
+void bno055_get_quaternion(bno055_t* imu, bno055_vec4_t* buf) {
+    buf->w = (s16)((imu->rx_buf[25] << 8) | imu->rx_buf[24]) / (f32)BNO_QUA_SCALE;
+    buf->x = (s16)((imu->rx_buf[27] << 8) | imu->rx_buf[26]) / (f32)BNO_QUA_SCALE;
+    buf->y = (s16)((imu->rx_buf[29] << 8) | imu->rx_buf[28]) / (f32)BNO_QUA_SCALE;
+    buf->z = (s16)((imu->rx_buf[31] << 8) | imu->rx_buf[30]) / (f32)BNO_QUA_SCALE;
+}
+
+void bno055_get_linear_acc(bno055_t* imu, bno055_vec3_t* buf) {
+    float scale = (imu->_acc_unit == BNO_ACC_UNITSEL_M_S2) ? BNO_ACC_SCALE_M_2 : BNO_ACC_SCALE_MG;
+    buf->x = (s16)((imu->rx_buf[33] << 8) | imu->rx_buf[32]) / scale;
+    buf->y = (s16)((imu->rx_buf[35] << 8) | imu->rx_buf[34]) / scale;
+    buf->z = (s16)((imu->rx_buf[37] << 8) | imu->rx_buf[36]) / scale;
+}
+
+void bno055_get_gravity(bno055_t* imu, bno055_vec3_t* buf) {
+    f32 scale = (imu->_acc_unit == BNO_ACC_UNITSEL_M_S2) ? BNO_ACC_SCALE_M_2 : BNO_ACC_SCALE_MG;
+    buf->x = (s16)((imu->rx_buf[39] << 8) | imu->rx_buf[38]) / scale;
+    buf->y = (s16)((imu->rx_buf[41] << 8) | imu->rx_buf[40]) / scale;
+    buf->z = (s16)((imu->rx_buf[43] << 8) | imu->rx_buf[42]) / scale;
+}
+
+void bno055_get_temp(bno055_t* imu, s8* buf) {
+    *buf = (imu->_temp_unit) ? imu->rx_buf[44] * 2 : imu->rx_buf[44];
 }

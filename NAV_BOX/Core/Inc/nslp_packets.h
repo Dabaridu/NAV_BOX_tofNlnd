@@ -6,11 +6,11 @@
 #include <nslp_dma.h>
 
 #define type_GPS 0x0a 		//10
-#define type_BNO055_g 0x0b	//11
+//#define type_BNO055_g 0x0b	//11
 #define type_BNO055_a 0x0c	//12
-#define type_BNO055_m 0x0d	//13
-#define type_BMP 0x0e		//14
-#define type_KF 0x0f		//15
+//#define type_BNO055_m 0x0d	//13
+//#define type_BMP 0x0e		//14
+//#define type_KF 0x0f		//15
 
 
 //-----------------------------Structures----------------------------------------------
@@ -32,6 +32,15 @@ struct Position GPS_data = {
 		.numSV = 0
 };
 
+struct BNO055_payload_a {
+	double ax;
+	double ay;
+	double az;
+	uint32_t time;
+};
+struct BNO055_payload_a BNO055_data_a;
+
+/*
 //structure of BNO055 payload (variables of type DOUBLE)
 struct BNO055_payload_g {
 	//uint32_t calib; //8 --> 32 bit
@@ -42,14 +51,6 @@ struct BNO055_payload_g {
 	uint32_t time;
 };
 struct BNO055_payload_g BNO055_data_g;
-
-struct BNO055_payload_a {
-	double ax;
-	double ay;
-	double az;
-	uint32_t time;
-};
-struct BNO055_payload_a BNO055_data_a;
 
 struct BNO055_payload_m {
 	double mx;
@@ -78,7 +79,7 @@ struct KF_payload {
   uint32_t time;
 };
 struct KF_payload KF_data;
-
+*/
 //-------------------------Packets-----------------------------------
 
 //format and fill the nslp_packet for transmition UART2
@@ -89,18 +90,18 @@ nslp_packet_t GPS_packet = {
         .payload = (uint8_t*)&GPS_data
 };
 
-nslp_packet_t BNO_packet_g = {
-        .receiver = 0xFF,
-        .type = type_BNO055_g, //11 - B
-        .size = sizeof(struct BNO055_payload_g),
-        .payload = (uint8_t*)&BNO055_data_g
-};
-
 nslp_packet_t BNO_packet_a = {
         .receiver = 0xFF,
         .type = type_BNO055_a, //12 - C
         .size = sizeof(struct BNO055_payload_a),
         .payload = (uint8_t*)&BNO055_data_a
+};
+/*
+nslp_packet_t BNO_packet_g = {
+        .receiver = 0xFF,
+        .type = type_BNO055_g, //11 - B
+        .size = sizeof(struct BNO055_payload_g),
+        .payload = (uint8_t*)&BNO055_data_g
 };
 
 nslp_packet_t BNO_packet_m = {
@@ -116,12 +117,12 @@ nslp_packet_t BMP_packet = {
         .size = sizeof(struct BMP_payload),
         .payload = (uint8_t*)&BMP_data
 };
-
+/*
 nslp_packet_t KF_packet = {
     .receiver = 0xFF,
     .type = type_KF, //13 - D
     .size = sizeof(struct KF_payload),
     .payload = (uint8_t*)&KF_data
 };
-
+*/
 #endif
