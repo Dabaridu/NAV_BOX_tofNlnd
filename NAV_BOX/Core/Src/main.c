@@ -106,6 +106,7 @@ uint32_t GPS_timeStamp;
 //dirty flags
 bool recieved_GPS = false;
 bool parsed_GPS = false;
+bool estimation_gps_ready = false;
 //-------------------------------GPS---------------------------------------------
 
 //--------------------------nslp--------------------------------------------
@@ -228,12 +229,13 @@ void parse_gps_data(){
 			pos_prec.y = 0; 
 			pos_prec.z = 0; 
 
-			joined_position_estimation(&X_hat_estimation, &pos, &X_global_translation, &pos_prec, &acc_prec);
-			joined_precision_calculation(&X_hat_precision, &pos_prec, &acc_prec);
-			reset_IMU_precision(&X_hat_precision, &X_global_translation_precision, &X_hat_estimation, &X_global_translation);
 
 			//----------------implements sensor fusion----------------------
 
+      //set flag for updating estimation with GPS data in sensor fusion
+      estimation_gps_ready = true;
+
+      //clear flag for operation
 			parsed_GPS = true;
 
 		}
@@ -256,6 +258,15 @@ void process_sensor_fusion(){
 	//update precision estimation how sure we are of our position
 	update_position_precision_calculation(&X_global_translation_precision, &acc_prec, ts);
 
+  //on GPS recieved update the position estimation with the GPS data and reset the IMU precision to the GPS precision
+  if(estimation_gps_ready == true){
+
+      joined_position_estimation(&X_hat_estimation, &pos, &X_global_translation, &pos_prec, &acc_prec);
+			joined_precision_calculation(&X_hat_precision, &pos_prec, &acc_prec);
+			reset_IMU_precision(&X_hat_precision, &X_global_translation_precision, &X_hat_estimation, &X_global_translation);
+      estimation_gps_ready = false;
+
+  }
 }
 /* USER CODE END PFP */
 

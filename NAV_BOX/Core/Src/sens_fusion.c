@@ -98,9 +98,15 @@ void update_IMU_global_position(float starting_position_offset[1][3],float start
     }
 
     // Extract global translation and orientation from H
+    /*
     X_global_translation->x = H[0][3];
     X_global_translation->y = H[1][3];
     X_global_translation->z = H[2][3];
+    */
+    X_global_translation->x = X_global_translation->x + H[0][3];
+    X_global_translation->y = X_global_translation->y + H[1][3];
+    X_global_translation->z = X_global_translation->z + H[2][3];
+    //TODO ""ADD"" X_global_transtin per cycle execution
 
     // Convert rotation part of H back to Euler angles (roll, pitch, yaw)
     float sy = sqrt(H[0][0] * H[0][0] + H[1][0] * H[1][0]);

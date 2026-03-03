@@ -3,6 +3,11 @@
 	<item key="hasShownOverlayPopupBefore" value="true"/>
 	<item key="replaceBarOpen" value="false"/>
 	<list key="searchhistory">
+		<item value="acc"/>
+		<item value="vector_t"/>
+		<item value="dma_data_ready"/>
+		<item value="NSLP"/>
+		<item value="DMA"/>
 		<item value="linear"/>
 	</list>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
