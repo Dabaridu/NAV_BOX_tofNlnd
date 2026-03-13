@@ -10,8 +10,10 @@ vector_t acc;
 vector_t acc_prec = {1e-5, 1e-5, 1e-5, 1e-5};
 vector_t abs_q;
 vector_t abs_q_prec;
-//GPS data
+
+//GPS_data_for_fusion
 vector_t pos;
+//GPS_prec_data_for_fusion
 vector_t pos_prec = {1e-3, 1e-3, 1e-3, 1e-3};
 
 //imu integration data
@@ -26,6 +28,9 @@ vector_t X_hat_precision = {0,0,0,0};
 vector_t O_hat_estimation = {0,0,0,0};
 vector_t O_hat_precision = {0,0,0,0};
 
+//filtering data
+vector_t acc_f;
+
 int ts = 0;
 int lt = 0;
 
@@ -34,10 +39,28 @@ double starting_orientation_offset[3][3] = {{1.0, 0.0, 0.0},
 											{0.0, 1.0, 0.0},
 											{0.0, 0.0, 1.0}};
 
-void low_pass_filter(vector_t *input){
-    
-}
+void vector_t_moving_average_filter(vector_t *input, vector_t *output){
+    static const int BUFFER_SIZE = 20;
+    static vector_t buffer[/*BUFFER_SIZE*/20];
+    static int index = 0;
 
+    buffer[index] = *input;
+    index = (index + 1) % BUFFER_SIZE;
+
+    output->x = 0.0;
+    output->y = 0.0;
+    output->z = 0.0;
+
+    //average buffer
+    for(int i = 0; i < BUFFER_SIZE; i++){
+        output->x += buffer[i].x;
+        output->y += buffer[i].y;
+        output->z += buffer[i].z;
+    }
+    output->x /= BUFFER_SIZE;
+    output->y /= BUFFER_SIZE;
+    output->z /= BUFFER_SIZE;
+}
 
 void matrix_multiply(double A[4][4], double B[4][4], double result[4][4]){
     //result = A * B
@@ -64,9 +87,9 @@ void update_IMU_global_position(double sp[3],double so[3][3],vector_t *acc, vect
                      {2.0 * (abs_q->x * abs_q->z - abs_q->w * abs_q->y), 2.0 * (abs_q->y * abs_q->z + abs_q->w * abs_q->x), (abs_q->w*abs_q->w-abs_q->x*abs_q->x-abs_q->y*abs_q->y+abs_q->z*abs_q->z), 0.0},
                      {0.0, 0.0, 0.0, 1.0}};
     
-    double T[4][4] = {{1.0, 0.0, 0.0,X_global_translation->x + acc->x * t_s * t_s / 2.0},
-                     {0.0, 1.0, 0.0,X_global_translation->y + acc->y * t_s * t_s / 2.0},
-                     {0.0, 0.0, 1.0,X_global_translation->z + acc->z * t_s * t_s / 2.0},
+    double T[4][4] = {{1.0, 0.0, 0.0,X_global_translation->x + (acc->x * t_s * t_s) / 2.0},
+                     {0.0, 1.0, 0.0,X_global_translation->y + (acc->y * t_s * t_s) / 2.0},
+                     {0.0, 0.0, 1.0,X_global_translation->z + (acc->z * t_s * t_s) / 2.0},
                      {0.0, 0.0, 0.0, 1.0}};
 
     double L1[4][4];

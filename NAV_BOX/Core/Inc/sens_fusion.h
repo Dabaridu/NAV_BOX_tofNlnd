@@ -32,6 +32,9 @@ extern vector_t X_hat_precision;
 extern vector_t O_hat_estimation;
 extern vector_t O_hat_precision;
 
+//filtering data
+extern vector_t acc_f;
+
 extern int ts;
 extern int lt;
 
@@ -51,5 +54,7 @@ void reset_IMU_precision(vector_t *X_hat_precision, vector_t *X_global_translati
 
 //support functions
 double update_ts(int *last_time, int current_time);
+void matrix_multiply(double A[4][4], double B[4][4], double result[4][4]);
+void vector_t_moving_average_filter(vector_t *input, vector_t *output);
 
 #endif /* SENS_FUSION_H */

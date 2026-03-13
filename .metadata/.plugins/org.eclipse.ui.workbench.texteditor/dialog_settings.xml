@@ -3,6 +3,8 @@
 	<item key="hasShownOverlayPopupBefore" value="true"/>
 	<item key="replaceBarOpen" value="false"/>
 	<list key="searchhistory">
+		<item value="bno.dma_data_ready"/>
+		<item value="BNO055_timeStamp"/>
 		<item value="acc"/>
 		<item value="vector_t"/>
 		<item value="dma_data_ready"/>

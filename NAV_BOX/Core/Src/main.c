@@ -113,6 +113,7 @@ bool recieved_GPS = false;
 bool send_gps_nslp = false; // Flag to indicate if the GPS data has been parsed and is ready for use
 bool estimation_gps_ready = false; // Flag to indicate if GPS data is ready for sensor fusion
 bool valid_gps_recieved = false; // Flag to indicate if valid GPS data has ever been received
+bool estimation_imu_ready = false;
 //-------------------------------GPS---------------------------------------------
 
 //--------------------------nslp--------------------------------------------
@@ -176,7 +177,7 @@ void parse_i2c_data(){
 
 		if (bno.dma_data_ready) {
 
-			bno055_get_acc(&bno, &accel);
+			bno055_get_linear_acc(&bno, &accel);
 			bno055_get_euler(&bno, &euler);
 			bno055_get_quaternion(&bno, &quat);
 
@@ -189,8 +190,11 @@ void parse_i2c_data(){
 			BNO055_data_g.gx = euler.pitch;
 			BNO055_data_g.gy = euler.roll;
 			BNO055_data_g.gz = euler.yaw;
+			BNO055_data_g.time = BNO055_timeStamp;
 
 			bno055_start_dma_read(&bno);
+
+			estimation_imu_ready = true;
 		}
 
 		if (HAL_GetTick() - lastBMP180Time > BMP180_interval){ //reads pressure and temperature from BMP180 sensor every BMP180_interval
@@ -225,13 +229,17 @@ void parse_gps_data(){
 
 			//---------------sensor fusion GPS readings--------------------
 
-			pos.x = GPS_data.latitude;
-			pos.y = GPS_data.longitude;
-			pos.z = GPS_data.altitude;
+			// pos.x = GPS_data.latitude;
+			// pos.y = GPS_data.longitude;
+			// pos.z = GPS_data.altitude;
+
+      pos.x = solData.ecefX_m;
+      pos.y = solData.ecefY_m;
+      pos.z = solData.ecefZ_m;
       // Keep GPS variance finite for fusion weighting.
-      pos_prec.x = 1e-3;
-      pos_prec.y = 1e-3;
-      pos_prec.z = 1e-3;
+      pos_prec.x = solData.pAcc_m;
+      pos_prec.y = solData.pAcc_m;
+      pos_prec.z = solData.pAcc_m;
 			//----------------implements sensor fusion----------------------
 
       //----------------------FLAGS----------------------
@@ -252,34 +260,48 @@ void parse_gps_data(){
 }
 
 void process_sensor_fusion(){
-	acc.x = accel.x;
-	acc.y = accel.y;
-	acc.z = accel.z;
 
-	abs_q.w = quat.w;
-	abs_q.x = quat.x;
-	abs_q.y = quat.y;
-	abs_q.z = quat.z;
+	if(estimation_imu_ready == true){
 
-	//time stamp calculation
-	POS_fusion_X.ts = micros();
-	ts = update_ts(&lt,micros());
-	//update position estimate how much have we moved since last mesurement
-  update_IMU_global_position(starting_position_offset, starting_orientation_offset, &acc, &abs_q, ts, &X_global_translation, &O_global_orientation_euller);
-	//update precision estimation how sure we are of our position
-	update_position_precision_calculation(&X_global_translation_precision, &acc_prec, ts);
+    acc.x = accel.x;
+    acc.y = accel.y;
+    acc.z = accel.z;
+
+		vector_t_moving_average_filter(&acc, &acc_f); // Filter accelerometer data for precision estimation
+
+		abs_q.w = quat.w;
+		abs_q.x = quat.x;
+		abs_q.y = quat.y;
+		abs_q.z = quat.z;
+
+		//time stamp calculation
+		POS_fusion_X.ts = micros();
+		ts = update_ts(&lt,micros());
+		//update position estimate how much have we moved since last mesurement
+		update_IMU_global_position(starting_position_offset, starting_orientation_offset, &acc_f, &abs_q, ts, &X_global_translation, &O_global_orientation_euller);
+		//update precision estimation how sure we are of our position
+		update_position_precision_calculation(&X_global_translation_precision, &acc_prec, ts);
+
+		POS_fusion_X.Xx = X_global_translation.x;
+		POS_fusion_X.Xy = X_global_translation.y;
+		POS_fusion_X.Xz = X_global_translation.z;
+
+		estimation_imu_ready = false;
+	}
 
 	//on GPS recieved update the position estimation with the GPS data and reset the IMU precision to the GPS precision
 	if(estimation_gps_ready == true && valid_gps_recieved == true){
 		joined_position_estimation(&X_hat_estimation, &pos, &X_global_translation, &pos_prec, &acc_prec);
 		joined_precision_calculation(&X_hat_precision, &pos_prec, &acc_prec);
 		reset_IMU_precision(&X_hat_precision, &X_global_translation_precision, &X_hat_estimation, &X_global_translation);
+
+		POS_fusion_X.Xx = X_global_translation.x;
+		POS_fusion_X.Xy = X_global_translation.y;
+		POS_fusion_X.Xz = X_global_translation.z;
+
 		estimation_gps_ready = false;
 	}
 
-	POS_fusion_X.Xx = X_global_translation.x;
-	POS_fusion_X.Xy = X_global_translation.y;
-	POS_fusion_X.Xz = X_global_translation.z;
 
 }
 /* USER CODE END PFP */
@@ -382,7 +404,7 @@ int main(void)
 
 			nslp_send_packet(&nslp, &BMP_packet);
 
-      nslp_send_packet(&nslp, &POS_fusion_packet);
+			nslp_send_packet(&nslp, &POS_fusion_packet);
 
 			lastTime = HAL_GetTick();
 		}
