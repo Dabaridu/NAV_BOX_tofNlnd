@@ -34,6 +34,7 @@
 #include "nslp_dma.h"
 #include "nslp_packets.h"
 #include "sens_fusion.h"
+#include "micros.h"
 
 /* USER CODE END Includes */
 
@@ -79,6 +80,10 @@ int32_t pressure;
 #define BMP180_interval 1000 // 1 second interval in milliseconds
 //-------------------------------BMP180---------------------------------------------
 
+double Hd[4][4];
+double Rd[3][3];
+
+
 //-------------------------------BNO055---------------------------------------------
 int32_t BNO055_timeStamp;
 bno055_t bno;
@@ -105,8 +110,9 @@ uint8_t rx_buffer[rx_buffer_size]; //size of data recieved from GPS
 uint32_t GPS_timeStamp;
 //dirty flags
 bool recieved_GPS = false;
-bool parsed_GPS = false;
-bool estimation_gps_ready = false;
+bool send_gps_nslp = false; // Flag to indicate if the GPS data has been parsed and is ready for use
+bool estimation_gps_ready = false; // Flag to indicate if GPS data is ready for sensor fusion
+bool valid_gps_recieved = false; // Flag to indicate if valid GPS data has ever been received
 //-------------------------------GPS---------------------------------------------
 
 //--------------------------nslp--------------------------------------------
@@ -206,8 +212,6 @@ void parse_gps_data(){
 
 		if(recieved_GPS == true){
 
-			recieved_GPS = false;
-
 			//parse rx_buffer to usefull navigation data
 			uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
 
@@ -219,25 +223,31 @@ void parse_gps_data(){
 			GPS_data.numSV = solData.numSV;
 			GPS_data.time = HAL_GetTick();
 
-
 			//---------------sensor fusion GPS readings--------------------
 
 			pos.x = GPS_data.latitude;
 			pos.y = GPS_data.longitude;
 			pos.z = GPS_data.altitude;
-			pos_prec.x = 0;
-			pos_prec.y = 0; 
-			pos_prec.z = 0; 
-
-
+      // Keep GPS variance finite for fusion weighting.
+      pos_prec.x = 1e-3;
+      pos_prec.y = 1e-3;
+      pos_prec.z = 1e-3;
 			//----------------implements sensor fusion----------------------
 
+      //----------------------FLAGS----------------------
       //set flag for updating estimation with GPS data in sensor fusion
       estimation_gps_ready = true;
 
       //clear flag for operation
-			parsed_GPS = true;
+			send_gps_nslp = true;
 
+      //clear flag for recieving new GPS data
+      recieved_GPS = false;
+
+      if(GPS_data.fixType > 0){ // Only consider valid GPS fixes for fusion
+        valid_gps_recieved = true;
+      }
+      //----------------------FLAGS----------------------
 		}
 }
 
@@ -252,21 +262,25 @@ void process_sensor_fusion(){
 	abs_q.z = quat.z;
 
 	//time stamp calculation
-	ts = update_ts(&lt,HAL_GetTick());
+	POS_fusion_X.ts = micros();
+	ts = update_ts(&lt,micros());
 	//update position estimate how much have we moved since last mesurement
-	update_IMU_global_position(starting_position_offset, starting_orientation_offset, &accel, &abs_q, ts, &X_global_translation, &O_global_orientation_euller);
+  update_IMU_global_position(starting_position_offset, starting_orientation_offset, &acc, &abs_q, ts, &X_global_translation, &O_global_orientation_euller);
 	//update precision estimation how sure we are of our position
 	update_position_precision_calculation(&X_global_translation_precision, &acc_prec, ts);
 
-  //on GPS recieved update the position estimation with the GPS data and reset the IMU precision to the GPS precision
-  if(estimation_gps_ready == true){
+	//on GPS recieved update the position estimation with the GPS data and reset the IMU precision to the GPS precision
+	if(estimation_gps_ready == true && valid_gps_recieved == true){
+		joined_position_estimation(&X_hat_estimation, &pos, &X_global_translation, &pos_prec, &acc_prec);
+		joined_precision_calculation(&X_hat_precision, &pos_prec, &acc_prec);
+		reset_IMU_precision(&X_hat_precision, &X_global_translation_precision, &X_hat_estimation, &X_global_translation);
+		estimation_gps_ready = false;
+	}
 
-      joined_position_estimation(&X_hat_estimation, &pos, &X_global_translation, &pos_prec, &acc_prec);
-			joined_precision_calculation(&X_hat_precision, &pos_prec, &acc_prec);
-			reset_IMU_precision(&X_hat_precision, &X_global_translation_precision, &X_hat_estimation, &X_global_translation);
-      estimation_gps_ready = false;
+	POS_fusion_X.Xx = X_global_translation.x;
+	POS_fusion_X.Xy = X_global_translation.y;
+	POS_fusion_X.Xz = X_global_translation.z;
 
-  }
 }
 /* USER CODE END PFP */
 
@@ -312,6 +326,8 @@ int main(void)
   MX_CRC_Init();
   /* USER CODE BEGIN 2 */
 
+	DWT_Init();
+
 	//------------------------NSLP CODE------------------------
 
 	uint32_t lastTime = 0;
@@ -354,10 +370,10 @@ int main(void)
 
 			//-----------------------------Send packets for NSLP----------------- START
 
-			if((parsed_GPS == true)/*&&(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE))*/){
+			if((send_gps_nslp == true)/*&&(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE))*/){
 				//__HAL_UART_CLEAR_IDLEFLAG(&huart1);
 				nslp_send_packet(&nslp, &GPS_packet);
-				parsed_GPS = false;
+				send_gps_nslp = false;
 			}
 
 			//-----------------------------Send packets for NSLP----------------- END
@@ -365,6 +381,8 @@ int main(void)
 			nslp_send_packet(&nslp, &BNO_packet_g);
 
 			nslp_send_packet(&nslp, &BMP_packet);
+
+      nslp_send_packet(&nslp, &POS_fusion_packet);
 
 			lastTime = HAL_GetTick();
 		}

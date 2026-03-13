@@ -10,7 +10,8 @@
 #define type_BNO055_a 0x0c	//12
 //#define type_BNO055_m 0x0d	//13
 #define type_BMP 0x0e		//14
-//#define type_KF 0x0f		//15
+#define type_POS_F_X 0x0f       //15
+
 
 
 //-----------------------------Structures----------------------------------------------
@@ -57,6 +58,17 @@ struct BNO055_payload_g {
 	uint32_t time;
 };
 struct BNO055_payload_g BNO055_data_g;
+
+struct position_fusion_payload {
+
+	double Xx;
+	double Xy;
+	double Xz;
+
+	uint32_t ts;
+};
+
+struct position_fusion_payload POS_fusion_X;
 
 /*
 //structure of BNO055 payload (variables of type DOUBLE)
@@ -111,6 +123,13 @@ nslp_packet_t BNO_packet_g = {
         .type = type_BNO055_g, //11 - B
         .size = sizeof(struct BNO055_payload_g),
         .payload = (uint8_t*)&BNO055_data_g
+};
+
+nslp_packet_t POS_fusion_packet = {
+        .receiver = 0xFF,
+        .type = type_POS_F_X, //11 - B
+        .size = sizeof(struct position_fusion_payload),
+        .payload = (uint8_t*)&POS_fusion_X
 };
 
 /*

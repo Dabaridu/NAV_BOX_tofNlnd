@@ -35,12 +35,12 @@ extern vector_t O_hat_precision;
 extern int ts;
 extern int lt;
 
-extern float starting_position_offset[3];
-extern float starting_orientation_offset[3][3];
+extern double starting_position_offset[3];
+extern double starting_orientation_offset[3][3];
 
 //-----------------------------------------------------------------------------
 //update as often as posible
-void update_IMU_global_position(float starting_position_offset[1][3],float starting_orientation_offset[3][3],vector_t *acc, vector_t *abs_q, int time_step, vector_t *X_global_translation, vector_t *O_global_orientation_euller);
+void update_IMU_global_position(double starting_position_offset[3],double starting_orientation_offset[3][3],vector_t *acc, vector_t *abs_q, int time_step, vector_t *X_global_translation, vector_t *O_global_orientation_euller);
 void update_position_precision_calculation(vector_t *X_global_translation_precision, vector_t *acc_prec,int time_step);
 //void update_orientation_precision_calculation(vector_t *abs_q_prec, int time_step);
 
@@ -50,6 +50,6 @@ void joined_precision_calculation(vector_t *X_hat_precision, vector_t *pos_prec,
 void reset_IMU_precision(vector_t *X_hat_precision, vector_t *X_global_translation_precision, vector_t *X_hat_estimation, vector_t *X_global_translation);
 
 //support functions
-float update_ts(int *last_time, int current_time);
+double update_ts(int *last_time, int current_time);
 
 #endif /* SENS_FUSION_H */

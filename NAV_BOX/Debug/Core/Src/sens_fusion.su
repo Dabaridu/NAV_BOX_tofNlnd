@@ -1,7 +1,9 @@
-../Core/Src/sens_fusion.c:35:6:update_IMU_global_position	344	static
-../Core/Src/sens_fusion.c:119:6:update_position_precision_calculation	32	static
-../Core/Src/sens_fusion.c:126:6:update_orientation_precision_calculation	0	static
-../Core/Src/sens_fusion.c:135:6:joined_position_estimation	72	static
-../Core/Src/sens_fusion.c:150:6:joined_precision_calculation	24	static
-../Core/Src/sens_fusion.c:160:6:reset_IMU_precision	20	static
-../Core/Src/sens_fusion.c:168:7:update_ts	0	static
+../Core/Src/sens_fusion.c:37:6:low_pass_filter	0	static
+../Core/Src/sens_fusion.c:42:6:matrix_multiply	64	static
+../Core/Src/sens_fusion.c:54:6:update_IMU_global_position	784	static
+../Core/Src/sens_fusion.c:96:6:update_position_precision_calculation	40	static
+../Core/Src/sens_fusion.c:103:6:update_orientation_precision_calculation	0	static
+../Core/Src/sens_fusion.c:112:6:joined_position_estimation	64	static
+../Core/Src/sens_fusion.c:127:6:joined_precision_calculation	24	static
+../Core/Src/sens_fusion.c:137:6:reset_IMU_precision	20	static
+../Core/Src/sens_fusion.c:145:8:update_ts	8	static
