@@ -17042,3 +17042,759 @@ Finished building: default.size.stdout
  
 Finished building: NAV_BOX.list
  
+19:10:10 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
+../Core/Src/sens_fusion.c: In function 'vector_t_moving_average_filter':
+../Core/Src/sens_fusion.c:44:21: error: storage size of 'buffer' isn't constant
+   44 |     static vector_t buffer[BUFFER_SIZE];
+      |                     ^~~~~~
+../Core/Src/sens_fusion.c:44:21: warning: unused variable 'buffer' [-Wunused-variable]
+../Core/Src/sens_fusion.c: In function 'update_IMU_global_position':
+../Core/Src/sens_fusion.c:113:38: warning: implicit declaration of function 'atan2f' [-Wimplicit-function-declaration]
+  113 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:2:1: note: include '<math.h>' or provide a declaration of 'atan2f'
+    1 | #include "sens_fusion.h"
+  +++ |+#include <math.h>
+    2 | 
+../Core/Src/sens_fusion.c:113:38: warning: incompatible implicit declaration of built-in function 'atan2f' [-Wbuiltin-declaration-mismatch]
+  113 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:113:38: note: include '<math.h>' or provide a declaration of 'atan2f'
+../Core/Src/sens_fusion.c:114:55: warning: implicit declaration of function 'sqrtf' [-Wimplicit-function-declaration]
+  114 |     O_global_orientation_euller->y = atan2f(-R[2][0], sqrtf(R[2][1] * R[2][1] + R[2][2] * R[2][2])); // yaw
+      |                                                       ^~~~~
+../Core/Src/sens_fusion.c:114:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c:114:55: warning: incompatible implicit declaration of built-in function 'sqrtf' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:114:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c: In function 'update_position_precision_calculation':
+../Core/Src/sens_fusion.c:122:62: warning: implicit declaration of function 'sqrt' [-Wimplicit-function-declaration]
+  122 |         X_global_translation_precision->x += acc_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                              ^~~~
+../Core/Src/sens_fusion.c:122:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c:122:62: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:122:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c: In function 'update_orientation_precision_calculation':
+../Core/Src/sens_fusion.c:129:71: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+  129 |         O_global_orientation_euller_precision->x += abs_q_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                                       ^~~~
+../Core/Src/sens_fusion.c:129:71: note: include '<math.h>' or provide a declaration of 'sqrt'
+make: *** [Core/Src/subdir.mk:55: Core/Src/sens_fusion.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+19:10:22 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
+../Core/Src/sens_fusion.c: In function 'update_IMU_global_position':
+../Core/Src/sens_fusion.c:113:38: warning: implicit declaration of function 'atan2f' [-Wimplicit-function-declaration]
+  113 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:2:1: note: include '<math.h>' or provide a declaration of 'atan2f'
+    1 | #include "sens_fusion.h"
+  +++ |+#include <math.h>
+    2 | 
+../Core/Src/sens_fusion.c:113:38: warning: incompatible implicit declaration of built-in function 'atan2f' [-Wbuiltin-declaration-mismatch]
+  113 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:113:38: note: include '<math.h>' or provide a declaration of 'atan2f'
+../Core/Src/sens_fusion.c:114:55: warning: implicit declaration of function 'sqrtf' [-Wimplicit-function-declaration]
+  114 |     O_global_orientation_euller->y = atan2f(-R[2][0], sqrtf(R[2][1] * R[2][1] + R[2][2] * R[2][2])); // yaw
+      |                                                       ^~~~~
+../Core/Src/sens_fusion.c:114:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c:114:55: warning: incompatible implicit declaration of built-in function 'sqrtf' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:114:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c: In function 'update_position_precision_calculation':
+../Core/Src/sens_fusion.c:122:62: warning: implicit declaration of function 'sqrt' [-Wimplicit-function-declaration]
+  122 |         X_global_translation_precision->x += acc_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                              ^~~~
+../Core/Src/sens_fusion.c:122:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c:122:62: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:122:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c: In function 'update_orientation_precision_calculation':
+../Core/Src/sens_fusion.c:129:71: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+  129 |         O_global_orientation_euller_precision->x += abs_q_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                                       ^~~~
+../Core/Src/sens_fusion.c:129:71: note: include '<math.h>' or provide a declaration of 'sqrt'
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  53532	    668	   4576	  58776	   e598	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+19:12:38 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
+../Core/Src/sens_fusion.c: In function 'update_IMU_global_position':
+../Core/Src/sens_fusion.c:90:65: error: expected ',' or ';' before '}' token
+   90 |     int x = X_global_translation->x + (acc->x * t_s * t_s) / 2.0};
+      |                                                                 ^
+../Core/Src/sens_fusion.c:91:69: error: expected ',' or ';' before '}' token
+   91 |         int y = X_global_translation->y + (acc->y * t_s * t_s) / 2.0};
+      |                                                                     ^
+../Core/Src/sens_fusion.c:92:69: error: expected ',' or ';' before '}' token
+   92 |         int z = X_global_translation->z + (acc->z * t_s * t_s) / 2.0};
+      |                                                                     ^
+../Core/Src/sens_fusion.c:94:39: error: expected '}' before ';' token
+   94 |     double T[4][4] = {{1.0, 0.0, 0.0,x;
+      |                       ~               ^
+../Core/Src/sens_fusion.c:176:1: error: expected declaration or statement at end of input
+  176 | }
+      | ^
+../Core/Src/sens_fusion.c:94:12: warning: unused variable 'T' [-Wunused-variable]
+   94 |     double T[4][4] = {{1.0, 0.0, 0.0,x;
+      |            ^
+../Core/Src/sens_fusion.c:92:13: warning: unused variable 'z' [-Wunused-variable]
+   92 |         int z = X_global_translation->z + (acc->z * t_s * t_s) / 2.0};
+      |             ^
+../Core/Src/sens_fusion.c:91:13: warning: unused variable 'y' [-Wunused-variable]
+   91 |         int y = X_global_translation->y + (acc->y * t_s * t_s) / 2.0};
+      |             ^
+../Core/Src/sens_fusion.c:85:12: warning: unused variable 'R' [-Wunused-variable]
+   85 |     double R[4][4] = {{(abs_q->w*abs_q->w+abs_q->x*abs_q->x-abs_q->y*abs_q->y-abs_q->z*abs_q->z), 2.0 * (abs_q->x * abs_q->y - abs_q->w * abs_q->z), 2.0 * (abs_q->x * abs_q->z + abs_q->w * abs_q->y), 0.0},
+      |            ^
+../Core/Src/sens_fusion.c:79:12: warning: unused variable 'L' [-Wunused-variable]
+   79 |     double L[4][4] = {{so[0][0],so[0][1],so[0][2],sp[0]},
+      |            ^
+make: *** [Core/Src/subdir.mk:55: Core/Src/sens_fusion.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+19:12:56 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
+../Core/Src/sens_fusion.c: In function 'update_IMU_global_position':
+../Core/Src/sens_fusion.c:90:65: error: expected ',' or ';' before '}' token
+   90 |     int x = X_global_translation->x + (acc->x * t_s * t_s) / 2.0};
+      |                                                                 ^
+../Core/Src/sens_fusion.c:91:69: error: expected ',' or ';' before '}' token
+   91 |         int y = X_global_translation->y + (acc->y * t_s * t_s) / 2.0};
+      |                                                                     ^
+../Core/Src/sens_fusion.c:92:69: error: expected ',' or ';' before '}' token
+   92 |         int z = X_global_translation->z + (acc->z * t_s * t_s) / 2.0};
+      |                                                                     ^
+../Core/Src/sens_fusion.c:117:38: warning: implicit declaration of function 'atan2f' [-Wimplicit-function-declaration]
+  117 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:2:1: note: include '<math.h>' or provide a declaration of 'atan2f'
+    1 | #include "sens_fusion.h"
+  +++ |+#include <math.h>
+    2 | 
+../Core/Src/sens_fusion.c:117:38: warning: incompatible implicit declaration of built-in function 'atan2f' [-Wbuiltin-declaration-mismatch]
+  117 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:117:38: note: include '<math.h>' or provide a declaration of 'atan2f'
+../Core/Src/sens_fusion.c:118:55: warning: implicit declaration of function 'sqrtf' [-Wimplicit-function-declaration]
+  118 |     O_global_orientation_euller->y = atan2f(-R[2][0], sqrtf(R[2][1] * R[2][1] + R[2][2] * R[2][2])); // yaw
+      |                                                       ^~~~~
+../Core/Src/sens_fusion.c:118:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c:118:55: warning: incompatible implicit declaration of built-in function 'sqrtf' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:118:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c:92:13: warning: unused variable 'z' [-Wunused-variable]
+   92 |         int z = X_global_translation->z + (acc->z * t_s * t_s) / 2.0};
+      |             ^
+../Core/Src/sens_fusion.c:91:13: warning: unused variable 'y' [-Wunused-variable]
+   91 |         int y = X_global_translation->y + (acc->y * t_s * t_s) / 2.0};
+      |             ^
+../Core/Src/sens_fusion.c:90:9: warning: unused variable 'x' [-Wunused-variable]
+   90 |     int x = X_global_translation->x + (acc->x * t_s * t_s) / 2.0};
+      |         ^
+../Core/Src/sens_fusion.c: In function 'update_position_precision_calculation':
+../Core/Src/sens_fusion.c:126:62: warning: implicit declaration of function 'sqrt' [-Wimplicit-function-declaration]
+  126 |         X_global_translation_precision->x += acc_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                              ^~~~
+../Core/Src/sens_fusion.c:126:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c:126:62: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:126:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c: In function 'update_orientation_precision_calculation':
+../Core/Src/sens_fusion.c:133:71: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+  133 |         O_global_orientation_euller_precision->x += abs_q_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                                       ^~~~
+../Core/Src/sens_fusion.c:133:71: note: include '<math.h>' or provide a declaration of 'sqrt'
+make: *** [Core/Src/subdir.mk:55: Core/Src/sens_fusion.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+19:13:40 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
+../Core/Src/sens_fusion.c: In function 'update_IMU_global_position':
+../Core/Src/sens_fusion.c:117:38: warning: implicit declaration of function 'atan2f' [-Wimplicit-function-declaration]
+  117 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:2:1: note: include '<math.h>' or provide a declaration of 'atan2f'
+    1 | #include "sens_fusion.h"
+  +++ |+#include <math.h>
+    2 | 
+../Core/Src/sens_fusion.c:117:38: warning: incompatible implicit declaration of built-in function 'atan2f' [-Wbuiltin-declaration-mismatch]
+  117 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:117:38: note: include '<math.h>' or provide a declaration of 'atan2f'
+../Core/Src/sens_fusion.c:118:55: warning: implicit declaration of function 'sqrtf' [-Wimplicit-function-declaration]
+  118 |     O_global_orientation_euller->y = atan2f(-R[2][0], sqrtf(R[2][1] * R[2][1] + R[2][2] * R[2][2])); // yaw
+      |                                                       ^~~~~
+../Core/Src/sens_fusion.c:118:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c:118:55: warning: incompatible implicit declaration of built-in function 'sqrtf' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:118:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c:92:13: warning: unused variable 'z' [-Wunused-variable]
+   92 |         int z = X_global_translation->z + (acc->z * t_s * t_s) / 2.0;
+      |             ^
+../Core/Src/sens_fusion.c:91:13: warning: unused variable 'y' [-Wunused-variable]
+   91 |         int y = X_global_translation->y + (acc->y * t_s * t_s) / 2.0;
+      |             ^
+../Core/Src/sens_fusion.c:90:9: warning: unused variable 'x' [-Wunused-variable]
+   90 |     int x = X_global_translation->x + (acc->x * t_s * t_s) / 2.0;
+      |         ^
+../Core/Src/sens_fusion.c: In function 'update_position_precision_calculation':
+../Core/Src/sens_fusion.c:126:62: warning: implicit declaration of function 'sqrt' [-Wimplicit-function-declaration]
+  126 |         X_global_translation_precision->x += acc_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                              ^~~~
+../Core/Src/sens_fusion.c:126:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c:126:62: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:126:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c: In function 'update_orientation_precision_calculation':
+../Core/Src/sens_fusion.c:133:71: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+  133 |         O_global_orientation_euller_precision->x += abs_q_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                                       ^~~~
+../Core/Src/sens_fusion.c:133:71: note: include '<math.h>' or provide a declaration of 'sqrt'
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  53548	    668	   4576	  58792	   e5a8	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+19:13:52 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
+../Core/Src/sens_fusion.c: In function 'update_IMU_global_position':
+../Core/Src/sens_fusion.c:95:22: warning: braces around scalar initializer
+   95 |                      {0.0, 1.0, 0.0,y,
+      |                      ^
+../Core/Src/sens_fusion.c:95:22: note: (near initialization for 'T[0][4]')
+../Core/Src/sens_fusion.c:95:28: warning: excess elements in scalar initializer
+   95 |                      {0.0, 1.0, 0.0,y,
+      |                            ^~~
+../Core/Src/sens_fusion.c:95:28: note: (near initialization for 'T[0][4]')
+../Core/Src/sens_fusion.c:95:33: warning: excess elements in scalar initializer
+   95 |                      {0.0, 1.0, 0.0,y,
+      |                                 ^~~
+../Core/Src/sens_fusion.c:95:33: note: (near initialization for 'T[0][4]')
+../Core/Src/sens_fusion.c:95:37: warning: excess elements in scalar initializer
+   95 |                      {0.0, 1.0, 0.0,y,
+      |                                     ^
+../Core/Src/sens_fusion.c:95:37: note: (near initialization for 'T[0][4]')
+../Core/Src/sens_fusion.c:96:22: warning: braces around scalar initializer
+   96 |                      {0.0, 0.0, 1.0,z,
+      |                      ^
+../Core/Src/sens_fusion.c:96:22: note: (near initialization for 'T[0][4]')
+../Core/Src/sens_fusion.c:96:28: warning: excess elements in scalar initializer
+   96 |                      {0.0, 0.0, 1.0,z,
+      |                            ^~~
+../Core/Src/sens_fusion.c:96:28: note: (near initialization for 'T[0][4]')
+../Core/Src/sens_fusion.c:96:33: warning: excess elements in scalar initializer
+   96 |                      {0.0, 0.0, 1.0,z,
+      |                                 ^~~
+../Core/Src/sens_fusion.c:96:33: note: (near initialization for 'T[0][4]')
+../Core/Src/sens_fusion.c:96:37: warning: excess elements in scalar initializer
+   96 |                      {0.0, 0.0, 1.0,z,
+      |                                     ^
+../Core/Src/sens_fusion.c:96:37: note: (near initialization for 'T[0][4]')
+../Core/Src/sens_fusion.c:97:22: warning: braces around scalar initializer
+   97 |                      {0.0, 0.0, 0.0, 1.0}};
+      |                      ^
+../Core/Src/sens_fusion.c:97:22: note: (near initialization for 'T[0][4]')
+../Core/Src/sens_fusion.c:97:28: warning: excess elements in scalar initializer
+   97 |                      {0.0, 0.0, 0.0, 1.0}};
+      |                            ^~~
+../Core/Src/sens_fusion.c:97:28: note: (near initialization for 'T[0][4]')
+../Core/Src/sens_fusion.c:97:33: warning: excess elements in scalar initializer
+   97 |                      {0.0, 0.0, 0.0, 1.0}};
+      |                                 ^~~
+../Core/Src/sens_fusion.c:97:33: note: (near initialization for 'T[0][4]')
+../Core/Src/sens_fusion.c:97:38: warning: excess elements in scalar initializer
+   97 |                      {0.0, 0.0, 0.0, 1.0}};
+      |                                      ^~~
+../Core/Src/sens_fusion.c:97:38: note: (near initialization for 'T[0][4]')
+../Core/Src/sens_fusion.c:97:22: warning: excess elements in scalar initializer
+   97 |                      {0.0, 0.0, 0.0, 1.0}};
+      |                      ^
+../Core/Src/sens_fusion.c:97:22: note: (near initialization for 'T[0][4]')
+../Core/Src/sens_fusion.c:96:22: warning: excess elements in scalar initializer
+   96 |                      {0.0, 0.0, 1.0,z,
+      |                      ^
+../Core/Src/sens_fusion.c:96:22: note: (near initialization for 'T[0][4]')
+../Core/Src/sens_fusion.c:97:43: error: expected '}' before ';' token
+   97 |                      {0.0, 0.0, 0.0, 1.0}};
+      |                                           ^
+../Core/Src/sens_fusion.c:95:22: note: to match this '{'
+   95 |                      {0.0, 1.0, 0.0,y,
+      |                      ^
+../Core/Src/sens_fusion.c:95:22: warning: excess elements in array initializer
+../Core/Src/sens_fusion.c:95:22: note: (near initialization for 'T[0]')
+../Core/Src/sens_fusion.c:123:1: error: expected '}' before 'void'
+  123 | void update_position_precision_calculation(vector_t *X_global_translation_precision, vector_t *acc_prec,int time_step){
+      | ^~~~
+../Core/Src/sens_fusion.c:94:23: note: to match this '{'
+   94 |     double T[4][4] = {{1.0, 0.0, 0.0,x,
+      |                       ^
+../Core/Src/sens_fusion.c:176:1: error: expected declaration or statement at end of input
+  176 | }
+      | ^
+../Core/Src/sens_fusion.c:94:12: warning: unused variable 'T' [-Wunused-variable]
+   94 |     double T[4][4] = {{1.0, 0.0, 0.0,x,
+      |            ^
+../Core/Src/sens_fusion.c:85:12: warning: unused variable 'R' [-Wunused-variable]
+   85 |     double R[4][4] = {{(abs_q->w*abs_q->w+abs_q->x*abs_q->x-abs_q->y*abs_q->y-abs_q->z*abs_q->z), 2.0 * (abs_q->x * abs_q->y - abs_q->w * abs_q->z), 2.0 * (abs_q->x * abs_q->z + abs_q->w * abs_q->y), 0.0},
+      |            ^
+../Core/Src/sens_fusion.c:79:12: warning: unused variable 'L' [-Wunused-variable]
+   79 |     double L[4][4] = {{so[0][0],so[0][1],so[0][2],sp[0]},
+      |            ^
+make: *** [Core/Src/subdir.mk:55: Core/Src/sens_fusion.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+19:14:21 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
+../Core/Src/sens_fusion.c: In function 'update_IMU_global_position':
+../Core/Src/sens_fusion.c:117:38: warning: implicit declaration of function 'atan2f' [-Wimplicit-function-declaration]
+  117 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:2:1: note: include '<math.h>' or provide a declaration of 'atan2f'
+    1 | #include "sens_fusion.h"
+  +++ |+#include <math.h>
+    2 | 
+../Core/Src/sens_fusion.c:117:38: warning: incompatible implicit declaration of built-in function 'atan2f' [-Wbuiltin-declaration-mismatch]
+  117 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:117:38: note: include '<math.h>' or provide a declaration of 'atan2f'
+../Core/Src/sens_fusion.c:118:55: warning: implicit declaration of function 'sqrtf' [-Wimplicit-function-declaration]
+  118 |     O_global_orientation_euller->y = atan2f(-R[2][0], sqrtf(R[2][1] * R[2][1] + R[2][2] * R[2][2])); // yaw
+      |                                                       ^~~~~
+../Core/Src/sens_fusion.c:118:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c:118:55: warning: incompatible implicit declaration of built-in function 'sqrtf' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:118:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c: In function 'update_position_precision_calculation':
+../Core/Src/sens_fusion.c:126:62: warning: implicit declaration of function 'sqrt' [-Wimplicit-function-declaration]
+  126 |         X_global_translation_precision->x += acc_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                              ^~~~
+../Core/Src/sens_fusion.c:126:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c:126:62: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:126:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c: In function 'update_orientation_precision_calculation':
+../Core/Src/sens_fusion.c:133:71: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+  133 |         O_global_orientation_euller_precision->x += abs_q_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                                       ^~~~
+../Core/Src/sens_fusion.c:133:71: note: include '<math.h>' or provide a declaration of 'sqrt'
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  53564	    668	   4576	  58808	   e5b8	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+19:46:10 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
+../Core/Src/sens_fusion.c: In function 'update_IMU_global_position':
+../Core/Src/sens_fusion.c:117:38: warning: implicit declaration of function 'atan2f' [-Wimplicit-function-declaration]
+  117 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:2:1: note: include '<math.h>' or provide a declaration of 'atan2f'
+    1 | #include "sens_fusion.h"
+  +++ |+#include <math.h>
+    2 | 
+../Core/Src/sens_fusion.c:117:38: warning: incompatible implicit declaration of built-in function 'atan2f' [-Wbuiltin-declaration-mismatch]
+  117 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:117:38: note: include '<math.h>' or provide a declaration of 'atan2f'
+../Core/Src/sens_fusion.c:118:55: warning: implicit declaration of function 'sqrtf' [-Wimplicit-function-declaration]
+  118 |     O_global_orientation_euller->y = atan2f(-R[2][0], sqrtf(R[2][1] * R[2][1] + R[2][2] * R[2][2])); // yaw
+      |                                                       ^~~~~
+../Core/Src/sens_fusion.c:118:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c:118:55: warning: incompatible implicit declaration of built-in function 'sqrtf' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:118:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c: In function 'update_position_precision_calculation':
+../Core/Src/sens_fusion.c:126:62: warning: implicit declaration of function 'sqrt' [-Wimplicit-function-declaration]
+  126 |         X_global_translation_precision->x += acc_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                              ^~~~
+../Core/Src/sens_fusion.c:126:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c:126:62: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:126:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c: In function 'update_orientation_precision_calculation':
+../Core/Src/sens_fusion.c:133:71: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+  133 |         O_global_orientation_euller_precision->x += abs_q_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                                       ^~~~
+../Core/Src/sens_fusion.c:133:71: note: include '<math.h>' or provide a declaration of 'sqrt'
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  53564	    668	   4576	  58808	   e5b8	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+19:46:55 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  53564	    668	   4576	  58808	   e5b8	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+19:47:14 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  53564	    668	   4576	  58808	   e5b8	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+19:51:24 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
+../Core/Src/sens_fusion.c: In function 'update_IMU_global_position':
+../Core/Src/sens_fusion.c:117:38: warning: implicit declaration of function 'atan2f' [-Wimplicit-function-declaration]
+  117 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:2:1: note: include '<math.h>' or provide a declaration of 'atan2f'
+    1 | #include "sens_fusion.h"
+  +++ |+#include <math.h>
+    2 | 
+../Core/Src/sens_fusion.c:117:38: warning: incompatible implicit declaration of built-in function 'atan2f' [-Wbuiltin-declaration-mismatch]
+  117 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:117:38: note: include '<math.h>' or provide a declaration of 'atan2f'
+../Core/Src/sens_fusion.c:118:55: warning: implicit declaration of function 'sqrtf' [-Wimplicit-function-declaration]
+  118 |     O_global_orientation_euller->y = atan2f(-R[2][0], sqrtf(R[2][1] * R[2][1] + R[2][2] * R[2][2])); // yaw
+      |                                                       ^~~~~
+../Core/Src/sens_fusion.c:118:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c:118:55: warning: incompatible implicit declaration of built-in function 'sqrtf' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:118:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c: In function 'update_position_precision_calculation':
+../Core/Src/sens_fusion.c:126:62: warning: implicit declaration of function 'sqrt' [-Wimplicit-function-declaration]
+  126 |         X_global_translation_precision->x += acc_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                              ^~~~
+../Core/Src/sens_fusion.c:126:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c:126:62: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:126:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c: In function 'update_orientation_precision_calculation':
+../Core/Src/sens_fusion.c:133:71: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+  133 |         O_global_orientation_euller_precision->x += abs_q_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                                       ^~~~
+../Core/Src/sens_fusion.c:133:71: note: include '<math.h>' or provide a declaration of 'sqrt'
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  53548	    668	   4576	  58792	   e5a8	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+19:53:38 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
+../Core/Src/sens_fusion.c: In function 'update_IMU_global_position':
+../Core/Src/sens_fusion.c:117:38: warning: implicit declaration of function 'atan2f' [-Wimplicit-function-declaration]
+  117 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:2:1: note: include '<math.h>' or provide a declaration of 'atan2f'
+    1 | #include "sens_fusion.h"
+  +++ |+#include <math.h>
+    2 | 
+../Core/Src/sens_fusion.c:117:38: warning: incompatible implicit declaration of built-in function 'atan2f' [-Wbuiltin-declaration-mismatch]
+  117 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:117:38: note: include '<math.h>' or provide a declaration of 'atan2f'
+../Core/Src/sens_fusion.c:118:55: warning: implicit declaration of function 'sqrtf' [-Wimplicit-function-declaration]
+  118 |     O_global_orientation_euller->y = atan2f(-R[2][0], sqrtf(R[2][1] * R[2][1] + R[2][2] * R[2][2])); // yaw
+      |                                                       ^~~~~
+../Core/Src/sens_fusion.c:118:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c:118:55: warning: incompatible implicit declaration of built-in function 'sqrtf' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:118:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c: In function 'update_position_precision_calculation':
+../Core/Src/sens_fusion.c:126:62: warning: implicit declaration of function 'sqrt' [-Wimplicit-function-declaration]
+  126 |         X_global_translation_precision->x += acc_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                              ^~~~
+../Core/Src/sens_fusion.c:126:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c:126:62: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:126:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c: In function 'update_orientation_precision_calculation':
+../Core/Src/sens_fusion.c:133:71: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+  133 |         O_global_orientation_euller_precision->x += abs_q_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                                       ^~~~
+../Core/Src/sens_fusion.c:133:71: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:220:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  220 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                                 ^~~~~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  53548	    668	   5056	  59272	   e788	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+19:53:55 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
+../Core/Src/sens_fusion.c: In function 'update_IMU_global_position':
+../Core/Src/sens_fusion.c:116:38: warning: implicit declaration of function 'atan2f' [-Wimplicit-function-declaration]
+  116 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:2:1: note: include '<math.h>' or provide a declaration of 'atan2f'
+    1 | #include "sens_fusion.h"
+  +++ |+#include <math.h>
+    2 | 
+../Core/Src/sens_fusion.c:116:38: warning: incompatible implicit declaration of built-in function 'atan2f' [-Wbuiltin-declaration-mismatch]
+  116 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:116:38: note: include '<math.h>' or provide a declaration of 'atan2f'
+../Core/Src/sens_fusion.c:117:55: warning: implicit declaration of function 'sqrtf' [-Wimplicit-function-declaration]
+  117 |     O_global_orientation_euller->y = atan2f(-R[2][0], sqrtf(R[2][1] * R[2][1] + R[2][2] * R[2][2])); // yaw
+      |                                                       ^~~~~
+../Core/Src/sens_fusion.c:117:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c:117:55: warning: incompatible implicit declaration of built-in function 'sqrtf' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:117:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c: In function 'update_position_precision_calculation':
+../Core/Src/sens_fusion.c:125:62: warning: implicit declaration of function 'sqrt' [-Wimplicit-function-declaration]
+  125 |         X_global_translation_precision->x += acc_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                              ^~~~
+../Core/Src/sens_fusion.c:125:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c:125:62: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:125:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c: In function 'update_orientation_precision_calculation':
+../Core/Src/sens_fusion.c:132:71: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+  132 |         O_global_orientation_euller_precision->x += abs_q_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                                       ^~~~
+../Core/Src/sens_fusion.c:132:71: note: include '<math.h>' or provide a declaration of 'sqrt'
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  53548	    668	   5056	  59272	   e788	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+19:54:02 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  53548	    668	   5056	  59272	   e788	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+20:06:27 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:220:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  220 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                                 ^~~~~~~~~~
+../Core/Src/sens_fusion.c: In function 'update_IMU_global_position':
+../Core/Src/sens_fusion.c:116:38: warning: implicit declaration of function 'atan2f' [-Wimplicit-function-declaration]
+  116 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:2:1: note: include '<math.h>' or provide a declaration of 'atan2f'
+    1 | #include "sens_fusion.h"
+  +++ |+#include <math.h>
+    2 | 
+../Core/Src/sens_fusion.c:116:38: warning: incompatible implicit declaration of built-in function 'atan2f' [-Wbuiltin-declaration-mismatch]
+  116 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:116:38: note: include '<math.h>' or provide a declaration of 'atan2f'
+../Core/Src/sens_fusion.c:117:55: warning: implicit declaration of function 'sqrtf' [-Wimplicit-function-declaration]
+  117 |     O_global_orientation_euller->y = atan2f(-R[2][0], sqrtf(R[2][1] * R[2][1] + R[2][2] * R[2][2])); // yaw
+      |                                                       ^~~~~
+../Core/Src/sens_fusion.c:117:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c:117:55: warning: incompatible implicit declaration of built-in function 'sqrtf' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:117:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c: In function 'update_position_precision_calculation':
+../Core/Src/sens_fusion.c:125:62: warning: implicit declaration of function 'sqrt' [-Wimplicit-function-declaration]
+  125 |         X_global_translation_precision->x += acc_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                              ^~~~
+../Core/Src/sens_fusion.c:125:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c:125:62: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:125:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c: In function 'update_orientation_precision_calculation':
+../Core/Src/sens_fusion.c:132:71: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+  132 |         O_global_orientation_euller_precision->x += abs_q_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                                       ^~~~
+../Core/Src/sens_fusion.c:132:71: note: include '<math.h>' or provide a declaration of 'sqrt'
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  53548	    668	   7136	  61352	   efa8	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+20:21:40 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
+../Core/Src/sens_fusion.c: In function 'update_IMU_global_position':
+../Core/Src/sens_fusion.c:116:38: warning: implicit declaration of function 'atan2f' [-Wimplicit-function-declaration]
+  116 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:2:1: note: include '<math.h>' or provide a declaration of 'atan2f'
+    1 | #include "sens_fusion.h"
+  +++ |+#include <math.h>
+    2 | 
+../Core/Src/sens_fusion.c:116:38: warning: incompatible implicit declaration of built-in function 'atan2f' [-Wbuiltin-declaration-mismatch]
+  116 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:116:38: note: include '<math.h>' or provide a declaration of 'atan2f'
+../Core/Src/sens_fusion.c:117:55: warning: implicit declaration of function 'sqrtf' [-Wimplicit-function-declaration]
+  117 |     O_global_orientation_euller->y = atan2f(-R[2][0], sqrtf(R[2][1] * R[2][1] + R[2][2] * R[2][2])); // yaw
+      |                                                       ^~~~~
+../Core/Src/sens_fusion.c:117:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c:117:55: warning: incompatible implicit declaration of built-in function 'sqrtf' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:117:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c:98:12: warning: unused variable 'L1' [-Wunused-variable]
+   98 |     double L1[4][4];
+      |            ^~
+../Core/Src/sens_fusion.c: In function 'update_position_precision_calculation':
+../Core/Src/sens_fusion.c:125:62: warning: implicit declaration of function 'sqrt' [-Wimplicit-function-declaration]
+  125 |         X_global_translation_precision->x += acc_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                              ^~~~
+../Core/Src/sens_fusion.c:125:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c:125:62: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:125:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c: In function 'update_orientation_precision_calculation':
+../Core/Src/sens_fusion.c:132:71: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+  132 |         O_global_orientation_euller_precision->x += abs_q_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                                       ^~~~
+../Core/Src/sens_fusion.c:132:71: note: include '<math.h>' or provide a declaration of 'sqrt'
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  53364	    668	   7136	  61168	   eef0	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+20:32:51 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  53364	    668	   7136	  61168	   eef0	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+20:34:58 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
+../Core/Src/sens_fusion.c: In function 'update_IMU_global_position':
+../Core/Src/sens_fusion.c:116:38: warning: implicit declaration of function 'atan2f' [-Wimplicit-function-declaration]
+  116 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:2:1: note: include '<math.h>' or provide a declaration of 'atan2f'
+    1 | #include "sens_fusion.h"
+  +++ |+#include <math.h>
+    2 | 
+../Core/Src/sens_fusion.c:116:38: warning: incompatible implicit declaration of built-in function 'atan2f' [-Wbuiltin-declaration-mismatch]
+  116 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:116:38: note: include '<math.h>' or provide a declaration of 'atan2f'
+../Core/Src/sens_fusion.c:117:55: warning: implicit declaration of function 'sqrtf' [-Wimplicit-function-declaration]
+  117 |     O_global_orientation_euller->y = atan2f(-R[2][0], sqrtf(R[2][1] * R[2][1] + R[2][2] * R[2][2])); // yaw
+      |                                                       ^~~~~
+../Core/Src/sens_fusion.c:117:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c:117:55: warning: incompatible implicit declaration of built-in function 'sqrtf' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:117:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c: In function 'update_position_precision_calculation':
+../Core/Src/sens_fusion.c:125:62: warning: implicit declaration of function 'sqrt' [-Wimplicit-function-declaration]
+  125 |         X_global_translation_precision->x += acc_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                              ^~~~
+../Core/Src/sens_fusion.c:125:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c:125:62: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:125:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c: In function 'update_orientation_precision_calculation':
+../Core/Src/sens_fusion.c:132:71: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+  132 |         O_global_orientation_euller_precision->x += abs_q_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                                       ^~~~
+../Core/Src/sens_fusion.c:132:71: note: include '<math.h>' or provide a declaration of 'sqrt'
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  53548	    668	   7136	  61352	   efa8	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+11:52:18 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
+../Core/Src/sens_fusion.c: In function 'update_IMU_global_position':
+../Core/Src/sens_fusion.c:114:38: warning: implicit declaration of function 'atan2f' [-Wimplicit-function-declaration]
+  114 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:2:1: note: include '<math.h>' or provide a declaration of 'atan2f'
+    1 | #include "sens_fusion.h"
+  +++ |+#include <math.h>
+    2 | 
+../Core/Src/sens_fusion.c:114:38: warning: incompatible implicit declaration of built-in function 'atan2f' [-Wbuiltin-declaration-mismatch]
+  114 |     O_global_orientation_euller->x = atan2f(R[2][1], R[2][2]); // pitch
+      |                                      ^~~~~~
+../Core/Src/sens_fusion.c:114:38: note: include '<math.h>' or provide a declaration of 'atan2f'
+../Core/Src/sens_fusion.c:115:55: warning: implicit declaration of function 'sqrtf' [-Wimplicit-function-declaration]
+  115 |     O_global_orientation_euller->y = atan2f(-R[2][0], sqrtf(R[2][1] * R[2][1] + R[2][2] * R[2][2])); // yaw
+      |                                                       ^~~~~
+../Core/Src/sens_fusion.c:115:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c:115:55: warning: incompatible implicit declaration of built-in function 'sqrtf' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:115:55: note: include '<math.h>' or provide a declaration of 'sqrtf'
+../Core/Src/sens_fusion.c: In function 'update_position_precision_calculation':
+../Core/Src/sens_fusion.c:123:62: warning: implicit declaration of function 'sqrt' [-Wimplicit-function-declaration]
+  123 |         X_global_translation_precision->x += acc_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                              ^~~~
+../Core/Src/sens_fusion.c:123:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c:123:62: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sens_fusion.c:123:62: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/sens_fusion.c: In function 'update_orientation_precision_calculation':
+../Core/Src/sens_fusion.c:130:71: warning: incompatible implicit declaration of built-in function 'sqrt' [-Wbuiltin-declaration-mismatch]
+  130 |         O_global_orientation_euller_precision->x += abs_q_prec->x * 1/sqrt(3) * sqrt(t_s*t_s*t_s); // Increase variance in x
+      |                                                                       ^~~~
+../Core/Src/sens_fusion.c:130:71: note: include '<math.h>' or provide a declaration of 'sqrt'
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:222:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  222 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                                 ^~~~~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  53548	    668	   7136	  61352	   efa8	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 

@@ -3,6 +3,8 @@
 
 #include "main.h"
 
+#define RUNING_AVG_BUFF 100
+
 //standart BNO055 quaternion & vector struct
 //(for ease of use)
 typedef struct {
