@@ -17798,3 +17798,131 @@ Finished building: default.size.stdout
  
 Finished building: NAV_BOX.list
  
+18:27:47 **** Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:222:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  222 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                                 ^~~~~~~~~~
+../Core/Src/main.c: In function 'process_sensor_fusion':
+../Core/Src/main.c:283:143: error: 'O_global_orientation_euller' undeclared (first use in this function); did you mean 'O_global_orientation_euler'?
+  283 |                 update_IMU_global_position(starting_position_offset, starting_orientation_offset, &acc_f, &abs_q, ts, &X_global_translation, &O_global_orientation_euller);
+      |                                                                                                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                                                                                                               O_global_orientation_euler
+../Core/Src/main.c:283:143: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:285:17: warning: implicit declaration of function 'update_position_precision_calculation' [-Wimplicit-function-declaration]
+  285 |                 update_position_precision_calculation(&X_global_translation_precision, &acc_prec, ts);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:297:17: warning: implicit declaration of function 'joined_position_estimation' [-Wimplicit-function-declaration]
+  297 |                 joined_position_estimation(&X_hat_estimation, &pos, &X_global_translation, &pos_prec, &acc_prec);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:297:45: error: 'X_hat_estimation' undeclared (first use in this function)
+  297 |                 joined_position_estimation(&X_hat_estimation, &pos, &X_global_translation, &pos_prec, &acc_prec);
+      |                                             ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:298:17: warning: implicit declaration of function 'joined_precision_calculation' [-Wimplicit-function-declaration]
+  298 |                 joined_precision_calculation(&X_hat_precision, &pos_prec, &acc_prec);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:298:47: error: 'X_hat_precision' undeclared (first use in this function)
+  298 |                 joined_precision_calculation(&X_hat_precision, &pos_prec, &acc_prec);
+      |                                               ^~~~~~~~~~~~~~~
+../Core/Src/main.c:299:17: warning: implicit declaration of function 'reset_IMU_precision' [-Wimplicit-function-declaration]
+  299 |                 reset_IMU_precision(&X_hat_precision, &X_global_translation_precision, &X_hat_estimation, &X_global_translation);
+      |                 ^~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:55: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+18:28:29 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:222:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  222 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                                 ^~~~~~~~~~
+../Core/Src/main.c: In function 'process_sensor_fusion':
+../Core/Src/main.c:285:17: warning: implicit declaration of function 'update_position_precision_calculation' [-Wimplicit-function-declaration]
+  285 |                 update_position_precision_calculation(&X_global_translation_precision, &acc_prec, ts);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:297:17: warning: implicit declaration of function 'joined_position_estimation' [-Wimplicit-function-declaration]
+  297 |                 joined_position_estimation(&X_hat_estimation, &pos, &X_global_translation, &pos_prec, &acc_prec);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:297:45: error: 'X_hat_estimation' undeclared (first use in this function)
+  297 |                 joined_position_estimation(&X_hat_estimation, &pos, &X_global_translation, &pos_prec, &acc_prec);
+      |                                             ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:297:45: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:298:17: warning: implicit declaration of function 'joined_precision_calculation' [-Wimplicit-function-declaration]
+  298 |                 joined_precision_calculation(&X_hat_precision, &pos_prec, &acc_prec);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:298:47: error: 'X_hat_precision' undeclared (first use in this function)
+  298 |                 joined_precision_calculation(&X_hat_precision, &pos_prec, &acc_prec);
+      |                                               ^~~~~~~~~~~~~~~
+../Core/Src/main.c:299:17: warning: implicit declaration of function 'reset_IMU_precision' [-Wimplicit-function-declaration]
+  299 |                 reset_IMU_precision(&X_hat_precision, &X_global_translation_precision, &X_hat_estimation, &X_global_translation);
+      |                 ^~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:55: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+18:35:47 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:222:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  222 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                                 ^~~~~~~~~~
+../Core/Src/main.c: In function 'process_sensor_fusion':
+../Core/Src/main.c:285:17: warning: implicit declaration of function 'update_position_precision_calculation' [-Wimplicit-function-declaration]
+  285 |                 update_position_precision_calculation(&X_global_translation_precision, &acc_prec, ts);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+C:/ST/STM32CubeIDE_1.19.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/main.o: in function `process_sensor_fusion':
+C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Debug/../Core/Src/main.c:285:(.text.process_sensor_fusion+0xb2): undefined reference to `update_position_precision_calculation'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:88: NAV_BOX.elf] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+18:35:58 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+C:/ST/STM32CubeIDE_1.19.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/main.o: in function `process_sensor_fusion':
+C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Debug/../Core/Src/main.c:285:(.text.process_sensor_fusion+0xb2): undefined reference to `update_position_precision_calculation'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:88: NAV_BOX.elf] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+18:36:27 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:222:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  222 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                                 ^~~~~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  53228	    636	   6936	  60800	   ed80	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+18:36:37 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  53228	    636	   6936	  60800	   ed80	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+18:37:27 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  53228	    636	   6936	  60800	   ed80	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+18:38:07 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  53228	    636	   6936	  60800	   ed80	NAV_BOX.elf
+Finished building: default.size.stdout
+ 

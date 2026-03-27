@@ -52,13 +52,6 @@
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
 
-// #define type_GPS 0x0a 		//10
-// #define type_BNO055 0x0b	//11
-// #define type_BMP 0x0c		//12
-// #define type_KF 0x0d		//13
-
-#define rx_buffer_size 60 //GPS uart 1 recieve NAV-SOL packed size
-
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -95,7 +88,7 @@ bno055_euler_t euler;
 //-------------------------------BNO055---------------------------------------------
 
 
-//---------------REVIEVING PACKET FROM GPS VIA UBX raw bytes---------------
+//---------------REVIEVING PACKET FROM GPS VIA UBX raw bytes-------------------- 
 /*
  *
  * Match this to recieving end of NSLP debugger
@@ -104,19 +97,20 @@ bno055_euler_t euler;
  *It this struct define the data you want to send from the STM machine
  *It
  * */
-
-//-------------------------------GPS---------------------------------------------
-UBX_NavSol rawData;
-UBX_NavSolData solData;
+#define rx_buffer_size 60 //GPS uart 1 recieve NAV-SOL packed size
 uint8_t rx_buffer[rx_buffer_size]; //size of data recieved from GPS
-uint32_t GPS_timeStamp;
-//dirty flags
+UBX_NavSol rawData; //raw gps data from parsing the rx_buffer
+UBX_NavSolData solData; // organized and converted gps data
+uint32_t GPS_timeStamp; //timestamp of processing
+//-------------------------------GPS---------------------------------------------
+
+//---------------------------------------dirty flags---------------------------------------------
 bool recieved_GPS = false;
 bool send_gps_nslp = false; // Flag to indicate if the GPS data has been parsed and is ready for use
 bool estimation_gps_ready = false; // Flag to indicate if GPS data is ready for sensor fusion
 bool valid_gps_recieved = false; // Flag to indicate if valid GPS data has ever been received
 bool estimation_imu_ready = false;
-//-------------------------------GPS---------------------------------------------
+//-------------------------------dirty flags-----------------------------------------------------
 
 //--------------------------nslp--------------------------------------------
 nslp_instance_t nslp;
@@ -177,7 +171,7 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
 void parse_i2c_data(){
 	static uint32_t lastBMP180Time = 0;
 
-		if (bno.dma_data_ready) {
+		if (bno.dma_data_ready) { /*on i2c data rx recieved bno.dma... is = true*/
 
 			bno055_get_linear_acc(&bno, &accel);
 			bno055_get_euler(&bno, &euler);
@@ -265,9 +259,9 @@ void process_sensor_fusion(){
 
 	if(estimation_imu_ready == true){
 
-    acc.x = accel.x;
-    acc.y = accel.y;
-    acc.z = accel.z;
+		acc.x = accel.x;
+		acc.y = accel.y;
+		acc.z = accel.z;
 
 		vector_t_moving_average_filter(&acc, &acc_f); // Filter accelerometer data for precision estimation
 
@@ -280,10 +274,11 @@ void process_sensor_fusion(){
 		POS_fusion_X.ts = micros();
 		ts = update_ts(&lt,micros());
 		//update position estimate how much have we moved since last mesurement
-		update_IMU_global_position(starting_position_offset, starting_orientation_offset, &acc_f, &abs_q, ts, &X_global_translation, &O_global_orientation_euller);
+		update_IMU_global_position(starting_position_offset, starting_orientation_offset, &acc_f, &abs_q, ts, &X_global_translation, &O_global_orientation_euler);
 		//update precision estimation how sure we are of our position
-		update_position_precision_calculation(&X_global_translation_precision, &acc_prec, ts);
+		//update_position_precision_calculation(&X_global_translation_precision, &acc_prec, ts);
 
+		//OUTPUT
 		POS_fusion_X.Xx = X_global_translation.x;
 		POS_fusion_X.Xy = X_global_translation.y;
 		POS_fusion_X.Xz = X_global_translation.z;
@@ -293,9 +288,9 @@ void process_sensor_fusion(){
 
 	//on GPS recieved update the position estimation with the GPS data and reset the IMU precision to the GPS precision
 	if(estimation_gps_ready == true && valid_gps_recieved == true){
-		joined_position_estimation(&X_hat_estimation, &pos, &X_global_translation, &pos_prec, &acc_prec);
-		joined_precision_calculation(&X_hat_precision, &pos_prec, &acc_prec);
-		reset_IMU_precision(&X_hat_precision, &X_global_translation_precision, &X_hat_estimation, &X_global_translation);
+//		joined_position_estimation(&X_hat_estimation, &pos, &X_global_translation, &pos_prec, &acc_prec);
+//		joined_precision_calculation(&X_hat_precision, &pos_prec, &acc_prec);
+//		reset_IMU_precision(&X_hat_precision, &X_global_translation_precision, &X_hat_estimation, &X_global_translation);
 
 		POS_fusion_X.Xx = X_global_translation.x;
 		POS_fusion_X.Xy = X_global_translation.y;

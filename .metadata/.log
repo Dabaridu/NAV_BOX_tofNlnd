@@ -8171,3 +8171,167 @@ Caused by: java.io.IOException: CreateProcess error=2, The system cannot find th
 
 !ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2026-03-19 11:51:56.143
 !MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2026-03-22 04:41:00.681 -----------------------------------------------
+eclipse.buildId=Version 1.19.0
+java.version=21.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2026-03-22 04:41:04.744
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2026-03-22 04:41:38.670
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2026-03-22 04:41:38.672
+!MESSAGE Log4j2 initialized with config file C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\.metadata\.log4j2.xml
+
+!ENTRY org.eclipse.ui.workbench 4 0 2026-03-22 04:41:47.658
+!MESSAGE Failed to obtain 'WinDefend' service state
+!STACK 0
+java.io.IOException: Cannot run program "powershell.exe": CreateProcess error=2, The system cannot find the file specified
+	at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1170)
+	at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1089)
+	at org.eclipse.ui.internal.WindowsDefenderConfigurator.runProcess(WindowsDefenderConfigurator.java:383)
+	at org.eclipse.ui.internal.WindowsDefenderConfigurator.runPowershell(WindowsDefenderConfigurator.java:378)
+	at org.eclipse.ui.internal.WindowsDefenderConfigurator.isWindowsDefenderServiceRunning(WindowsDefenderConfigurator.java:302)
+	at org.eclipse.ui.internal.WindowsDefenderConfigurator.runExclusionCheck(WindowsDefenderConfigurator.java:159)
+	at org.eclipse.ui.internal.WindowsDefenderConfigurator.lambda$0(WindowsDefenderConfigurator.java:106)
+	at org.eclipse.core.runtime.jobs.Job$2.run(Job.java:187)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: java.io.IOException: CreateProcess error=2, The system cannot find the file specified
+	at java.base/java.lang.ProcessImpl.create(Native Method)
+	at java.base/java.lang.ProcessImpl.<init>(ProcessImpl.java:500)
+	at java.base/java.lang.ProcessImpl.start(ProcessImpl.java:159)
+	at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1126)
+	... 8 more
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2026-03-22 04:41:53.538
+!MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2026-03-23 18:25:40.812 -----------------------------------------------
+eclipse.buildId=Version 1.19.0
+java.version=21.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2026-03-23 18:26:24.285
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2026-03-23 18:26:24.287
+!MESSAGE Log4j2 initialized with config file C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\.metadata\.log4j2.xml
+
+!ENTRY org.eclipse.ui.workbench 4 0 2026-03-23 18:26:29.121
+!MESSAGE Failed to obtain 'WinDefend' service state
+!STACK 0
+java.io.IOException: Cannot run program "powershell.exe": CreateProcess error=2, The system cannot find the file specified
+	at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1170)
+	at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1089)
+	at org.eclipse.ui.internal.WindowsDefenderConfigurator.runProcess(WindowsDefenderConfigurator.java:383)
+	at org.eclipse.ui.internal.WindowsDefenderConfigurator.runPowershell(WindowsDefenderConfigurator.java:378)
+	at org.eclipse.ui.internal.WindowsDefenderConfigurator.isWindowsDefenderServiceRunning(WindowsDefenderConfigurator.java:302)
+	at org.eclipse.ui.internal.WindowsDefenderConfigurator.runExclusionCheck(WindowsDefenderConfigurator.java:159)
+	at org.eclipse.ui.internal.WindowsDefenderConfigurator.lambda$0(WindowsDefenderConfigurator.java:106)
+	at org.eclipse.core.runtime.jobs.Job$2.run(Job.java:187)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: java.io.IOException: CreateProcess error=2, The system cannot find the file specified
+	at java.base/java.lang.ProcessImpl.create(Native Method)
+	at java.base/java.lang.ProcessImpl.<init>(ProcessImpl.java:500)
+	at java.base/java.lang.ProcessImpl.start(ProcessImpl.java:159)
+	at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1126)
+	... 8 more
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2026-03-23 18:26:32.893
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.dsf.gdb.ui 4 4 2026-03-23 18:37:34.510
+!MESSAGE Illegal char <<> at index 68: C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Debug/<built-in>
+!STACK 0
+java.nio.file.InvalidPathException: Illegal char <<> at index 68: C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Debug/<built-in>
+	at java.base/sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:204)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:175)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:77)
+	at java.base/sun.nio.fs.WindowsPath.parse(WindowsPath.java:92)
+	at java.base/sun.nio.fs.WindowsFileSystem.getPath(WindowsFileSystem.java:231)
+	at java.base/java.nio.file.Path.of(Path.java:148)
+	at java.base/java.nio.file.Paths.get(Paths.java:69)
+	at org.eclipse.cdt.dsf.gdb.internal.ui.debugsources.DebugSourcesView$PopulateTreeJob.populateTree(DebugSourcesView.java:630)
+	at org.eclipse.cdt.dsf.gdb.internal.ui.debugsources.DebugSourcesView$PopulateTreeJob.run(DebugSourcesView.java:605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.cdt.dsf.gdb.ui 4 4 2026-03-23 18:38:12.819
+!MESSAGE Illegal char <<> at index 68: C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Debug/<built-in>
+!STACK 0
+java.nio.file.InvalidPathException: Illegal char <<> at index 68: C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Debug/<built-in>
+	at java.base/sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:204)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:175)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:77)
+	at java.base/sun.nio.fs.WindowsPath.parse(WindowsPath.java:92)
+	at java.base/sun.nio.fs.WindowsFileSystem.getPath(WindowsFileSystem.java:231)
+	at java.base/java.nio.file.Path.of(Path.java:148)
+	at java.base/java.nio.file.Paths.get(Paths.java:69)
+	at org.eclipse.cdt.dsf.gdb.internal.ui.debugsources.DebugSourcesView$PopulateTreeJob.populateTree(DebugSourcesView.java:630)
+	at org.eclipse.cdt.dsf.gdb.internal.ui.debugsources.DebugSourcesView$PopulateTreeJob.run(DebugSourcesView.java:605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.core.jobs 2 2 2026-03-24 14:00:05.389
+!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: org.eclipse.debug.core.DebugPlugin$EventDispatchJob RUNNING
+	 at java.base/java.lang.Object.wait0(Native Method)
+	 at java.base/java.lang.Object.wait(Object.java:366)
+	 at java.base/java.lang.Object.wait(Object.java:339)
+	 at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:200)
+	 at org.eclipse.swt.widgets.Display.syncExec(Display.java:4855)
+	 at com.st.stm32cube.ide.mcu.debug.launch.Activator$DebugEventListener.inDebugPerspective(Activator.java:152)
+	 at com.st.stm32cube.ide.mcu.debug.launch.Activator$DebugEventListener.handleDebugEvents(Activator.java:85)
+	 at org.eclipse.debug.core.DebugPlugin$EventNotifier.run(DebugPlugin.java:1287)
+	 at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	 at org.eclipse.debug.core.DebugPlugin$EventNotifier.dispatch(DebugPlugin.java:1321)
+	 at org.eclipse.debug.core.DebugPlugin$EventDispatchJob.run(DebugPlugin.java:498)
+	 at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.core.jobs 2 2 2026-03-24 14:00:05.390
+!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: org.eclipse.cdt.dsf.gdb.internal.ui.console.GdbBasicCliConsole$InputReadJob RUNNING
+	 at java.base/java.lang.Object.wait0(Native Method)
+	 at java.base/java.lang.Object.wait(Object.java:366)
+	 at java.base/java.lang.Object.wait(Object.java:339)
+	 at org.eclipse.ui.console.IOConsoleInputStream.waitForData(IOConsoleInputStream.java:140)
+	 at org.eclipse.ui.console.IOConsoleInputStream.read(IOConsoleInputStream.java:91)
+	 at org.eclipse.ui.console.IOConsoleInputStream.read(IOConsoleInputStream.java:113)
+	 at org.eclipse.cdt.dsf.gdb.internal.ui.console.GdbBasicCliConsole$InputReadJob.run(GdbBasicCliConsole.java:248)
+	 at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2026-03-27 22:52:04.704 -----------------------------------------------
+eclipse.buildId=Version 1.19.0
+java.version=21.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2026-03-27 22:52:47.103
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2026-03-27 22:52:47.105
+!MESSAGE Log4j2 initialized with config file C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\.metadata\.log4j2.xml
+
+!ENTRY org.eclipse.ui.workbench 4 0 2026-03-27 22:52:51.119
+!MESSAGE Failed to obtain 'WinDefend' service state
+!STACK 0
+java.io.IOException: Cannot run program "powershell.exe": CreateProcess error=2, The system cannot find the file specified
+	at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1170)
+	at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1089)
+	at org.eclipse.ui.internal.WindowsDefenderConfigurator.runProcess(WindowsDefenderConfigurator.java:383)
+	at org.eclipse.ui.internal.WindowsDefenderConfigurator.runPowershell(WindowsDefenderConfigurator.java:378)
+	at org.eclipse.ui.internal.WindowsDefenderConfigurator.isWindowsDefenderServiceRunning(WindowsDefenderConfigurator.java:302)
+	at org.eclipse.ui.internal.WindowsDefenderConfigurator.runExclusionCheck(WindowsDefenderConfigurator.java:159)
+	at org.eclipse.ui.internal.WindowsDefenderConfigurator.lambda$0(WindowsDefenderConfigurator.java:106)
+	at org.eclipse.core.runtime.jobs.Job$2.run(Job.java:187)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: java.io.IOException: CreateProcess error=2, The system cannot find the file specified
+	at java.base/java.lang.ProcessImpl.create(Native Method)
+	at java.base/java.lang.ProcessImpl.<init>(ProcessImpl.java:500)
+	at java.base/java.lang.ProcessImpl.start(ProcessImpl.java:159)
+	at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1126)
+	... 8 more
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2026-03-27 22:52:55.539
+!MESSAGE Started RMI Server, listening on port 41337
