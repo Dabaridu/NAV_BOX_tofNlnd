@@ -1,9 +1,9 @@
 ../Core/Src/nslp_dma.c:10:25:find_instance	4
+../Core/Src/nslp_dma.c:54:13:start_tx	4
 ../Core/Src/nslp_dma.c:19:6:nslp_init	3
 ../Core/Src/nslp_dma.c:50:6:nslp_set_rx_callback	1
-../Core/Src/nslp_dma.c:54:13:start_tx	2
-../Core/Src/nslp_dma.c:79:6:nslp_send_packet	4
-../Core/Src/nslp_dma.c:92:10:nslp_min_delay	7
-../Core/Src/nslp_dma.c:123:6:nslp_uart_tx_cplt_handler	2
-../Core/Src/nslp_dma.c:133:6:nslp_uart_rx_event_handler	7
-../Core/Src/nslp_dma.c:196:6:nslp_uart_error_handler	2
+../Core/Src/nslp_dma.c:95:6:nslp_send_packet	4
+../Core/Src/nslp_dma.c:108:10:nslp_min_delay	7
+../Core/Src/nslp_dma.c:139:6:nslp_uart_tx_cplt_handler	2
+../Core/Src/nslp_dma.c:149:6:nslp_uart_rx_event_handler	7
+../Core/Src/nslp_dma.c:212:6:nslp_uart_error_handler	2

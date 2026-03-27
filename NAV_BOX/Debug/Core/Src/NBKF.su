@@ -1,0 +1,7 @@
+../Core/Src/NBKF.c:173:13:matrix_multiply.constprop	28	static
+../Core/Src/NBKF.c:32:6:NBKF_SetProcessNoise	24	static
+../Core/Src/NBKF.c:51:6:NBKF_SetMeasurementNoise	16	static
+../Core/Src/NBKF.c:16:6:NBKF_Init	16	static
+../Core/Src/NBKF.c:65:6:NBKF_Predict	1048	static
+../Core/Src/NBKF.c:118:6:NBKF_Update	216	static
+../Core/Src/NBKF.c:161:6:NBKF_GetOutput	24	static

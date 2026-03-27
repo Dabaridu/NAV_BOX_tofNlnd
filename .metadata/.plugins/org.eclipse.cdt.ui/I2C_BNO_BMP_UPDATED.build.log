@@ -1,0 +1,10 @@
+16:20:34 **** Incremental Build of configuration Debug for project I2C_BNO_BMP_UPDATED ****
+make -j12 all 
+arm-none-eabi-size  I2C_BNO_BMP_UPDATED.elf 
+   text	   data	    bss	    dec	    hex	filename
+  44008	    480	   2360	  46848	   b700	I2C_BNO_BMP_UPDATED.elf
+Finished building: default.size.stdout
+ 
+
+16:20:35 Build Finished. 0 errors, 0 warnings. (took 214ms)
+

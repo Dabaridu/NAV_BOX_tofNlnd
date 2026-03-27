@@ -1,27 +1,10 @@
-15:15:00 **** Incremental Build of configuration Debug for project NAV_BOX ****
+18:38:07 **** Incremental Build of configuration Debug for project NAV_BOX ****
 make -j12 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-In file included from C:\Users\Admin\Documents\NAV_BOX_tofNlnd\eigen3\Eigen\Core:20,
-                 from ../Core/Inc/ekfNavINS.h:29,
-                 from ../Core/Src/main.c:38:
-C:\Users\Admin\Documents\NAV_BOX_tofNlnd\eigen3\Eigen\src/Core/util/Macros.h:172:5: error: unknown type name 'namespace'
-  172 |     namespace Eigen {
-      |     ^~~~~~~~~
-C:\Users\Admin\Documents\NAV_BOX_tofNlnd\eigen3\Eigen\src/Core/util/Macros.h:172:21: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
-  172 |     namespace Eigen {
-      |                     ^
-C:\Users\Admin\Documents\NAV_BOX_tofNlnd\eigen3\Eigen\src/Core/util/Macros.h:241:1: error: unknown type name 'namespace'
-  241 | namespace Eigen {
-      | ^~~~~~~~~
-C:\Users\Admin\Documents\NAV_BOX_tofNlnd\eigen3\Eigen\src/Core/util/Macros.h:241:17: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
-  241 | namespace Eigen {
-      |                 ^
-C:\Users\Admin\Documents\NAV_BOX_tofNlnd\eigen3\Eigen\Core:28:10: fatal error: complex: No such file or directory
-   28 | #include <complex>
-      |          ^~~~~~~~~
-compilation terminated.
-make: *** [Core/Src/subdir.mk:49: Core/Src/main.o] Error 1
-"make -j12 all" terminated with exit code 2. Build might be incomplete.
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  53228	    636	   6936	  60800	   ed80	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
 
-15:15:01 Build Failed. 6 errors, 0 warnings. (took 513ms)
+18:38:07 Build Finished. 0 errors, 0 warnings. (took 263ms)
 

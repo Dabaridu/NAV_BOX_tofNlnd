@@ -55,9 +55,25 @@ static void start_tx(nslp_instance_t *inst) {
     if (inst->tx_count == 0) return;
 
     nslp_packet_t *p = inst->tx_queue[inst->tx_tail];
+    if (!p || !p->payload || p->size > MAX_PAYLOAD_SIZE) {
+        inst->tx_tail = (inst->tx_tail + 1) % inst->tx_queue_length;
+        if (inst->tx_count > 0) {
+            inst->tx_count--;
+        }
+        inst->tx_busy = 0;
+        return;
+    }
 
     size_t packet_size = HEADER_SIZE + p->size;
     size_t total_size  = FRAME_START_SIZE + packet_size + CHECKSUM_SIZE;
+    if (total_size > MAX_PACKET_SIZE) {
+        inst->tx_tail = (inst->tx_tail + 1) % inst->tx_queue_length;
+        if (inst->tx_count > 0) {
+            inst->tx_count--;
+        }
+        inst->tx_busy = 0;
+        return;
+    }
 
     inst->tx_buffer[0] = FRAME_START;
     inst->tx_buffer[1] = inst->address;      // sender
