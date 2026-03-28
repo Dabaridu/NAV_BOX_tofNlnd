@@ -7,7 +7,6 @@
 #define RUNING_AVG_BUFF 100
 #define GIMBAL_LOCK_THRESHOLD 1e-6
 
-/* ── Basic vector / quaternion ── */
 typedef struct {
     double w;
     double x;

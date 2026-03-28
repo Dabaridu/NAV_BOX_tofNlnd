@@ -5,7 +5,7 @@
 /* ══════════════════════════════════════════
  *  Global variable definitions
  * ══════════════════════════════════════════ */
-extern double Hd[4][4];
+extern double Hd[4][4]; //debug output matrix
 
 vector_t acc;
 vector_t acc_prec  = {1e-5, 1e-5, 1e-5, 1e-5};
