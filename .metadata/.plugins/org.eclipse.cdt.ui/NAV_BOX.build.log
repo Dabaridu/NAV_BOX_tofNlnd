@@ -1,10 +1,42 @@
-18:38:07 **** Incremental Build of configuration Debug for project NAV_BOX ****
+19:29:56 **** Incremental Build of configuration Debug for project NAV_BOX ****
 make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
+arm-none-eabi-gcc "../Core/Src/stm32f3xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f3xx_hal_msp.d" -MT"Core/Src/stm32f3xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f3xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f3xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f3xx_it.d" -MT"Core/Src/stm32f3xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f3xx_it.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32f3xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/system_stm32f3xx.d" -MT"Core/Src/system_stm32f3xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32f3xx.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:229:16: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  229 |         return 0;
+      |                ^
+../Core/Src/main.c:213:6: note: declared here
+  213 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:218:33: warning: unused variable 'parsecheck' [-Wunused-variable]
+  218 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                                 ^~~~~~~~~~
+../Core/Src/main.c: In function 'process_sensor_fusion':
+../Core/Src/main.c:288:10: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  288 |   return 0;
+      |          ^
+../Core/Src/main.c:287:6: note: declared here
+  287 | void process_sensor_fusion(){
+      |      ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:340:18: warning: unused variable 'lastTime' [-Wunused-variable]
+  340 |         uint32_t lastTime = 0;
+      |                  ^~~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
 arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
    text	   data	    bss	    dec	    hex	filename
-  53228	    636	   6936	  60800	   ed80	NAV_BOX.elf
+  50092	    468	   3456	  54016	   d300	NAV_BOX.elf
 Finished building: default.size.stdout
  
+Finished building: NAV_BOX.list
+ 
 
-18:38:07 Build Finished. 0 errors, 0 warnings. (took 263ms)
+19:29:57 Build Finished. 0 errors, 4 warnings. (took 1s.957ms)
 

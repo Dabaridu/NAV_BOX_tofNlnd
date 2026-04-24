@@ -26,6 +26,8 @@ Core/Src/nslp_dma.o: ../Core/Src/nslp_dma.c ../Core/Inc/nslp_dma.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_i2c_ex.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr_ex.h \
+ ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_spi.h \
+ ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_spi_ex.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart_ex.h
 ../Core/Inc/nslp_dma.h:
@@ -56,5 +58,7 @@ Core/Src/nslp_dma.o: ../Core/Src/nslp_dma.c ../Core/Inc/nslp_dma.h \
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_i2c_ex.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr_ex.h:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_spi.h:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_spi_ex.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart_ex.h:
