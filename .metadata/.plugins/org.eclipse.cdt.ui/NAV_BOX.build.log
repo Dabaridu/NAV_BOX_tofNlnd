@@ -1,42 +1,67 @@
-19:29:56 **** Incremental Build of configuration Debug for project NAV_BOX ****
+17:59:19 **** Incremental Build of configuration Debug for project NAV_BOX ****
 make -j12 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
-arm-none-eabi-gcc "../Core/Src/stm32f3xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f3xx_hal_msp.d" -MT"Core/Src/stm32f3xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f3xx_hal_msp.o"
-arm-none-eabi-gcc "../Core/Src/stm32f3xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f3xx_it.d" -MT"Core/Src/stm32f3xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f3xx_it.o"
-arm-none-eabi-gcc "../Core/Src/system_stm32f3xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/system_stm32f3xx.d" -MT"Core/Src/system_stm32f3xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32f3xx.o"
-../Core/Src/main.c: In function 'parse_gps_data':
-../Core/Src/main.c:229:16: warning: 'return' with a value, in function returning void [-Wreturn-type]
-  229 |         return 0;
-      |                ^
-../Core/Src/main.c:213:6: note: declared here
-  213 | void parse_gps_data(){
-      |      ^~~~~~~~~~~~~~
-../Core/Src/main.c:218:33: warning: unused variable 'parsecheck' [-Wunused-variable]
-  218 |                         uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
-      |                                 ^~~~~~~~~~
-../Core/Src/main.c: In function 'process_sensor_fusion':
-../Core/Src/main.c:288:10: warning: 'return' with a value, in function returning void [-Wreturn-type]
-  288 |   return 0;
-      |          ^
-../Core/Src/main.c:287:6: note: declared here
-  287 | void process_sensor_fusion(){
-      |      ^~~~~~~~~~~~~~~~~~~~~
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:340:18: warning: unused variable 'lastTime' [-Wunused-variable]
-  340 |         uint32_t lastTime = 0;
-      |                  ^~~~~~~~
-arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
-Finished building target: NAV_BOX.elf
- 
-arm-none-eabi-size  NAV_BOX.elf 
-arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
-   text	   data	    bss	    dec	    hex	filename
-  50092	    468	   3456	  54016	   d300	NAV_BOX.elf
-Finished building: default.size.stdout
- 
-Finished building: NAV_BOX.list
- 
+arm-none-eabi-gcc "../FATFS/Target/user_diskio_spi.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"FATFS/Target/user_diskio_spi.d" -MT"FATFS/Target/user_diskio_spi.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "FATFS/Target/user_diskio_spi.o"
+../FATFS/Target/user_diskio_spi.c: In function 'xmit_spi_multi':
+../FATFS/Target/user_diskio_spi.c:135:42: warning: passing argument 2 of 'HAL_SPI_Transmit' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  135 |         HAL_SPI_Transmit(&SD_SPI_HANDLE, buff, btx, HAL_MAX_DELAY);
+      |                                          ^~~~
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:316,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../FATFS/Target/user_diskio_spi.c:27:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_spi.h:792:70: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'const BYTE *' {aka 'const unsigned char *'}
+  792 | HAL_StatusTypeDef HAL_SPI_Transmit(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                             ~~~~~~~~~^~~~~
+../FATFS/Target/user_diskio_spi.c: In function 'USER_SPI_initialize':
+../FATFS/Target/user_diskio_spi.c:326:22: warning: variable 'ty' set but not used [-Wunused-but-set-variable]
+  326 |         BYTE n, cmd, ty, ocr[4];
+      |                      ^~
+../FATFS/Target/user_diskio_spi.c: At top level:
+../FATFS/Target/user_diskio_spi.c:385:9: warning: data definition has no type or storage class
+  385 |         CardType = ty;  /* Card type */
+      |         ^~~~~~~~
+../FATFS/Target/user_diskio_spi.c:385:9: warning: type defaults to 'int' in declaration of 'CardType' [-Wimplicit-int]
+../FATFS/Target/user_diskio_spi.c:385:9: error: conflicting types for 'CardType'; have 'int'
+../FATFS/Target/user_diskio_spi.c:84:6: note: previous declaration of 'CardType' with type 'BYTE' {aka 'unsigned char'}
+   84 | BYTE CardType;                  /* Card type flags */
+      |      ^~~~~~~~
+../FATFS/Target/user_diskio_spi.c:385:20: error: 'ty' undeclared here (not in a function)
+  385 |         CardType = ty;  /* Card type */
+      |                    ^~
+../FATFS/Target/user_diskio_spi.c:386:9: warning: data definition has no type or storage class
+  386 |         despiselect();
+      |         ^~~~~~~~~~~
+../FATFS/Target/user_diskio_spi.c:386:9: warning: type defaults to 'int' in declaration of 'despiselect' [-Wimplicit-int]
+../FATFS/Target/user_diskio_spi.c:386:9: error: conflicting types for 'despiselect'; have 'int()'
+../FATFS/Target/user_diskio_spi.c:172:6: note: previous definition of 'despiselect' with type 'void(void)'
+  172 | void despiselect (void)
+      |      ^~~~~~~~~~~
+../FATFS/Target/user_diskio_spi.c:388:18: error: expected declaration specifiers or '...' before string constant
+  388 |         myprintf("DEBUG: CardType = 0x%02X, Stat = 0x%02X\r\n", CardType, Stat);
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../FATFS/Target/user_diskio_spi.c:388:65: error: expected declaration specifiers or '...' before 'CardType'
+  388 |         myprintf("DEBUG: CardType = 0x%02X, Stat = 0x%02X\r\n", CardType, Stat);
+      |                                                                 ^~~~~~~~
+../FATFS/Target/user_diskio_spi.c:388:75: error: expected declaration specifiers or '...' before 'Stat'
+  388 |         myprintf("DEBUG: CardType = 0x%02X, Stat = 0x%02X\r\n", CardType, Stat);
+      |                                                                           ^~~~
+../FATFS/Target/user_diskio_spi.c:390:9: error: expected identifier or '(' before 'if'
+  390 |         if (ty) {                       /* OK */
+      |         ^~
+../FATFS/Target/user_diskio_spi.c:394:11: error: expected identifier or '(' before 'else'
+  394 |         } else {                        /* Failed */
+      |           ^~~~
+../FATFS/Target/user_diskio_spi.c:399:9: error: expected identifier or '(' before 'return'
+  399 |         return Stat;
+      |         ^~~~~~
+../FATFS/Target/user_diskio_spi.c:400:1: error: expected identifier or '(' before '}' token
+  400 | }
+      | ^
+../FATFS/Target/user_diskio_spi.c: In function 'USER_SPI_initialize':
+../FATFS/Target/user_diskio_spi.c:384:9: warning: control reaches end of non-void function [-Wreturn-type]
+  384 |         }
+      |         ^
+make: *** [FATFS/Target/subdir.mk:22: FATFS/Target/user_diskio_spi.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
 
-19:29:57 Build Finished. 0 errors, 4 warnings. (took 1s.957ms)
+17:59:19 Build Failed. 11 errors, 7 warnings. (took 307ms)
 

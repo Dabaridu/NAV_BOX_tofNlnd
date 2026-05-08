@@ -67,6 +67,7 @@ void Error_Handler(void);
 #define SWCLK_GPIO_Port GPIOA
 
 /* USER CODE BEGIN Private defines */
+#define SD_SPI_HANDLE hspi1
 
 /* USER CODE END Private defines */
 
