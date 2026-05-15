@@ -20993,3 +20993,10 @@ Finished building: default.size.stdout
  
 Finished building: NAV_BOX.list
  
+23:45:57 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  47996	    492	   3540	  52028	   cb3c	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
