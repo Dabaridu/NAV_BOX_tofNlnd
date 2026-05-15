@@ -7,10 +7,10 @@
 ../Core/Src/main.c:212:6:poll_n_parse_bmp180_data	2
 ../Core/Src/main.c:229:6:parse_gps_data	2
 ../Core/Src/main.c:254:6:myprintf	1
-../Core/Src/main.c:266:6:test_sd_card_write	8
-../Core/Src/main.c:349:9:save_data_to_SD_SPI	8
-../Core/Src/main.c:421:6:nslp_transmit_packets	5
-../Core/Src/main.c:481:6:process_sensor_fusion	1
-../Core/Src/main.c:603:6:SystemClock_Config	4
-../Core/Src/main.c:499:5:main	11
-../Core/Src/main.c:900:6:Error_Handler	1
+../Core/Src/main.c:266:6:test_sd_card_write	6
+../Core/Src/main.c:351:9:save_data_to_SD_SPI	8
+../Core/Src/main.c:423:6:nslp_transmit_packets	5
+../Core/Src/main.c:483:6:process_sensor_fusion	1
+../Core/Src/main.c:606:6:SystemClock_Config	4
+../Core/Src/main.c:501:5:main	11
+../Core/Src/main.c:903:6:Error_Handler	1

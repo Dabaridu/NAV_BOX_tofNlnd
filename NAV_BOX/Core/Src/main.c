@@ -298,7 +298,7 @@ void test_sd_card_write(){
   myprintf("SD card stats:\r\n%10lu KiB total drive space.\r\n%10lu KiB available.\r\n", total_sectors / 2, free_sectors / 2);
 
   //Now let's try to open file "test.txt"
-  fres = f_open(&fil, "test.txt", FA_READ);
+ /* fres = f_open(&fil, "test.txt", FA_WRITE);
   if (fres != FR_OK) {
 	myprintf("f_open error (%i)\r\n");
 	while(1);
@@ -319,7 +319,7 @@ void test_sd_card_write(){
 
   //Be a tidy kiwi - don't forget to close your file!
   f_close(&fil);
-
+*/
   //Now let's try and write a file "write.txt"
   fres = f_open(&fil, "write.txt", FA_WRITE | FA_OPEN_ALWAYS | FA_CREATE_ALWAYS);
   if(fres == FR_OK) {
@@ -329,6 +329,8 @@ void test_sd_card_write(){
   }
 
   //Copy in a string
+  BYTE readBuf[30];
+
   strncpy((char*)readBuf, "a new file is made!", 19);
   UINT bytesWrote;
   fres = f_write(&fil, readBuf, 19, &bytesWrote);
@@ -529,6 +531,7 @@ int main(void)
   MX_SPI1_Init();
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
+
 
 	DWT_Init(); //innitialize library for time measurement in micros
 
@@ -742,7 +745,7 @@ static void MX_SPI1_Init(void)
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_128;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -880,7 +883,7 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin : SD_CS_Pin */
   GPIO_InitStruct.Pin = SD_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(SD_CS_GPIO_Port, &GPIO_InitStruct);
 
@@ -907,7 +910,8 @@ void Error_Handler(void)
 	}
   /* USER CODE END Error_Handler_Debug */
 }
-#ifdef USE_FULL_ASSERT
+
+#ifdef  USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

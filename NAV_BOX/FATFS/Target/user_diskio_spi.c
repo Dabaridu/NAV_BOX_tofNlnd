@@ -106,6 +106,7 @@ BYTE xchg_spi (
 )
 {
 	BYTE rxDat;
+	volatile HAL_StatusTypeDef stat =
     HAL_SPI_TransmitReceive(&SD_SPI_HANDLE, &dat, &rxDat, 1, 50);
     return rxDat;
 }
@@ -331,19 +332,23 @@ inline DSTATUS USER_SPI_initialize (
 
 	myprintf("DEBUG: USER_SPI_initialize called, Stat = 0x%02X\r\n", Stat);
 	
-	if (Stat & STA_NODISK) return Stat;	/* Is card existing in the soket? */
+	if (Stat & STA_NODISK) return Stat;	/* Is card existing in the socket? */
 
-	FCLK_SLOW();
+//	FCLK_SLOW();
 	
 	/* Ensure CS is HIGH and send 100+ clock cycles for initialization */
 	CS_HIGH();
-	for (n = 20; n; n--) xchg_spi(0xFF);	/* Send 160 dummy clocks with CS high */
-	
+	for (n = 20; n; n--) xchg_spi(0xFF);
+	/* Send 160 dummy clocks with CS high */
+	CS_LOW();
+
 	/* Small delay to allow card to settle */
 	HAL_Delay(10);
-	
+	CS_LOW();
+
+
 	/* Try CMD0 multiple times to ensure proper reset */
-	BYTE reset_attempts = 5;
+	BYTE reset_attempts = 10;
 	while (reset_attempts--) {
 		cmd_resp = send_cmd(CMD0, 0);
 		myprintf("DEBUG: CMD0 response = 0x%02X\r\n", cmd_resp);
@@ -381,7 +386,7 @@ inline DSTATUS USER_SPI_initialize (
 				ty = 0;
 		}
 	}
-	}
+
 	CardType = ty;	/* Card type */
 	despiselect();
 

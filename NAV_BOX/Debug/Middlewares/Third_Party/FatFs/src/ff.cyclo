@@ -6,8 +6,6 @@
 ../Middlewares/Third_Party/FatFs/src/ff.c:753:6:clear_lock	3
 ../Middlewares/Third_Party/FatFs/src/ff.c:1125:7:clmt_clust	3
 ../Middlewares/Third_Party/FatFs/src/ff.c:1773:6:get_fileinfo	5
-../Middlewares/Third_Party/FatFs/src/ff.c:1843:7:get_achar	3
-../Middlewares/Third_Party/FatFs/src/ff.c:1865:5:pattern_matching	15
 ../Middlewares/Third_Party/FatFs/src/ff.c:2187:5:get_ldnumber	6
 ../Middlewares/Third_Party/FatFs/src/ff.c:773:9:sync_window	5
 ../Middlewares/Third_Party/FatFs/src/ff.c:2445:9:validate	6
@@ -39,8 +37,6 @@
 ../Middlewares/Third_Party/FatFs/src/ff.c:3260:9:f_opendir	10
 ../Middlewares/Third_Party/FatFs/src/ff.c:3316:9:f_closedir	4
 ../Middlewares/Third_Party/FatFs/src/ff.c:3348:9:f_readdir	6
-../Middlewares/Third_Party/FatFs/src/ff.c:3390:9:f_findnext	5
-../Middlewares/Third_Party/FatFs/src/ff.c:3416:9:f_findfirst	2
 ../Middlewares/Third_Party/FatFs/src/ff.c:3442:9:f_stat	5
 ../Middlewares/Third_Party/FatFs/src/ff.c:3477:9:f_getfree	14
 ../Middlewares/Third_Party/FatFs/src/ff.c:3544:9:f_truncate	13
