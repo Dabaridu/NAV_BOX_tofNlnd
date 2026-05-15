@@ -25,12 +25,14 @@ struct Position {
 
 	uint32_t time;
 };
-struct Position GPS_data = {
-		.latitude = 1.0,
-		.longitude = 0.0,
-		.altitude = 0.0,
-		.fixType = 0,
-		.numSV = 0
+struct Position GPS_nslp_data = {
+        .latitude = 1.0,
+        .longitude = 0.0,
+        .altitude = 0.0,
+        .fixType = 0,
+        .numSV = 0,
+
+        .time = 0
 };
 
 struct BNO055_payload_a {
@@ -39,7 +41,7 @@ struct BNO055_payload_a {
 	double az;
 	uint32_t time;
 };
-struct BNO055_payload_a BNO055_data_a;
+struct BNO055_payload_a BNO055_nslp_data_a;
 
 struct BMP_payload {
 	float temp;
@@ -47,7 +49,7 @@ struct BMP_payload {
 
 	uint32_t time;
 };
-struct BMP_payload BMP_data;
+struct BMP_payload BMP_nslp_data;
 
 struct BNO055_payload_g {
 	//uint32_t calib; //8 --> 32 bit
@@ -57,7 +59,7 @@ struct BNO055_payload_g {
 	double gz;
 	uint32_t time;
 };
-struct BNO055_payload_g BNO055_data_g;
+struct BNO055_payload_g BNO055_nslp_data_g;
 
 struct position_fusion_payload {
 
@@ -68,32 +70,8 @@ struct position_fusion_payload {
 	uint32_t ts;
 };
 
-struct position_fusion_payload POS_fusion_X;
+struct position_fusion_payload POS_nslp_data_fusion_X;
 
-/*
-//structure of BNO055 payload (variables of type DOUBLE)
-
-
-struct BNO055_payload_m {
-	double mx;
-	double my;
-	double mz;
-	uint32_t time;
-};
-struct BNO055_payload_m BNO055_data_m;
-
-struct KF_payload {
-  double latitude;
-  double longitude;
-  float altitude;
-  float vx;
-  float vy;
-  float vz;
-
-  uint32_t time;
-};
-struct KF_payload KF_data;
-*/
 //-------------------------Packets-----------------------------------
 
 //format and fill the nslp_packet for transmition UART2
@@ -101,50 +79,34 @@ nslp_packet_t GPS_packet = {
         .receiver = 0xFF,
         .type = type_GPS, //10 - A
         .size = sizeof(struct Position),
-        .payload = (uint8_t*)&GPS_data
+        .payload = (uint8_t*)&GPS_nslp_data
 };
 
 nslp_packet_t BNO_packet_a = {
         .receiver = 0xFF,
         .type = type_BNO055_a, //12 - C
         .size = sizeof(struct BNO055_payload_a),
-        .payload = (uint8_t*)&BNO055_data_a
+        .payload = (uint8_t*)&BNO055_nslp_data_a
 };
 
 nslp_packet_t BMP_packet = {
         .receiver = 0xFF,
         .type = type_BMP, // 12 - C
         .size = sizeof(struct BMP_payload),
-        .payload = (uint8_t*)&BMP_data
+        .payload = (uint8_t*)&BMP_nslp_data
 };
 
 nslp_packet_t BNO_packet_g = {
         .receiver = 0xFF,
         .type = type_BNO055_g, //11 - B
         .size = sizeof(struct BNO055_payload_g),
-        .payload = (uint8_t*)&BNO055_data_g
+        .payload = (uint8_t*)&BNO055_nslp_data_g
 };
 
 nslp_packet_t POS_fusion_packet = {
         .receiver = 0xFF,
         .type = type_POS_F_X, //11 - B
         .size = sizeof(struct position_fusion_payload),
-        .payload = (uint8_t*)&POS_fusion_X
+        .payload = (uint8_t*)&POS_nslp_data_fusion_X
 };
-
-/*
-nslp_packet_t BNO_packet_m = {
-        .receiver = 0xFF,
-        .type = type_BNO055_m, //13 - D
-        .size = sizeof(struct BNO055_payload_m),
-        .payload = (uint8_t*)&BNO055_data_m
-};
-
-nslp_packet_t KF_packet = {
-    .receiver = 0xFF,
-    .type = type_KF, //13 - D
-    .size = sizeof(struct KF_payload),
-    .payload = (uint8_t*)&KF_data
-};
-*/
 #endif

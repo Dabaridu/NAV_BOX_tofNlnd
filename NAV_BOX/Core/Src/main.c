@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "fatfs.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -25,6 +26,10 @@
 //#include "stdbool.h"
 #include "stdlib.h"
 #include "stdio.h"
+
+#include <stdio.h>
+#include <string.h>
+#include <stdarg.h> //for va_list var arg functions
 
 //include the library
 //#include "nmea_parse.h"
@@ -36,7 +41,7 @@
 #include "sens_fusion.h"
 #include "micros.h"
 
-#include <math.h>
+//#include <math.h>
 
 /* USER CODE END Includes */
 
@@ -46,7 +51,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define SD_SPI_HANDLE hspi1
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -61,6 +66,8 @@ I2C_HandleTypeDef hi2c1;
 DMA_HandleTypeDef hdma_i2c1_rx;
 DMA_HandleTypeDef hdma_i2c1_tx;
 
+SPI_HandleTypeDef hspi1;
+
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 DMA_HandleTypeDef hdma_usart1_rx;
@@ -72,51 +79,53 @@ DMA_HandleTypeDef hdma_usart2_rx;
 //-------------------------------BMP180---------------------------------------------
 float temperature;
 int32_t pressure;
+uint32_t BMP180_time;
 #define BMP180_interval 1000 // 1 second interval in milliseconds
+bool to_send_BMP180_nslp_flag = false;
 //-------------------------------BMP180---------------------------------------------
 
-double Hd[4][4];
-double Rd[3][3];
-
-
 //-------------------------------BNO055---------------------------------------------
-int32_t BNO055_timeStamp;
 bno055_t bno;
+
 bno055_vec3_t accel;
 bno055_vec4_t quat;
 bno055_euler_t euler;
+
+int32_t BNO055_timeStamp;
+
+bool to_send_imu_nslp_flag = false;
 //-------------------------------BNO055---------------------------------------------
 
 
-//---------------REVIEVING PACKET FROM GPS VIA UBX raw bytes-------------------- 
-/*
- *
- * Match this to recieving end of NSLP debugger
- * Software: -->NSLP Trace<--
- *
- *It this struct define the data you want to send from the STM machine
- *It
- * */
+//-------------------------------GPS---------------------------------------------
 #define rx_buffer_size 60 //GPS uart 1 recieve NAV-SOL packed size
 uint8_t rx_buffer[rx_buffer_size]; //size of data recieved from GPS
 UBX_NavSol rawData; //raw gps data from parsing the rx_buffer
 UBX_NavSolData solData; // organized and converted gps data
 uint32_t GPS_timeStamp; //timestamp of processing
+
+bool gps_dma_data_ready = false;
+bool to_send_gps_nslp_flag = false;
 //-------------------------------GPS---------------------------------------------
 
-//---------------------------------------dirty flags---------------------------------------------
-bool recieved_GPS = false;
-bool send_gps_nslp = false; // Flag to indicate if the GPS data has been parsed and is ready for use
-bool estimation_gps_ready = false; // Flag to indicate if GPS data is ready for sensor fusion
-bool valid_gps_recieved = false; // Flag to indicate if valid GPS data has ever been received
-bool estimation_imu_ready = false;
-//-------------------------------dirty flags-----------------------------------------------------
-
-//--------------------------nslp--------------------------------------------
+//--------------------------NSLP--------------------------------------------
+/*
+ * Match this to recieving end of NSLP debugger
+ * Software: -->NSLP Trace<--
+ *
+ *It this struct define the data you want to send from the STM machine
+ */
 nslp_instance_t nslp;
-uint8_t tx_buffer[sizeof(struct Position)]; //recieving size of DMA message
-//--------------------------nslp--------------------------------------------
+//uint8_t tx_buffer[sizeof(struct Position)]; //transmission size of message
+//--------------------------NSLP--------------------------------------------
 
+//-------------------------------SD_CARD_SPI---------------------------------------------
+static FIL gps_csv_file;
+static FATFS fs_sd;
+static bool sd_initialized = false;
+static uint32_t write_count = 0;
+uint8_t sd_status = 0;
+//-------------------------------SD_CARD_SPI---------------------------------------------
 
 /* USER CODE END PV */
 
@@ -128,8 +137,10 @@ static void MX_USART1_UART_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_CRC_Init(void);
+static void MX_SPI1_Init(void);
 /* USER CODE BEGIN PFP */
 
+//----------------------------------INTERUPTS FUNCTIONS---------------------------------------------
 void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c) {
     if (hi2c->Instance == I2C1) {
     	BNO055_timeStamp = HAL_GetTick();
@@ -149,18 +160,28 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart) {
 	nslp_uart_error_handler(huart);
 }
 
-void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
-{
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
 
-	if (huart->Instance == USART1)//Check which interupt was triggered
+  //gps uart handler
+	if (huart->Instance == USART1)//Check which interupt was triggered for / on uart1 line connected to GPS
 	{
 		GPS_timeStamp = HAL_GetTick();
-		recieved_GPS = true;
+    /*
+      check if are still parsing last packet
+      only clear flag to reparse if last packet had been parsed
+    */
+    if (gps_dma_data_ready == false) {
+      gps_dma_data_ready = true;
+
+      //if LAST package had not been parsed yet, this is an ERROR !!!
+    }
 
 		/* restart the DMA  */
 		HAL_UARTEx_ReceiveToIdle_DMA(&huart1, (uint8_t *) rx_buffer, sizeof(rx_buffer)); //Restart interupt
 		__HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_HT); //Dont interupt on half buffer
 	}
+
+  //seperate nslp handler
 	nslp_uart_rx_event_handler(huart, Size);
 }
 
@@ -168,139 +189,303 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
 	nslp_uart_tx_cplt_handler(huart);
 }
 
-void parse_i2c_data(){
-	static uint32_t lastBMP180Time = 0;
+//------------------------------USER FUNCTIONS------------------------------
 
-		if (bno.dma_data_ready) { /*on i2c data rx recieved bno.dma... is = true*/
+void parse_bno055_data(){
+//On I2C dma memCplt set set dma_data_ready flag to parse data from register and restart recieve from BNI055
 
-			bno055_get_linear_acc(&bno, &accel);
-			bno055_get_euler(&bno, &euler);
-			bno055_get_quaternion(&bno, &quat);
+	if (bno.dma_data_ready) {
 
-			// Copy accelerometer data to transmission structure
-			BNO055_data_a.ax = accel.x;
-			BNO055_data_a.ay = accel.y;
-			BNO055_data_a.az = accel.z;
-			BNO055_data_a.time = BNO055_timeStamp;
+		bno055_get_linear_acc(&bno, &accel);
+		bno055_get_euler(&bno, &euler);
+		bno055_get_quaternion(&bno, &quat); //orientation
 
-			BNO055_data_g.gx = euler.pitch;
-			BNO055_data_g.gy = euler.roll;
-			BNO055_data_g.gz = euler.yaw;
-			BNO055_data_g.time = BNO055_timeStamp;
+		//block dma_data_ready untill I2C rxCpltCallback is executed
+		//and send dma_read_instruction to BNO055 returns I2C error in the HAL is buissy or read incorectly
+		bno055_start_dma_read(&bno);
 
-			bno055_start_dma_read(&bno);
-
-			estimation_imu_ready = true;
-		}
-
-		if (HAL_GetTick() - lastBMP180Time > BMP180_interval){ //reads pressure and temperature from BMP180 sensor every BMP180_interval
-			//reads pressure and temperature from BMP180 sensor
-				temperature = BMP180_GetRawTemperature();
-				pressure = BMP180_GetPressure();
-
-				//write data to NSLP paylaod
-				BMP_data.temp = temperature;
-				BMP_data.press = pressure;
-
-				BMP_data.time = HAL_GetTick();
-				lastBMP180Time = HAL_GetTick();
-		}
-
+		to_send_imu_nslp_flag = true;
+		//bno.dma_data_ready = false; //flow controller
 	}
+}
+
+void poll_n_parse_bmp180_data(){
+//reads pressure and temperature from BMP180 sensor every BMP180_interval
+  static uint32_t lastBMP180Time = 0;
+  
+
+  if (HAL_GetTick() - lastBMP180Time > BMP180_interval){
+
+      temperature = BMP180_GetRawTemperature();
+      pressure = BMP180_GetPressure();
+
+      lastBMP180Time = HAL_GetTick();
+      BMP180_time = lastBMP180Time;
+
+      to_send_BMP180_nslp_flag = true;
+  }
+}
 
 void parse_gps_data(){
+/*
+  Parses gps data after recieved_GPS_flag flag is cleared
+  parsed gps data is stored in -> solData <-
+*/
 
-		if(recieved_GPS == true){
+	if(gps_dma_data_ready == true){
 
-			//parse rx_buffer to usefull navigation data
-			uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+		//parse check rx_buffer to usefull navigation data
+		uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
 
-			//pass the parsed data to Position pos packet frame
-			GPS_data.latitude = solData.latitude_deg;
-			GPS_data.longitude = solData.longitude_deg;
-			GPS_data.altitude = solData.height_m;
-			GPS_data.fixType = solData.gpsFix;
-			GPS_data.numSV = solData.numSV;
-			GPS_data.time = HAL_GetTick();
+		//----------------------FLAGS----------------------
 
-			//---------------sensor fusion GPS readings--------------------
+		//set flag to send gps data via NSLP
+		to_send_gps_nslp_flag = true;
 
-			// pos.x = GPS_data.latitude;
-			// pos.y = GPS_data.longitude;
-			// pos.z = GPS_data.altitude;
+		//clear flag for recieving new GPS data
+		gps_dma_data_ready = false;
 
-      pos.x = solData.ecefX_m;
-      pos.y = solData.ecefY_m;
-      pos.z = solData.ecefZ_m;
-      // Keep GPS variance finite for fusion weighting.
-      pos_prec.x = solData.pAcc_m;
-      pos_prec.y = solData.pAcc_m;
-      pos_prec.z = solData.pAcc_m;
-			//----------------implements sensor fusion----------------------
-
-      //----------------------FLAGS----------------------
-      //set flag for updating estimation with GPS data in sensor fusion
-      estimation_gps_ready = true;
-
-      //clear flag for operation
-			send_gps_nslp = true;
-
-      //clear flag for recieving new GPS data
-      recieved_GPS = false;
-
-      if(GPS_data.fixType > 0){ // Only consider valid GPS fixes for fusion
-        valid_gps_recieved = true;
-      }
-      //----------------------FLAGS----------------------
+		if(GPS_nslp_data.fixType == 0){ // Only consider valid GPS fixes for fusion
+			return 0;
 		}
+	}
+}
+
+void myprintf(const char *fmt, ...) {
+  static char buffer[256];
+  va_list args;
+  va_start(args, fmt);
+  vsnprintf(buffer, sizeof(buffer), fmt, args);
+  va_end(args);
+
+  int len = strlen(buffer);
+  HAL_UART_Transmit(&huart2, (uint8_t*)buffer, len, -1);
+
+}
+
+void test_sd_card_write(){
+  myprintf("\r\n~ SD card demo by kiwih ~\r\n\r\n");
+
+  HAL_Delay(1000); //a short delay is important to let the SD card settle
+
+  //some variables for FatFs
+  FATFS FatFs; 	//Fatfs handle
+  FIL fil; 		//File handle
+  FRESULT fres; //Result after operations
+
+  //Open the file system
+  fres = f_mount(&FatFs, "", 1); //1=mount now
+  if (fres != FR_OK) {
+	myprintf("f_mount error (%i)\r\n", fres);
+	while(1);
+  }
+
+  //Let's get some statistics from the SD card
+  DWORD free_clusters, free_sectors, total_sectors;
+
+  FATFS* getFreeFs;
+
+  fres = f_getfree("", &free_clusters, &getFreeFs);
+  if (fres != FR_OK) {
+	myprintf("f_getfree error (%i)\r\n", fres);
+	while(1);
+  }
+
+  //Formula comes from ChaN's documentation
+  total_sectors = (getFreeFs->n_fatent - 2) * getFreeFs->csize;
+  free_sectors = free_clusters * getFreeFs->csize;
+
+  myprintf("SD card stats:\r\n%10lu KiB total drive space.\r\n%10lu KiB available.\r\n", total_sectors / 2, free_sectors / 2);
+
+  //Now let's try to open file "test.txt"
+ /* fres = f_open(&fil, "test.txt", FA_WRITE);
+  if (fres != FR_OK) {
+	myprintf("f_open error (%i)\r\n");
+	while(1);
+  }
+  myprintf("I was able to open 'test.txt' for reading!\r\n");
+
+  //Read 30 bytes from "test.txt" on the SD card
+  BYTE readBuf[30];
+
+  //We can either use f_read OR f_gets to get data out of files
+  //f_gets is a wrapper on f_read that does some string formatting for us
+  TCHAR* rres = f_gets((TCHAR*)readBuf, 30, &fil);
+  if(rres != 0) {
+	myprintf("Read string from 'test.txt' contents: %s\r\n", readBuf);
+  } else {
+	myprintf("f_gets error (%i)\r\n", fres);
+  }
+
+  //Be a tidy kiwi - don't forget to close your file!
+  f_close(&fil);
+*/
+  //Now let's try and write a file "write.txt"
+  fres = f_open(&fil, "write.txt", FA_WRITE | FA_OPEN_ALWAYS | FA_CREATE_ALWAYS);
+  if(fres == FR_OK) {
+	myprintf("I was able to open 'write.txt' for writing\r\n");
+  } else {
+	myprintf("f_open error (%i)\r\n", fres);
+  }
+
+  //Copy in a string
+  BYTE readBuf[30];
+
+  strncpy((char*)readBuf, "a new file is made!", 19);
+  UINT bytesWrote;
+  fres = f_write(&fil, readBuf, 19, &bytesWrote);
+  if(fres == FR_OK) {
+	myprintf("Wrote %i bytes to 'write.txt'!\r\n", bytesWrote);
+  } else {
+	myprintf("f_write error (%i)\r\n");
+  }
+
+  //Be a tidy kiwi - don't forget to close your file!
+  f_close(&fil);
+
+  //We're done, so de-mount the drive
+  f_mount(NULL, "", 0);
+}
+
+/* OPTIMIZED IMPLEMENTATION - PERSISTENT FILE HANDLE, NON-BLOCKING */
+uint8_t save_data_to_SD_SPI(){
+/*
+  Save GPS time data to SD_card_via SPI in CSV format
+  OPTIMIZED: Keeps file open persistently, only writes on new GPS data
+  Prevents I2C blocking by avoiding repeated mount/open operations
+*/
+  FRESULT fres;
+  char buffer[256];
+  unsigned int bytes_written;
+  
+  // Only proceed if new GPS data is available
+  if (!to_send_gps_nslp_flag) {
+    return 0;  // No new data to write
+  }
+  
+  // Initialize SD card on first call only
+  if (!sd_initialized) {
+    fres = f_mount(&fs_sd, "", 0);
+    if (fres != FR_OK) {
+      sd_status = 1;
+      return 1;  // Mount failed
+    }
+    
+    // Open or create CSV file
+    fres = f_open(&gps_csv_file, "GPS_time.csv", FA_WRITE | FA_OPEN_ALWAYS);
+    if (fres != FR_OK) {
+      f_mount(NULL, "", 0);  // Unmount on failure
+      sd_status = 2;
+      return 2;  // File open failed
+    }
+    
+    // Check if file is new (empty) and write header
+    if (f_size(&gps_csv_file) == 0) {
+      sprintf(buffer, "TimeStamp_ms,iTOW_ms,fTOW_ns,GPSWeek,FixType,NumSV\n");
+      f_write(&gps_csv_file, buffer, strlen(buffer), &bytes_written);
+    }
+    
+    // Move to end of file for appending
+    f_lseek(&gps_csv_file, f_size(&gps_csv_file));
+    
+    sd_initialized = true;
+    sd_status = 3;  // SD initialized
+  }
+  
+  // Write GPS time data to persistent file
+  sprintf(buffer, "%lu,%lu,%ld,%d,%u,%u\n",
+          GPS_timeStamp,           // TimeStamp_ms (HAL tick when received)
+          solData.iTOW,            // iTOW - GPS time of week (ms)
+          solData.fTOW,            // fTOW - Fractional part of GPS TOW (ns)
+          solData.week,            // GPS week
+          solData.gpsFix,          // Fix type
+          solData.numSV            // Number of satellites
+  );
+  
+  fres = f_write(&gps_csv_file, buffer, strlen(buffer), &bytes_written);
+  if (fres != FR_OK) {
+    sd_status = 4;  // Write failed
+    return 4;
+  }
+  
+  // Increment write counter and sync to disk periodically (every 10 writes)
+  write_count++;
+  if (write_count >= 10) {
+    f_sync(&gps_csv_file);  // Flush to disk without closing
+    write_count = 0;
+    sd_status = 5;  // Synced
+  }
+  
+  sd_status = 6;  // Data written successfully
+  return 6;
+}
+
+void nslp_transmit_packets(){
+/*
+  transmits NSLP packets 
+  using nslp_min_delay for optimization of transmition time
+*/
+
+  //pass the parsed data to Position pos packet frame
+  GPS_nslp_data.latitude = solData.latitude_deg;
+  GPS_nslp_data.longitude = solData.longitude_deg;
+  GPS_nslp_data.altitude = solData.height_m;
+  GPS_nslp_data.fixType = solData.gpsFix;
+  GPS_nslp_data.numSV = solData.numSV;
+  GPS_nslp_data.time = GPS_timeStamp;
+
+  // Copy accelerometer data to transmission structure
+  BNO055_nslp_data_a.ax = accel.x;
+  BNO055_nslp_data_a.ay = accel.y;
+  BNO055_nslp_data_a.az = accel.z;
+  BNO055_nslp_data_a.time = BNO055_timeStamp;
+
+  BNO055_nslp_data_g.gx = euler.pitch;
+  BNO055_nslp_data_g.gy = euler.roll;
+  BNO055_nslp_data_g.gz = euler.yaw;
+  BNO055_nslp_data_g.time = BNO055_timeStamp;
+
+  //write data to NSLP payload
+  BMP_nslp_data.temp = temperature;
+  BMP_nslp_data.press = pressure;
+  BMP_nslp_data.time = BMP180_time;
+
+  static uint32_t lastTime = 0;
+
+  //------------------------------NSLP setup for optimal comunication interval-----------------------------------
+  if (HAL_GetTick() - lastTime > nslp_min_delay(&nslp)){
+
+    //-----------------------------Send packets for NSLP----------------- START
+
+    if((to_send_gps_nslp_flag == true)){  // Only send GPS packet if new GPS data has been parsed and is ready
+      nslp_send_packet(&nslp, &GPS_packet);
+      to_send_gps_nslp_flag = false;
+    }
+
+    //-----------------------------Send packets for NSLP----------------- END
+    if(to_send_imu_nslp_flag == true){
+        nslp_send_packet(&nslp, &BNO_packet_a);
+        nslp_send_packet(&nslp, &BNO_packet_g);
+        to_send_imu_nslp_flag = false;
+    }
+
+    if(to_send_BMP180_nslp_flag == true){
+        nslp_send_packet(&nslp, &BMP_packet);
+        to_send_BMP180_nslp_flag = false;
+    }
+
+    // nslp_send_packet(&nslp, &POS_fusion_packet);
+
+    lastTime = HAL_GetTick();
+  }
 }
 
 void process_sensor_fusion(){
-
-	if(estimation_imu_ready == true){
-
-		acc.x = accel.x;
-		acc.y = accel.y;
-		acc.z = accel.z;
-
-		vector_t_moving_average_filter(&acc, &acc_f); // Filter accelerometer data for precision estimation
-
-		abs_q.w = quat.w;
-		abs_q.x = quat.x;
-		abs_q.y = quat.y;
-		abs_q.z = quat.z;
-
-		//time stamp calculation
-		POS_fusion_X.ts = micros();
-		ts = update_ts(&lt,micros());
-		//update position estimate how much have we moved since last mesurement
-		update_IMU_global_position(starting_position_offset, starting_orientation_offset, &acc_f, &abs_q, ts, &X_global_translation, &O_global_orientation_euler);
-		//update precision estimation how sure we are of our position
-		//update_position_precision_calculation(&X_global_translation_precision, &acc_prec, ts);
-
-		//OUTPUT
-		POS_fusion_X.Xx = X_global_translation.x;
-		POS_fusion_X.Xy = X_global_translation.y;
-		POS_fusion_X.Xz = X_global_translation.z;
-
-		estimation_imu_ready = false;
-	}
-
-	//on GPS recieved update the position estimation with the GPS data and reset the IMU precision to the GPS precision
-	if(estimation_gps_ready == true && valid_gps_recieved == true){
-//		joined_position_estimation(&X_hat_estimation, &pos, &X_global_translation, &pos_prec, &acc_prec);
-//		joined_precision_calculation(&X_hat_precision, &pos_prec, &acc_prec);
-//		reset_IMU_precision(&X_hat_precision, &X_global_translation_precision, &X_hat_estimation, &X_global_translation);
-
-		POS_fusion_X.Xx = X_global_translation.x;
-		POS_fusion_X.Xy = X_global_translation.y;
-		POS_fusion_X.Xz = X_global_translation.z;
-
-		estimation_gps_ready = false;
-	}
-
-
+  /*
+    Code implementation for Kalman filter data proccesing
+  */
 }
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -323,7 +508,7 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-	HAL_Init();
+  HAL_Init();
 
   /* USER CODE BEGIN Init */
 
@@ -343,39 +528,49 @@ int main(void)
   MX_USART2_UART_Init();
   MX_I2C1_Init();
   MX_CRC_Init();
+  MX_SPI1_Init();
+  MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
 
-	DWT_Init();
+
+	DWT_Init(); //innitialize library for time measurement in micros
 
 	//------------------------NSLP CODE------------------------
-
-	uint32_t lastTime = 0;
 	nslp_init(&nslp, &huart2, &hcrc, 16, 0xAA);
 	//------------------------NSLP CODE------------------------
 
-	//initialize DMA on uart1, rx for GPS
+	//----------------initialize DMA on uart1, rx for GPS-----------
 	__HAL_DMA_ENABLE_IT(&hdma_usart1_rx, DMA_IT_TC | DMA_IT_HT);
 	HAL_UARTEx_ReceiveToIdle_DMA(&huart1, (uint8_t *) rx_buffer, sizeof(rx_buffer));
 	__HAL_DMA_DISABLE_IT(&hdma_usart1_rx,DMA_IT_HT); //DMA half transfer interupt
 
-	//Initializes BMP180 sensor and oversampling settings.
+	//-----------Initializes BMP180 sensor and oversampling settings.------------
 	BMP180_Init(&hi2c1);
 	BMP180_SetOversampling(BMP180_STANDARD); //BMP180_LOW, BMP180_STANDARD, BMP180_HIGH, BMP180_ULTRA,
 	// Update calibration data. Must be called once before entering main loop.
 	BMP180_UpdateCalibrationData();
 
-	//innitialize DMA on I2C
+	//-----------innitialize BNO055 DMA on I2C------------
 	bno.i2c = &hi2c1;
 	bno.addr = BNO_ADDR_ALT;
 	bno.mode = BNO_MODE_NDOF;
 	HAL_Delay(500);
 	if (bno055_init(&bno) != BNO_OK) {
-		while (1) { }
+		uint32_t BNO_timeout = 0;
+		BNO_timeout = HAL_GetTick();
+		while (HAL_GetTick() - BNO_timeout < 5000) { //wait for 5 seconds before trying to initialize again
+      if (bno055_init(&bno) == BNO_OK) {
+        break; //break loop if initialization is successful
+      }
+		}
 	}
 
+  //-----------Set BNO055 units and start first DMA read.------------
 	bno055_set_unit(&bno, BNO_TEMP_UNIT_C, BNO_GYR_UNIT_DPS, BNO_ACC_UNITSEL_M_S2, BNO_EUL_UNIT_DEG);
 	bno055_start_dma_read(&bno);
 
+  //------------------------TEST SD CARD WRITE------------------------
+  test_sd_card_write();
 
   /* USER CODE END 2 */
 
@@ -383,39 +578,19 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 	while (1)
 	{
-		//------------------------------choose comunication type-----------------------------------
 
-		if (HAL_GetTick() - lastTime > nslp_min_delay(&nslp)){
 
-			//-----------------------------Send packets for NSLP----------------- START
+		// parse_gps_data();
+		// parse_bno055_data();
+		// poll_n_parse_bmp180_data();
 
-			if((send_gps_nslp == true)/*&&(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE))*/){
-				//__HAL_UART_CLEAR_IDLEFLAG(&huart1);
-				nslp_send_packet(&nslp, &GPS_packet);
-				send_gps_nslp = false;
-			}
+		// process_sensor_fusion();
 
-			//-----------------------------Send packets for NSLP----------------- END
-			nslp_send_packet(&nslp, &BNO_packet_a);
-			nslp_send_packet(&nslp, &BNO_packet_g);
+		// sd_status = save_data_to_SD_SPI();
 
-			nslp_send_packet(&nslp, &BMP_packet);
+		// nslp_transmit_packets();
 
-			nslp_send_packet(&nslp, &POS_fusion_packet);
-
-			lastTime = HAL_GetTick();
-		}
-		//-------------------parse data from GPS------------------------
-		parse_gps_data();
-		//-------------------parse data from GPS------------------------
-
-		//-------------------parse data from I2C------------------------
-		parse_i2c_data();
-		//-------------------parse data from I2C------------------------
-
-		//------------sensor fusion------------------------------------
-		process_sensor_fusion();
-		//----------------implements sensor fusion----------------------
+    HAL_Delay(1000);
 
     /* USER CODE END WHILE */
 
@@ -548,6 +723,46 @@ static void MX_I2C1_Init(void)
 }
 
 /**
+  * @brief SPI1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_SPI1_Init(void)
+{
+
+  /* USER CODE BEGIN SPI1_Init 0 */
+
+  /* USER CODE END SPI1_Init 0 */
+
+  /* USER CODE BEGIN SPI1_Init 1 */
+
+  /* USER CODE END SPI1_Init 1 */
+  /* SPI1 parameter configuration*/
+  hspi1.Instance = SPI1;
+  hspi1.Init.Mode = SPI_MODE_MASTER;
+  hspi1.Init.Direction = SPI_DIRECTION_2LINES;
+  hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
+  hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
+  hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
+  hspi1.Init.NSS = SPI_NSS_SOFT;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
+  hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
+  hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
+  hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+  hspi1.Init.CRCPolynomial = 7;
+  hspi1.Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
+  hspi1.Init.NSSPMode = SPI_NSS_PULSE_ENABLE;
+  if (HAL_SPI_Init(&hspi1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN SPI1_Init 2 */
+
+  /* USER CODE END SPI1_Init 2 */
+
+}
+
+/**
   * @brief USART1 Initialization Function
   * @param None
   * @retval None
@@ -652,6 +867,7 @@ static void MX_DMA_Init(void)
   */
 static void MX_GPIO_Init(void)
 {
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
   /* USER CODE BEGIN MX_GPIO_Init_1 */
 
   /* USER CODE END MX_GPIO_Init_1 */
@@ -660,6 +876,16 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOF_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(SD_CS_GPIO_Port, SD_CS_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : SD_CS_Pin */
+  GPIO_InitStruct.Pin = SD_CS_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(SD_CS_GPIO_Port, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 
@@ -684,7 +910,8 @@ void Error_Handler(void)
 	}
   /* USER CODE END Error_Handler_Debug */
 }
-#ifdef USE_FULL_ASSERT
+
+#ifdef  USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

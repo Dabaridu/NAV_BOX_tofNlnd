@@ -3,18 +3,26 @@
 	<item key="hasShownOverlayPopupBefore" value="true"/>
 	<item key="replaceBarOpen" value="false"/>
 	<list key="searchhistory">
+		<item value="va_end"/>
+		<item value="private define"/>
+		<item value="extern SPI_HandleTypeDef SD_SPI_HANDLE;"/>
+		<item value="gps_dma_data_ready"/>
+		<item value="sd_status"/>
+		<item value="SAVE"/>
+		<item value="SD_SPI_HA"/>
+		<item value="to_send_BMP180_nslp_flag"/>
+		<item value="lastBMP180Time"/>
+		<item value="to_send_gps_nslp_flag"/>
 		<item value="bno.dma_data_ready"/>
 		<item value="BNO055_timeStamp"/>
 		<item value="acc"/>
 		<item value="vector_t"/>
 		<item value="dma_data_ready"/>
-		<item value="NSLP"/>
-		<item value="DMA"/>
-		<item value="linear"/>
 	</list>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="      KF_data.latitude = navOutput.latitude;"/>
+		<item key="selection" value="static FIL gps_csv_file;"/>
 		<list key="findhistory">
+			<item value="static FIL gps_csv_file;"/>
 			<item value="      KF_data.latitude = navOutput.latitude;"/>
 			<item value="#include &quot;sens_fusion.h&quot;"/>
 		</list>
