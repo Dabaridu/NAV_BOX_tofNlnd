@@ -21090,3 +21090,1692 @@ Finished building: default.size.stdout
  
 Finished building: NAV_BOX.list
  
+22:02:25 **** Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/bmp180_for_stm32_hal.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/bmp180_for_stm32_hal.d" -MT"Core/Src/bmp180_for_stm32_hal.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/bmp180_for_stm32_hal.o"
+arm-none-eabi-gcc "../Core/Src/bno055.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/bno055.d" -MT"Core/Src/bno055.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/bno055.o"
+arm-none-eabi-gcc "../Core/Src/iir_filter.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/iir_filter.d" -MT"Core/Src/iir_filter.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/iir_filter.o"
+arm-none-eabi-gcc "../Core/Src/iir_filter_example.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/iir_filter_example.d" -MT"Core/Src/iir_filter_example.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/iir_filter_example.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/nmea_parse.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/nmea_parse.d" -MT"Core/Src/nmea_parse.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/nmea_parse.o"
+arm-none-eabi-gcc "../Core/Src/nslp_dma.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/nslp_dma.d" -MT"Core/Src/nslp_dma.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/nslp_dma.o"
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
+arm-none-eabi-gcc "../Core/Src/stm32f3xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f3xx_hal_msp.d" -MT"Core/Src/stm32f3xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f3xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f3xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f3xx_it.d" -MT"Core/Src/stm32f3xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f3xx_it.o"
+arm-none-eabi-gcc "../Core/Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/syscalls.d" -MT"Core/Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/syscalls.o"
+../Core/Src/sd_black_box.c:6:8: error: unknown type name 'bool'
+    6 | static bool sd_initialized = false;
+      |        ^~~~
+../Core/Src/sd_black_box.c:6:30: error: 'false' undeclared here (not in a function)
+    6 | static bool sd_initialized = false;
+      |                              ^~~~~
+../Core/Src/sd_black_box.c:2:1: note: 'false' is defined in header '<stdbool.h>'; did you forget to '#include <stdbool.h>'?
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdbool.h>
+    2 | 
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:15:3: warning: implicit declaration of function 'vsnprintf' [-Wimplicit-function-declaration]
+   15 |   vsnprintf(buffer, sizeof(buffer), fmt, args);
+      |   ^~~~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<stdio.h>' or provide a declaration of 'vsnprintf'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdio.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:18:13: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c:19:22: error: 'huart2' undeclared (first use in this function)
+   19 |   HAL_UART_Transmit(&huart2, (uint8_t*)buffer, len, -1);
+      |                      ^~~~~~
+../Core/Src/sd_black_box.c:19:22: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:68:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   68 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:68:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:68:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:68:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c: In function 'save_data_to_SD_SPI':
+../Core/Src/sd_black_box.c:96:8: error: 'to_send_gps_nslp_flag' undeclared (first use in this function)
+   96 |   if (!to_send_gps_nslp_flag) {
+      |        ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:118:7: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  118 |       sprintf(buffer, "TimeStamp_ms,iTOW_ms,fTOW_ns,GPSWeek,FixType,NumSV\n");
+      |       ^~~~~~~
+../Core/Src/sd_black_box.c:118:7: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/sd_black_box.c:118:7: warning: incompatible implicit declaration of built-in function 'sprintf' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:118:7: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/sd_black_box.c:119:38: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+  119 |       f_write(&gps_csv_file, buffer, strlen(buffer), &bytes_written);
+      |                                      ^~~~~~
+../Core/Src/sd_black_box.c:119:38: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c:125:22: error: 'true' undeclared (first use in this function)
+  125 |     sd_initialized = true;
+      |                      ^~~~
+../Core/Src/sd_black_box.c:125:22: note: 'true' is defined in header '<stdbool.h>'; did you forget to '#include <stdbool.h>'?
+../Core/Src/sd_black_box.c:130:3: warning: incompatible implicit declaration of built-in function 'sprintf' [-Wbuiltin-declaration-mismatch]
+  130 |   sprintf(buffer, "%lu,%lu,%ld,%d,%u,%u\n",
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:130:3: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/sd_black_box.c:131:11: error: 'GPS_timeStamp' undeclared (first use in this function)
+  131 |           GPS_timeStamp,           // TimeStamp_ms (HAL tick when received)
+      |           ^~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:132:11: error: 'solData' undeclared (first use in this function)
+  132 |           solData.iTOW,            // iTOW - GPS time of week (ms)
+      |           ^~~~~~~
+../Core/Src/sd_black_box.c:139:41: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+  139 |   fres = f_write(&gps_csv_file, buffer, strlen(buffer), &bytes_written);
+      |                                         ^~~~~~
+../Core/Src/sd_black_box.c:139:41: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:68:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   68 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/nmea_parse.c: In function 'nmea_parse':
+../Core/Src/nmea_parse.c:168:27: warning: pointer targets in passing argument 1 of 'strtok' differ in signedness [-Wpointer-sign]
+  168 |     char * token = strtok(buffer, "$");
+      |                           ^~~~~~
+      |                           |
+      |                           uint8_t * {aka unsigned char *}
+In file included from ../Core/Inc/nmea_parse.h:12,
+                 from ../Core/Src/nmea_parse.c:4:
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/string.h:50:18: note: expected 'char * restrict' but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+   50 | char    *strtok (char *__restrict, const char *__restrict);
+      |                  ^
+../Core/Src/iir_filter_example.c: In function 'Example1_ReadFilteredAccel':
+../Core/Src/iir_filter_example.c:40:5: warning: implicit declaration of function 'BNO055_ReadAccel' [-Wimplicit-function-declaration]
+   40 |     BNO055_ReadAccel(&raw_x, &raw_y, &raw_z);  // Your BNO055 function
+      |     ^~~~~~~~~~~~~~~~
+../Core/Src/iir_filter_example.c: In function 'Example3_SeparateComponents':
+../Core/Src/iir_filter_example.c:112:11: warning: unused variable 'filtered_vibration' [-Wunused-variable]
+  112 |     float filtered_vibration = IIR_LPF_1st_Apply(&accel_vibration_filter, raw_accel);
+      |           ^~~~~~~~~~~~~~~~~~
+../Core/Src/iir_filter_example.c: In function 'Example4_MainLoop':
+../Core/Src/iir_filter_example.c:134:15: warning: unused variable 'accel_magnitude' [-Wunused-variable]
+  134 |         float accel_magnitude = sqrtf(filtered_x * filtered_x +
+      |               ^~~~~~~~~~~~~~~
+../Core/Src/iir_filter_example.c: In function 'Example7_LatencyCheck':
+../Core/Src/iir_filter_example.c:237:11: warning: unused variable 'delay_2nd' [-Wunused-variable]
+  237 |     float delay_2nd = CalculateFilterDelay(10.0f, 2);   // ~0.032 seconds = 32ms
+      |           ^~~~~~~~~
+../Core/Src/iir_filter_example.c:236:11: warning: unused variable 'delay_1st' [-Wunused-variable]
+  236 |     float delay_1st = CalculateFilterDelay(10.0f, 1);   // ~0.016 seconds = 16ms
+      |           ^~~~~~~~~
+make: *** [Core/Src/subdir.mk:61: Core/Src/sd_black_box.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Core/Src/main.c: In function 'parse_bno055_data':
+../Core/Src/main.c:201:17: warning: implicit declaration of function 'accel_ema_filter_run' [-Wimplicit-function-declaration]
+  201 |                 accel_ema_filter_run(&accel, &accel_filtered);
+      |                 ^~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:252:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  252 |                         return 0;
+      |                                ^
+../Core/Src/main.c:232:6: note: declared here
+  232 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:241:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  241 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:372:3: warning: implicit declaration of function 'MX_FATFS_Init' [-Wimplicit-function-declaration]
+  372 |   MX_FATFS_Init();
+      |   ^~~~~~~~~~~~~
+../Core/Src/main.c:414:3: warning: implicit declaration of function 'test_sd_card_write' [-Wimplicit-function-declaration]
+  414 |   test_sd_card_write();
+      |   ^~~~~~~~~~~~~~~~~~
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:03:08 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+arm-none-eabi-gcc "../Core/Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sysmem.d" -MT"Core/Src/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sysmem.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32f3xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/system_stm32f3xx.d" -MT"Core/Src/system_stm32f3xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32f3xx.o"
+arm-none-eabi-gcc "../Core/Src/ubx_nav_sol.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ubx_nav_sol.d" -MT"Core/Src/ubx_nav_sol.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ubx_nav_sol.o"
+../Core/Src/sd_black_box.c:6:8: error: unknown type name 'bool'
+    6 | static bool sd_initialized = false;
+      |        ^~~~
+../Core/Src/sd_black_box.c:6:30: error: 'false' undeclared here (not in a function)
+    6 | static bool sd_initialized = false;
+      |                              ^~~~~
+../Core/Src/sd_black_box.c:2:1: note: 'false' is defined in header '<stdbool.h>'; did you forget to '#include <stdbool.h>'?
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdbool.h>
+    2 | 
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:15:3: warning: implicit declaration of function 'vsnprintf' [-Wimplicit-function-declaration]
+   15 |   vsnprintf(buffer, sizeof(buffer), fmt, args);
+      |   ^~~~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<stdio.h>' or provide a declaration of 'vsnprintf'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdio.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:18:13: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c:19:22: error: 'huart2' undeclared (first use in this function)
+   19 |   HAL_UART_Transmit(&huart2, (uint8_t*)buffer, len, -1);
+      |                      ^~~~~~
+../Core/Src/sd_black_box.c:19:22: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:68:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   68 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:68:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:68:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:68:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c: In function 'save_data_to_SD_SPI':
+../Core/Src/sd_black_box.c:96:8: error: 'to_send_gps_nslp_flag' undeclared (first use in this function)
+   96 |   if (!to_send_gps_nslp_flag) {
+      |        ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:118:7: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  118 |       sprintf(buffer, "TimeStamp_ms,iTOW_ms,fTOW_ns,GPSWeek,FixType,NumSV\n");
+      |       ^~~~~~~
+../Core/Src/sd_black_box.c:118:7: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/sd_black_box.c:118:7: warning: incompatible implicit declaration of built-in function 'sprintf' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:118:7: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/sd_black_box.c:119:38: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+  119 |       f_write(&gps_csv_file, buffer, strlen(buffer), &bytes_written);
+      |                                      ^~~~~~
+../Core/Src/sd_black_box.c:119:38: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c:125:22: error: 'true' undeclared (first use in this function)
+  125 |     sd_initialized = true;
+      |                      ^~~~
+../Core/Src/sd_black_box.c:125:22: note: 'true' is defined in header '<stdbool.h>'; did you forget to '#include <stdbool.h>'?
+../Core/Src/sd_black_box.c:130:3: warning: incompatible implicit declaration of built-in function 'sprintf' [-Wbuiltin-declaration-mismatch]
+  130 |   sprintf(buffer, "%lu,%lu,%ld,%d,%u,%u\n",
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:130:3: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/sd_black_box.c:131:11: error: 'GPS_timeStamp' undeclared (first use in this function)
+  131 |           GPS_timeStamp,           // TimeStamp_ms (HAL tick when received)
+      |           ^~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:132:11: error: 'solData' undeclared (first use in this function)
+  132 |           solData.iTOW,            // iTOW - GPS time of week (ms)
+      |           ^~~~~~~
+../Core/Src/sd_black_box.c:139:41: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+  139 |   fres = f_write(&gps_csv_file, buffer, strlen(buffer), &bytes_written);
+      |                                         ^~~~~~
+../Core/Src/sd_black_box.c:139:41: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:68:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   68 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:61: Core/Src/sd_black_box.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:03:10 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c:6:8: error: unknown type name 'bool'
+    6 | static bool sd_initialized = false;
+      |        ^~~~
+../Core/Src/sd_black_box.c:6:30: error: 'false' undeclared here (not in a function)
+    6 | static bool sd_initialized = false;
+      |                              ^~~~~
+../Core/Src/sd_black_box.c:2:1: note: 'false' is defined in header '<stdbool.h>'; did you forget to '#include <stdbool.h>'?
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdbool.h>
+    2 | 
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:15:3: warning: implicit declaration of function 'vsnprintf' [-Wimplicit-function-declaration]
+   15 |   vsnprintf(buffer, sizeof(buffer), fmt, args);
+      |   ^~~~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<stdio.h>' or provide a declaration of 'vsnprintf'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdio.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:18:13: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c:19:22: error: 'huart2' undeclared (first use in this function)
+   19 |   HAL_UART_Transmit(&huart2, (uint8_t*)buffer, len, -1);
+      |                      ^~~~~~
+../Core/Src/sd_black_box.c:19:22: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:68:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   68 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:68:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:68:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:68:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c: In function 'save_data_to_SD_SPI':
+../Core/Src/sd_black_box.c:96:8: error: 'to_send_gps_nslp_flag' undeclared (first use in this function)
+   96 |   if (!to_send_gps_nslp_flag) {
+      |        ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:118:7: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  118 |       sprintf(buffer, "TimeStamp_ms,iTOW_ms,fTOW_ns,GPSWeek,FixType,NumSV\n");
+      |       ^~~~~~~
+../Core/Src/sd_black_box.c:118:7: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/sd_black_box.c:118:7: warning: incompatible implicit declaration of built-in function 'sprintf' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:118:7: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/sd_black_box.c:119:38: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+  119 |       f_write(&gps_csv_file, buffer, strlen(buffer), &bytes_written);
+      |                                      ^~~~~~
+../Core/Src/sd_black_box.c:119:38: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c:125:22: error: 'true' undeclared (first use in this function)
+  125 |     sd_initialized = true;
+      |                      ^~~~
+../Core/Src/sd_black_box.c:125:22: note: 'true' is defined in header '<stdbool.h>'; did you forget to '#include <stdbool.h>'?
+../Core/Src/sd_black_box.c:130:3: warning: incompatible implicit declaration of built-in function 'sprintf' [-Wbuiltin-declaration-mismatch]
+  130 |   sprintf(buffer, "%lu,%lu,%ld,%d,%u,%u\n",
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:130:3: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/sd_black_box.c:131:11: error: 'GPS_timeStamp' undeclared (first use in this function)
+  131 |           GPS_timeStamp,           // TimeStamp_ms (HAL tick when received)
+      |           ^~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:132:11: error: 'solData' undeclared (first use in this function)
+  132 |           solData.iTOW,            // iTOW - GPS time of week (ms)
+      |           ^~~~~~~
+../Core/Src/sd_black_box.c:139:41: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+  139 |   fres = f_write(&gps_csv_file, buffer, strlen(buffer), &bytes_written);
+      |                                         ^~~~~~
+../Core/Src/sd_black_box.c:139:41: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:68:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   68 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:61: Core/Src/sd_black_box.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:04:30 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c:6:8: error: unknown type name 'bool'
+    6 | static bool sd_initialized = false;
+      |        ^~~~
+../Core/Src/sd_black_box.c:6:30: error: 'false' undeclared here (not in a function)
+    6 | static bool sd_initialized = false;
+      |                              ^~~~~
+../Core/Src/sd_black_box.c:2:1: note: 'false' is defined in header '<stdbool.h>'; did you forget to '#include <stdbool.h>'?
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdbool.h>
+    2 | 
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:15:3: warning: implicit declaration of function 'vsnprintf' [-Wimplicit-function-declaration]
+   15 |   vsnprintf(buffer, sizeof(buffer), fmt, args);
+      |   ^~~~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<stdio.h>' or provide a declaration of 'vsnprintf'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdio.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:18:13: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c:19:22: error: 'huart2' undeclared (first use in this function)
+   19 |   HAL_UART_Transmit(&huart2, (uint8_t*)buffer, len, -1);
+      |                      ^~~~~~
+../Core/Src/sd_black_box.c:19:22: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:68:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   68 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:68:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:68:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:68:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c: In function 'save_data_to_SD_SPI':
+../Core/Src/sd_black_box.c:96:8: error: 'to_send_gps_nslp_flag' undeclared (first use in this function)
+   96 |   if (!to_send_gps_nslp_flag) {
+      |        ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:118:7: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  118 |       sprintf(buffer, "TimeStamp_ms,iTOW_ms,fTOW_ns,GPSWeek,FixType,NumSV\n");
+      |       ^~~~~~~
+../Core/Src/sd_black_box.c:118:7: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/sd_black_box.c:118:7: warning: incompatible implicit declaration of built-in function 'sprintf' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:118:7: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/sd_black_box.c:119:38: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+  119 |       f_write(&gps_csv_file, buffer, strlen(buffer), &bytes_written);
+      |                                      ^~~~~~
+../Core/Src/sd_black_box.c:119:38: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c:125:22: error: 'true' undeclared (first use in this function)
+  125 |     sd_initialized = true;
+      |                      ^~~~
+../Core/Src/sd_black_box.c:125:22: note: 'true' is defined in header '<stdbool.h>'; did you forget to '#include <stdbool.h>'?
+../Core/Src/sd_black_box.c:130:3: warning: incompatible implicit declaration of built-in function 'sprintf' [-Wbuiltin-declaration-mismatch]
+  130 |   sprintf(buffer, "%lu,%lu,%ld,%d,%u,%u\n",
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:130:3: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/sd_black_box.c:131:11: error: 'GPS_timeStamp' undeclared (first use in this function)
+  131 |           GPS_timeStamp,           // TimeStamp_ms (HAL tick when received)
+      |           ^~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:132:11: error: 'solData' undeclared (first use in this function)
+  132 |           solData.iTOW,            // iTOW - GPS time of week (ms)
+      |           ^~~~~~~
+../Core/Src/sd_black_box.c:139:41: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+  139 |   fres = f_write(&gps_csv_file, buffer, strlen(buffer), &bytes_written);
+      |                                         ^~~~~~
+../Core/Src/sd_black_box.c:139:41: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:68:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   68 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:61: Core/Src/sd_black_box.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:04:52 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/main.c: In function 'parse_bno055_data':
+../Core/Src/main.c:200:17: warning: implicit declaration of function 'accel_ema_filter_run' [-Wimplicit-function-declaration]
+  200 |                 accel_ema_filter_run(&accel, &accel_filtered);
+      |                 ^~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:251:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  251 |                         return 0;
+      |                                ^
+../Core/Src/main.c:231:6: note: declared here
+  231 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:240:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  240 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/sd_black_box.c:6:8: error: unknown type name 'bool'
+    6 | static bool sd_initialized = false;
+      |        ^~~~
+../Core/Src/sd_black_box.c:6:30: error: 'false' undeclared here (not in a function)
+    6 | static bool sd_initialized = false;
+      |                              ^~~~~
+../Core/Src/sd_black_box.c:2:1: note: 'false' is defined in header '<stdbool.h>'; did you forget to '#include <stdbool.h>'?
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdbool.h>
+    2 | 
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:18:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:18:13: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c:19:22: error: 'huart2' undeclared (first use in this function)
+   19 |   HAL_UART_Transmit(&huart2, (uint8_t*)buffer, len, -1);
+      |                      ^~~~~~
+../Core/Src/sd_black_box.c:19:22: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:68:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   68 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:68:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:68:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:68:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:371:3: warning: implicit declaration of function 'MX_FATFS_Init' [-Wimplicit-function-declaration]
+  371 |   MX_FATFS_Init();
+      |   ^~~~~~~~~~~~~
+../Core/Src/main.c:413:3: warning: implicit declaration of function 'test_sd_card_write' [-Wimplicit-function-declaration]
+  413 |   test_sd_card_write();
+      |   ^~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: In function 'save_data_to_SD_SPI':
+../Core/Src/sd_black_box.c:96:8: error: 'to_send_gps_nslp_flag' undeclared (first use in this function)
+   96 |   if (!to_send_gps_nslp_flag) {
+      |        ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:119:38: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+  119 |       f_write(&gps_csv_file, buffer, strlen(buffer), &bytes_written);
+      |                                      ^~~~~~
+../Core/Src/sd_black_box.c:119:38: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c:125:22: error: 'true' undeclared (first use in this function)
+  125 |     sd_initialized = true;
+      |                      ^~~~
+../Core/Src/sd_black_box.c:125:22: note: 'true' is defined in header '<stdbool.h>'; did you forget to '#include <stdbool.h>'?
+../Core/Src/sd_black_box.c:131:11: error: 'GPS_timeStamp' undeclared (first use in this function)
+  131 |           GPS_timeStamp,           // TimeStamp_ms (HAL tick when received)
+      |           ^~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:132:11: error: 'solData' undeclared (first use in this function)
+  132 |           solData.iTOW,            // iTOW - GPS time of week (ms)
+      |           ^~~~~~~
+../Core/Src/sd_black_box.c:139:41: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+  139 |   fres = f_write(&gps_csv_file, buffer, strlen(buffer), &bytes_written);
+      |                                         ^~~~~~
+../Core/Src/sd_black_box.c:139:41: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:68:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   68 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:61: Core/Src/sd_black_box.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:07:21 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:19:22: error: 'huart2' undeclared (first use in this function)
+   19 |   HAL_UART_Transmit(&huart2, (uint8_t*)buffer, len, -1);
+      |                      ^~~~~~
+../Core/Src/sd_black_box.c:19:22: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/sd_black_box.c: In function 'save_data_to_SD_SPI':
+../Core/Src/sd_black_box.c:96:8: error: 'to_send_gps_nslp_flag' undeclared (first use in this function)
+   96 |   if (!to_send_gps_nslp_flag) {
+      |        ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'parse_bno055_data':
+../Core/Src/main.c:202:17: warning: implicit declaration of function 'accel_ema_filter_run' [-Wimplicit-function-declaration]
+  202 |                 accel_ema_filter_run(&accel, &accel_filtered);
+      |                 ^~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:253:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  253 |                         return 0;
+      |                                ^
+../Core/Src/main.c:233:6: note: declared here
+  233 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:242:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  242 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/sd_black_box.c:131:11: error: 'GPS_timeStamp' undeclared (first use in this function)
+  131 |           GPS_timeStamp,           // TimeStamp_ms (HAL tick when received)
+      |           ^~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:132:11: error: 'solData' undeclared (first use in this function)
+  132 |           solData.iTOW,            // iTOW - GPS time of week (ms)
+      |           ^~~~~~~
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:68:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   68 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:61: Core/Src/sd_black_box.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:07:23 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:19:22: error: 'huart2' undeclared (first use in this function)
+   19 |   HAL_UART_Transmit(&huart2, (uint8_t*)buffer, len, -1);
+      |                      ^~~~~~
+../Core/Src/sd_black_box.c:19:22: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/sd_black_box.c: In function 'save_data_to_SD_SPI':
+../Core/Src/sd_black_box.c:96:8: error: 'to_send_gps_nslp_flag' undeclared (first use in this function)
+   96 |   if (!to_send_gps_nslp_flag) {
+      |        ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:131:11: error: 'GPS_timeStamp' undeclared (first use in this function)
+  131 |           GPS_timeStamp,           // TimeStamp_ms (HAL tick when received)
+      |           ^~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:132:11: error: 'solData' undeclared (first use in this function)
+  132 |           solData.iTOW,            // iTOW - GPS time of week (ms)
+      |           ^~~~~~~
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:68:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   68 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:61: Core/Src/sd_black_box.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:08:09 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:15:3: warning: implicit declaration of function 'vsnprintf' [-Wimplicit-function-declaration]
+   15 |   vsnprintf(buffer, sizeof(buffer), fmt, args);
+      |   ^~~~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<stdio.h>' or provide a declaration of 'vsnprintf'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdio.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:18:13: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c:19:22: error: 'huart2' undeclared (first use in this function)
+   19 |   HAL_UART_Transmit(&huart2, (uint8_t*)buffer, len, -1);
+      |                      ^~~~~~
+../Core/Src/sd_black_box.c:19:22: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:68:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   68 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:68:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:68:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:68:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c: In function 'save_data_to_SD_SPI':
+../Core/Src/sd_black_box.c:96:8: error: 'to_send_gps_nslp_flag' undeclared (first use in this function)
+   96 |   if (!to_send_gps_nslp_flag) {
+      |        ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:118:7: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  118 |       sprintf(buffer, "TimeStamp_ms,iTOW_ms,fTOW_ns,GPSWeek,FixType,NumSV\n");
+      |       ^~~~~~~
+../Core/Src/sd_black_box.c:118:7: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/sd_black_box.c:118:7: warning: incompatible implicit declaration of built-in function 'sprintf' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:118:7: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/sd_black_box.c:119:38: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+  119 |       f_write(&gps_csv_file, buffer, strlen(buffer), &bytes_written);
+      |                                      ^~~~~~
+../Core/Src/sd_black_box.c:119:38: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c:130:3: warning: incompatible implicit declaration of built-in function 'sprintf' [-Wbuiltin-declaration-mismatch]
+  130 |   sprintf(buffer, "%lu,%lu,%ld,%d,%u,%u\n",
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:130:3: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/main.c: In function 'parse_bno055_data':
+../Core/Src/main.c:202:17: warning: implicit declaration of function 'accel_ema_filter_run' [-Wimplicit-function-declaration]
+  202 |                 accel_ema_filter_run(&accel, &accel_filtered);
+      |                 ^~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:253:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  253 |                         return 0;
+      |                                ^
+../Core/Src/main.c:233:6: note: declared here
+  233 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:242:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  242 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/sd_black_box.c:131:11: error: 'GPS_timeStamp' undeclared (first use in this function)
+  131 |           GPS_timeStamp,           // TimeStamp_ms (HAL tick when received)
+      |           ^~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:132:11: error: 'solData' undeclared (first use in this function)
+  132 |           solData.iTOW,            // iTOW - GPS time of week (ms)
+      |           ^~~~~~~
+../Core/Src/sd_black_box.c:139:41: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+  139 |   fres = f_write(&gps_csv_file, buffer, strlen(buffer), &bytes_written);
+      |                                         ^~~~~~
+../Core/Src/sd_black_box.c:139:41: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:68:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   68 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:61: Core/Src/sd_black_box.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:09:25 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:15:3: warning: implicit declaration of function 'vsnprintf' [-Wimplicit-function-declaration]
+   15 |   vsnprintf(buffer, sizeof(buffer), fmt, args);
+      |   ^~~~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<stdio.h>' or provide a declaration of 'vsnprintf'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdio.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:18:13: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c:19:22: error: 'huart2' undeclared (first use in this function)
+   19 |   HAL_UART_Transmit(&huart2, (uint8_t*)buffer, len, -1);
+      |                      ^~~~~~
+../Core/Src/sd_black_box.c:19:22: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:68:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   68 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:68:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:68:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:68:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:68:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   68 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: At top level:
+../Core/Src/sd_black_box.c:7:17: warning: 'write_count' defined but not used [-Wunused-variable]
+    7 | static uint32_t write_count = 0;
+      |                 ^~~~~~~~~~~
+../Core/Src/sd_black_box.c:6:16: warning: 'sd_initialized' defined but not used [-Wunused-variable]
+    6 | static uint8_t sd_initialized = 0;
+      |                ^~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:5:14: warning: 'fs_sd' defined but not used [-Wunused-variable]
+    5 | static FATFS fs_sd;
+      |              ^~~~~
+../Core/Src/sd_black_box.c:4:12: warning: 'gps_csv_file' defined but not used [-Wunused-variable]
+    4 | static FIL gps_csv_file;
+      |            ^~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:61: Core/Src/sd_black_box.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:10:41 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:15:3: warning: implicit declaration of function 'vsnprintf' [-Wimplicit-function-declaration]
+   15 |   vsnprintf(buffer, sizeof(buffer), fmt, args);
+      |   ^~~~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<stdio.h>' or provide a declaration of 'vsnprintf'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdio.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:18:13: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c:19:22: error: 'huart2' undeclared (first use in this function)
+   19 |   HAL_UART_Transmit(&huart2, (uint8_t*)buffer, len, -1);
+      |                      ^~~~~~
+../Core/Src/sd_black_box.c:19:22: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:67:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:67:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:67:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: At top level:
+../Core/Src/sd_black_box.c:7:17: warning: 'write_count' defined but not used [-Wunused-variable]
+    7 | static uint32_t write_count = 0;
+      |                 ^~~~~~~~~~~
+../Core/Src/sd_black_box.c:6:16: warning: 'sd_initialized' defined but not used [-Wunused-variable]
+    6 | static uint8_t sd_initialized = 0;
+      |                ^~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:5:14: warning: 'fs_sd' defined but not used [-Wunused-variable]
+    5 | static FATFS fs_sd;
+      |              ^~~~~
+../Core/Src/sd_black_box.c:4:12: warning: 'gps_csv_file' defined but not used [-Wunused-variable]
+    4 | static FIL gps_csv_file;
+      |            ^~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:61: Core/Src/sd_black_box.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Core/Src/main.c: In function 'parse_bno055_data':
+../Core/Src/main.c:202:17: warning: implicit declaration of function 'accel_ema_filter_run' [-Wimplicit-function-declaration]
+  202 |                 accel_ema_filter_run(&accel, &accel_filtered);
+      |                 ^~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:253:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  253 |                         return 0;
+      |                                ^
+../Core/Src/main.c:233:6: note: declared here
+  233 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:242:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  242 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:11:06 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:16:3: warning: implicit declaration of function 'vsnprintf' [-Wimplicit-function-declaration]
+   16 |   vsnprintf(buffer, sizeof(buffer), fmt, args);
+      |   ^~~~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<stdio.h>' or provide a declaration of 'vsnprintf'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdio.h>
+    2 | #include "main.h"
+../Core/Src/sd_black_box.c:19:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   19 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | #include "main.h"
+../Core/Src/sd_black_box.c:19:13: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   19 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:19:13: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c:20:22: error: 'huart2' undeclared (first use in this function)
+   20 |   HAL_UART_Transmit(&huart2, (uint8_t*)buffer, len, -1);
+      |                      ^~~~~~
+../Core/Src/sd_black_box.c:20:22: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:68:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   68 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:68:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:68:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:68:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:68:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   68 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: At top level:
+../Core/Src/sd_black_box.c:8:17: warning: 'write_count' defined but not used [-Wunused-variable]
+    8 | static uint32_t write_count = 0;
+      |                 ^~~~~~~~~~~
+../Core/Src/sd_black_box.c:7:16: warning: 'sd_initialized' defined but not used [-Wunused-variable]
+    7 | static uint8_t sd_initialized = 0;
+      |                ^~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:6:14: warning: 'fs_sd' defined but not used [-Wunused-variable]
+    6 | static FATFS fs_sd;
+      |              ^~~~~
+../Core/Src/sd_black_box.c:5:12: warning: 'gps_csv_file' defined but not used [-Wunused-variable]
+    5 | static FIL gps_csv_file;
+      |            ^~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:61: Core/Src/sd_black_box.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Core/Src/main.c: In function 'parse_bno055_data':
+../Core/Src/main.c:202:17: warning: implicit declaration of function 'accel_ema_filter_run' [-Wimplicit-function-declaration]
+  202 |                 accel_ema_filter_run(&accel, &accel_filtered);
+      |                 ^~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:253:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  253 |                         return 0;
+      |                                ^
+../Core/Src/main.c:233:6: note: declared here
+  233 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:242:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  242 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:12:52 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:23:3: warning: implicit declaration of function 'vsnprintf' [-Wimplicit-function-declaration]
+   23 |   vsnprintf(buffer, sizeof(buffer), fmt, args);
+      |   ^~~~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<stdio.h>' or provide a declaration of 'vsnprintf'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdio.h>
+    2 | 
+../Core/Src/sd_black_box.c:26:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   26 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:26:13: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   26 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:26:13: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:75:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   75 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:75:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:75:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:75:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:75:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   75 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: At top level:
+../Core/Src/sd_black_box.c:15:17: warning: 'write_count' defined but not used [-Wunused-variable]
+   15 | static uint32_t write_count = 0;
+      |                 ^~~~~~~~~~~
+../Core/Src/sd_black_box.c:14:16: warning: 'sd_initialized' defined but not used [-Wunused-variable]
+   14 | static uint8_t sd_initialized = 0;
+      |                ^~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:13:14: warning: 'fs_sd' defined but not used [-Wunused-variable]
+   13 | static FATFS fs_sd;
+      |              ^~~~~
+../Core/Src/sd_black_box.c:12:12: warning: 'gps_csv_file' defined but not used [-Wunused-variable]
+   12 | static FIL gps_csv_file;
+      |            ^~~~~~~~~~~~
+../Core/Src/main.c: In function 'parse_bno055_data':
+../Core/Src/main.c:202:17: warning: implicit declaration of function 'accel_ema_filter_run' [-Wimplicit-function-declaration]
+  202 |                 accel_ema_filter_run(&accel, &accel_filtered);
+      |                 ^~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:253:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  253 |                         return 0;
+      |                                ^
+../Core/Src/main.c:233:6: note: declared here
+  233 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:242:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  242 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+C:/ST/STM32CubeIDE_1.19.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/main.o:C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Debug/../Core/Src/main.c:105: multiple definition of `accel_z_filter'; ./Core/Src/iir_filter_example.o:C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Debug/../Core/Src/iir_filter_example.c:15: first defined here
+C:/ST/STM32CubeIDE_1.19.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/main.o:C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Debug/../Core/Src/main.c:104: multiple definition of `accel_y_filter'; ./Core/Src/iir_filter_example.o:C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Debug/../Core/Src/iir_filter_example.c:14: first defined here
+C:/ST/STM32CubeIDE_1.19.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/main.o:C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Debug/../Core/Src/main.c:103: multiple definition of `accel_x_filter'; ./Core/Src/iir_filter_example.o:C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Debug/../Core/Src/iir_filter_example.c:13: first defined here
+C:/ST/STM32CubeIDE_1.19.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/sd_black_box.o:C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Debug/../Core/Src/sd_black_box.c:5: multiple definition of `huart2'; ./Core/Src/main.o:C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Debug/../Core/Src/main.c:75: first defined here
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:92: NAV_BOX.elf] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:14:31 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/bmp180_for_stm32_hal.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/bmp180_for_stm32_hal.d" -MT"Core/Src/bmp180_for_stm32_hal.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/bmp180_for_stm32_hal.o"
+arm-none-eabi-gcc "../Core/Src/bno055.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/bno055.d" -MT"Core/Src/bno055.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/bno055.o"
+arm-none-eabi-gcc "../Core/Src/iir_filter.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/iir_filter.d" -MT"Core/Src/iir_filter.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/iir_filter.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/nmea_parse.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/nmea_parse.d" -MT"Core/Src/nmea_parse.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/nmea_parse.o"
+arm-none-eabi-gcc "../Core/Src/nslp_dma.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/nslp_dma.d" -MT"Core/Src/nslp_dma.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/nslp_dma.o"
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
+arm-none-eabi-gcc "../Core/Src/stm32f3xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f3xx_hal_msp.d" -MT"Core/Src/stm32f3xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f3xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f3xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f3xx_it.d" -MT"Core/Src/stm32f3xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f3xx_it.o"
+arm-none-eabi-gcc "../Core/Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/syscalls.d" -MT"Core/Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/syscalls.o"
+arm-none-eabi-gcc "../Core/Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sysmem.d" -MT"Core/Src/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sysmem.o"
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:23:3: warning: implicit declaration of function 'vsnprintf' [-Wimplicit-function-declaration]
+   23 |   vsnprintf(buffer, sizeof(buffer), fmt, args);
+      |   ^~~~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<stdio.h>' or provide a declaration of 'vsnprintf'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdio.h>
+    2 | 
+../Core/Src/sd_black_box.c:26:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   26 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:26:13: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   26 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:26:13: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:75:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   75 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:75:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:75:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:75:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:75:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   75 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: At top level:
+../Core/Src/sd_black_box.c:15:17: warning: 'write_count' defined but not used [-Wunused-variable]
+   15 | static uint32_t write_count = 0;
+      |                 ^~~~~~~~~~~
+../Core/Src/sd_black_box.c:14:16: warning: 'sd_initialized' defined but not used [-Wunused-variable]
+   14 | static uint8_t sd_initialized = 0;
+      |                ^~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:13:14: warning: 'fs_sd' defined but not used [-Wunused-variable]
+   13 | static FATFS fs_sd;
+      |              ^~~~~
+../Core/Src/sd_black_box.c:12:12: warning: 'gps_csv_file' defined but not used [-Wunused-variable]
+   12 | static FIL gps_csv_file;
+      |            ^~~~~~~~~~~~
+arm-none-eabi-gcc "../Core/Src/system_stm32f3xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/system_stm32f3xx.d" -MT"Core/Src/system_stm32f3xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32f3xx.o"
+../Core/Src/nmea_parse.c: In function 'nmea_parse':
+../Core/Src/nmea_parse.c:168:27: warning: pointer targets in passing argument 1 of 'strtok' differ in signedness [-Wpointer-sign]
+  168 |     char * token = strtok(buffer, "$");
+      |                           ^~~~~~
+      |                           |
+      |                           uint8_t * {aka unsigned char *}
+In file included from ../Core/Inc/nmea_parse.h:12,
+                 from ../Core/Src/nmea_parse.c:4:
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/string.h:50:18: note: expected 'char * restrict' but argument is of type 'uint8_t *' {aka 'unsigned char *'}
+   50 | char    *strtok (char *__restrict, const char *__restrict);
+      |                  ^
+../Core/Src/main.c: In function 'parse_bno055_data':
+../Core/Src/main.c:202:17: warning: implicit declaration of function 'accel_ema_filter_run' [-Wimplicit-function-declaration]
+  202 |                 accel_ema_filter_run(&accel, &accel_filtered);
+      |                 ^~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:253:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  253 |                         return 0;
+      |                                ^
+../Core/Src/main.c:233:6: note: declared here
+  233 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:242:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  242 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+arm-none-eabi-gcc "../Core/Src/ubx_nav_sol.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ubx_nav_sol.d" -MT"Core/Src/ubx_nav_sol.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ubx_nav_sol.o"
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+C:/ST/STM32CubeIDE_1.19.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/sd_black_box.o:C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Debug/../Core/Src/sd_black_box.c:5: multiple definition of `huart2'; ./Core/Src/main.o:C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Debug/../Core/Src/main.c:75: first defined here
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:92: NAV_BOX.elf] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:16:43 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'parse_bno055_data':
+../Core/Src/main.c:202:17: warning: implicit declaration of function 'accel_ema_filter_run' [-Wimplicit-function-declaration]
+  202 |                 accel_ema_filter_run(&accel, &accel_filtered);
+      |                 ^~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:253:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  253 |                         return 0;
+      |                                ^
+../Core/Src/main.c:233:6: note: declared here
+  233 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:242:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  242 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+C:/ST/STM32CubeIDE_1.19.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/sd_black_box.o:C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Debug/../Core/Src/sd_black_box.c:5: multiple definition of `huart2'; ./Core/Src/main.o:C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Debug/../Core/Src/main.c:74: first defined here
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:92: NAV_BOX.elf] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:17:04 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:15:3: warning: implicit declaration of function 'vsnprintf' [-Wimplicit-function-declaration]
+   15 |   vsnprintf(buffer, sizeof(buffer), fmt, args);
+      |   ^~~~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<stdio.h>' or provide a declaration of 'vsnprintf'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdio.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:18:13: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c:19:22: error: 'huart2' undeclared (first use in this function)
+   19 |   HAL_UART_Transmit(&huart2, (uint8_t*)buffer, len, -1);
+      |                      ^~~~~~
+../Core/Src/sd_black_box.c:19:22: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:67:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:67:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:67:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: At top level:
+../Core/Src/sd_black_box.c:7:17: warning: 'write_count' defined but not used [-Wunused-variable]
+    7 | static uint32_t write_count = 0;
+      |                 ^~~~~~~~~~~
+../Core/Src/sd_black_box.c:6:16: warning: 'sd_initialized' defined but not used [-Wunused-variable]
+    6 | static uint8_t sd_initialized = 0;
+      |                ^~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:5:14: warning: 'fs_sd' defined but not used [-Wunused-variable]
+    5 | static FATFS fs_sd;
+      |              ^~~~~
+../Core/Src/sd_black_box.c:4:12: warning: 'gps_csv_file' defined but not used [-Wunused-variable]
+    4 | static FIL gps_csv_file;
+      |            ^~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/sd_black_box.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:18:56 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c:11:41: error: expected ';', ',' or ')' before '=' token
+   11 | void myprintf(UART_HandleTypeDef *huart = &huart2, const char *fmt, ...) {
+      |                                         ^
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:23:13: error: 'huart2' undeclared (first use in this function)
+   23 |   myprintf(&huart2, "\r\n~ SD card demo by kiwih ~\r\n\r\n");
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:23:13: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/sd_black_box.c:67:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strncpy'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:67:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:67:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: At top level:
+../Core/Src/sd_black_box.c:7:17: warning: 'write_count' defined but not used [-Wunused-variable]
+    7 | static uint32_t write_count = 0;
+      |                 ^~~~~~~~~~~
+../Core/Src/sd_black_box.c:6:16: warning: 'sd_initialized' defined but not used [-Wunused-variable]
+    6 | static uint8_t sd_initialized = 0;
+      |                ^~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:5:14: warning: 'fs_sd' defined but not used [-Wunused-variable]
+    5 | static FATFS fs_sd;
+      |              ^~~~~
+../Core/Src/sd_black_box.c:4:12: warning: 'gps_csv_file' defined but not used [-Wunused-variable]
+    4 | static FIL gps_csv_file;
+      |            ^~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/sd_black_box.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Core/Src/main.c: In function 'parse_bno055_data':
+../Core/Src/main.c:202:17: warning: implicit declaration of function 'accel_ema_filter_run' [-Wimplicit-function-declaration]
+  202 |                 accel_ema_filter_run(&accel, &accel_filtered);
+      |                 ^~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:253:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  253 |                         return 0;
+      |                                ^
+../Core/Src/main.c:233:6: note: declared here
+  233 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:242:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  242 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:21:00 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c:11:35: error: expected ')' before ',' token
+   11 | void myprintf(const char *fmt, ...,hal_uart_handle_t *huart = &huart2) {
+      |                                   ^
+      |                                   )
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:67:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strncpy'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:67:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:67:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: At top level:
+../Core/Src/sd_black_box.c:7:17: warning: 'write_count' defined but not used [-Wunused-variable]
+    7 | static uint32_t write_count = 0;
+      |                 ^~~~~~~~~~~
+../Core/Src/sd_black_box.c:6:16: warning: 'sd_initialized' defined but not used [-Wunused-variable]
+    6 | static uint8_t sd_initialized = 0;
+      |                ^~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:5:14: warning: 'fs_sd' defined but not used [-Wunused-variable]
+    5 | static FATFS fs_sd;
+      |              ^~~~~
+../Core/Src/sd_black_box.c:4:12: warning: 'gps_csv_file' defined but not used [-Wunused-variable]
+    4 | static FIL gps_csv_file;
+      |            ^~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/sd_black_box.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:21:52 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c:11:35: error: expected ')' before ',' token
+   11 | void myprintf(const char *fmt, ...,hal_uart_handle_t *huart = &huart2){
+      |                                   ^
+      |                                   )
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:67:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strncpy'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:67:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:67:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: At top level:
+../Core/Src/sd_black_box.c:7:17: warning: 'write_count' defined but not used [-Wunused-variable]
+    7 | static uint32_t write_count = 0;
+      |                 ^~~~~~~~~~~
+../Core/Src/sd_black_box.c:6:16: warning: 'sd_initialized' defined but not used [-Wunused-variable]
+    6 | static uint8_t sd_initialized = 0;
+      |                ^~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:5:14: warning: 'fs_sd' defined but not used [-Wunused-variable]
+    5 | static FATFS fs_sd;
+      |              ^~~~~
+../Core/Src/sd_black_box.c:4:12: warning: 'gps_csv_file' defined but not used [-Wunused-variable]
+    4 | static FIL gps_csv_file;
+      |            ^~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/sd_black_box.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:26:17 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c:11:41: error: expected ';', ',' or ')' before '=' token
+   11 | void myprintf(UART_HandleTypeDef *huart = &huart2, const char *fmt, ...) {
+      |                                         ^
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:67:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strncpy'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:67:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:67:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: At top level:
+../Core/Src/sd_black_box.c:7:17: warning: 'write_count' defined but not used [-Wunused-variable]
+    7 | static uint32_t write_count = 0;
+      |                 ^~~~~~~~~~~
+../Core/Src/sd_black_box.c:6:16: warning: 'sd_initialized' defined but not used [-Wunused-variable]
+    6 | static uint8_t sd_initialized = 0;
+      |                ^~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:5:14: warning: 'fs_sd' defined but not used [-Wunused-variable]
+    5 | static FATFS fs_sd;
+      |              ^~~~~
+../Core/Src/sd_black_box.c:4:12: warning: 'gps_csv_file' defined but not used [-Wunused-variable]
+    4 | static FIL gps_csv_file;
+      |            ^~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/sd_black_box.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:27:13 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c:11:6: error: conflicting types for 'myprintf'; have 'void(UART_HandleTypeDef *, const char *, ...)' {aka 'void(struct __UART_HandleTypeDef *, const char *, ...)'}
+   11 | void myprintf(UART_HandleTypeDef *huart, const char *fmt, ...) {
+      |      ^~~~~~~~
+In file included from ../Core/Src/sd_black_box.c:1:
+../Core/Inc/sd_black_box.h:11:6: note: previous declaration of 'myprintf' with type 'void(const char *, ...)'
+   11 | void myprintf(const char *fmt, ...);
+      |      ^~~~~~~~
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:15:3: warning: implicit declaration of function 'vsnprintf' [-Wimplicit-function-declaration]
+   15 |   vsnprintf(buffer, sizeof(buffer), fmt, args);
+      |   ^~~~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<stdio.h>' or provide a declaration of 'vsnprintf'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdio.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:18:13: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:23:12: warning: passing argument 1 of 'myprintf' from incompatible pointer type [-Wincompatible-pointer-types]
+   23 |   myprintf("\r\n~ SD card demo by kiwih ~\r\n\r\n");
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |            |
+      |            char *
+../Core/Src/sd_black_box.c:11:35: note: expected 'UART_HandleTypeDef *' {aka 'struct __UART_HandleTypeDef *'} but argument is of type 'char *'
+   11 | void myprintf(UART_HandleTypeDef *huart, const char *fmt, ...) {
+      |               ~~~~~~~~~~~~~~~~~~~~^~~~~
+../Core/Src/sd_black_box.c:23:3: error: too few arguments to function 'myprintf'
+   23 |   myprintf("\r\n~ SD card demo by kiwih ~\r\n\r\n");
+      |   ^~~~~~~~
+../Core/Src/sd_black_box.c:11:6: note: declared here
+   11 | void myprintf(UART_HandleTypeDef *huart, const char *fmt, ...) {
+      |      ^~~~~~~~
+../Core/Src/sd_black_box.c:35:18: warning: passing argument 1 of 'myprintf' from incompatible pointer type [-Wincompatible-pointer-types]
+   35 |         myprintf("f_mount error (%i)\r\n", fres);
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~
+      |                  |
+      |                  char *
+../Core/Src/sd_black_box.c:11:35: note: expected 'UART_HandleTypeDef *' {aka 'struct __UART_HandleTypeDef *'} but argument is of type 'char *'
+   11 | void myprintf(UART_HandleTypeDef *huart, const char *fmt, ...) {
+      |               ~~~~~~~~~~~~~~~~~~~~^~~~~
+../Core/Src/sd_black_box.c:35:44: error: incompatible type for argument 2 of 'myprintf'
+   35 |         myprintf("f_mount error (%i)\r\n", fres);
+      |                                            ^~~~
+      |                                            |
+      |                                            FRESULT
+../Core/Src/sd_black_box.c:11:54: note: expected 'const char *' but argument is of type 'FRESULT'
+   11 | void myprintf(UART_HandleTypeDef *huart, const char *fmt, ...) {
+      |                                          ~~~~~~~~~~~~^~~
+../Core/Src/sd_black_box.c:46:18: warning: passing argument 1 of 'myprintf' from incompatible pointer type [-Wincompatible-pointer-types]
+   46 |         myprintf("f_getfree error (%i)\r\n", fres);
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                  |
+      |                  char *
+../Core/Src/sd_black_box.c:11:35: note: expected 'UART_HandleTypeDef *' {aka 'struct __UART_HandleTypeDef *'} but argument is of type 'char *'
+   11 | void myprintf(UART_HandleTypeDef *huart, const char *fmt, ...) {
+      |               ~~~~~~~~~~~~~~~~~~~~^~~~~
+../Core/Src/sd_black_box.c:46:46: error: incompatible type for argument 2 of 'myprintf'
+   46 |         myprintf("f_getfree error (%i)\r\n", fres);
+      |                                              ^~~~
+      |                                              |
+      |                                              FRESULT
+../Core/Src/sd_black_box.c:11:54: note: expected 'const char *' but argument is of type 'FRESULT'
+   11 | void myprintf(UART_HandleTypeDef *huart, const char *fmt, ...) {
+      |                                          ~~~~~~~~~~~~^~~
+../Core/Src/sd_black_box.c:54:12: warning: passing argument 1 of 'myprintf' from incompatible pointer type [-Wincompatible-pointer-types]
+   54 |   myprintf("SD card stats:\r\n%10lu KiB total drive space.\r\n%10lu KiB available.\r\n", total_sectors / 2, free_sectors / 2);
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |            |
+      |            char *
+../Core/Src/sd_black_box.c:11:35: note: expected 'UART_HandleTypeDef *' {aka 'struct __UART_HandleTypeDef *'} but argument is of type 'char *'
+   11 | void myprintf(UART_HandleTypeDef *huart, const char *fmt, ...) {
+      |               ~~~~~~~~~~~~~~~~~~~~^~~~~
+../Core/Src/sd_black_box.c:54:104: warning: passing argument 2 of 'myprintf' makes pointer from integer without a cast [-Wint-conversion]
+   54 |   myprintf("SD card stats:\r\n%10lu KiB total drive space.\r\n%10lu KiB available.\r\n", total_sectors / 2, free_sectors / 2);
+      |                                                                                          ~~~~~~~~~~~~~~^~~
+      |                                                                                                        |
+      |                                                                                                        long unsigned int
+../Core/Src/sd_black_box.c:11:54: note: expected 'const char *' but argument is of type 'long unsigned int'
+   11 | void myprintf(UART_HandleTypeDef *huart, const char *fmt, ...) {
+      |                                          ~~~~~~~~~~~~^~~
+../Core/Src/sd_black_box.c:59:18: warning: passing argument 1 of 'myprintf' from incompatible pointer type [-Wincompatible-pointer-types]
+   59 |         myprintf("I was able to open 'write.txt' for writing\r\n");
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                  |
+      |                  char *
+../Core/Src/sd_black_box.c:11:35: note: expected 'UART_HandleTypeDef *' {aka 'struct __UART_HandleTypeDef *'} but argument is of type 'char *'
+   11 | void myprintf(UART_HandleTypeDef *huart, const char *fmt, ...) {
+      |               ~~~~~~~~~~~~~~~~~~~~^~~~~
+../Core/Src/sd_black_box.c:59:9: error: too few arguments to function 'myprintf'
+   59 |         myprintf("I was able to open 'write.txt' for writing\r\n");
+      |         ^~~~~~~~
+../Core/Src/sd_black_box.c:11:6: note: declared here
+   11 | void myprintf(UART_HandleTypeDef *huart, const char *fmt, ...) {
+      |      ^~~~~~~~
+../Core/Src/sd_black_box.c:61:18: warning: passing argument 1 of 'myprintf' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |         myprintf("f_open error (%i)\r\n", fres);
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~
+      |                  |
+      |                  char *
+../Core/Src/sd_black_box.c:11:35: note: expected 'UART_HandleTypeDef *' {aka 'struct __UART_HandleTypeDef *'} but argument is of type 'char *'
+   11 | void myprintf(UART_HandleTypeDef *huart, const char *fmt, ...) {
+      |               ~~~~~~~~~~~~~~~~~~~~^~~~~
+../Core/Src/sd_black_box.c:61:43: error: incompatible type for argument 2 of 'myprintf'
+   61 |         myprintf("f_open error (%i)\r\n", fres);
+      |                                           ^~~~
+      |                                           |
+      |                                           FRESULT
+../Core/Src/sd_black_box.c:11:54: note: expected 'const char *' but argument is of type 'FRESULT'
+   11 | void myprintf(UART_HandleTypeDef *huart, const char *fmt, ...) {
+      |                                          ~~~~~~~~~~~~^~~
+../Core/Src/sd_black_box.c:67:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:67:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:71:18: warning: passing argument 1 of 'myprintf' from incompatible pointer type [-Wincompatible-pointer-types]
+   71 |         myprintf("Wrote %i bytes to 'write.txt'!\r\n", bytesWrote);
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                  |
+      |                  char *
+../Core/Src/sd_black_box.c:11:35: note: expected 'UART_HandleTypeDef *' {aka 'struct __UART_HandleTypeDef *'} but argument is of type 'char *'
+   11 | void myprintf(UART_HandleTypeDef *huart, const char *fmt, ...) {
+      |               ~~~~~~~~~~~~~~~~~~~~^~~~~
+../Core/Src/sd_black_box.c:71:56: warning: passing argument 2 of 'myprintf' makes pointer from integer without a cast [-Wint-conversion]
+   71 |         myprintf("Wrote %i bytes to 'write.txt'!\r\n", bytesWrote);
+      |                                                        ^~~~~~~~~~
+      |                                                        |
+      |                                                        UINT {aka unsigned int}
+../Core/Src/sd_black_box.c:11:54: note: expected 'const char *' but argument is of type 'UINT' {aka 'unsigned int'}
+   11 | void myprintf(UART_HandleTypeDef *huart, const char *fmt, ...) {
+      |                                          ~~~~~~~~~~~~^~~
+../Core/Src/sd_black_box.c:73:18: warning: passing argument 1 of 'myprintf' from incompatible pointer type [-Wincompatible-pointer-types]
+   73 |         myprintf("f_write error (%i)\r\n");
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~
+      |                  |
+      |                  char *
+../Core/Src/sd_black_box.c:11:35: note: expected 'UART_HandleTypeDef *' {aka 'struct __UART_HandleTypeDef *'} but argument is of type 'char *'
+   11 | void myprintf(UART_HandleTypeDef *huart, const char *fmt, ...) {
+      |               ~~~~~~~~~~~~~~~~~~~~^~~~~
+../Core/Src/sd_black_box.c:73:9: error: too few arguments to function 'myprintf'
+   73 |         myprintf("f_write error (%i)\r\n");
+      |         ^~~~~~~~
+../Core/Src/sd_black_box.c:11:6: note: declared here
+   11 | void myprintf(UART_HandleTypeDef *huart, const char *fmt, ...) {
+      |      ^~~~~~~~
+../Core/Src/sd_black_box.c:67:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: At top level:
+../Core/Src/sd_black_box.c:7:17: warning: 'write_count' defined but not used [-Wunused-variable]
+    7 | static uint32_t write_count = 0;
+      |                 ^~~~~~~~~~~
+../Core/Src/sd_black_box.c:6:16: warning: 'sd_initialized' defined but not used [-Wunused-variable]
+    6 | static uint8_t sd_initialized = 0;
+      |                ^~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:5:14: warning: 'fs_sd' defined but not used [-Wunused-variable]
+    5 | static FATFS fs_sd;
+      |              ^~~~~
+../Core/Src/sd_black_box.c:4:12: warning: 'gps_csv_file' defined but not used [-Wunused-variable]
+    4 | static FIL gps_csv_file;
+      |            ^~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/sd_black_box.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:42:50 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c:11:6: error: conflicting types for 'myprintf'; have 'void(UART_HandleTypeDef *, const char *, ...)' {aka 'void(struct __UART_HandleTypeDef *, const char *, ...)'}
+   11 | void myprintf(UART_HandleTypeDef *huart, const char *fmt, ...) {
+      |      ^~~~~~~~
+In file included from ../Core/Src/sd_black_box.c:1:
+../Core/Inc/sd_black_box.h:11:6: note: previous declaration of 'myprintf' with type 'void(const char *, ...)'
+   11 | void myprintf(const char *fmt, ...);
+      |      ^~~~~~~~
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:15:3: warning: implicit declaration of function 'vsnprintf' [-Wimplicit-function-declaration]
+   15 |   vsnprintf(buffer, sizeof(buffer), fmt, args);
+      |   ^~~~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<stdio.h>' or provide a declaration of 'vsnprintf'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdio.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:18:13: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:67:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:67:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:67:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: At top level:
+../Core/Src/sd_black_box.c:7:17: warning: 'write_count' defined but not used [-Wunused-variable]
+    7 | static uint32_t write_count = 0;
+      |                 ^~~~~~~~~~~
+../Core/Src/sd_black_box.c:6:16: warning: 'sd_initialized' defined but not used [-Wunused-variable]
+    6 | static uint8_t sd_initialized = 0;
+      |                ^~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:5:14: warning: 'fs_sd' defined but not used [-Wunused-variable]
+    5 | static FATFS fs_sd;
+      |              ^~~~~
+../Core/Src/sd_black_box.c:4:12: warning: 'gps_csv_file' defined but not used [-Wunused-variable]
+    4 | static FIL gps_csv_file;
+      |            ^~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/sd_black_box.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:43:51 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c:11:6: error: conflicting types for 'myprintf'; have 'void(UART_HandleTypeDef *, char *, ...)' {aka 'void(struct __UART_HandleTypeDef *, char *, ...)'}
+   11 | void myprintf(UART_HandleTypeDef *huart, char *fmt, ...) {
+      |      ^~~~~~~~
+In file included from ../Core/Src/sd_black_box.c:1:
+../Core/Inc/sd_black_box.h:11:6: note: previous declaration of 'myprintf' with type 'void(const char *, ...)'
+   11 | void myprintf(const char *fmt, ...);
+      |      ^~~~~~~~
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:15:3: warning: implicit declaration of function 'vsnprintf' [-Wimplicit-function-declaration]
+   15 |   vsnprintf(buffer, sizeof(buffer), fmt, args);
+      |   ^~~~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<stdio.h>' or provide a declaration of 'vsnprintf'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdio.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:18:13: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:67:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:67:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:67:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: At top level:
+../Core/Src/sd_black_box.c:7:17: warning: 'write_count' defined but not used [-Wunused-variable]
+    7 | static uint32_t write_count = 0;
+      |                 ^~~~~~~~~~~
+../Core/Src/sd_black_box.c:6:16: warning: 'sd_initialized' defined but not used [-Wunused-variable]
+    6 | static uint8_t sd_initialized = 0;
+      |                ^~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:5:14: warning: 'fs_sd' defined but not used [-Wunused-variable]
+    5 | static FATFS fs_sd;
+      |              ^~~~~
+../Core/Src/sd_black_box.c:4:12: warning: 'gps_csv_file' defined but not used [-Wunused-variable]
+    4 | static FIL gps_csv_file;
+      |            ^~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/sd_black_box.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:45:09 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:15:3: warning: implicit declaration of function 'vsnprintf' [-Wimplicit-function-declaration]
+   15 |   vsnprintf(buffer, sizeof(buffer), fmt, args);
+      |   ^~~~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<stdio.h>' or provide a declaration of 'vsnprintf'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdio.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:18:13: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:67:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:67:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:67:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: At top level:
+../Core/Src/sd_black_box.c:7:17: warning: 'write_count' defined but not used [-Wunused-variable]
+    7 | static uint32_t write_count = 0;
+      |                 ^~~~~~~~~~~
+../Core/Src/sd_black_box.c:6:16: warning: 'sd_initialized' defined but not used [-Wunused-variable]
+    6 | static uint8_t sd_initialized = 0;
+      |                ^~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c:5:14: warning: 'fs_sd' defined but not used [-Wunused-variable]
+    5 | static FATFS fs_sd;
+      |              ^~~~~
+../Core/Src/sd_black_box.c:4:12: warning: 'gps_csv_file' defined but not used [-Wunused-variable]
+    4 | static FIL gps_csv_file;
+      |            ^~~~~~~~~~~~
+../Core/Src/main.c: In function 'parse_bno055_data':
+../Core/Src/main.c:202:17: warning: implicit declaration of function 'accel_ema_filter_run' [-Wimplicit-function-declaration]
+  202 |                 accel_ema_filter_run(&accel, &accel_filtered);
+      |                 ^~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:253:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  253 |                         return 0;
+      |                                ^
+../Core/Src/main.c:233:6: note: declared here
+  233 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:242:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  242 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:415:3: error: too few arguments to function 'test_sd_card_write'
+  415 |   test_sd_card_write();
+      |   ^~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:45:
+../Core/Inc/sd_black_box.h:12:6: note: declared here
+   12 | void test_sd_card_write(UART_HandleTypeDef *huart);
+      |      ^~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:45:28 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'parse_bno055_data':
+../Core/Src/main.c:202:17: warning: implicit declaration of function 'accel_ema_filter_run' [-Wimplicit-function-declaration]
+  202 |                 accel_ema_filter_run(&accel, &accel_filtered);
+      |                 ^~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:253:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  253 |                         return 0;
+      |                                ^
+../Core/Src/main.c:233:6: note: declared here
+  233 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:242:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  242 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:415:22: error: incompatible type for argument 1 of 'test_sd_card_write'
+  415 |   test_sd_card_write(huart2);
+      |                      ^~~~~~
+      |                      |
+      |                      UART_HandleTypeDef {aka struct __UART_HandleTypeDef}
+In file included from ../Core/Src/main.c:45:
+../Core/Inc/sd_black_box.h:12:45: note: expected 'UART_HandleTypeDef *' {aka 'struct __UART_HandleTypeDef *'} but argument is of type 'UART_HandleTypeDef' {aka 'struct __UART_HandleTypeDef'}
+   12 | void test_sd_card_write(UART_HandleTypeDef *huart);
+      |                         ~~~~~~~~~~~~~~~~~~~~^~~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+22:45:38 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'parse_bno055_data':
+../Core/Src/main.c:202:17: warning: implicit declaration of function 'accel_ema_filter_run' [-Wimplicit-function-declaration]
+  202 |                 accel_ema_filter_run(&accel, &accel_filtered);
+      |                 ^~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:253:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  253 |                         return 0;
+      |                                ^
+../Core/Src/main.c:233:6: note: declared here
+  233 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:242:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  242 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  48012	    492	   3540	  52044	   cb4c	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+22:46:48 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:249:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  249 |                         return 0;
+      |                                ^
+../Core/Src/main.c:229:6: note: declared here
+  229 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:238:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  238 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  48012	    492	   3540	  52044	   cb4c	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+22:54:03 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:254:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  254 |                         return 0;
+      |                                ^
+../Core/Src/main.c:234:6: note: declared here
+  234 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:243:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  243 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  48188	    492	   3564	  52244	   cc14	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+22:55:35 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:254:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  254 |                         return 0;
+      |                                ^
+../Core/Src/main.c:234:6: note: declared here
+  234 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:243:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  243 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  48188	    492	   3564	  52244	   cc14	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 

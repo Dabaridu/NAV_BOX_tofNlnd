@@ -7,9 +7,11 @@
 C_SRCS += \
 ../Core/Src/bmp180_for_stm32_hal.c \
 ../Core/Src/bno055.c \
+../Core/Src/iir_filter.c \
 ../Core/Src/main.c \
 ../Core/Src/nmea_parse.c \
 ../Core/Src/nslp_dma.c \
+../Core/Src/sd_black_box.c \
 ../Core/Src/sens_fusion.c \
 ../Core/Src/stm32f3xx_hal_msp.c \
 ../Core/Src/stm32f3xx_it.c \
@@ -21,9 +23,11 @@ C_SRCS += \
 C_DEPS += \
 ./Core/Src/bmp180_for_stm32_hal.d \
 ./Core/Src/bno055.d \
+./Core/Src/iir_filter.d \
 ./Core/Src/main.d \
 ./Core/Src/nmea_parse.d \
 ./Core/Src/nslp_dma.d \
+./Core/Src/sd_black_box.d \
 ./Core/Src/sens_fusion.d \
 ./Core/Src/stm32f3xx_hal_msp.d \
 ./Core/Src/stm32f3xx_it.d \
@@ -35,9 +39,11 @@ C_DEPS += \
 OBJS += \
 ./Core/Src/bmp180_for_stm32_hal.o \
 ./Core/Src/bno055.o \
+./Core/Src/iir_filter.o \
 ./Core/Src/main.o \
 ./Core/Src/nmea_parse.o \
 ./Core/Src/nslp_dma.o \
+./Core/Src/sd_black_box.o \
 ./Core/Src/sens_fusion.o \
 ./Core/Src/stm32f3xx_hal_msp.o \
 ./Core/Src/stm32f3xx_it.o \
@@ -54,7 +60,7 @@ Core/Src/%.o Core/Src/%.su Core/Src/%.cyclo: ../Core/Src/%.c Core/Src/subdir.mk
 clean: clean-Core-2f-Src
 
 clean-Core-2f-Src:
-	-$(RM) ./Core/Src/bmp180_for_stm32_hal.cyclo ./Core/Src/bmp180_for_stm32_hal.d ./Core/Src/bmp180_for_stm32_hal.o ./Core/Src/bmp180_for_stm32_hal.su ./Core/Src/bno055.cyclo ./Core/Src/bno055.d ./Core/Src/bno055.o ./Core/Src/bno055.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/nmea_parse.cyclo ./Core/Src/nmea_parse.d ./Core/Src/nmea_parse.o ./Core/Src/nmea_parse.su ./Core/Src/nslp_dma.cyclo ./Core/Src/nslp_dma.d ./Core/Src/nslp_dma.o ./Core/Src/nslp_dma.su ./Core/Src/sens_fusion.cyclo ./Core/Src/sens_fusion.d ./Core/Src/sens_fusion.o ./Core/Src/sens_fusion.su ./Core/Src/stm32f3xx_hal_msp.cyclo ./Core/Src/stm32f3xx_hal_msp.d ./Core/Src/stm32f3xx_hal_msp.o ./Core/Src/stm32f3xx_hal_msp.su ./Core/Src/stm32f3xx_it.cyclo ./Core/Src/stm32f3xx_it.d ./Core/Src/stm32f3xx_it.o ./Core/Src/stm32f3xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f3xx.cyclo ./Core/Src/system_stm32f3xx.d ./Core/Src/system_stm32f3xx.o ./Core/Src/system_stm32f3xx.su ./Core/Src/ubx_nav_sol.cyclo ./Core/Src/ubx_nav_sol.d ./Core/Src/ubx_nav_sol.o ./Core/Src/ubx_nav_sol.su
+	-$(RM) ./Core/Src/bmp180_for_stm32_hal.cyclo ./Core/Src/bmp180_for_stm32_hal.d ./Core/Src/bmp180_for_stm32_hal.o ./Core/Src/bmp180_for_stm32_hal.su ./Core/Src/bno055.cyclo ./Core/Src/bno055.d ./Core/Src/bno055.o ./Core/Src/bno055.su ./Core/Src/iir_filter.cyclo ./Core/Src/iir_filter.d ./Core/Src/iir_filter.o ./Core/Src/iir_filter.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/nmea_parse.cyclo ./Core/Src/nmea_parse.d ./Core/Src/nmea_parse.o ./Core/Src/nmea_parse.su ./Core/Src/nslp_dma.cyclo ./Core/Src/nslp_dma.d ./Core/Src/nslp_dma.o ./Core/Src/nslp_dma.su ./Core/Src/sd_black_box.cyclo ./Core/Src/sd_black_box.d ./Core/Src/sd_black_box.o ./Core/Src/sd_black_box.su ./Core/Src/sens_fusion.cyclo ./Core/Src/sens_fusion.d ./Core/Src/sens_fusion.o ./Core/Src/sens_fusion.su ./Core/Src/stm32f3xx_hal_msp.cyclo ./Core/Src/stm32f3xx_hal_msp.d ./Core/Src/stm32f3xx_hal_msp.o ./Core/Src/stm32f3xx_hal_msp.su ./Core/Src/stm32f3xx_it.cyclo ./Core/Src/stm32f3xx_it.d ./Core/Src/stm32f3xx_it.o ./Core/Src/stm32f3xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f3xx.cyclo ./Core/Src/system_stm32f3xx.d ./Core/Src/system_stm32f3xx.o ./Core/Src/system_stm32f3xx.su ./Core/Src/ubx_nav_sol.cyclo ./Core/Src/ubx_nav_sol.d ./Core/Src/ubx_nav_sol.o ./Core/Src/ubx_nav_sol.su
 
 .PHONY: clean-Core-2f-Src
 

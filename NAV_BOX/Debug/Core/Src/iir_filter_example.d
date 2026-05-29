@@ -1,8 +1,5 @@
-Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
- ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h \
- ../Core/Inc/stm32f3xx_hal_conf.h \
- ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc.h \
- ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h \
+Core/Src/iir_filter_example.o: ../Core/Src/iir_filter_example.c \
+ ../Core/Inc/iir_filter.h ../Core/Inc/bno055.h \
  ../Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f3xx.h \
  ../Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303x8.h \
  ../Drivers/CMSIS/Include/core_cm4.h \
@@ -10,6 +7,10 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/CMSIS/Include/cmsis_compiler.h \
  ../Drivers/CMSIS/Include/cmsis_gcc.h \
  ../Drivers/CMSIS/Device/ST/STM32F3xx/Include/system_stm32f3xx.h \
+ ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h \
+ ../Core/Inc/stm32f3xx_hal_conf.h \
+ ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc.h \
+ ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc_ex.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_gpio.h \
@@ -29,22 +30,9 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_spi.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_spi_ex.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h \
- ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart_ex.h \
- ../Core/Inc/bno055.h ../Core/Inc/bmp180_for_stm32_hal.h \
- ../Core/Inc/main.h ../Core/Inc/ubx_nav_sol.h ../Core/Inc/nslp_dma.h \
- ../Core/Inc/micros.h ../Core/Inc/nslp_packets.h \
- ../Core/Inc/sens_fusion.h ../Core/Inc/iir_filter.h \
- ../Core/Inc/sd_black_box.h ../FATFS/App/fatfs.h \
- ../Middlewares/Third_Party/FatFs/src/ff.h \
- ../Middlewares/Third_Party/FatFs/src/integer.h ../FATFS/Target/ffconf.h \
- ../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
- ../Middlewares/Third_Party/FatFs/src/diskio.h \
- ../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/user_diskio.h
-../Core/Inc/main.h:
-../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:
-../Core/Inc/stm32f3xx_hal_conf.h:
-../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc.h:
-../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h:
+ ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart_ex.h
+../Core/Inc/iir_filter.h:
+../Core/Inc/bno055.h:
 ../Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f3xx.h:
 ../Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303x8.h:
 ../Drivers/CMSIS/Include/core_cm4.h:
@@ -52,6 +40,10 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/CMSIS/Include/cmsis_compiler.h:
 ../Drivers/CMSIS/Include/cmsis_gcc.h:
 ../Drivers/CMSIS/Device/ST/STM32F3xx/Include/system_stm32f3xx.h:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:
+../Core/Inc/stm32f3xx_hal_conf.h:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc.h:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc_ex.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_gpio.h:
@@ -72,21 +64,3 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_spi_ex.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_uart_ex.h:
-../Core/Inc/bno055.h:
-../Core/Inc/bmp180_for_stm32_hal.h:
-../Core/Inc/main.h:
-../Core/Inc/ubx_nav_sol.h:
-../Core/Inc/nslp_dma.h:
-../Core/Inc/micros.h:
-../Core/Inc/nslp_packets.h:
-../Core/Inc/sens_fusion.h:
-../Core/Inc/iir_filter.h:
-../Core/Inc/sd_black_box.h:
-../FATFS/App/fatfs.h:
-../Middlewares/Third_Party/FatFs/src/ff.h:
-../Middlewares/Third_Party/FatFs/src/integer.h:
-../FATFS/Target/ffconf.h:
-../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h:
-../Middlewares/Third_Party/FatFs/src/diskio.h:
-../Middlewares/Third_Party/FatFs/src/ff.h:
-../FATFS/Target/user_diskio.h:

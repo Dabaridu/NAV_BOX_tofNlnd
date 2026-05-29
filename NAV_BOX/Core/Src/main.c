@@ -18,7 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "fatfs.h"
+
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -26,20 +26,23 @@
 //#include "stdbool.h"
 #include "stdlib.h"
 #include "stdio.h"
-
 #include <stdio.h>
 #include <string.h>
-#include <stdarg.h> //for va_list var arg functions
 
-//include the library
+
+//include netbuilt librarys
 //#include "nmea_parse.h"
 #include "bno055.h"
 #include "bmp180_for_stm32_hal.h"
 #include "ubx_nav_sol.h"
 #include "nslp_dma.h"
+#include "micros.h"
+
+//homebrewed libraries
 #include "nslp_packets.h"
 #include "sens_fusion.h"
-#include "micros.h"
+#include "iir_filter.h"
+#include "sd_black_box.h"
 
 //#include <math.h>
 
@@ -88,6 +91,7 @@ bool to_send_BMP180_nslp_flag = false;
 bno055_t bno;
 
 bno055_vec3_t accel;
+bno055_vec3_t filtered_accel;
 bno055_vec4_t quat;
 bno055_euler_t euler;
 
@@ -95,7 +99,11 @@ int32_t BNO055_timeStamp;
 
 bool to_send_imu_nslp_flag = false;
 //-------------------------------BNO055---------------------------------------------
-
+//--------------------------FILTER---------------------------------
+IIR_LPF_1st accel_x_filter;
+IIR_LPF_1st accel_y_filter;
+IIR_LPF_1st accel_z_filter;
+//--------------------------FILTER---------------------------------
 
 //-------------------------------GPS---------------------------------------------
 #define rx_buffer_size 60 //GPS uart 1 recieve NAV-SOL packed size
@@ -118,14 +126,6 @@ bool to_send_gps_nslp_flag = false;
 nslp_instance_t nslp;
 //uint8_t tx_buffer[sizeof(struct Position)]; //transmission size of message
 //--------------------------NSLP--------------------------------------------
-
-//-------------------------------SD_CARD_SPI---------------------------------------------
-static FIL gps_csv_file;
-static FATFS fs_sd;
-static bool sd_initialized = false;
-static uint32_t write_count = 0;
-uint8_t sd_status = 0;
-//-------------------------------SD_CARD_SPI---------------------------------------------
 
 /* USER CODE END PV */
 
@@ -197,6 +197,11 @@ void parse_bno055_data(){
 	if (bno.dma_data_ready) {
 
 		bno055_get_linear_acc(&bno, &accel);
+
+    filtered_accel.x = IIR_LPF_1st_Apply(&accel_x_filter, accel.x);
+    filtered_accel.y = IIR_LPF_1st_Apply(&accel_y_filter, accel.y);
+    filtered_accel.z = IIR_LPF_1st_Apply(&accel_z_filter, accel.z);
+		
 		bno055_get_euler(&bno, &euler);
 		bno055_get_quaternion(&bno, &quat); //orientation
 
@@ -251,152 +256,6 @@ void parse_gps_data(){
 	}
 }
 
-void myprintf(const char *fmt, ...) {
-  static char buffer[256];
-  va_list args;
-  va_start(args, fmt);
-  vsnprintf(buffer, sizeof(buffer), fmt, args);
-  va_end(args);
-
-  int len = strlen(buffer);
-  HAL_UART_Transmit(&huart2, (uint8_t*)buffer, len, -1);
-
-}
-
-void test_sd_card_write(){
-  myprintf("\r\n~ SD card demo by kiwih ~\r\n\r\n");
-
-  HAL_Delay(1000); //a short delay is important to let the SD card settle
-
-  //some variables for FatFs
-  FATFS FatFs; 	//Fatfs handle
-  FIL fil; 		//File handle
-  FRESULT fres; //Result after operations
-
-  //Open the file system
-  fres = f_mount(&FatFs, "", 1); //1=mount now
-  if (fres != FR_OK) {
-	myprintf("f_mount error (%i)\r\n", fres);
-	while(1);
-  }
-
-  //Let's get some statistics from the SD card
-  DWORD free_clusters, free_sectors, total_sectors;
-
-  FATFS* getFreeFs;
-
-  fres = f_getfree("", &free_clusters, &getFreeFs);
-  if (fres != FR_OK) {
-	myprintf("f_getfree error (%i)\r\n", fres);
-	while(1);
-  }
-
-  //Formula comes from ChaN's documentation
-  total_sectors = (getFreeFs->n_fatent - 2) * getFreeFs->csize;
-  free_sectors = free_clusters * getFreeFs->csize;
-
-  myprintf("SD card stats:\r\n%10lu KiB total drive space.\r\n%10lu KiB available.\r\n", total_sectors / 2, free_sectors / 2);
-
-  //Now let's try and write a file "write.txt"
-  fres = f_open(&fil, "write.txt", FA_WRITE | FA_OPEN_ALWAYS | FA_CREATE_ALWAYS);
-  if(fres == FR_OK) {
-	myprintf("I was able to open 'write.txt' for writing\r\n");
-  } else {
-	myprintf("f_open error (%i)\r\n", fres);
-  }
-
-  //Copy in a string
-  BYTE readBuf[30];
-
-  strncpy((char*)readBuf, "a new file is made!", 19);
-  UINT bytesWrote;
-  fres = f_write(&fil, readBuf, 19, &bytesWrote);
-  if(fres == FR_OK) {
-	myprintf("Wrote %i bytes to 'write.txt'!\r\n", bytesWrote);
-  } else {
-	myprintf("f_write error (%i)\r\n");
-  }
-
-  //Be a tidy kiwi - don't forget to close your file!
-  f_close(&fil);
-
-  //We're done, so de-mount the drive
-  f_mount(NULL, "", 0);
-}
-
-/* OPTIMIZED IMPLEMENTATION - PERSISTENT FILE HANDLE, NON-BLOCKING */
-uint8_t save_data_to_SD_SPI(){
-/*
-  Save GPS time data to SD_card_via SPI in CSV format
-  OPTIMIZED: Keeps file open persistently, only writes on new GPS data
-  Prevents I2C blocking by avoiding repeated mount/open operations
-*/
-  FRESULT fres;
-  char buffer[256];
-  unsigned int bytes_written;
-  
-  // Only proceed if new GPS data is available
-  if (!to_send_gps_nslp_flag) {
-    return 0;  // No new data to write
-  }
-  
-  // Initialize SD card on first call only
-  if (!sd_initialized) {
-    fres = f_mount(&fs_sd, "", 0);
-    if (fres != FR_OK) {
-      sd_status = 1;
-      return 1;  // Mount failed
-    }
-    
-    // Open or create CSV file
-    fres = f_open(&gps_csv_file, "GPS_time.csv", FA_WRITE | FA_OPEN_ALWAYS);
-    if (fres != FR_OK) {
-      f_mount(NULL, "", 0);  // Unmount on failure
-      sd_status = 2;
-      return 2;  // File open failed
-    }
-    
-    // Check if file is new (empty) and write header
-    if (f_size(&gps_csv_file) == 0) {
-      sprintf(buffer, "TimeStamp_ms,iTOW_ms,fTOW_ns,GPSWeek,FixType,NumSV\n");
-      f_write(&gps_csv_file, buffer, strlen(buffer), &bytes_written);
-    }
-    
-    // Move to end of file for appending
-    f_lseek(&gps_csv_file, f_size(&gps_csv_file));
-    
-    sd_initialized = true;
-    sd_status = 3;  // SD initialized
-  }
-  
-  // Write GPS time data to persistent file
-  sprintf(buffer, "%lu,%lu,%ld,%d,%u,%u\n",
-          GPS_timeStamp,           // TimeStamp_ms (HAL tick when received)
-          solData.iTOW,            // iTOW - GPS time of week (ms)
-          solData.fTOW,            // fTOW - Fractional part of GPS TOW (ns)
-          solData.week,            // GPS week
-          solData.gpsFix,          // Fix type
-          solData.numSV            // Number of satellites
-  );
-  
-  fres = f_write(&gps_csv_file, buffer, strlen(buffer), &bytes_written);
-  if (fres != FR_OK) {
-    sd_status = 4;  // Write failed
-    return 4;
-  }
-  
-  // Increment write counter and sync to disk periodically (every 10 writes)
-  write_count++;
-  if (write_count >= 10) {
-    f_sync(&gps_csv_file);  // Flush to disk without closing
-    write_count = 0;
-    sd_status = 5;  // Synced
-  }
-  
-  sd_status = 6;  // Data written successfully
-  return 6;
-}
-
 void nslp_transmit_packets(){
 /*
   transmits NSLP packets 
@@ -411,10 +270,10 @@ void nslp_transmit_packets(){
   GPS_nslp_data.numSV = solData.numSV;
   GPS_nslp_data.time = GPS_timeStamp;
 
-  // Copy accelerometer data to transmission structure
-  BNO055_nslp_data_a.ax = accel.x;
-  BNO055_nslp_data_a.ay = accel.y;
-  BNO055_nslp_data_a.az = accel.z;
+// Copy filtered accelerometer data to transmission structure
+  BNO055_nslp_data_a.ax = filtered_accel.x;
+  BNO055_nslp_data_a.ay = filtered_accel.y;
+  BNO055_nslp_data_a.az = filtered_accel.z;
   BNO055_nslp_data_a.time = BNO055_timeStamp;
 
   BNO055_nslp_data_g.gx = euler.pitch;
@@ -509,45 +368,52 @@ int main(void)
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
 
-
-	DWT_Init(); //innitialize library for time measurement in micros
+  //innitialize library for time measurement in micros
+	  DWT_Init(); 
 
 	//------------------------NSLP CODE------------------------
-	nslp_init(&nslp, &huart2, &hcrc, 16, 0xAA);
+	  nslp_init(&nslp, &huart2, &hcrc, 16, 0xAA);
 	//------------------------NSLP CODE------------------------
 
 	//----------------initialize DMA on uart1, rx for GPS-----------
-	__HAL_DMA_ENABLE_IT(&hdma_usart1_rx, DMA_IT_TC | DMA_IT_HT);
-	HAL_UARTEx_ReceiveToIdle_DMA(&huart1, (uint8_t *) rx_buffer, sizeof(rx_buffer));
-	__HAL_DMA_DISABLE_IT(&hdma_usart1_rx,DMA_IT_HT); //DMA half transfer interupt
+    __HAL_DMA_ENABLE_IT(&hdma_usart1_rx, DMA_IT_TC | DMA_IT_HT);
+    HAL_UARTEx_ReceiveToIdle_DMA(&huart1, (uint8_t *) rx_buffer, sizeof(rx_buffer));
+    __HAL_DMA_DISABLE_IT(&hdma_usart1_rx,DMA_IT_HT); //DMA half transfer interupt
 
 	//-----------Initializes BMP180 sensor and oversampling settings.------------
-	BMP180_Init(&hi2c1);
-	BMP180_SetOversampling(BMP180_STANDARD); //BMP180_LOW, BMP180_STANDARD, BMP180_HIGH, BMP180_ULTRA,
+    BMP180_Init(&hi2c1);
+  	BMP180_SetOversampling(BMP180_STANDARD); //BMP180_LOW, BMP180_STANDARD, BMP180_HIGH, BMP180_ULTRA,
 	// Update calibration data. Must be called once before entering main loop.
-	BMP180_UpdateCalibrationData();
+	  BMP180_UpdateCalibrationData();
 
 	//-----------innitialize BNO055 DMA on I2C------------
-	bno.i2c = &hi2c1;
-	bno.addr = BNO_ADDR_ALT;
-	bno.mode = BNO_MODE_NDOF;
-	HAL_Delay(500);
-	if (bno055_init(&bno) != BNO_OK) {
-		uint32_t BNO_timeout = 0;
-		BNO_timeout = HAL_GetTick();
-		while (HAL_GetTick() - BNO_timeout < 5000) { //wait for 5 seconds before trying to initialize again
-      if (bno055_init(&bno) == BNO_OK) {
-        break; //break loop if initialization is successful
+    bno.i2c = &hi2c1;
+    bno.addr = BNO_ADDR_ALT;
+    bno.mode = BNO_MODE_NDOF;
+    HAL_Delay(500);
+    if (bno055_init(&bno) != BNO_OK) {
+      uint32_t BNO_timeout = 0;
+      BNO_timeout = HAL_GetTick();
+      while (HAL_GetTick() - BNO_timeout < 5000) { //wait for 5 seconds before trying to initialize again
+        if (bno055_init(&bno) == BNO_OK) {
+          break; //break loop if initialization is successful
+        }
       }
-		}
-	}
+    }
 
-  //-----------Set BNO055 units and start first DMA read.------------
-	bno055_set_unit(&bno, BNO_TEMP_UNIT_C, BNO_GYR_UNIT_DPS, BNO_ACC_UNITSEL_M_S2, BNO_EUL_UNIT_DEG);
-	bno055_start_dma_read(&bno);
+  //Set BNO055 units and start first DMA read
+    bno055_set_unit(&bno, BNO_TEMP_UNIT_C, BNO_GYR_UNIT_DPS, BNO_ACC_UNITSEL_M_S2, BNO_EUL_UNIT_DEG);
+    bno055_start_dma_read(&bno);
+
+  //innitialize the filters for the accelerometer data
+    float cutoff = 10; // 10Hz cutoff frequency for accelerometer data
+    float sample_rate = 100; // 100Hz sample rate for accelerometer data
+    IIR_LPF_1st_Init(&accel_x_filter, cutoff, sample_rate);  
+    IIR_LPF_1st_Init(&accel_y_filter, cutoff, sample_rate);
+    IIR_LPF_1st_Init(&accel_z_filter, cutoff, sample_rate);
 
   //------------------------TEST SD CARD WRITE------------------------
-  test_sd_card_write();
+    test_sd_card_write(&huart2);
 
   /* USER CODE END 2 */
 
@@ -555,8 +421,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 	while (1)
 	{
-
-
 		// parse_gps_data();
 		// parse_bno055_data();
 		// poll_n_parse_bmp180_data();
