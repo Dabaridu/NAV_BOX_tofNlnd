@@ -1,0 +1,51 @@
+classdef KF3 < matlab.System
+    % KF Add summary here
+    %
+    % This template includes the minimum set of functions required
+    % to define a System object.
+
+    % Public, tunable properties
+    properties
+        %model specific
+
+        Ts = 1;
+
+        x_estmate = [0 0 0]'; %innitialize state vector of [pos, vel, acc]
+        x_predict = [0 0 0]';
+        E = [0 0 0]'; %innitialize standard deviation of state estimation error
+
+        F = [1 0 0; 0 1 0; 0 0 1]; %innitialize system dynamics matrix in state space
+
+        Q = 1e-6*eye(3); %innitialize system covariance matrix of proccess noise
+        
+        P = 1e6*eye(3); %innitialize covariance matrix of state estimation error
+
+        %measurement specific
+        %sensorID = struct('H', H, 'R', R)
+        % R - measurement noise covariance matrix
+        % H - system measurement matrix
+
+    end
+
+    % Pre-computed constants or internal states
+    properties (Access = private)
+        
+    end
+
+    methods (Access = protected)
+        %choose method based on filter structure you want to use
+        function kalman_predict_3(Ts) 
+            %Basic x,v,a estimation 
+            %-----------For this specific filter 
+            F = [1 Ts Ts^2/2; 
+                0  1   Ts;
+                0  0     1]
+
+            Q = [obj.Ts^4/4 obj.Ts^3/2 obj.Ts^2/2; 
+                obj.Ts^3/2 obj.Ts^2    obj.Ts;
+                obj.Ts^2/2 obj.Ts      1]
+        end
+    end
+end
+
+

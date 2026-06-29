@@ -22779,3 +22779,1458 @@ Finished building: default.size.stdout
  
 Finished building: NAV_BOX.list
  
+17:57:50 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:254:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  254 |                         return 0;
+      |                                ^
+../Core/Src/main.c:234:6: note: declared here
+  234 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:243:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  243 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  48188	    492	   3564	  52244	   cc14	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+15:34:53 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:15:3: warning: implicit declaration of function 'vsnprintf' [-Wimplicit-function-declaration]
+   15 |   vsnprintf(buffer, sizeof(buffer), fmt, args);
+      |   ^~~~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<stdio.h>' or provide a declaration of 'vsnprintf'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdio.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:18:13: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:67:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:67:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c: At top level:
+../Core/Src/sd_black_box.c:83:9: error: conflicting types for 'sd_card_meas_init'; have 'uint8_t(uint32_t *, uint32_t *)' {aka 'unsigned char(long unsigned int *, long unsigned int *)'}
+   83 | uint8_t sd_card_meas_init(uint32_t *filename, uint32_t *data_header) {
+      |         ^~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/sd_black_box.c:1:
+../Core/Inc/sd_black_box.h:14:9: note: previous declaration of 'sd_card_meas_init' with type 'uint8_t(uint32_t *)' {aka 'unsigned char(long unsigned int *)'}
+   14 | uint8_t sd_card_meas_init(uint32_t *filename);
+      |         ^~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: In function 'sd_card_meas_init':
+../Core/Src/sd_black_box.c:94:15: error: 'FIL' has no member named 'obj'
+   94 |   if (csv_file.obj.fs) {
+      |               ^
+../Core/Src/sd_black_box.c: In function 'write_to_sd':
+../Core/Src/sd_black_box.c:114:35: error: 'FIL' has no member named 'obj'
+  114 |   if (!sd_initialized || !csv_file.obj.fs || buffer == NULL || length == 0) {
+      |                                   ^
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:67:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/sd_black_box.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:254:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  254 |                         return 0;
+      |                                ^
+../Core/Src/main.c:234:6: note: declared here
+  234 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:243:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  243 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+15:36:04 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:15:3: warning: implicit declaration of function 'vsnprintf' [-Wimplicit-function-declaration]
+   15 |   vsnprintf(buffer, sizeof(buffer), fmt, args);
+      |   ^~~~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<stdio.h>' or provide a declaration of 'vsnprintf'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdio.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:18:13: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:67:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:67:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c: At top level:
+../Core/Src/sd_black_box.c:83:9: error: conflicting types for 'sd_card_meas_init'; have 'uint8_t(uint32_t *, uint32_t *)' {aka 'unsigned char(long unsigned int *, long unsigned int *)'}
+   83 | uint8_t sd_card_meas_init(uint32_t *filename, uint32_t *data_header) {
+      |         ^~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/sd_black_box.c:1:
+../Core/Inc/sd_black_box.h:14:9: note: previous declaration of 'sd_card_meas_init' with type 'uint8_t(uint32_t *)' {aka 'unsigned char(long unsigned int *)'}
+   14 | uint8_t sd_card_meas_init(uint32_t *filename);
+      |         ^~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: In function 'sd_card_meas_init':
+../Core/Src/sd_black_box.c:94:15: error: 'FIL' has no member named 'obj'
+   94 |   if (csv_file.obj.fs) {
+      |               ^
+../Core/Src/sd_black_box.c: In function 'write_to_sd':
+../Core/Src/sd_black_box.c:114:35: error: 'FIL' has no member named 'obj'
+  114 |   if (!sd_initialized || !csv_file.obj.fs || buffer == NULL || length == 0) {
+      |                                   ^
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:67:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/sd_black_box.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:254:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  254 |                         return 0;
+      |                                ^
+../Core/Src/main.c:234:6: note: declared here
+  234 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:243:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  243 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:368:3: warning: implicit declaration of function 'MX_FATFS_Init' [-Wimplicit-function-declaration]
+  368 |   MX_FATFS_Init();
+      |   ^~~~~~~~~~~~~
+../Core/Src/main.c:416:5: warning: implicit declaration of function 'test_sd_card_write' [-Wimplicit-function-declaration]
+  416 |     test_sd_card_write(&huart2);
+      |     ^~~~~~~~~~~~~~~~~~
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+15:36:16 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:15:3: warning: implicit declaration of function 'vsnprintf' [-Wimplicit-function-declaration]
+   15 |   vsnprintf(buffer, sizeof(buffer), fmt, args);
+      |   ^~~~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<stdio.h>' or provide a declaration of 'vsnprintf'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdio.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:18:13: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:67:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:67:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c: At top level:
+../Core/Src/sd_black_box.c:83:9: error: conflicting types for 'sd_card_meas_init'; have 'uint8_t(uint32_t *, uint32_t *)' {aka 'unsigned char(long unsigned int *, long unsigned int *)'}
+   83 | uint8_t sd_card_meas_init(uint32_t *filename, uint32_t *data_header) {
+      |         ^~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/sd_black_box.c:1:
+../Core/Inc/sd_black_box.h:14:9: note: previous declaration of 'sd_card_meas_init' with type 'uint8_t(uint32_t *)' {aka 'unsigned char(long unsigned int *)'}
+   14 | uint8_t sd_card_meas_init(uint32_t *filename);
+      |         ^~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: In function 'sd_card_meas_init':
+../Core/Src/sd_black_box.c:94:15: error: 'FIL' has no member named 'obj'
+   94 |   if (csv_file.obj.fs) {
+      |               ^
+../Core/Src/sd_black_box.c: In function 'write_to_sd':
+../Core/Src/sd_black_box.c:114:35: error: 'FIL' has no member named 'obj'
+  114 |   if (!sd_initialized || !csv_file.obj.fs || buffer == NULL || length == 0) {
+      |                                   ^
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:67:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/sd_black_box.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+15:37:59 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c: In function 'myprintf':
+../Core/Src/sd_black_box.c:15:3: warning: implicit declaration of function 'vsnprintf' [-Wimplicit-function-declaration]
+   15 |   vsnprintf(buffer, sizeof(buffer), fmt, args);
+      |   ^~~~~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<stdio.h>' or provide a declaration of 'vsnprintf'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <stdio.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:2:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    1 | #include "sd_black_box.h"
+  +++ |+#include <string.h>
+    2 | 
+../Core/Src/sd_black_box.c:18:13: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   18 |   int len = strlen(buffer);
+      |             ^~~~~~
+../Core/Src/sd_black_box.c:18:13: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:67:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:67:3: warning: incompatible implicit declaration of built-in function 'strncpy' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sd_black_box.c:67:3: note: include '<string.h>' or provide a declaration of 'strncpy'
+../Core/Src/sd_black_box.c:67:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   67 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:254:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  254 |                         return 0;
+      |                                ^
+../Core/Src/main.c:234:6: note: declared here
+  234 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:243:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  243 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  60428	    548	   3896	  64872	   fd68	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+15:38:07 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  60428	    548	   3896	  64872	   fd68	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+15:38:29 **** Clean-only build of configuration Debug for project testboardrb ****
+make -j12 clean 
+rm -rf ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.cyclo ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.o ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.su ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.cyclo ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.o ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.su ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_crc.cyclo ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_crc.d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_crc.o ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_crc.su ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_crc_ex.cyclo ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_crc_ex.d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_crc_ex.o ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_crc_ex.su ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.cyclo ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.o ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.su ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.cyclo ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.o ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.su ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.cyclo ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.o ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.su ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.cyclo ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.o ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.su ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.cyclo ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.o ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.su ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.cyclo ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.o ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.su ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.cyclo ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.o ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.su ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c.cyclo ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c.d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c.o ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c.su ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c_ex.cyclo ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c_ex.d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c_ex.o ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c_ex.su ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.cyclo ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.o ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.su ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.cyclo ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.o ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.su ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.cyclo ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.o ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.su ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.cyclo ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.o ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.su ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.cyclo ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.o ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.su ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.cyclo ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.d ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.o ./Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.su
+rm -rf ./Core/Startup/startup_stm32g431rbtx.d ./Core/Startup/startup_stm32g431rbtx.o
+rm -rf ./Core/Src/autorun.cyclo ./Core/Src/autorun.d ./Core/Src/autorun.o ./Core/Src/autorun.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/nslp_dma.cyclo ./Core/Src/nslp_dma.d ./Core/Src/nslp_dma.o ./Core/Src/nslp_dma.su ./Core/Src/payloads.cyclo ./Core/Src/payloads.d ./Core/Src/payloads.o ./Core/Src/payloads.su ./Core/Src/pte7300.cyclo ./Core/Src/pte7300.d ./Core/Src/pte7300.o ./Core/Src/pte7300.su ./Core/Src/stm32g4xx_hal_msp.cyclo ./Core/Src/stm32g4xx_hal_msp.d ./Core/Src/stm32g4xx_hal_msp.o ./Core/Src/stm32g4xx_hal_msp.su ./Core/Src/stm32g4xx_it.cyclo ./Core/Src/stm32g4xx_it.d ./Core/Src/stm32g4xx_it.o ./Core/Src/stm32g4xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32g4xx.cyclo ./Core/Src/system_stm32g4xx.d ./Core/Src/system_stm32g4xx.o ./Core/Src/system_stm32g4xx.su ./Core/Src/valve.cyclo ./Core/Src/valve.d ./Core/Src/valve.o ./Core/Src/valve.su
+rm -rf default.size.stdout testboardrb.elf testboardrb.list testboardrb.map
+ 
+15:38:29 **** Build of configuration Debug for project testboardrb ****
+make -j12 all 
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_crc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_crc.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_crc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_crc.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_crc_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_crc_ex.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_crc_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_crc_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c_ex.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2c_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.o"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Startup/startup_stm32g431rbtx.d" -MT"Core/Startup/startup_stm32g431rbtx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Startup/startup_stm32g431rbtx.o" "../Core/Startup/startup_stm32g431rbtx.s"
+arm-none-eabi-gcc "../Core/Src/autorun.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/autorun.d" -MT"Core/Src/autorun.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/autorun.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/nslp_dma.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/nslp_dma.d" -MT"Core/Src/nslp_dma.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/nslp_dma.o"
+arm-none-eabi-gcc "../Core/Src/payloads.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/payloads.d" -MT"Core/Src/payloads.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/payloads.o"
+arm-none-eabi-gcc "../Core/Src/pte7300.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/pte7300.d" -MT"Core/Src/pte7300.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/pte7300.o"
+In file included from ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h:111,
+                 from ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h:29,
+                 from ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32g4xx_hal_conf.h:212,
+                 from ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1132:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1132 | #define GPIOA               ((GPIO_TypeDef *) GPIOA_BASE)
+      |                             ^
+../Core/Src/main.c:89:32: note: in expansion of macro 'GPIOA'
+   89 | Solenoid air1 = { GPIO_PIN_15, GPIOA, GPIO_PIN_1, GPIOC, GPIO_PIN_0, GPIOC, 0, 0 };
+      |                                ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1132:29: note: (near initialization for 'air1.onbus')
+ 1132 | #define GPIOA               ((GPIO_TypeDef *) GPIOA_BASE)
+      |                             ^
+../Core/Src/main.c:89:32: note: in expansion of macro 'GPIOA'
+   89 | Solenoid air1 = { GPIO_PIN_15, GPIOA, GPIO_PIN_1, GPIOC, GPIO_PIN_0, GPIOC, 0, 0 };
+      |                                ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1134:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1134 | #define GPIOC               ((GPIO_TypeDef *) GPIOC_BASE)
+      |                             ^
+../Core/Src/main.c:89:51: note: in expansion of macro 'GPIOC'
+   89 | Solenoid air1 = { GPIO_PIN_15, GPIOA, GPIO_PIN_1, GPIOC, GPIO_PIN_0, GPIOC, 0, 0 };
+      |                                                   ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1134:29: note: (near initialization for 'air1.conBus')
+ 1134 | #define GPIOC               ((GPIO_TypeDef *) GPIOC_BASE)
+      |                             ^
+../Core/Src/main.c:89:51: note: in expansion of macro 'GPIOC'
+   89 | Solenoid air1 = { GPIO_PIN_15, GPIOA, GPIO_PIN_1, GPIOC, GPIO_PIN_0, GPIOC, 0, 0 };
+      |                                                   ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1134:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1134 | #define GPIOC               ((GPIO_TypeDef *) GPIOC_BASE)
+      |                             ^
+../Core/Src/main.c:89:70: note: in expansion of macro 'GPIOC'
+   89 | Solenoid air1 = { GPIO_PIN_15, GPIOA, GPIO_PIN_1, GPIOC, GPIO_PIN_0, GPIOC, 0, 0 };
+      |                                                                      ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1134:29: note: (near initialization for 'air1.funBus')
+ 1134 | #define GPIOC               ((GPIO_TypeDef *) GPIOC_BASE)
+      |                             ^
+../Core/Src/main.c:89:70: note: in expansion of macro 'GPIOC'
+   89 | Solenoid air1 = { GPIO_PIN_15, GPIOA, GPIO_PIN_1, GPIOC, GPIO_PIN_0, GPIOC, 0, 0 };
+      |                                                                      ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1134:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1134 | #define GPIOC               ((GPIO_TypeDef *) GPIOC_BASE)
+      |                             ^
+../Core/Src/main.c:90:32: note: in expansion of macro 'GPIOC'
+   90 | Solenoid air2 = { GPIO_PIN_10, GPIOC, GPIO_PIN_3, GPIOC, GPIO_PIN_2, GPIOC, 0, 0 };
+      |                                ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1134:29: note: (near initialization for 'air2.onbus')
+ 1134 | #define GPIOC               ((GPIO_TypeDef *) GPIOC_BASE)
+      |                             ^
+../Core/Src/main.c:90:32: note: in expansion of macro 'GPIOC'
+   90 | Solenoid air2 = { GPIO_PIN_10, GPIOC, GPIO_PIN_3, GPIOC, GPIO_PIN_2, GPIOC, 0, 0 };
+      |                                ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1134:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1134 | #define GPIOC               ((GPIO_TypeDef *) GPIOC_BASE)
+      |                             ^
+../Core/Src/main.c:90:51: note: in expansion of macro 'GPIOC'
+   90 | Solenoid air2 = { GPIO_PIN_10, GPIOC, GPIO_PIN_3, GPIOC, GPIO_PIN_2, GPIOC, 0, 0 };
+      |                                                   ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1134:29: note: (near initialization for 'air2.conBus')
+ 1134 | #define GPIOC               ((GPIO_TypeDef *) GPIOC_BASE)
+      |                             ^
+../Core/Src/main.c:90:51: note: in expansion of macro 'GPIOC'
+   90 | Solenoid air2 = { GPIO_PIN_10, GPIOC, GPIO_PIN_3, GPIOC, GPIO_PIN_2, GPIOC, 0, 0 };
+      |                                                   ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1134:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1134 | #define GPIOC               ((GPIO_TypeDef *) GPIOC_BASE)
+      |                             ^
+../Core/Src/main.c:90:70: note: in expansion of macro 'GPIOC'
+   90 | Solenoid air2 = { GPIO_PIN_10, GPIOC, GPIO_PIN_3, GPIOC, GPIO_PIN_2, GPIOC, 0, 0 };
+      |                                                                      ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1134:29: note: (near initialization for 'air2.funBus')
+ 1134 | #define GPIOC               ((GPIO_TypeDef *) GPIOC_BASE)
+      |                             ^
+../Core/Src/main.c:90:70: note: in expansion of macro 'GPIOC'
+   90 | Solenoid air2 = { GPIO_PIN_10, GPIOC, GPIO_PIN_3, GPIOC, GPIO_PIN_2, GPIOC, 0, 0 };
+      |                                                                      ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1134:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1134 | #define GPIOC               ((GPIO_TypeDef *) GPIOC_BASE)
+      |                             ^
+../Core/Src/main.c:91:32: note: in expansion of macro 'GPIOC'
+   91 | Solenoid liq1 = { GPIO_PIN_11, GPIOC, GPIO_PIN_1, GPIOA, GPIO_PIN_0, GPIOA, 0, 0 };
+      |                                ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1134:29: note: (near initialization for 'liq1.onbus')
+ 1134 | #define GPIOC               ((GPIO_TypeDef *) GPIOC_BASE)
+      |                             ^
+../Core/Src/main.c:91:32: note: in expansion of macro 'GPIOC'
+   91 | Solenoid liq1 = { GPIO_PIN_11, GPIOC, GPIO_PIN_1, GPIOA, GPIO_PIN_0, GPIOA, 0, 0 };
+      |                                ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1132:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1132 | #define GPIOA               ((GPIO_TypeDef *) GPIOA_BASE)
+      |                             ^
+../Core/Src/main.c:91:51: note: in expansion of macro 'GPIOA'
+   91 | Solenoid liq1 = { GPIO_PIN_11, GPIOC, GPIO_PIN_1, GPIOA, GPIO_PIN_0, GPIOA, 0, 0 };
+      |                                                   ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1132:29: note: (near initialization for 'liq1.conBus')
+ 1132 | #define GPIOA               ((GPIO_TypeDef *) GPIOA_BASE)
+      |                             ^
+../Core/Src/main.c:91:51: note: in expansion of macro 'GPIOA'
+   91 | Solenoid liq1 = { GPIO_PIN_11, GPIOC, GPIO_PIN_1, GPIOA, GPIO_PIN_0, GPIOA, 0, 0 };
+      |                                                   ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1132:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1132 | #define GPIOA               ((GPIO_TypeDef *) GPIOA_BASE)
+      |                             ^
+../Core/Src/main.c:91:70: note: in expansion of macro 'GPIOA'
+   91 | Solenoid liq1 = { GPIO_PIN_11, GPIOC, GPIO_PIN_1, GPIOA, GPIO_PIN_0, GPIOA, 0, 0 };
+      |                                                                      ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1132:29: note: (near initialization for 'liq1.funBus')
+ 1132 | #define GPIOA               ((GPIO_TypeDef *) GPIOA_BASE)
+      |                             ^
+../Core/Src/main.c:91:70: note: in expansion of macro 'GPIOA'
+   91 | Solenoid liq1 = { GPIO_PIN_11, GPIOC, GPIO_PIN_1, GPIOA, GPIO_PIN_0, GPIOA, 0, 0 };
+      |                                                                      ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1134:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1134 | #define GPIOC               ((GPIO_TypeDef *) GPIOC_BASE)
+      |                             ^
+../Core/Src/main.c:92:32: note: in expansion of macro 'GPIOC'
+   92 | Solenoid liq2 = { GPIO_PIN_12, GPIOC, GPIO_PIN_3, GPIOA, GPIO_PIN_2, GPIOA, 0, 0 };
+      |                                ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1134:29: note: (near initialization for 'liq2.onbus')
+ 1134 | #define GPIOC               ((GPIO_TypeDef *) GPIOC_BASE)
+      |                             ^
+../Core/Src/main.c:92:32: note: in expansion of macro 'GPIOC'
+   92 | Solenoid liq2 = { GPIO_PIN_12, GPIOC, GPIO_PIN_3, GPIOA, GPIO_PIN_2, GPIOA, 0, 0 };
+      |                                ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1132:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1132 | #define GPIOA               ((GPIO_TypeDef *) GPIOA_BASE)
+      |                             ^
+../Core/Src/main.c:92:51: note: in expansion of macro 'GPIOA'
+   92 | Solenoid liq2 = { GPIO_PIN_12, GPIOC, GPIO_PIN_3, GPIOA, GPIO_PIN_2, GPIOA, 0, 0 };
+      |                                                   ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1132:29: note: (near initialization for 'liq2.conBus')
+ 1132 | #define GPIOA               ((GPIO_TypeDef *) GPIOA_BASE)
+      |                             ^
+../Core/Src/main.c:92:51: note: in expansion of macro 'GPIOA'
+arm-none-eabi-gcc "../Core/Src/stm32g4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32g4xx_hal_msp.d" -MT"Core/Src/stm32g4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32g4xx_hal_msp.o"
+   92 | Solenoid liq2 = { GPIO_PIN_12, GPIOC, GPIO_PIN_3, GPIOA, GPIO_PIN_2, GPIOA, 0, 0 };
+      |                                                   ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1132:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1132 | #define GPIOA               ((GPIO_TypeDef *) GPIOA_BASE)
+      |                             ^
+../Core/Src/main.c:92:70: note: in expansion of macro 'GPIOA'
+   92 | Solenoid liq2 = { GPIO_PIN_12, GPIOC, GPIO_PIN_3, GPIOA, GPIO_PIN_2, GPIOA, 0, 0 };
+      |                                                                      ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1132:29: note: (near initialization for 'liq2.funBus')
+ 1132 | #define GPIOA               ((GPIO_TypeDef *) GPIOA_BASE)
+      |                             ^
+../Core/Src/main.c:92:70: note: in expansion of macro 'GPIOA'
+   92 | Solenoid liq2 = { GPIO_PIN_12, GPIOC, GPIO_PIN_3, GPIOA, GPIO_PIN_2, GPIOA, 0, 0 };
+      |                                                                      ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1135:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1135 | #define GPIOD               ((GPIO_TypeDef *) GPIOD_BASE)
+      |                             ^
+../Core/Src/main.c:93:31: note: in expansion of macro 'GPIOD'
+   93 | Solenoid ven1 = { GPIO_PIN_2, GPIOD, GPIO_PIN_5, GPIOA, GPIO_PIN_4, GPIOA, 0, 0 };
+      |                               ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1135:29: note: (near initialization for 'ven1.onbus')
+ 1135 | #define GPIOD               ((GPIO_TypeDef *) GPIOD_BASE)
+      |                             ^
+../Core/Src/main.c:93:31: note: in expansion of macro 'GPIOD'
+   93 | Solenoid ven1 = { GPIO_PIN_2, GPIOD, GPIO_PIN_5, GPIOA, GPIO_PIN_4, GPIOA, 0, 0 };
+      |                               ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1132:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1132 | #define GPIOA               ((GPIO_TypeDef *) GPIOA_BASE)
+      |                             ^
+../Core/Src/main.c:93:50: note: in expansion of macro 'GPIOA'
+   93 | Solenoid ven1 = { GPIO_PIN_2, GPIOD, GPIO_PIN_5, GPIOA, GPIO_PIN_4, GPIOA, 0, 0 };
+      |                                                  ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1132:29: note: (near initialization for 'ven1.conBus')
+ 1132 | #define GPIOA               ((GPIO_TypeDef *) GPIOA_BASE)
+      |                             ^
+../Core/Src/main.c:93:50: note: in expansion of macro 'GPIOA'
+arm-none-eabi-gcc "../Core/Src/stm32g4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32g4xx_it.d" -MT"Core/Src/stm32g4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32g4xx_it.o"
+   93 | Solenoid ven1 = { GPIO_PIN_2, GPIOD, GPIO_PIN_5, GPIOA, GPIO_PIN_4, GPIOA, 0, 0 };
+      |                                                  ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1132:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1132 | #define GPIOA               ((GPIO_TypeDef *) GPIOA_BASE)
+      |                             ^
+../Core/Src/main.c:93:69: note: in expansion of macro 'GPIOA'
+   93 | Solenoid ven1 = { GPIO_PIN_2, GPIOD, GPIO_PIN_5, GPIOA, GPIO_PIN_4, GPIOA, 0, 0 };
+      |                                                                     ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1132:29: note: (near initialization for 'ven1.funBus')
+ 1132 | #define GPIOA               ((GPIO_TypeDef *) GPIOA_BASE)
+      |                             ^
+../Core/Src/main.c:93:69: note: in expansion of macro 'GPIOA'
+   93 | Solenoid ven1 = { GPIO_PIN_2, GPIOD, GPIO_PIN_5, GPIOA, GPIO_PIN_4, GPIOA, 0, 0 };
+      |                                                                     ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1133:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1133 | #define GPIOB               ((GPIO_TypeDef *) GPIOB_BASE)
+      |                             ^
+../Core/Src/main.c:94:31: note: in expansion of macro 'GPIOB'
+   94 | Solenoid ven2 = { GPIO_PIN_3, GPIOB, GPIO_PIN_7, GPIOA, GPIO_PIN_6, GPIOA, 0, 0 };
+      |                               ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1133:29: note: (near initialization for 'ven2.onbus')
+arm-none-eabi-gcc "../Core/Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/syscalls.d" -MT"Core/Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/syscalls.o"
+ 1133 | #define GPIOB               ((GPIO_TypeDef *) GPIOB_BASE)
+      |                             ^
+../Core/Src/main.c:94:31: note: in expansion of macro 'GPIOB'
+   94 | Solenoid ven2 = { GPIO_PIN_3, GPIOB, GPIO_PIN_7, GPIOA, GPIO_PIN_6, GPIOA, 0, 0 };
+arm-none-eabi-gcc "../Core/Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sysmem.d" -MT"Core/Src/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sysmem.o"
+      |                               ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1132:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1132 | #define GPIOA               ((GPIO_TypeDef *) GPIOA_BASE)
+      |                             ^
+../Core/Src/main.c:94:50: note: in expansion of macro 'GPIOA'
+   94 | Solenoid ven2 = { GPIO_PIN_3, GPIOB, GPIO_PIN_7, GPIOA, GPIO_PIN_6, GPIOA, 0, 0 };
+      |                                                  ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1132:29: note: (near initialization for 'ven2.conBus')
+arm-none-eabi-gcc "../Core/Src/system_stm32g4xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/system_stm32g4xx.d" -MT"Core/Src/system_stm32g4xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32g4xx.o"
+ 1132 | #define GPIOA               ((GPIO_TypeDef *) GPIOA_BASE)
+arm-none-eabi-gcc "../Core/Src/valve.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G431xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/valve.d" -MT"Core/Src/valve.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/valve.o"
+      |                             ^
+../Core/Src/main.c:94:50: note: in expansion of macro 'GPIOA'
+   94 | Solenoid ven2 = { GPIO_PIN_3, GPIOB, GPIO_PIN_7, GPIOA, GPIO_PIN_6, GPIOA, 0, 0 };
+      |                                                  ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1132:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1132 | #define GPIOA               ((GPIO_TypeDef *) GPIOA_BASE)
+      |                             ^
+../Core/Src/main.c:94:69: note: in expansion of macro 'GPIOA'
+   94 | Solenoid ven2 = { GPIO_PIN_3, GPIOB, GPIO_PIN_7, GPIOA, GPIO_PIN_6, GPIOA, 0, 0 };
+      |                                                                     ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1132:29: note: (near initialization for 'ven2.funBus')
+ 1132 | #define GPIOA               ((GPIO_TypeDef *) GPIOA_BASE)
+      |                             ^
+../Core/Src/main.c:94:69: note: in expansion of macro 'GPIOA'
+   94 | Solenoid ven2 = { GPIO_PIN_3, GPIOB, GPIO_PIN_7, GPIOA, GPIO_PIN_6, GPIOA, 0, 0 };
+      |                                                                     ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1133:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1133 | #define GPIOB               ((GPIO_TypeDef *) GPIOB_BASE)
+      |                             ^
+../Core/Src/main.c:95:31: note: in expansion of macro 'GPIOB'
+   95 | Solenoid NoCo = { GPIO_PIN_4, GPIOB, GPIO_PIN_1, GPIOB, GPIO_PIN_0, GPIOB, 0, 0 };
+      |                               ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1133:29: note: (near initialization for 'NoCo.onbus')
+ 1133 | #define GPIOB               ((GPIO_TypeDef *) GPIOB_BASE)
+      |                             ^
+../Core/Src/main.c:95:31: note: in expansion of macro 'GPIOB'
+   95 | Solenoid NoCo = { GPIO_PIN_4, GPIOB, GPIO_PIN_1, GPIOB, GPIO_PIN_0, GPIOB, 0, 0 };
+      |                               ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1133:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1133 | #define GPIOB               ((GPIO_TypeDef *) GPIOB_BASE)
+      |                             ^
+../Core/Src/main.c:95:50: note: in expansion of macro 'GPIOB'
+   95 | Solenoid NoCo = { GPIO_PIN_4, GPIOB, GPIO_PIN_1, GPIOB, GPIO_PIN_0, GPIOB, 0, 0 };
+      |                                                  ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1133:29: note: (near initialization for 'NoCo.conBus')
+ 1133 | #define GPIOB               ((GPIO_TypeDef *) GPIOB_BASE)
+      |                             ^
+../Core/Src/main.c:95:50: note: in expansion of macro 'GPIOB'
+   95 | Solenoid NoCo = { GPIO_PIN_4, GPIOB, GPIO_PIN_1, GPIOB, GPIO_PIN_0, GPIOB, 0, 0 };
+      |                                                  ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1133:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1133 | #define GPIOB               ((GPIO_TypeDef *) GPIOB_BASE)
+      |                             ^
+../Core/Src/main.c:95:69: note: in expansion of macro 'GPIOB'
+   95 | Solenoid NoCo = { GPIO_PIN_4, GPIOB, GPIO_PIN_1, GPIOB, GPIO_PIN_0, GPIOB, 0, 0 };
+      |                                                                     ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1133:29: note: (near initialization for 'NoCo.funBus')
+ 1133 | #define GPIOB               ((GPIO_TypeDef *) GPIOB_BASE)
+      |                             ^
+../Core/Src/main.c:95:69: note: in expansion of macro 'GPIOB'
+   95 | Solenoid NoCo = { GPIO_PIN_4, GPIOB, GPIO_PIN_1, GPIOB, GPIO_PIN_0, GPIOB, 0, 0 };
+      |                                                                     ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1133:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1133 | #define GPIOB               ((GPIO_TypeDef *) GPIOB_BASE)
+      |                             ^
+../Core/Src/main.c:96:29: note: in expansion of macro 'GPIOB'
+   96 | Ignitor ig1 = { GPIO_PIN_5, GPIOB, GPIO_PIN_10, GPIOB, GPIO_PIN_2, GPIOB, 0, 0 };
+      |                             ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1133:29: note: (near initialization for 'ig1.onbus')
+ 1133 | #define GPIOB               ((GPIO_TypeDef *) GPIOB_BASE)
+      |                             ^
+../Core/Src/main.c:96:29: note: in expansion of macro 'GPIOB'
+   96 | Ignitor ig1 = { GPIO_PIN_5, GPIOB, GPIO_PIN_10, GPIOB, GPIO_PIN_2, GPIOB, 0, 0 };
+      |                             ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1133:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1133 | #define GPIOB               ((GPIO_TypeDef *) GPIOB_BASE)
+      |                             ^
+../Core/Src/main.c:96:49: note: in expansion of macro 'GPIOB'
+   96 | Ignitor ig1 = { GPIO_PIN_5, GPIOB, GPIO_PIN_10, GPIOB, GPIO_PIN_2, GPIOB, 0, 0 };
+      |                                                 ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1133:29: note: (near initialization for 'ig1.conBus')
+ 1133 | #define GPIOB               ((GPIO_TypeDef *) GPIOB_BASE)
+      |                             ^
+../Core/Src/main.c:96:49: note: in expansion of macro 'GPIOB'
+   96 | Ignitor ig1 = { GPIO_PIN_5, GPIOB, GPIO_PIN_10, GPIOB, GPIO_PIN_2, GPIOB, 0, 0 };
+      |                                                 ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1133:29: warning: initialization of 'int' from 'GPIO_TypeDef *' makes integer from pointer without a cast [-Wint-conversion]
+ 1133 | #define GPIOB               ((GPIO_TypeDef *) GPIOB_BASE)
+      |                             ^
+../Core/Src/main.c:96:68: note: in expansion of macro 'GPIOB'
+   96 | Ignitor ig1 = { GPIO_PIN_5, GPIOB, GPIO_PIN_10, GPIOB, GPIO_PIN_2, GPIOB, 0, 0 };
+      |                                                                    ^~~~~
+../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:1133:29: note: (near initialization for 'ig1.funBus')
+ 1133 | #define GPIOB               ((GPIO_TypeDef *) GPIOB_BASE)
+      |                             ^
+../Core/Src/main.c:96:68: note: in expansion of macro 'GPIOB'
+   96 | Ignitor ig1 = { GPIO_PIN_5, GPIOB, GPIO_PIN_10, GPIOB, GPIO_PIN_2, GPIOB, 0, 0 };
+      |                                                                    ^~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:291:65: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  291 |                 (byPayload1 & (1 << 0)) ? HAL_GPIO_WritePin(air1.onbus, air1.onpin, 1) : HAL_GPIO_WritePin(air1.onbus, air1.onpin, 0);
+      |                                                             ~~~~^~~~~~
+      |                                                                 |
+      |                                                                 int
+In file included from ../Core/Inc/stm32g4xx_hal_conf.h:216:
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:291:112: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  291 |                 (byPayload1 & (1 << 0)) ? HAL_GPIO_WritePin(air1.onbus, air1.onpin, 1) : HAL_GPIO_WritePin(air1.onbus, air1.onpin, 0);
+      |                                                                                                            ~~~~^~~~~~
+      |                                                                                                                |
+      |                                                                                                                int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:292:65: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  292 |                 (byPayload1 & (1 << 1)) ? HAL_GPIO_WritePin(air2.onbus, air2.onpin, 1) : HAL_GPIO_WritePin(air2.onbus, air2.onpin, 0);
+      |                                                             ~~~~^~~~~~
+      |                                                                 |
+      |                                                                 int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:292:112: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  292 |                 (byPayload1 & (1 << 1)) ? HAL_GPIO_WritePin(air2.onbus, air2.onpin, 1) : HAL_GPIO_WritePin(air2.onbus, air2.onpin, 0);
+      |                                                                                                            ~~~~^~~~~~
+      |                                                                                                                |
+      |                                                                                                                int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:293:65: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  293 |                 (byPayload1 & (1 << 2)) ? HAL_GPIO_WritePin(liq1.onbus, liq1.onpin, 1) : HAL_GPIO_WritePin(liq1.onbus, liq1.onpin, 0);
+      |                                                             ~~~~^~~~~~
+      |                                                                 |
+      |                                                                 int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:293:112: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  293 |                 (byPayload1 & (1 << 2)) ? HAL_GPIO_WritePin(liq1.onbus, liq1.onpin, 1) : HAL_GPIO_WritePin(liq1.onbus, liq1.onpin, 0);
+      |                                                                                                            ~~~~^~~~~~
+      |                                                                                                                |
+      |                                                                                                                int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:294:65: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  294 |                 (byPayload1 & (1 << 3)) ? HAL_GPIO_WritePin(liq2.onbus, liq2.onpin, 1) : HAL_GPIO_WritePin(liq2.onbus, liq2.onpin, 0);
+      |                                                             ~~~~^~~~~~
+      |                                                                 |
+      |                                                                 int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:294:112: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  294 |                 (byPayload1 & (1 << 3)) ? HAL_GPIO_WritePin(liq2.onbus, liq2.onpin, 1) : HAL_GPIO_WritePin(liq2.onbus, liq2.onpin, 0);
+      |                                                                                                            ~~~~^~~~~~
+      |                                                                                                                |
+      |                                                                                                                int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:295:65: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  295 |                 (byPayload1 & (1 << 4)) ? HAL_GPIO_WritePin(ven1.onbus, ven1.onpin, 1) : HAL_GPIO_WritePin(ven1.onbus, ven1.onpin, 0);
+      |                                                             ~~~~^~~~~~
+      |                                                                 |
+      |                                                                 int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:295:112: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  295 |                 (byPayload1 & (1 << 4)) ? HAL_GPIO_WritePin(ven1.onbus, ven1.onpin, 1) : HAL_GPIO_WritePin(ven1.onbus, ven1.onpin, 0);
+      |                                                                                                            ~~~~^~~~~~
+      |                                                                                                                |
+      |                                                                                                                int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:296:65: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  296 |                 (byPayload1 & (1 << 5)) ? HAL_GPIO_WritePin(ven2.onbus, ven2.onpin, 1) : HAL_GPIO_WritePin(ven2.onbus, ven2.onpin, 0);
+      |                                                             ~~~~^~~~~~
+      |                                                                 |
+      |                                                                 int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:296:112: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  296 |                 (byPayload1 & (1 << 5)) ? HAL_GPIO_WritePin(ven2.onbus, ven2.onpin, 1) : HAL_GPIO_WritePin(ven2.onbus, ven2.onpin, 0);
+      |                                                                                                            ~~~~^~~~~~
+      |                                                                                                                |
+      |                                                                                                                int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:297:65: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  297 |                 (byPayload1 & (1 << 6)) ? HAL_GPIO_WritePin(NoCo.onbus, NoCo.onpin, 1) : HAL_GPIO_WritePin(NoCo.onbus, NoCo.onpin, 0);
+      |                                                             ~~~~^~~~~~
+      |                                                                 |
+      |                                                                 int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:297:112: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  297 |                 (byPayload1 & (1 << 6)) ? HAL_GPIO_WritePin(NoCo.onbus, NoCo.onpin, 1) : HAL_GPIO_WritePin(NoCo.onbus, NoCo.onpin, 0);
+      |                                                                                                            ~~~~^~~~~~
+      |                                                                                                                |
+      |                                                                                                                int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:298:64: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  298 |                 (byPayload1 & (1 << 7)) ? HAL_GPIO_WritePin(ig1.onbus, ig1.onpin, 1) : HAL_GPIO_WritePin(ig1.onbus, ig1.onpin, 0);
+      |                                                             ~~~^~~~~~
+      |                                                                |
+      |                                                                int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:298:109: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  298 |                 (byPayload1 & (1 << 7)) ? HAL_GPIO_WritePin(ig1.onbus, ig1.onpin, 1) : HAL_GPIO_WritePin(ig1.onbus, ig1.onpin, 0);
+      |                                                                                                          ~~~^~~~~~
+      |                                                                                                             |
+      |                                                                                                             int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:305:43: warning: assignment to 'uint8_t *' {aka 'unsigned char *'} from incompatible pointer type 'struct BallsStatus *' [-Wincompatible-pointer-types]
+  305 |                         BallValve.payload = &bstat;
+      |                                           ^
+../Core/Src/main.c:316:50: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  316 |                 air1.isOn = HAL_GPIO_ReadPin(air1.onbus, air1.onpin);
+      |                                              ~~~~^~~~~~
+      |                                                  |
+      |                                                  int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:317:50: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  317 |                 air2.isOn = HAL_GPIO_ReadPin(air2.onbus, air2.onpin);
+      |                                              ~~~~^~~~~~
+      |                                                  |
+      |                                                  int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:318:50: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  318 |                 liq1.isOn = HAL_GPIO_ReadPin(liq1.onbus, liq1.onpin);
+      |                                              ~~~~^~~~~~
+      |                                                  |
+      |                                                  int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:319:50: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  319 |                 liq2.isOn = HAL_GPIO_ReadPin(liq2.onbus, liq2.onpin);
+      |                                              ~~~~^~~~~~
+      |                                                  |
+      |                                                  int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:320:50: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  320 |                 ven1.isOn = HAL_GPIO_ReadPin(ven1.onbus, ven1.onpin);
+      |                                              ~~~~^~~~~~
+      |                                                  |
+      |                                                  int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:321:50: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  321 |                 ven2.isOn = HAL_GPIO_ReadPin(ven2.onbus, ven2.onpin);
+      |                                              ~~~~^~~~~~
+      |                                                  |
+      |                                                  int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:322:50: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  322 |                 NoCo.isOn = HAL_GPIO_ReadPin(NoCo.onbus, NoCo.onpin);
+      |                                              ~~~~^~~~~~
+      |                                                  |
+      |                                                  int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:323:48: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  323 |                 ig1.isOn = HAL_GPIO_ReadPin(ig1.onbus, ig1.onpin);
+      |                                             ~~~^~~~~~
+      |                                                |
+      |                                                int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:334:52: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  334 |                 air1.isCon = !HAL_GPIO_ReadPin(air1.conBus, air1.conPin);
+      |                                                ~~~~^~~~~~~
+      |                                                    |
+      |                                                    int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:335:52: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  335 |                 air2.isCon = !HAL_GPIO_ReadPin(air2.conBus, air2.conPin);
+      |                                                ~~~~^~~~~~~
+      |                                                    |
+      |                                                    int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:336:52: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  336 |                 liq1.isCon = !HAL_GPIO_ReadPin(liq1.conBus, liq1.conPin);
+      |                                                ~~~~^~~~~~~
+      |                                                    |
+      |                                                    int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:337:52: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  337 |                 liq2.isCon = !HAL_GPIO_ReadPin(liq2.conBus, liq2.conPin);
+      |                                                ~~~~^~~~~~~
+      |                                                    |
+      |                                                    int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:338:52: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  338 |                 ven1.isCon = !HAL_GPIO_ReadPin(ven1.conBus, ven1.conPin);
+      |                                                ~~~~^~~~~~~
+      |                                                    |
+      |                                                    int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:339:52: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  339 |                 ven2.isCon = !HAL_GPIO_ReadPin(ven2.conBus, ven2.conPin);
+      |                                                ~~~~^~~~~~~
+      |                                                    |
+      |                                                    int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:340:52: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  340 |                 NoCo.isCon = !HAL_GPIO_ReadPin(NoCo.conBus, NoCo.conPin);
+      |                                                ~~~~^~~~~~~
+      |                                                    |
+      |                                                    int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:341:50: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  341 |                 ig1.isCon = !HAL_GPIO_ReadPin(ig1.conBus, ig1.conPin);
+      |                                               ~~~^~~~~~~
+      |                                                  |
+      |                                                  int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:352:51: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  352 |                 air1.isFun = HAL_GPIO_ReadPin(air1.funBus, air1.funPin);
+      |                                               ~~~~^~~~~~~
+      |                                                   |
+      |                                                   int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:353:51: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  353 |                 air2.isFun = HAL_GPIO_ReadPin(air2.funBus, air2.funPin);
+      |                                               ~~~~^~~~~~~
+      |                                                   |
+      |                                                   int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:354:51: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  354 |                 liq1.isFun = HAL_GPIO_ReadPin(liq1.funBus, liq1.funPin);
+      |                                               ~~~~^~~~~~~
+      |                                                   |
+      |                                                   int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:355:51: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  355 |                 liq2.isFun = HAL_GPIO_ReadPin(liq2.funBus, liq2.funPin);
+      |                                               ~~~~^~~~~~~
+      |                                                   |
+      |                                                   int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:356:51: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  356 |                 ven1.isFun = HAL_GPIO_ReadPin(ven1.funBus, ven1.funPin);
+      |                                               ~~~~^~~~~~~
+      |                                                   |
+      |                                                   int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:357:51: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  357 |                 ven2.isFun = HAL_GPIO_ReadPin(ven2.funBus, ven2.funPin);
+      |                                               ~~~~^~~~~~~
+      |                                                   |
+      |                                                   int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:358:51: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  358 |                 NoCo.isFun = HAL_GPIO_ReadPin(NoCo.funBus, NoCo.funPin);
+      |                                               ~~~~^~~~~~~
+      |                                                   |
+      |                                                   int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:359:49: warning: passing argument 1 of 'HAL_GPIO_ReadPin' makes pointer from integer without a cast [-Wint-conversion]
+  359 |                 ig1.isFun = HAL_GPIO_ReadPin(ig1.funBus, ig1.funPin);
+      |                                              ~~~^~~~~~~
+      |                                                 |
+      |                                                 int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:298:50: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  298 | GPIO_PinState     HAL_GPIO_ReadPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+      |                                    ~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:374:34: warning: assignment to 'uint8_t *' {aka 'unsigned char *'} from incompatible pointer type 'float *' [-Wincompatible-pointer-types]
+  374 |                 Pressure.payload = pressureArray;
+      |                                  ^
+../Core/Src/main.c:375:37: warning: assignment to 'uint8_t *' {aka 'unsigned char *'} from incompatible pointer type 'float *' [-Wincompatible-pointer-types]
+  375 |                 Temperature.payload = temperatureArray;
+      |                                     ^
+../Core/Src/main.c:378:35: warning: assignment to 'uint8_t *' {aka 'unsigned char *'} from incompatible pointer type 'struct BallsStatus *' [-Wincompatible-pointer-types]
+  378 |                 BallValve.payload = &bstat;
+      |                                   ^
+../Core/Src/main.c:379:35: warning: assignment to 'uint8_t *' {aka 'unsigned char *'} from incompatible pointer type 'struct Sols *' [-Wincompatible-pointer-types]
+  379 |                 Solenoids.payload = &sol;
+      |                                   ^
+../Core/Src/main.c:248:18: warning: unused variable 'tsend' [-Wunused-variable]
+  248 |         uint32_t tsend = 0;
+      |                  ^~~~~
+../Core/Src/main.c:247:18: warning: unused variable 'psend' [-Wunused-variable]
+  247 |         uint32_t psend = 0;
+      |                  ^~~~~
+../Core/Src/main.c:245:18: warning: unused variable 'timeref1' [-Wunused-variable]
+  245 |         uint32_t timeref1 = 0;
+      |                  ^~~~~~~~
+../Core/Src/main.c:243:17: warning: unused variable 'flag' [-Wunused-variable]
+  243 |         uint8_t flag = 0;
+      |                 ^~~~
+../Core/Src/main.c:242:17: warning: unused variable 'debug' [-Wunused-variable]
+  242 |         uint8_t debug = 0;
+      |                 ^~~~~
+../Core/Src/valve.c: In function 'valve_update':
+../Core/Src/valve.c:36:64: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+   36 |                                         HAL_GPIO_WritePin(valve->busO, valve->pinO, GPIO_PIN_SET);
+      |                                                           ~~~~~^~~~~~
+      |                                                                |
+      |                                                                int
+../Core/Src/main.c:241:18: warning: unused variable 'opento2' [-Wunused-variable]
+  241 |         uint32_t opento2 = 0;
+      |                  ^~~~~~~
+../Core/Src/main.c:240:18: warning: unused variable 'opento1' [-Wunused-variable]
+  240 |         uint32_t opento1 = 0;
+      |                  ^~~~~~~
+In file included from ../Core/Inc/stm32g4xx_hal_conf.h:216,
+                 from ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:29,
+                 from ../Core/Inc/valve.h:11,
+                 from ../Core/Src/valve.c:7:
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/valve.c:41:64: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+   41 |                                         HAL_GPIO_WritePin(valve->busC, valve->pinC, GPIO_PIN_SET);
+      |                                                           ~~~~~^~~~~~
+      |                                                                |
+      |                                                                int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/valve.c:54:87: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+   54 |                         HAL_GPIO_WritePin(valve->state == VALVE_OPENING ? valve->busO : valve->busC, valve->state == VALVE_OPENING ? valve->pinO : valve->pinC, GPIO_PIN_RESET);
+      |                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+      |                                                                                       |
+      |                                                                                       int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/valve.c:64:87: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+   64 |                         HAL_GPIO_WritePin(valve->state == VALVE_OPENING ? valve->busO : valve->busC, valve->state == VALVE_OPENING ? valve->pinO : valve->pinC, GPIO_PIN_RESET);
+      |                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+      |                                                                                       |
+      |                                                                                       int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/valve.c: In function 'valve_calibrate':
+../Core/Src/valve.c:95:32: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+   95 |         HAL_GPIO_WritePin(valve->busC, valve->pinC, 0);
+      |                           ~~~~~^~~~~~
+      |                                |
+      |                                int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/valve.c:99:32: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+   99 |         HAL_GPIO_WritePin(valve->busC, valve->pinC, 0);
+      |                           ~~~~~^~~~~~
+      |                                |
+      |                                int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/valve.c:103:40: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  103 |                 HAL_GPIO_WritePin(valve->busC, valve->pinC, 1);
+      |                                   ~~~~~^~~~~~
+      |                                        |
+      |                                        int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/valve.c:109:56: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  109 |                                 HAL_GPIO_WritePin(valve->busC, valve->pinC, 0);
+      |                                                   ~~~~~^~~~~~
+      |                                                        |
+      |                                                        int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/valve.c:117:40: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  117 |                 HAL_GPIO_WritePin(valve->busC, valve->pinC, 0);
+      |                                   ~~~~~^~~~~~
+      |                                        |
+      |                                        int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/valve.c:118:40: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  118 |                 HAL_GPIO_WritePin(valve->busO, valve->pinO, 1);
+      |                                   ~~~~~^~~~~~
+      |                                        |
+      |                                        int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/valve.c:124:56: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  124 |                                 HAL_GPIO_WritePin(valve->busO, valve->pinO, 0);
+      |                                                   ~~~~~^~~~~~
+      |                                                        |
+      |                                                        int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/valve.c:133:40: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  133 |                 HAL_GPIO_WritePin(valve->busO, valve->pinO, 0);
+      |                                   ~~~~~^~~~~~
+      |                                        |
+      |                                        int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/valve.c:134:40: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  134 |                 HAL_GPIO_WritePin(valve->busC, valve->pinC, 1);
+      |                                   ~~~~~^~~~~~
+      |                                        |
+      |                                        int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/valve.c:140:56: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  140 |                                 HAL_GPIO_WritePin(valve->busC, valve->pinC, 0);
+      |                                                   ~~~~~^~~~~~
+      |                                                        |
+      |                                                        int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/valve.c: In function 'valve_close':
+../Core/Src/valve.c:154:32: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  154 |         HAL_GPIO_WritePin(valve->busO, valve->pinO, 0);
+      |                           ~~~~~^~~~~~
+      |                                |
+      |                                int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/valve.c:155:32: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  155 |         HAL_GPIO_WritePin(valve->busC, valve->pinC, 1);
+      |                           ~~~~~^~~~~~
+      |                                |
+      |                                int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+../Core/Src/valve.c:161:48: warning: passing argument 1 of 'HAL_GPIO_WritePin' makes pointer from integer without a cast [-Wint-conversion]
+  161 |                         HAL_GPIO_WritePin(valve->busC, valve->pinC, 0);
+      |                                           ~~~~~^~~~~~
+      |                                                |
+      |                                                int
+../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_gpio.h:299:51: note: expected 'GPIO_TypeDef *' but argument is of type 'int'
+  299 | void              HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                     ~~~~~~~~~~~~~~^~~~~
+arm-none-eabi-g++ -o "testboardrb.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\fadec_firmware\STM32G431RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="testboardrb.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: testboardrb.elf
+ 
+arm-none-eabi-size  testboardrb.elf 
+arm-none-eabi-objdump -h -S testboardrb.elf  > "testboardrb.list"
+   text	   data	    bss	    dec	    hex	filename
+  43236	    564	   4148	  47948	   bb4c	testboardrb.elf
+Finished building: default.size.stdout
+ 
+Finished building: testboardrb.list
+ 
+16:24:24 **** Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+arm-none-eabi-gcc "../Core/Src/sens_fusion.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sens_fusion.d" -MT"Core/Src/sens_fusion.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sens_fusion.o"
+../Core/Src/sd_black_box.c:114:6: error: conflicting types for 'sd_card_init'; have 'void(const char *)'
+  114 | void sd_card_init(const char *filename) {
+      |      ^~~~~~~~~~~~
+In file included from ../Core/Src/sd_black_box.c:1:
+../Core/Inc/sd_black_box.h:12:9: note: previous declaration of 'sd_card_init' with type 'uint8_t(const char *)' {aka 'unsigned char(const char *)'}
+   12 | uint8_t sd_card_init(const char *filename);
+      |         ^~~~~~~~~~~~
+../Core/Src/sd_black_box.c: In function 'sd_card_init':
+../Core/Src/sd_black_box.c:158:22: error: 'csv_header' undeclared (first use in this function)
+  158 |   f_write(&csv_file, csv_header, strlen(csv_header), &bytes_written);
+      |                      ^~~~~~~~~~
+../Core/Src/sd_black_box.c:158:22: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:98:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   98 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:270:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  270 |                         return 0;
+      |                                ^
+../Core/Src/main.c:250:6: note: declared here
+  250 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:259:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  259 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:339:56: warning: format '%d' expects argument of type 'int', but argument 4 has type 'double' [-Wformat=]
+  339 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%d,%d,%d,%d,%d,%d,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                       ~^                     ~~~~~~~~~~~~~~~~
+      |                                                        |                                   |
+      |                                                        int                                 double
+      |                                                       %f
+../Core/Src/main.c:339:59: warning: format '%d' expects argument of type 'int', but argument 5 has type 'double' [-Wformat=]
+  339 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%d,%d,%d,%d,%d,%d,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                          ~^                                    ~~~~~~~~~~~~~~~~
+      |                                                           |                                                  |
+      |                                                           int                                                double
+      |                                                          %f
+../Core/Src/main.c:339:62: warning: format '%d' expects argument of type 'int', but argument 6 has type 'double' [-Wformat=]
+  339 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%d,%d,%d,%d,%d,%d,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                             ~^                                                   ~~~~~~~~~~~~~~~~
+      |                                                              |                                                                 |
+      |                                                              int                                                               double
+      |                                                             %f
+../Core/Src/main.c:339:65: warning: format '%d' expects argument of type 'int', but argument 7 has type 'double' [-Wformat=]
+  339 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%d,%d,%d,%d,%d,%d,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                ~^                                                                  ~~~~~~~~~~~
+      |                                                                 |                                                                       |
+      |                                                                 int                                                                     double
+      |                                                                %f
+make: *** [Core/Src/subdir.mk:58: Core/Src/sd_black_box.o] Error 1
+../Core/Src/main.c:339:68: warning: format '%d' expects argument of type 'int', but argument 8 has type 'double' [-Wformat=]
+  339 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%d,%d,%d,%d,%d,%d,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                   ~^                                                                            ~~~~~~~~~~
+      |                                                                    |                                                                                 |
+      |                                                                    int                                                                               double
+      |                                                                   %f
+make: *** Waiting for unfinished jobs....
+../Core/Src/main.c:339:71: warning: format '%d' expects argument of type 'int', but argument 9 has type 'double' [-Wformat=]
+  339 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%d,%d,%d,%d,%d,%d,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                      ~^                                                                                     ~~~~~~~~~
+      |                                                                       |                                                                                          |
+      |                                                                       int                                                                                        double
+      |                                                                      %f
+../Core/Src/main.c:339:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  339 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%d,%d,%d,%d,%d,%d,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                             ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                             |
+      |                                                                          int                                                                                           int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:345:63: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  345 |     snprintf(sd_bmp_buffer, sizeof(sd_bmp_buffer), "B,%f,%ld,%d", temperature, pressure, BMP180_time);
+      |                                                              ~^                          ~~~~~~~~~~~
+      |                                                               |                          |
+      |                                                               int                        uint32_t {aka long unsigned int}
+      |                                                              %ld
+../Core/Src/main.c:351:179: error: 'UBX_NavSolData' has no member named 'timeOfWeek_ms'
+  351 |     snprintf(sd_gps_buffer, sizeof(sd_gps_buffer), "G,%f,%f,%f,%d,%d,%d,%d", solData.latitude_deg, solData.longitude_deg, solData.height_m, solData.gpsFix, solData.numSV, solData.timeOfWeek_ms, GPS_timeStamp);
+      |                                                                                                                                                                                   ^
+make: *** [Core/Src/subdir.mk:58: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+16:24:46 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/sd_black_box.c:114:6: error: conflicting types for 'sd_card_init'; have 'void(const char *)'
+  114 | void sd_card_init(const char *filename) {
+      |      ^~~~~~~~~~~~
+In file included from ../Core/Src/sd_black_box.c:1:
+../Core/Inc/sd_black_box.h:12:9: note: previous declaration of 'sd_card_init' with type 'uint8_t(const char *)' {aka 'unsigned char(const char *)'}
+   12 | uint8_t sd_card_init(const char *filename);
+      |         ^~~~~~~~~~~~
+../Core/Src/main.c:270:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  270 |                         return 0;
+      |                                ^
+../Core/Src/sd_black_box.c: In function 'sd_card_init':
+../Core/Src/sd_black_box.c:157:8: warning: unused variable 'bytes_written' [-Wunused-variable]
+  157 |   UINT bytes_written;
+      |        ^~~~~~~~~~~~~
+../Core/Src/main.c:250:6: note: declared here
+  250 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:259:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  259 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:98:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   98 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:339:56: warning: format '%d' expects argument of type 'int', but argument 4 has type 'double' [-Wformat=]
+  339 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%d,%d,%d,%d,%d,%d,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                       ~^                     ~~~~~~~~~~~~~~~~
+      |                                                        |                                   |
+      |                                                        int                                 double
+      |                                                       %f
+../Core/Src/main.c:339:59: warning: format '%d' expects argument of type 'int', but argument 5 has type 'double' [-Wformat=]
+  339 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%d,%d,%d,%d,%d,%d,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                          ~^                                    ~~~~~~~~~~~~~~~~
+      |                                                           |                                                  |
+      |                                                           int                                                double
+      |                                                          %f
+../Core/Src/main.c:339:62: warning: format '%d' expects argument of type 'int', but argument 6 has type 'double' [-Wformat=]
+  339 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%d,%d,%d,%d,%d,%d,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                             ~^                                                   ~~~~~~~~~~~~~~~~
+      |                                                              |                                                                 |
+      |                                                              int                                                               double
+      |                                                             %f
+../Core/Src/main.c:339:65: warning: format '%d' expects argument of type 'int', but argument 7 has type 'double' [-Wformat=]
+  339 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%d,%d,%d,%d,%d,%d,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                ~^                                                                  ~~~~~~~~~~~
+      |                                                                 |                                                                       |
+      |                                                                 int                                                                     double
+      |                                                                %f
+../Core/Src/main.c:339:68: warning: format '%d' expects argument of type 'int', but argument 8 has type 'double' [-Wformat=]
+  339 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%d,%d,%d,%d,%d,%d,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                   ~^                                                                            ~~~~~~~~~~
+      |                                                                    |                                                                                 |
+      |                                                                    int                                                                               double
+      |                                                                   %f
+../Core/Src/main.c:339:71: warning: format '%d' expects argument of type 'int', but argument 9 has type 'double' [-Wformat=]
+  339 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%d,%d,%d,%d,%d,%d,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                      ~^                                                                                     ~~~~~~~~~
+      |                                                                       |                                                                                          |
+      |                                                                       int                                                                                        double
+      |                                                                      %f
+../Core/Src/main.c:339:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  339 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%d,%d,%d,%d,%d,%d,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                             ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                             |
+      |                                                                          int                                                                                           int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:345:63: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  345 |     snprintf(sd_bmp_buffer, sizeof(sd_bmp_buffer), "B,%f,%ld,%d", temperature, pressure, BMP180_time);
+      |                                                              ~^                          ~~~~~~~~~~~
+      |                                                               |                          |
+      |                                                               int                        uint32_t {aka long unsigned int}
+      |                                                              %ld
+../Core/Src/main.c:351:179: error: 'UBX_NavSolData' has no member named 'timeOfWeek_ms'
+  351 |     snprintf(sd_gps_buffer, sizeof(sd_gps_buffer), "G,%f,%f,%f,%d,%d,%d,%d", solData.latitude_deg, solData.longitude_deg, solData.height_m, solData.gpsFix, solData.numSV, solData.timeOfWeek_ms, GPS_timeStamp);
+      |                                                                                                                                                                                   ^
+make: *** [Core/Src/subdir.mk:58: Core/Src/sd_black_box.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [Core/Src/subdir.mk:58: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+16:35:10 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c:114:6: error: conflicting types for 'sd_card_init'; have 'void(const char *)'
+  114 | void sd_card_init(const char *filename) {
+      |      ^~~~~~~~~~~~
+In file included from ../Core/Src/sd_black_box.c:1:
+../Core/Inc/sd_black_box.h:12:9: note: previous declaration of 'sd_card_init' with type 'uint8_t(const char *)' {aka 'unsigned char(const char *)'}
+   12 | uint8_t sd_card_init(const char *filename);
+      |         ^~~~~~~~~~~~
+../Core/Src/sd_black_box.c: In function 'sd_card_init':
+../Core/Src/sd_black_box.c:157:8: warning: unused variable 'bytes_written' [-Wunused-variable]
+  157 |   UINT bytes_written;
+      |        ^~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:98:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   98 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:270:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  270 |                         return 0;
+      |                                ^
+../Core/Src/main.c:250:6: note: declared here
+  250 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:259:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  259 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:339:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  339 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%f,%f,%f,%f,%f,%f,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                             ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                             |
+      |                                                                          int                                                                                           int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:347:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  347 |     "B,%f,%ld,%d",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  348 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+../Core/Src/main.c:356:9: warning: format '%f' expects argument of type 'double', but argument 4 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  356 |     "G,%f,%d,%d,%d,%.4f,%.4f,%.4f",
+      |        ~^
+      |         |
+      |         double
+      |        %ld
+  357 |     solData.fTOW, GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~
+      |            |
+      |            int32_t {aka long int}
+../Core/Src/main.c:356:12: warning: format '%d' expects argument of type 'int', but argument 5 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  356 |     "G,%f,%d,%d,%d,%.4f,%.4f,%.4f",
+      |           ~^
+      |            |
+      |            int
+      |           %ld
+  357 |     solData.fTOW, GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |                   ~~~~~~~~~~~~~
+      |                   |
+      |                   uint32_t {aka long unsigned int}
+make: *** [Core/Src/subdir.mk:58: Core/Src/sd_black_box.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+16:35:45 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c:114:6: error: conflicting types for 'sd_card_init'; have 'void(char *)'
+  114 | void sd_card_init(char *filename) {
+      |      ^~~~~~~~~~~~
+In file included from ../Core/Src/sd_black_box.c:1:
+../Core/Inc/sd_black_box.h:12:9: note: previous declaration of 'sd_card_init' with type 'uint8_t(const char *)' {aka 'unsigned char(const char *)'}
+   12 | uint8_t sd_card_init(const char *filename);
+      |         ^~~~~~~~~~~~
+../Core/Src/sd_black_box.c: In function 'sd_card_init':
+../Core/Src/sd_black_box.c:157:8: warning: unused variable 'bytes_written' [-Wunused-variable]
+  157 |   UINT bytes_written;
+      |        ^~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:98:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   98 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/sd_black_box.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+16:36:53 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:270:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  270 |                         return 0;
+      |                                ^
+../Core/Src/main.c:250:6: note: declared here
+  250 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:259:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  259 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:339:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  339 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%f,%f,%f,%f,%f,%f,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                             ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                             |
+      |                                                                          int                                                                                           int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:347:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  347 |     "B,%f,%ld,%d",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  348 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+../Core/Src/main.c:356:9: warning: format '%f' expects argument of type 'double', but argument 4 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  356 |     "G,%f,%d,%d,%d,%.4f,%.4f,%.4f",
+      |        ~^
+      |         |
+      |         double
+      |        %ld
+  357 |     solData.fTOW, GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~
+      |            |
+      |            int32_t {aka long int}
+../Core/Src/main.c:356:12: warning: format '%d' expects argument of type 'int', but argument 5 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  356 |     "G,%f,%d,%d,%d,%.4f,%.4f,%.4f",
+      |           ~^
+      |            |
+      |            int
+      |           %ld
+  357 |     solData.fTOW, GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |                   ~~~~~~~~~~~~~
+      |                   |
+      |                   uint32_t {aka long unsigned int}
+../Core/Src/sd_black_box.c: In function 'sd_card_init':
+../Core/Src/sd_black_box.c:157:8: warning: unused variable 'bytes_written' [-Wunused-variable]
+  157 |   UINT bytes_written;
+      |        ^~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:98:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+   98 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  61528	    612	   5416	  67556	  107e4	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+16:37:15 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  61528	    612	   5416	  67556	  107e4	NAV_BOX.elf
+Finished building: default.size.stdout
+ 

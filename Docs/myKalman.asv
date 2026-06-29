@@ -1,0 +1,114 @@
+%% TODO
+% write as object to innitialize multiple kalman filters on dataflows
+
+clear all
+
+%define kalman filter
+F = ... %transition matrix (digital version of physical transition matrix)
+H = ... %measurement matrix
+%M = ... %covariance matrxix apriori
+Q = ... %process noise
+R = ... %measurement noise covariance matrix
+I = ... %identity matrix
+
+%set starting parameters
+X0 = ... %innitial state vector
+vk = ... %measurement noise
+
+%variable parameters
+P = ... %covariance matrxix posteriori
+xk = ... %system state
+xk_1 = ... %previos system state
+xk_hat = ... %previous system estimation
+xk_1_hat= ... %system estimation
+zk = ... %measurement vector
+
+%innitialize kalman filter
+xk = X0;
+
+%kalman coeficients
+Mk = Fk*Pk_1*Fk'+Qr
+Kk = Mk*H'/(H*Mk*H'+Rk)
+Pk = (I-Kk*H)*Mk
+
+%state estimation
+zk = H*xk+vk
+xk_hat = Fk*Xk_1_hat + Kk(zk-H*Fk*xk_1_hat)
+
+
+%% Sensors accelerometer
+
+%sensor accel
+Hs_accel = [0 0 1] % [+, 1] if we include bias %measurement matrix for sensor 1
+vk_accel = ... %measurement noise of sensor 1
+
+%NOISE CHARACTERISTICS
+ND = ... %noise density
+BandWdth = ... %band width
+BiasInstab = ... %bias instability
+RndWalk = ... %randome walk (optional)
+
+%build R matrix (measurement noise covariance)
+R = ND^2*BandWdth; %noise given in noise density n (m/s^2/sqrt(Hz)) 
+R = (noise in m/s^2)^2; % noise given in gm RMS
+
+%build Q matrix (proccess noise covariance)
+Q_accel = (acceleration_noise)^2
+Q_bias = (bias_drift_rate)^2
+
+Q = [Ts^4/4 Ts^3/2 Ts^2/2;
+     Ts^3/2 Ts^2    Ts;
+     Ts^2/2 TS      1];
+
+% Q = [Ts^4/4 Ts^3/2; %for 2x2 matrix
+%     Ts^3/2 Ts^2];
+
+Q = Q.*Q_accel
+
+%% Describing system
+
+Ts = ... %sampling rate
+%Filtr = ...%any added filters used in process --> determine F matrix
+
+SystemStateSize = 3; %position, velocity, acceleration
+F = [1 Ts Ts^2/2;
+     0  1   TS  ;
+     0  0   1   ]
+
+%% randome measurements
+
+clear all;
+close(figure(1))
+figure(1)
+hold on
+
+Ts = 0.1;
+Tend = 100;
+
+t = 0:Ts:Tend
+m_s1 = randometime(t,10,1,2); %GPS
+m_s2 = randometime(t,3,0.5,0.1); %IMU
+
+plot(t,m_s1)
+plot(t,m_s2)
+
+
+Kalman1 = KF;
+GPS = KFsens;
+IMU = KFsens;
+
+z = [0 0 1];
+
+for i = 1:numel(t)
+    if(m_s1(i) == 1)
+
+    else
+
+end
+
+Kalman1.kalman_step_predict_3(Ts)
+Kalman1.kalman_step_update_3(GPS,z)
+
+
+Kalman1.kalman_step_predict_3(Ts)
+Kalman1.kalman_step_update_3(IMU,z)

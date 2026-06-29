@@ -1,11 +1,42 @@
 #include "sd_black_box.h"
 
+#include <stdio.h>
+#include <string.h>
+
 //-------------------------------SD_CARD_SPI---------------------------------------------
-static FIL gps_csv_file;
-static FATFS fs_sd;
+static FIL csv_file;      // FatFs file object for the active CSV/log file on the SD card
+static FATFS fs_sd;       // FatFs volume object representing the mounted SD card filesystem
 static uint8_t sd_initialized = 0;
 static uint32_t write_count = 0;
-uint8_t sd_status = 0;
+
+static uint8_t file_exists(const char *path) {
+  return (f_stat(path, NULL) == FR_OK) ? 1U : 0U;
+}
+
+static uint8_t build_indexed_filename(const char *filename, uint32_t index, char *out, size_t out_size) {
+  const char *slash = strrchr(filename, '/');
+  const char *backslash = strrchr(filename, '\\');
+  const char *path_sep = slash;
+
+  if (backslash != NULL && (path_sep == NULL || backslash > path_sep)) {
+    path_sep = backslash;
+  }
+
+  const char *name_start = (path_sep != NULL) ? path_sep + 1 : filename;
+  const char *extension = strrchr(name_start, '.');
+
+  if (extension != NULL) {
+    size_t prefix_len = (size_t)(extension - filename);
+    int written = snprintf(out, out_size, "%.*s_%04lu%s",
+                           (int)prefix_len, filename,
+                           (unsigned long)index,
+                           extension);
+    return (written > 0 && (size_t)written < out_size) ? 1U : 0U;
+  }
+
+  int written = snprintf(out, out_size, "%s_%04lu", filename, (unsigned long)index);
+  return (written > 0 && (size_t)written < out_size) ? 1U : 0U;
+}
 //-------------------------------SD_CARD_SPI---------------------------------------------
 
 void myprintf(UART_HandleTypeDef *huart, const char *fmt, ...) {
@@ -80,7 +111,67 @@ void test_sd_card_write(UART_HandleTypeDef *huart){
   f_mount(NULL, "", 0);
 }
 
+void sd_card_init(const char *filename) {
+  /*
+    Start Log file
+  */
+  char log_filename[64];
+  
+
+  // Mount the filesystem
+  if (f_mount(&fs_sd, "", 1) != FR_OK) {
+    sd_initialized = 0;
+    return;
+  }
+
+  if (filename == NULL) {
+    sd_initialized = 0;
+    return;
+  }
+
+  if (!file_exists(filename)) {
+    int written = snprintf(log_filename, sizeof(log_filename), "%s", filename);
+    if (written <= 0 || (size_t)written >= sizeof(log_filename)) {
+      sd_initialized = 0;
+      return;
+    }
+  } else {
+    uint32_t index = 1U;
+
+    do {
+      if (!build_indexed_filename(filename, index, log_filename, sizeof(log_filename))) {
+        sd_initialized = 0;
+        return;
+      }
+      index++;
+    } while (file_exists(log_filename));
+  }
+
+  // Open the CSV file for writing without overwriting an existing file
+  if (f_open(&csv_file, log_filename, FA_WRITE | FA_CREATE_NEW) != FR_OK) {
+    sd_initialized = 0;
+    return;
+  }
+
+  // Write the header to the CSV file
+  UINT bytes_written;
+  sd_initialized = 1;
+}
+
 /* OPTIMIZED IMPLEMENTATION - PERSISTENT FILE HANDLE, NON-BLOCKING */
-uint8_t save_data_to_SD_SPI(){
-    return 1;
+uint8_t sd_card_write(uint32_t *buffer, uint32_t length) {
+  if (!sd_initialized || !csv_file.fs || buffer == NULL || length == 0) {
+    return 0;
+  }
+
+  FRESULT fres;            // Result code returned by FatFs write operation
+  UINT bytes_written = 0;   // Number of bytes actually written to the SD card
+
+  fres = f_write(&csv_file, buffer, length, &bytes_written);
+  if (fres != FR_OK || bytes_written != length) {
+    return 0;
+  }
+
+  write_count++;
+  return 1;
 }

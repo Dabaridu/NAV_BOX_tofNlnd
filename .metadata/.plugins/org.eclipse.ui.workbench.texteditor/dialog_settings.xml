@@ -3,6 +3,7 @@
 	<item key="hasShownOverlayPopupBefore" value="true"/>
 	<item key="replaceBarOpen" value="false"/>
 	<list key="searchhistory">
+		<item value="accel_filtered"/>
 		<item value="va_end"/>
 		<item value="private define"/>
 		<item value="extern SPI_HandleTypeDef SD_SPI_HANDLE;"/>
@@ -17,7 +18,6 @@
 		<item value="BNO055_timeStamp"/>
 		<item value="acc"/>
 		<item value="vector_t"/>
-		<item value="dma_data_ready"/>
 	</list>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item key="selection" value="static FIL gps_csv_file;"/>

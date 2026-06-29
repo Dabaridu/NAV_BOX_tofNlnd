@@ -127,6 +127,20 @@ nslp_instance_t nslp;
 //uint8_t tx_buffer[sizeof(struct Position)]; //transmission size of message
 //--------------------------NSLP--------------------------------------------
 
+//---------------------------SD CARD----------------------------
+char log_filename[64] = "data_log.csv"; // Default log filename
+char sd_gps_buffer[128]; // Buffer for GPS data to be written to SD card
+//%G,Time,Timestamp,FixType,NumSV,Lat,Lon,Alt
+bool sd_gps_store_flag = false;
+char sd_bmp_buffer[128]; // Buffer for BMP180 data to be written to SD card
+//%B,Temp,Press,Timestamp
+bool sd_bmp_store_flag = false;
+char sd_bno_buffer[128]; // Buffer for BNO055 data to be written to SD cardy
+//%I,Ax,Ay,Az,Gx,Gy,Gz,Timestamp
+bool sd_bno_store_flag = false;
+//---------------------------SD CARD----------------------------
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -210,7 +224,8 @@ void parse_bno055_data(){
 		bno055_start_dma_read(&bno);
 
 		to_send_imu_nslp_flag = true;
-		//bno.dma_data_ready = false; //flow controller
+
+    sd_bno_store_flag = true; // Set flag to store BNO055 data to SD card
 	}
 }
 
@@ -228,6 +243,7 @@ void poll_n_parse_bmp180_data(){
       BMP180_time = lastBMP180Time;
 
       to_send_BMP180_nslp_flag = true;
+      sd_bmp_store_flag = true; // Set flag to store BMP180 data to SD card
   }
 }
 
@@ -253,6 +269,8 @@ void parse_gps_data(){
 		if(GPS_nslp_data.fixType == 0){ // Only consider valid GPS fixes for fusion
 			return 0;
 		}
+
+    sd_gps_store_flag = true; // Set flag to store GPS data to SD card
 	}
 }
 
@@ -298,8 +316,7 @@ void nslp_transmit_packets(){
       to_send_gps_nslp_flag = false;
     }
 
-    //-----------------------------Send packets for NSLP----------------- END
-    if(to_send_imu_nslp_flag == true){
+        if(to_send_imu_nslp_flag == true){
         nslp_send_packet(&nslp, &BNO_packet_a);
         nslp_send_packet(&nslp, &BNO_packet_g);
         to_send_imu_nslp_flag = false;
@@ -311,8 +328,36 @@ void nslp_transmit_packets(){
     }
 
     // nslp_send_packet(&nslp, &POS_fusion_packet);
-
+    //-----------------------------Send packets for NSLP----------------- END
     lastTime = HAL_GetTick();
+  }
+}
+
+void sd_store(){
+  if(sd_bno_store_flag == true){
+    sd_bno_store_flag = false;
+    snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%f,%f,%f,%f,%f,%f,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+    //%I,Ax,Ay,Az,Gx,Gy,Gz,Timestamp
+    sd_card_write((uint32_t *)sd_bno_buffer, strlen(sd_bno_buffer));
+  }
+
+  if(sd_bmp_store_flag == true){
+    sd_bmp_store_flag = false;
+    snprintf(sd_bmp_buffer, sizeof(sd_bmp_buffer), //%G,Time,Timestamp,FixType,NumSV,Lat,Lon,Alt
+    "B,%f,%ld,%d", 
+    temperature, pressure, BMP180_time);
+    //%B,Temp,Press,Timestamp
+    sd_card_write((uint32_t *)sd_bmp_buffer, strlen(sd_bmp_buffer));
+  }
+
+  if(sd_gps_store_flag == true){
+    sd_gps_store_flag = false;
+    snprintf(sd_gps_buffer, sizeof(sd_gps_buffer), 
+    "G,%f,%d,%d,%d,%.4f,%.4f,%.4f", 
+    solData.fTOW, GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+    );
+    //%G,Time,Timestamp,FixType,NumSV,Lat,Lon,Alt
+    sd_card_write((uint32_t *)sd_gps_buffer, strlen(sd_gps_buffer));
   }
 }
 
@@ -408,12 +453,15 @@ int main(void)
   //innitialize the filters for the accelerometer data
     float cutoff = 10; // 10Hz cutoff frequency for accelerometer data
     float sample_rate = 100; // 100Hz sample rate for accelerometer data
-    IIR_LPF_1st_Init(&accel_x_filter, cutoff, sample_rate);  
+    IIR_LPF_1st_Init(&accel_x_filter, cutoff, sample_rate);
     IIR_LPF_1st_Init(&accel_y_filter, cutoff, sample_rate);
     IIR_LPF_1st_Init(&accel_z_filter, cutoff, sample_rate);
 
   //------------------------TEST SD CARD WRITE------------------------
     test_sd_card_write(&huart2);
+    
+  //------------------------SD CARD INNIT-----------------------------
+    sd_card_init(log_filename);
 
   /* USER CODE END 2 */
 
@@ -421,17 +469,13 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 	while (1)
 	{
-		// parse_gps_data();
-		// parse_bno055_data();
-		// poll_n_parse_bmp180_data();
+		parse_gps_data();
+		parse_bno055_data();
+		poll_n_parse_bmp180_data();
 
-		// process_sensor_fusion();
+		nslp_transmit_packets();
 
-		// sd_status = save_data_to_SD_SPI();
-
-		// nslp_transmit_packets();
-
-    HAL_Delay(1000);
+		sd_store();
 
     /* USER CODE END WHILE */
 
