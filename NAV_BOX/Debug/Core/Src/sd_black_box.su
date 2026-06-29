@@ -1,4 +1,4 @@
-../Core/Src/sd_black_box.c:42:6:myprintf	20	static
-../Core/Src/sd_black_box.c:53:6:test_sd_card_write	1176	static
-../Core/Src/sd_black_box.c:114:6:sd_card_init	104	static
-../Core/Src/sd_black_box.c:162:9:sd_card_write	24	static
+../Core/Src/sd_black_box.c:44:6:myprintf	20	static
+../Core/Src/sd_black_box.c:55:6:test_sd_card_write	1176	static
+../Core/Src/sd_black_box.c:118:6:sd_card_init	112	static
+../Core/Src/sd_black_box.c:172:9:sd_card_write	16	static

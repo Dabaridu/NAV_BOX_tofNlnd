@@ -338,7 +338,7 @@ void sd_store(){
     sd_bno_store_flag = false;
     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%f,%f,%f,%f,%f,%f,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
     //%I,Ax,Ay,Az,Gx,Gy,Gz,Timestamp
-    sd_card_write((uint32_t *)sd_bno_buffer, strlen(sd_bno_buffer));
+    sd_card_write((const uint8_t *)sd_bno_buffer, strlen(sd_bno_buffer));
   }
 
   if(sd_bmp_store_flag == true){
@@ -347,7 +347,7 @@ void sd_store(){
     "B,%f,%ld,%d", 
     temperature, pressure, BMP180_time);
     //%B,Temp,Press,Timestamp
-    sd_card_write((uint32_t *)sd_bmp_buffer, strlen(sd_bmp_buffer));
+    sd_card_write((const uint8_t *)sd_bmp_buffer, strlen(sd_bmp_buffer));
   }
 
   if(sd_gps_store_flag == true){
@@ -357,7 +357,7 @@ void sd_store(){
     solData.fTOW, GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
     );
     //%G,Time,Timestamp,FixType,NumSV,Lat,Lon,Alt
-    sd_card_write((uint32_t *)sd_gps_buffer, strlen(sd_gps_buffer));
+    sd_card_write((const uint8_t *)sd_gps_buffer, strlen(sd_gps_buffer));
   }
 }
 

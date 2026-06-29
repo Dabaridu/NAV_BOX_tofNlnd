@@ -10785,3 +10785,18 @@ java.io.FileNotFoundException: C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tof
 	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1054)
 	at org.eclipse.debug.internal.ui.DebugUIPlugin$1.run(DebugUIPlugin.java:1257)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.cdt.dsf.gdb.ui 4 4 2026-06-29 16:58:48.527
+!MESSAGE Illegal char <<> at index 68: C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Debug/<built-in>
+!STACK 0
+java.nio.file.InvalidPathException: Illegal char <<> at index 68: C:/Users/Admin/Documents/NoordungLabs/NAV_BOX_tofNlnd/NAV_BOX/Debug/<built-in>
+	at java.base/sun.nio.fs.WindowsPathParser.normalize(WindowsPathParser.java:204)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:175)
+	at java.base/sun.nio.fs.WindowsPathParser.parse(WindowsPathParser.java:77)
+	at java.base/sun.nio.fs.WindowsPath.parse(WindowsPath.java:92)
+	at java.base/sun.nio.fs.WindowsFileSystem.getPath(WindowsFileSystem.java:231)
+	at java.base/java.nio.file.Path.of(Path.java:148)
+	at java.base/java.nio.file.Paths.get(Paths.java:69)
+	at org.eclipse.cdt.dsf.gdb.internal.ui.debugsources.DebugSourcesView$PopulateTreeJob.populateTree(DebugSourcesView.java:630)
+	at org.eclipse.cdt.dsf.gdb.internal.ui.debugsources.DebugSourcesView$PopulateTreeJob.run(DebugSourcesView.java:605)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
