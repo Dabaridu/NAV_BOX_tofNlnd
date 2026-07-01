@@ -54,7 +54,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define SD_SPI_HANDLE hspi1
+//#define SD_SPI_HANDLE hspi1
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -78,6 +78,9 @@ DMA_HandleTypeDef hdma_usart2_tx;
 DMA_HandleTypeDef hdma_usart2_rx;
 
 /* USER CODE BEGIN PV */
+//-------------------------DEBUG--------------------
+uint8_t d_checker;
+
 
 //-------------------------------BMP180---------------------------------------------
 float temperature;
@@ -128,7 +131,7 @@ nslp_instance_t nslp;
 //--------------------------NSLP--------------------------------------------
 
 //---------------------------SD CARD----------------------------
-char log_filename[64] = "data_log.csv"; // Default log filename
+char log_filename[64] = "data_log"; // Default log filename
 char sd_gps_buffer[128]; // Buffer for GPS data to be written to SD card
 //%G,Time,Timestamp,FixType,NumSV,Lat,Lon,Alt
 bool sd_gps_store_flag = false;
@@ -256,21 +259,17 @@ void parse_gps_data(){
 	if(gps_dma_data_ready == true){
 
 		//parse check rx_buffer to usefull navigation data
-		uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
 
 		//----------------------FLAGS----------------------
+      //clear flag for recieving new GPS data
+      gps_dma_data_ready = false;
+      sd_gps_store_flag = true; // Set flag to store GPS data to SD card
+      to_send_gps_nslp_flag = true; //set flag to send gps data via NSLP
 
-		//set flag to send gps data via NSLP
-		to_send_gps_nslp_flag = true;
-
-		//clear flag for recieving new GPS data
-		gps_dma_data_ready = false;
-
-		if(GPS_nslp_data.fixType == 0){ // Only consider valid GPS fixes for fusion
-			return 0;
-		}
-
-    sd_gps_store_flag = true; // Set flag to store GPS data to SD card
+		// if(GPS_nslp_data.fixType != 0){ // Only consider valid GPS fixes for fusion
+		// 	return;
+		// }
 	}
 }
 
@@ -334,30 +333,38 @@ void nslp_transmit_packets(){
 }
 
 void sd_store(){
+  uint8_t check = 0;
+
+  if(sd_gps_store_flag == true){
+    sd_gps_store_flag = false;
+    snprintf(sd_gps_buffer, sizeof(sd_gps_buffer), 
+    "G,%d,%d,%d,%f,%f,%f \r\n", 
+    GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+    );
+    //%G,Time,Timestamp,FixType,NumSV,Lat,Lon,Alt
+    check = sd_card_write((const uint8_t *)sd_gps_buffer, strlen(sd_gps_buffer));
+  }
+
   if(sd_bno_store_flag == true){
     sd_bno_store_flag = false;
-    snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%f,%f,%f,%f,%f,%f,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+    snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "I,%f,%f,%f,%f,%f,%f,%d \r\n", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
     //%I,Ax,Ay,Az,Gx,Gy,Gz,Timestamp
-    sd_card_write((const uint8_t *)sd_bno_buffer, strlen(sd_bno_buffer));
+    check = sd_card_write((const uint8_t *)sd_bno_buffer, strlen(sd_bno_buffer));
   }
 
   if(sd_bmp_store_flag == true){
     sd_bmp_store_flag = false;
     snprintf(sd_bmp_buffer, sizeof(sd_bmp_buffer), //%G,Time,Timestamp,FixType,NumSV,Lat,Lon,Alt
-    "B,%f,%ld,%d", 
+    "B,%f,%ld,%d \r\n", 
     temperature, pressure, BMP180_time);
     //%B,Temp,Press,Timestamp
-    sd_card_write((const uint8_t *)sd_bmp_buffer, strlen(sd_bmp_buffer));
+    check = sd_card_write((const uint8_t *)sd_bmp_buffer, strlen(sd_bmp_buffer));
   }
 
-  if(sd_gps_store_flag == true){
-    sd_gps_store_flag = false;
-    snprintf(sd_gps_buffer, sizeof(sd_gps_buffer), 
-    "G,%f,%d,%d,%d,%.4f,%.4f,%.4f", 
-    solData.fTOW, GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
-    );
-    //%G,Time,Timestamp,FixType,NumSV,Lat,Lon,Alt
-    sd_card_write((const uint8_t *)sd_gps_buffer, strlen(sd_gps_buffer));
+  if(check != 0){
+    // Handle error in writing to SD card
+    // You can add error handling code here, such as logging the error or retrying the write operation
+	  //d_checker = check;
   }
 }
 
@@ -458,7 +465,7 @@ int main(void)
     IIR_LPF_1st_Init(&accel_z_filter, cutoff, sample_rate);
 
   //------------------------TEST SD CARD WRITE------------------------
-    test_sd_card_write(&huart2);
+    //test_sd_card_write(&huart2);
     
   //------------------------SD CARD INNIT-----------------------------
     sd_card_init(log_filename);
@@ -469,12 +476,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 	while (1)
 	{
+    
 		parse_gps_data();
 		parse_bno055_data();
 		poll_n_parse_bmp180_data();
-
 		nslp_transmit_packets();
-
 		sd_store();
 
     /* USER CODE END WHILE */

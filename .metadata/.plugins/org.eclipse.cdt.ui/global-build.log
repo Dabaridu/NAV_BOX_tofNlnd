@@ -24300,3 +24300,788 @@ Finished building: default.size.stdout
  
 Finished building: NAV_BOX.list
  
+17:07:15 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:100:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+  100 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:270:32: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  270 |                         return 0;
+      |                                ^
+../Core/Src/main.c:250:6: note: declared here
+  250 | void parse_gps_data(){
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:259:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  259 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:340:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  340 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%f,%f,%f,%f,%f,%f,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                             ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                             |
+      |                                                                          int                                                                                           int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:348:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  348 |     "B,%f,%ld,%d",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  349 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+../Core/Src/main.c:357:9: warning: format '%f' expects argument of type 'double', but argument 4 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  357 |     "G,%f,%d,%d,%d,%.4f,%.4f,%.4f",
+      |        ~^
+      |         |
+      |         double
+      |        %ld
+  358 |     solData.fTOW, GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~
+      |            |
+      |            int32_t {aka long int}
+../Core/Src/main.c:357:12: warning: format '%d' expects argument of type 'int', but argument 5 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  357 |     "G,%f,%d,%d,%d,%.4f,%.4f,%.4f",
+      |           ~^
+      |            |
+      |            int
+      |           %ld
+  358 |     solData.fTOW, GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |                   ~~~~~~~~~~~~~
+      |                   |
+      |                   uint32_t {aka long unsigned int}
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  61632	    612	   5416	  67660	  1084c	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+17:07:46 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:259:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  259 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:340:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  340 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%f,%f,%f,%f,%f,%f,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                             ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                             |
+      |                                                                          int                                                                                           int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:348:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  348 |     "B,%f,%ld,%d",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  349 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+../Core/Src/main.c:357:9: warning: format '%f' expects argument of type 'double', but argument 4 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  357 |     "G,%f,%d,%d,%d,%.4f,%.4f,%.4f",
+      |        ~^
+      |         |
+      |         double
+      |        %ld
+  358 |     solData.fTOW, GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~
+      |            |
+      |            int32_t {aka long int}
+../Core/Src/main.c:357:12: warning: format '%d' expects argument of type 'int', but argument 5 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  357 |     "G,%f,%d,%d,%d,%.4f,%.4f,%.4f",
+      |           ~^
+      |            |
+      |            int
+      |           %ld
+  358 |     solData.fTOW, GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |                   ~~~~~~~~~~~~~
+      |                   |
+      |                   uint32_t {aka long unsigned int}
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  61632	    612	   5416	  67660	  1084c	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+17:17:17 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:262:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  262 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:343:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  343 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%f,%f,%f,%f,%f,%f,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                             ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                             |
+      |                                                                          int                                                                                           int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:351:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  351 |     "B,%f,%ld,%d",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  352 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+../Core/Src/main.c:360:9: warning: format '%f' expects argument of type 'double', but argument 4 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  360 |     "G,%f,%d,%d,%d,%.4f,%.4f,%.4f",
+      |        ~^
+      |         |
+      |         double
+      |        %ld
+  361 |     solData.fTOW, GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~
+      |            |
+      |            int32_t {aka long int}
+../Core/Src/main.c:360:12: warning: format '%d' expects argument of type 'int', but argument 5 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  360 |     "G,%f,%d,%d,%d,%.4f,%.4f,%.4f",
+      |           ~^
+      |            |
+      |            int
+      |           %ld
+  361 |     solData.fTOW, GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |                   ~~~~~~~~~~~~~
+      |                   |
+      |                   uint32_t {aka long unsigned int}
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  61640	    612	   5424	  67676	  1085c	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+17:18:36 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  61640	    612	   5424	  67676	  1085c	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+17:20:42 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:100:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+  100 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  61648	    612	   5424	  67684	  10864	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+17:21:07 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  61648	    612	   5424	  67684	  10864	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+18:08:58 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  61648	    612	   5424	  67684	  10864	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+18:09:04 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  61648	    612	   5424	  67684	  10864	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+18:09:08 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  61648	    612	   5424	  67684	  10864	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+18:17:27 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:262:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  262 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:343:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  343 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%f,%f,%f,%f,%f,%f,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                             ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                             |
+      |                                                                          int                                                                                           int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:351:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  351 |     "B,%f,%ld,%d",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  352 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+../Core/Src/main.c:360:9: warning: format '%f' expects argument of type 'double', but argument 4 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  360 |     "G,%f,%d,%d,%d,%.4f,%.4f,%.4f",
+      |        ~^
+      |         |
+      |         double
+      |        %ld
+  361 |     solData.fTOW, GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~
+      |            |
+      |            int32_t {aka long int}
+../Core/Src/main.c:360:12: warning: format '%d' expects argument of type 'int', but argument 5 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  360 |     "G,%f,%d,%d,%d,%.4f,%.4f,%.4f",
+      |           ~^
+      |            |
+      |            int
+      |           %ld
+  361 |     solData.fTOW, GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |                   ~~~~~~~~~~~~~
+      |                   |
+      |                   uint32_t {aka long unsigned int}
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:100:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+  100 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: In function 'sd_card_init':
+../Core/Src/sd_black_box.c:169:1: warning: control reaches end of non-void function [-Wreturn-type]
+  169 | }
+      | ^
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  61672	    612	   5424	  67708	  1087c	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+18:24:47 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:100:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+  100 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: In function 'sd_card_init':
+../Core/Src/sd_black_box.c:169:1: warning: control reaches end of non-void function [-Wreturn-type]
+  169 | }
+      | ^
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  61672	    612	   5424	  67708	  1087c	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+18:25:02 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  61672	    612	   5424	  67708	  1087c	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+18:25:56 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:262:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  262 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:343:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  343 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%f,%f,%f,%f,%f,%f,%d", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                             ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                             |
+      |                                                                          int                                                                                           int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:351:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  351 |     "B,%f,%ld,%d",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  352 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+../Core/Src/main.c:360:9: warning: format '%f' expects argument of type 'double', but argument 4 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  360 |     "G,%f,%d,%d,%d,%.4f,%.4f,%.4f",
+      |        ~^
+      |         |
+      |         double
+      |        %ld
+  361 |     solData.fTOW, GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~
+      |            |
+      |            int32_t {aka long int}
+../Core/Src/main.c:360:12: warning: format '%d' expects argument of type 'int', but argument 5 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  360 |     "G,%f,%d,%d,%d,%.4f,%.4f,%.4f",
+      |           ~^
+      |            |
+      |            int
+      |           %ld
+  361 |     solData.fTOW, GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |                   ~~~~~~~~~~~~~
+      |                   |
+      |                   uint32_t {aka long unsigned int}
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  61112	    612	   5424	  67148	  1064c	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+18:33:39 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:100:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+  100 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: In function 'sd_card_init':
+../Core/Src/sd_black_box.c:169:1: warning: control reaches end of non-void function [-Wreturn-type]
+  169 | }
+      | ^
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  61000	    612	   5424	  67036	  105dc	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+18:41:23 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:262:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  262 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:343:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  343 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "B,%f,%f,%f,%f,%f,%f,%d \r\n", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                                  ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                                  |
+      |                                                                          int                                                                                                int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:351:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  351 |     "B,%f,%ld,%d \r\n",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  352 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+../Core/Src/main.c:360:9: warning: format '%f' expects argument of type 'double', but argument 4 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  360 |     "G,%f,%d,%d,%d,%.4f,%.4f,%.4f \r\n",
+      |        ~^
+      |         |
+      |         double
+      |        %ld
+  361 |     solData.fTOW, GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~
+      |            |
+      |            int32_t {aka long int}
+../Core/Src/main.c:360:12: warning: format '%d' expects argument of type 'int', but argument 5 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  360 |     "G,%f,%d,%d,%d,%.4f,%.4f,%.4f \r\n",
+      |           ~^
+      |            |
+      |            int
+      |           %ld
+  361 |     solData.fTOW, GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |                   ~~~~~~~~~~~~~
+      |                   |
+      |                   uint32_t {aka long unsigned int}
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  61008	    612	   5424	  67044	  105e4	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+18:41:51 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  61008	    612	   5424	  67044	  105e4	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+19:11:36 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:262:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  262 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:345:9: warning: format '%f' expects argument of type 'double', but argument 4 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  345 |     "G,%f,%d,%d,%d,%.4f,%.4f,%.4f \r\n",
+      |        ~^
+      |         |
+      |         double
+      |        %ld
+  346 |     solData.fTOW, GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~
+      |            |
+      |            int32_t {aka long int}
+../Core/Src/main.c:345:12: warning: format '%d' expects argument of type 'int', but argument 5 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  345 |     "G,%f,%d,%d,%d,%.4f,%.4f,%.4f \r\n",
+      |           ~^
+      |            |
+      |            int
+      |           %ld
+  346 |     solData.fTOW, GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |                   ~~~~~~~~~~~~~
+      |                   |
+      |                   uint32_t {aka long unsigned int}
+../Core/Src/main.c:354:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  354 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "I,%f,%f,%f,%f,%f,%f,%d \r\n", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                                  ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                                  |
+      |                                                                          int                                                                                                int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:362:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  362 |     "B,%f,%ld,%d \r\n",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  363 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  61008	    612	   5424	  67044	  105e4	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+19:16:40 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:262:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  262 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:345:9: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  345 |     "G,%d,%d,%d,%f,%f,%f \r\n",
+      |        ~^
+      |         |
+      |         int
+      |        %ld
+  346 |     GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~~
+      |     |
+      |     uint32_t {aka long unsigned int}
+../Core/Src/main.c:354:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  354 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "I,%f,%f,%f,%f,%f,%f,%d \r\n", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                                  ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                                  |
+      |                                                                          int                                                                                                int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:362:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  362 |     "B,%f,%ld,%d \r\n",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  363 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  60992	    612	   5424	  67028	  105d4	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+19:18:25 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:262:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  262 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:344:9: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  344 |     "G,%d,%d,%d,%f,%f,%f \r\n",
+      |        ~^
+      |         |
+      |         int
+      |        %ld
+  345 |     GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~~
+      |     |
+      |     uint32_t {aka long unsigned int}
+../Core/Src/main.c:353:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  353 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "I,%f,%f,%f,%f,%f,%f,%d \r\n", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                                  ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                                  |
+      |                                                                          int                                                                                                int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:361:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  361 |     "B,%f,%ld,%d \r\n",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  362 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  60984	    612	   5424	  67020	  105cc	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+19:25:17 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:262:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  262 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:344:9: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  344 |     "G,%d,%d,%d,%f,%f,%f \r\n",
+      |        ~^
+      |         |
+      |         int
+      |        %ld
+  345 |     GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~~
+      |     |
+      |     uint32_t {aka long unsigned int}
+../Core/Src/main.c:353:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  353 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "I,%f,%f,%f,%f,%f,%f,%d \r\n", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                                  ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                                  |
+      |                                                                          int                                                                                                int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:361:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  361 |     "B,%f,%ld,%d \r\n",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  362 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:100:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+  100 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: In function 'sd_card_init':
+../Core/Src/sd_black_box.c:169:1: warning: control reaches end of non-void function [-Wreturn-type]
+  169 | }
+      | ^
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  60984	    612	   5424	  67020	  105cc	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+19:34:20 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:262:25: warning: unused variable 'parsecheck' [-Wunused-variable]
+  262 |                 uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |                         ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:344:9: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  344 |     "G,%d,%d,%d,%f,%f,%f \r\n",
+      |        ~^
+      |         |
+      |         int
+      |        %ld
+  345 |     GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~~
+      |     |
+      |     uint32_t {aka long unsigned int}
+../Core/Src/main.c:353:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  353 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "I,%f,%f,%f,%f,%f,%f,%d \r\n", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                                  ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                                  |
+      |                                                                          int                                                                                                int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:361:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  361 |     "B,%f,%ld,%d \r\n",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  362 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  60984	    612	   5424	  67020	  105cc	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+19:36:43 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  60984	    612	   5424	  67020	  105cc	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+19:41:12 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:102:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+  102 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: In function 'sd_card_init':
+../Core/Src/sd_black_box.c:173:1: warning: control reaches end of non-void function [-Wreturn-type]
+  173 | }
+      | ^
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  60992	    612	   5424	  67028	  105d4	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+19:45:00 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:174:3: warning: 'strncpy' output truncated before terminating nul copying 19 bytes from a string of the same length [-Wstringop-truncation]
+  174 |   strncpy((char*)readBuf, "a new file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: In function 'sd_card_init':
+../Core/Src/sd_black_box.c:244:1: warning: control reaches end of non-void function [-Wreturn-type]
+  244 | }
+      | ^
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  61072	    612	   5424	  67108	  10624	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+19:45:07 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-size  NAV_BOX.elf 
+   text	   data	    bss	    dec	    hex	filename
+  61072	    612	   5424	  67108	  10624	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+17:49:26 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:75:3: warning: 'strncpy' output truncated copying 19 bytes from a string of length 23 [-Wstringop-truncation]
+   75 |   strncpy((char*)readBuf, "a new log_file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: At top level:
+../Core/Src/sd_black_box.c:8:12: warning: 'log_dir' defined but not used [-Wunused-variable]
+    8 | static DIR log_dir;       // FatFs directory object for the SD card root directory
+      |            ^~~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  60740	    612	   5424	  66776	  104d8	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 

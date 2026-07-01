@@ -4,41 +4,16 @@
 #include <string.h>
 
 //-------------------------------SD_CARD_SPI---------------------------------------------
-static FIL csv_file;      // FatFs file object for the active CSV/log file on the SD card
+static FIL log_file;      // FatFs log_file object for the active CSV/log log_file on the SD card
+static DIR log_dir;       // FatFs directory object for the SD card root directory
 static FATFS fs_sd;       // FatFs volume object representing the mounted SD card filesystem
 static uint8_t sd_initialized = 0;
+static uint8_t log_file_open = 0;
 static uint32_t write_count = 0;
 
+static FRESULT debug;
 #define SD_SYNC_INTERVAL 16   // call f_sync every N successful writes
 
-static uint8_t file_exists(const char *path) {
-  return (f_stat(path, NULL) == FR_OK) ? 1U : 0U;
-}
-
-static uint8_t build_indexed_filename(const char *filename, uint32_t index, char *out, size_t out_size) {
-  const char *slash = strrchr(filename, '/');
-  const char *backslash = strrchr(filename, '\\');
-  const char *path_sep = slash;
-
-  if (backslash != NULL && (path_sep == NULL || backslash > path_sep)) {
-    path_sep = backslash;
-  }
-
-  const char *name_start = (path_sep != NULL) ? path_sep + 1 : filename;
-  const char *extension = strrchr(name_start, '.');
-
-  if (extension != NULL) {
-    size_t prefix_len = (size_t)(extension - filename);
-    int written = snprintf(out, out_size, "%.*s_%04lu%s",
-                           (int)prefix_len, filename,
-                           (unsigned long)index,
-                           extension);
-    return (written > 0 && (size_t)written < out_size) ? 1U : 0U;
-  }
-
-  int written = snprintf(out, out_size, "%s_%04lu", filename, (unsigned long)index);
-  return (written > 0 && (size_t)written < out_size) ? 1U : 0U;
-}
 //-------------------------------SD_CARD_SPI---------------------------------------------
 
 void myprintf(UART_HandleTypeDef *huart, const char *fmt, ...) {
@@ -59,10 +34,10 @@ void test_sd_card_write(UART_HandleTypeDef *huart){
 
   //some variables for FatFs
   FATFS FatFs;  //Fatfs handle
-  FIL fil;      //File handle
+  FIL fil;      //log_file handle
   FRESULT fres; //Result after operations
 
-  //Open the file system
+  //Open the log_file system
   fres = f_mount(&FatFs, "", 1); //1=mount now
   if (fres != FR_OK) {
     myprintf(huart, "f_mount error (%i)\r\n", fres);
@@ -86,7 +61,7 @@ void test_sd_card_write(UART_HandleTypeDef *huart){
 
   myprintf(huart, "SD card stats:\r\n%10lu KiB total drive space.\r\n%10lu KiB available.\r\n", total_sectors / 2, free_sectors / 2);
 
-  //Now let's try and write a file "write.txt"
+  //Now let's try and write a log_file "write.txt"
   fres = f_open(&fil, "write.txt", FA_WRITE | FA_OPEN_ALWAYS | FA_CREATE_ALWAYS);
   if(fres == FR_OK) {
     myprintf(huart, "I was able to open 'write.txt' for writing\r\n");
@@ -97,7 +72,7 @@ void test_sd_card_write(UART_HandleTypeDef *huart){
   //Copy in a string
   BYTE readBuf[30];
 
-  strncpy((char*)readBuf, "a new file is made!", 19);
+  strncpy((char*)readBuf, "a new log_file is made!", 19);
   UINT bytesWrote;
   fres = f_write(&fil, readBuf, 19, &bytesWrote);
   if(fres == FR_OK) {
@@ -106,7 +81,7 @@ void test_sd_card_write(UART_HandleTypeDef *huart){
     myprintf(huart, "f_write error (%i)\r\n", fres);
   }
 
-  //Be a tidy kiwi - don't forget to close your file!
+  //Be a tidy kiwi - don't forget to close your log_file!
   f_close(&fil);
 
   // FIX 1: Do NOT unmount here. sd_card_init() will remount using fs_sd.
@@ -115,81 +90,73 @@ void test_sd_card_write(UART_HandleTypeDef *huart){
   // f_mount(NULL, "", 0);  <-- removed
 }
 
-void sd_card_init(const char *filename) {
+uint8_t sd_card_init(const char *filename) {
   /*
-    Start Log file
+    Start Log log_file
+    filenmame format: NAME_000
   */
-  char log_filename[64];
-
+  //check if filename is given
   if (filename == NULL) {
-    sd_initialized = 0;
-    return;
+    filename = "default_log.csv";
   }
 
-  // FIX 2: Mount using the persistent static fs_sd object.
-  // The test function no longer unmounts, so this remount cleanly
-  // replaces the test's local FATFS handle with our long-lived one.
+  //maunt SD cardfilesystem
   if (f_mount(&fs_sd, "", 1) != FR_OK) {
     sd_initialized = 0;
-    return;
+    log_file_open = 0;
+    return 2;
   }
 
-  if (!file_exists(filename)) {
-    int written = snprintf(log_filename, sizeof(log_filename), "%s", filename);
-    if (written <= 0 || (size_t)written >= sizeof(log_filename)) {
-      sd_initialized = 0;
-      return;
-    }
-  } else {
-    uint32_t index = 1U;
-
-    do {
-      if (!build_indexed_filename(filename, index, log_filename, sizeof(log_filename))) {
-        sd_initialized = 0;
-        return;
-      }
-      index++;
-    } while (file_exists(log_filename));
+  if (log_file_open) {
+    f_close(&log_file);
+    log_file_open = 0;
   }
 
-  // FIX 3: FA_WRITE must be combined with FA_CREATE_NEW so the file is
-  // opened for writing, not just created. Without FA_WRITE, f_write() fails.
-  if (f_open(&csv_file, log_filename, FA_WRITE | FA_CREATE_NEW) != FR_OK) {
+  //f_unlink(filename);
+
+  if (f_open(&log_file, filename, FA_WRITE | FA_CREATE_ALWAYS) != FR_OK) {
     sd_initialized = 0;
-    return;
+    return 3;
   }
 
-  // Write CSV header
-  const char *header = "type,ax,ay,az,pitch,roll,yaw,temp,pressure,lat,lon,alt,fix,numSV,gps_tow,timestamp\r\n";
-  UINT bytes_written;
-  f_write(&csv_file, header, strlen(header), &bytes_written);
-  f_sync(&csv_file); // flush header immediately so it survives a reset
+  log_file_open = 1;
+  write_count = 0;
 
   sd_initialized = 1;
+  return 0;
 }
 
-/* OPTIMIZED IMPLEMENTATION - PERSISTENT FILE HANDLE, NON-BLOCKING */
+/* OPTIMIZED IMPLEMENTATION - PERSISTENT log_file HANDLE, NON-BLOCKING */
 uint8_t sd_card_write(const uint8_t *buffer, uint32_t length) {
-  if (!sd_initialized || buffer == NULL || length == 0) {
-    return 0;
+  if (sd_initialized == 0 || log_file_open == 0) {
+    return 1;
+  }
+  if(buffer == NULL){
+    return 2;
+  }
+  if(length == 0){
+    return 3;
   }
 
   FRESULT fres;
   UINT bytes_written = 0;
 
-  fres = f_write(&csv_file, buffer, length, &bytes_written);
-  if (fres != FR_OK || bytes_written != length) {
-    return 0;
+  fres = f_write(&log_file, buffer, length, &bytes_written);
+  if (fres != FR_OK) {
+    return 4;
+  }
+  if( bytes_written != length){
+    return 5;
   }
 
   write_count++;
 
   // FIX 4: Periodically sync to flush the FatFs sector cache to the physical
   // card. Without this, f_write only fills RAM buffers and nothing is ever
-  // committed to the SD card unless the file is cleanly closed first.
+  // committed to the SD card unless the log_file is cleanly closed first.
   if ((write_count % SD_SYNC_INTERVAL) == 0) {
-    f_sync(&csv_file);
+    f_sync(&log_file);
   }
 
-  return 1;
+  return 0;
 }
