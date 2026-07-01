@@ -24,12 +24,12 @@ import matplotlib.pyplot as plt
 
 @dataclass(slots=True)
 class GPS:
-    time: np.ndarray = field(default_factory=lambda: np.array([], dtype=int))
+    timestamp: np.ndarray = field(default_factory=lambda: np.array([], dtype=int))
     fixtype: np.ndarray = field(default_factory=lambda: np.array([], dtype=int))
+    numSat: np.ndarray = field(default_factory=lambda: np.array([], dtype=int))
     lat: np.ndarray = field(default_factory=lambda: np.array([], dtype=float))
     lon: np.ndarray = field(default_factory=lambda: np.array([], dtype=float))
     alt: np.ndarray = field(default_factory=lambda: np.array([], dtype=float))
-    timestamp: np.ndarray = field(default_factory=lambda: np.array([], dtype=int))
 
 
 @dataclass(slots=True)
@@ -63,12 +63,13 @@ class LogParser:
         self.file_path = Path(file_path)
 
     def parse(self) -> ParsedLog:
-        gps_time: list[int] = []
+        gps_timestamp: list[int] = []
         gps_fixtype: list[int] = []
+        gps_numSat: list[int] = []
         gps_lat: list[float] = []
         gps_lon: list[float] = []
         gps_alt: list[float] = []
-        gps_timestamp: list[int] = []
+        
 
         bno_ax: list[float] = []
         bno_ay: list[float] = []
@@ -85,7 +86,7 @@ class LogParser:
         unknown: List[list[str]] = []
 
         with self.file_path.open(newline="", encoding="utf-8") as handle:
-            for row in csv.reader(self._iter_data_lines(handle)):
+            for row in csv.reader(handle):
                 if not row:
                     continue
 
@@ -95,12 +96,12 @@ class LogParser:
                 if tag == "G":
                     record = self._parse_gps(fields)
                     if record is not None:
-                        gps_time.append(record.time)
+                        gps_timestamp.append(record.timestamp)
                         gps_fixtype.append(record.fixtype)
+                        gps_numSat.append(record.numSat)
                         gps_lat.append(record.lat)
                         gps_lon.append(record.lon)
                         gps_alt.append(record.alt)
-                        gps_timestamp.append(record.timestamp)
                     else:
                         unknown.append(row)
                 elif tag == "I":
@@ -128,12 +129,12 @@ class LogParser:
 
         return ParsedLog(
             gps=GPS(
-                time=np.asarray(gps_time, dtype=int),
+                timestamp=np.asarray(gps_timestamp, dtype=int),
                 fixtype=np.asarray(gps_fixtype, dtype=int),
+                numSat=np.asarray(gps_numSat, dtype=int),
                 lat=np.asarray(gps_lat, dtype=float),
                 lon=np.asarray(gps_lon, dtype=float),
                 alt=np.asarray(gps_alt, dtype=float),
-                timestamp=np.asarray(gps_timestamp, dtype=int),
             ),
             bno=BNO(
                 ax=np.asarray(bno_ax, dtype=float),
@@ -153,34 +154,20 @@ class LogParser:
         )
 
     @staticmethod
-    def _iter_data_lines(handle: Iterable[str]) -> Iterable[str]:
-        for raw_line in handle:
-            line = raw_line.strip()
-            if not line:
-                continue
-            if line.startswith("//"):
-                continue
-            if line in {"GPS:", "BNO", "BMP"}:
-                continue
-            yield line
-
-    @staticmethod
     def _parse_gps(fields: list[str]) -> GPS | None:
         try:
             if len(fields) == 6:
-                time, fixtype, lat, lon, alt, timestamp = fields
-            elif len(fields) == 7:
-                time, timestamp, fixtype, _num_sv, lat, lon, alt = fields
+                timestamp, fixtype, numSat, lat, lon, alt = fields
             else:
                 return None
 
             return GPS(
-                time=int(float(time)),
+                timestamp=int(float(timestamp)),
                 fixtype=int(float(fixtype)),
+                numSat=int(float(numSat)),
                 lat=float(lat),
                 lon=float(lon),
                 alt=float(alt),
-                timestamp=int(float(timestamp)),
             )
         except ValueError:
             return None
@@ -233,15 +220,83 @@ if __name__ == "__main__":
     print(f"BMP records: {len(result.bmp.timestamp)}")
     print(f"Unknown rows: {len(result.unknown)}")
 
-    plt.figure()
-    plt.plot(result.bno.timestamp, result.bno.ax)
-    plt.plot(result.bno.timestamp, result.bno.ay)
-    plt.plot(result.bno.timestamp, result.bno.az)
-    plt.title("BNO ax vs timestamp")
+    plt.figure(figsize=(14, 10))
+    
+    # BNO Accelerometer
+    plt.subplot(3, 2, 1)
+    plt.plot(result.bno.timestamp, result.bno.ax, label="ax")
+    plt.plot(result.bno.timestamp, result.bno.ay, label="ay")
+    plt.plot(result.bno.timestamp, result.bno.az, label="az")
+    plt.title("BNO Accelerometer (ax, ay, az)")
     plt.xlabel("timestamp")
-    plt.ylabel("ax")
+    plt.ylabel("Acceleration")
+    plt.legend()
     plt.grid(True)
+
+    # BNO Gyroscope
+    plt.subplot(3, 2, 2)
+    plt.plot(result.bno.timestamp, result.bno.gx, label="gx")
+    plt.plot(result.bno.timestamp, result.bno.gy, label="gy")
+    plt.plot(result.bno.timestamp, result.bno.gz, label="gz")
+    plt.title("BNO Gyroscope (gx, gy, gz)")
+    plt.xlabel("timestamp")
+    plt.ylabel("Rotation")
+    plt.legend()
+    plt.grid(True)
+
+    # GPS Latitude
+    plt.subplot(3, 2, 3)
+    plt.plot(result.gps.timestamp, result.gps.lat, color='blue', marker='o', markersize=3)
+    plt.title("GPS Latitude")
+    plt.xlabel("timestamp")
+    plt.ylabel("Latitude (°)")
+    plt.grid(True)
+
+    # GPS Longitude
+    plt.subplot(3, 2, 4)
+    plt.plot(result.gps.timestamp, result.gps.lon, color='green', marker='o', markersize=3)
+    plt.title("GPS Longitude")
+    plt.xlabel("timestamp")
+    plt.ylabel("Longitude (°)")
+    plt.grid(True)
+
+    # GPS Altitude
+    plt.subplot(3, 2, 5)
+    plt.plot(result.gps.timestamp, result.gps.alt, color='red', marker='o', markersize=3)
+    plt.title("GPS Altitude")
+    plt.xlabel("timestamp")
+    plt.ylabel("Altitude (m)")
+    plt.grid(True)
+
+    # BMP Pressure & Temperature
+    plt.subplot(3, 2, 6)
+    ax1 = plt.gca()
+    ax2 = ax1.twinx()
+    line1 = ax1.plot(result.bmp.timestamp, result.bmp.press, color='purple', label="Pressure")
+    line2 = ax2.plot(result.bmp.timestamp, result.bmp.temp, color='orange', label="Temperature")
+    ax1.set_xlabel("timestamp")
+    ax1.set_ylabel("Pressure (Pa)", color='purple')
+    ax2.set_ylabel("Temperature (°C)", color='orange')
+    ax1.tick_params(axis='y', labelcolor='purple')
+    ax2.tick_params(axis='y', labelcolor='orange')
+    ax1.grid(True)
+    plt.title("BMP Pressure & Temperature")
+    
     plt.tight_layout()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     plt.show()
 
     

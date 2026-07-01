@@ -131,7 +131,7 @@ nslp_instance_t nslp;
 //--------------------------NSLP--------------------------------------------
 
 //---------------------------SD CARD----------------------------
-char log_filename[64] = "data_log"; // Default log filename
+char log_filename[64] = "DATA_LOG"; // Default log filename
 char sd_gps_buffer[128]; // Buffer for GPS data to be written to SD card
 //%G,Time,Timestamp,FixType,NumSV,Lat,Lon,Alt
 bool sd_gps_store_flag = false;
@@ -476,7 +476,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 	while (1)
 	{
-    
+
 		parse_gps_data();
 		parse_bno055_data();
 		poll_n_parse_bmp180_data();
