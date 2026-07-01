@@ -1,0 +1,2 @@
+../Core/Src/running_average.c:12:6:RA_set	0	static
+../Core/Src/running_average.c:20:6:RA_update	32	static

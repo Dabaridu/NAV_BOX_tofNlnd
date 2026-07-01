@@ -40,9 +40,8 @@
 
 //homebrewed libraries
 #include "nslp_packets.h"
-#include "sens_fusion.h"
-#include "iir_filter.h"
 #include "sd_black_box.h"
+#include "running_average.h"
 
 //#include <math.h>
 
@@ -101,14 +100,15 @@ bno055_euler_t euler;
 int32_t BNO055_timeStamp;
 
 bool to_send_imu_nslp_flag = false;
-//-------------------------------BNO055---------------------------------------------
-//--------------------------FILTER---------------------------------
-IIR_LPF_1st accel_x_filter;
-IIR_LPF_1st accel_y_filter;
-IIR_LPF_1st accel_z_filter;
-//--------------------------FILTER---------------------------------
 
-//-------------------------------GPS---------------------------------------------
+//-------------------------------BNO055---------------------------------------------
+//-------------------------------FILTER---------------------------------------------
+RunningAverage filter_accelx;
+RunningAverage filter_accely;
+RunningAverage filter_accelz;
+//-------------------------------FILTER---------------------------------------------
+
+//-------------------------------GPS------------------------------------------------
 #define rx_buffer_size 60 //GPS uart 1 recieve NAV-SOL packed size
 uint8_t rx_buffer[rx_buffer_size]; //size of data recieved from GPS
 UBX_NavSol rawData; //raw gps data from parsing the rx_buffer
@@ -117,9 +117,9 @@ uint32_t GPS_timeStamp; //timestamp of processing
 
 bool gps_dma_data_ready = false;
 bool to_send_gps_nslp_flag = false;
-//-------------------------------GPS---------------------------------------------
+//-------------------------------GPS------------------------------------------------
 
-//--------------------------NSLP--------------------------------------------
+//--------------------------NSLP----------------------------------------------------
 /*
  * Match this to recieving end of NSLP debugger
  * Software: -->NSLP Trace<--
@@ -214,11 +214,11 @@ void parse_bno055_data(){
 	if (bno.dma_data_ready) {
 
 		bno055_get_linear_acc(&bno, &accel);
-
-    filtered_accel.x = IIR_LPF_1st_Apply(&accel_x_filter, accel.x);
-    filtered_accel.y = IIR_LPF_1st_Apply(&accel_y_filter, accel.y);
-    filtered_accel.z = IIR_LPF_1st_Apply(&accel_z_filter, accel.z);
 		
+		RA_update(&filter_accelx);
+    RA_update(&filter_accely);
+    RA_update(&filter_accelz);
+
 		bno055_get_euler(&bno, &euler);
 		bno055_get_quaternion(&bno, &quat); //orientation
 
@@ -288,9 +288,9 @@ void nslp_transmit_packets(){
   GPS_nslp_data.time = GPS_timeStamp;
 
 // Copy filtered accelerometer data to transmission structure
-  BNO055_nslp_data_a.ax = filtered_accel.x;
-  BNO055_nslp_data_a.ay = filtered_accel.y;
-  BNO055_nslp_data_a.az = filtered_accel.z;
+  BNO055_nslp_data_a.ax = filter_accelx.data_output;
+  BNO055_nslp_data_a.ay = filter_accely.data_output;
+  BNO055_nslp_data_a.az = filter_accelz.data_output;
   BNO055_nslp_data_a.time = BNO055_timeStamp;
 
   BNO055_nslp_data_g.gx = euler.pitch;
@@ -347,7 +347,7 @@ void sd_store(){
 
   if(sd_bno_store_flag == true){
     sd_bno_store_flag = false;
-    snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "I,%f,%f,%f,%f,%f,%f,%d \r\n", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+    snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "I,%f,%f,%f,%f,%f,%f,%d \r\n", filter_accelx.data_output, filter_accely.data_output, filter_accelz.data_output, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
     //%I,Ax,Ay,Az,Gx,Gy,Gz,Timestamp
     check = sd_card_write((const uint8_t *)sd_bno_buffer, strlen(sd_bno_buffer));
   }
@@ -458,11 +458,9 @@ int main(void)
     bno055_start_dma_read(&bno);
 
   //innitialize the filters for the accelerometer data
-    float cutoff = 10; // 10Hz cutoff frequency for accelerometer data
-    float sample_rate = 100; // 100Hz sample rate for accelerometer data
-    IIR_LPF_1st_Init(&accel_x_filter, cutoff, sample_rate);
-    IIR_LPF_1st_Init(&accel_y_filter, cutoff, sample_rate);
-    IIR_LPF_1st_Init(&accel_z_filter, cutoff, sample_rate);
+    RA_set(&filter_accelx,10, &accel.x);
+    RA_set(&filter_accely,10, &accel.y);
+    RA_set(&filter_accelz,10, &accel.z);
 
   //------------------------TEST SD CARD WRITE------------------------
     //test_sd_card_write(&huart2);
@@ -476,7 +474,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 	while (1)
 	{
-
 		parse_gps_data();
 		parse_bno055_data();
 		poll_n_parse_bmp180_data();

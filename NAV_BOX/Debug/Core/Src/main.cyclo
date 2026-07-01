@@ -6,9 +6,9 @@
 ../Core/Src/main.c:211:6:parse_bno055_data	2
 ../Core/Src/main.c:235:6:poll_n_parse_bmp180_data	2
 ../Core/Src/main.c:253:6:parse_gps_data	2
-../Core/Src/main.c:279:6:nslp_transmit_packets	5
-../Core/Src/main.c:338:6:sd_store	4
-../Core/Src/main.c:374:6:process_sensor_fusion	1
-../Core/Src/main.c:501:6:SystemClock_Config	4
-../Core/Src/main.c:392:5:main	11
-../Core/Src/main.c:798:6:Error_Handler	1
+../Core/Src/main.c:276:6:nslp_transmit_packets	5
+../Core/Src/main.c:335:6:sd_store	4
+../Core/Src/main.c:371:6:process_sensor_fusion	1
+../Core/Src/main.c:494:6:SystemClock_Config	4
+../Core/Src/main.c:389:5:main	11
+../Core/Src/main.c:791:6:Error_Handler	1

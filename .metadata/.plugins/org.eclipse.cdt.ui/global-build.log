@@ -25085,3 +25085,1713 @@ Finished building: default.size.stdout
  
 Finished building: NAV_BOX.list
  
+21:18:18 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/bmp180_for_stm32_hal.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/bmp180_for_stm32_hal.d" -MT"Core/Src/bmp180_for_stm32_hal.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/bmp180_for_stm32_hal.o"
+arm-none-eabi-gcc "../Core/Src/bno055.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/bno055.d" -MT"Core/Src/bno055.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/bno055.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/nslp_dma.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/nslp_dma.d" -MT"Core/Src/nslp_dma.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/nslp_dma.o"
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+arm-none-eabi-gcc "../Core/Src/sd_black_box.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sd_black_box.d" -MT"Core/Src/sd_black_box.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sd_black_box.o"
+arm-none-eabi-gcc "../Core/Src/stm32f3xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f3xx_hal_msp.d" -MT"Core/Src/stm32f3xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f3xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f3xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f3xx_it.d" -MT"Core/Src/stm32f3xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f3xx_it.o"
+arm-none-eabi-gcc "../Core/Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/syscalls.d" -MT"Core/Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/syscalls.o"
+arm-none-eabi-gcc "../Core/Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sysmem.d" -MT"Core/Src/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sysmem.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32f3xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/system_stm32f3xx.d" -MT"Core/Src/system_stm32f3xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32f3xx.o"
+arm-none-eabi-gcc "../Core/Src/ubx_nav_sol.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ubx_nav_sol.d" -MT"Core/Src/ubx_nav_sol.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ubx_nav_sol.o"
+In file included from ../Core/Src/running_average.c:1:
+../Core/Inc/running_average.h:8:9: error: unknown type name 'uint32_t'
+    8 |         uint32_t window_size;
+      |         ^~~~~~~~
+../Core/Inc/running_average.h:11:48: error: unknown type name 'uint32_t'
+   11 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter)
+      |                                                ^~~~~~~~
+../Core/Inc/running_average.h:1:1: note: 'uint32_t' is defined in header '<stdint.h>'; did you forget to '#include <stdint.h>'?
+  +++ |+#include <stdint.h>
+    1 | #ifndef RUNNING_AVERAGE_H
+../Core/Src/running_average.c:15:1: warning: useless type name in empty declaration
+   15 | } RunningAverage;
+      | ^
+../Core/Src/running_average.c:17:48: error: unknown type name 'uint32_t'
+   17 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter)
+      |                                                ^~~~~~~~
+../Core/Src/running_average.c:2:1: note: 'uint32_t' is defined in header '<stdint.h>'; did you forget to '#include <stdint.h>'?
+    1 | #include "running_average.h"
+  +++ |+#include <stdint.h>
+    2 | /*
+../Core/Src/running_average.c: In function 'RA_update':
+../Core/Src/running_average.c:27:14: error: unknown type name 'uint32_t'
+   27 |         for (uint32_t i = 0; i < filter->window_size - 1; i++) {
+      |              ^~~~~~~~
+../Core/Src/running_average.c:27:14: note: 'uint32_t' is defined in header '<stdint.h>'; did you forget to '#include <stdint.h>'?
+../Core/Src/running_average.c:28:36: error: subscripted value is neither array nor pointer nor vector
+   28 |                 filter->data_buffer[i] = filter->data_buffer[i + 1];
+      |                                    ^
+../Core/Src/running_average.c:28:61: error: subscripted value is neither array nor pointer nor vector
+   28 |                 filter->data_buffer[i] = filter->data_buffer[i + 1];
+      |                                                             ^
+../Core/Src/running_average.c:32:28: error: subscripted value is neither array nor pointer nor vector
+   32 |         filter->data_buffer[filter->window_size - 1] = *(filter->data_input_address);
+      |                            ^
+../Core/Src/running_average.c:36:14: error: unknown type name 'uint32_t'
+   36 |         for (uint32_t i = 0; i < filter->window_size; i++) {
+      |              ^~~~~~~~
+../Core/Src/running_average.c:36:14: note: 'uint32_t' is defined in header '<stdint.h>'; did you forget to '#include <stdint.h>'?
+../Core/Src/running_average.c:37:43: error: subscripted value is neither array nor pointer nor vector
+   37 |                 sum += filter->data_buffer[i];
+      |                                           ^
+make: *** [Core/Src/subdir.mk:52: Core/Src/running_average.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Core/Src/sd_black_box.c: In function 'test_sd_card_write':
+../Core/Src/sd_black_box.c:75:3: warning: 'strncpy' output truncated copying 19 bytes from a string of length 23 [-Wstringop-truncation]
+   75 |   strncpy((char*)readBuf, "a new log_file is made!", 19);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/sd_black_box.c: At top level:
+../Core/Src/sd_black_box.c:14:16: warning: 'debug' defined but not used [-Wunused-variable]
+   14 | static FRESULT debug;
+      |                ^~~~~
+../Core/Src/sd_black_box.c:8:12: warning: 'log_dir' defined but not used [-Wunused-variable]
+    8 | static DIR log_dir;       // FatFs directory object for the SD card root directory
+      |            ^~~~~~~
+../Core/Src/main.c:43:10: fatal error: sens_fusion.h: No such file or directory
+   43 | #include "sens_fusion.h"
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+make: *** [Core/Src/subdir.mk:52: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:18:30 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+In file included from ../Core/Src/running_average.c:1:
+../Core/Inc/running_average.h:8:9: error: unknown type name 'uint32_t'
+    8 |         uint32_t window_size;
+      |         ^~~~~~~~
+../Core/Inc/running_average.h:11:48: error: unknown type name 'uint32_t'
+   11 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter)
+      |                                                ^~~~~~~~
+../Core/Inc/running_average.h:1:1: note: 'uint32_t' is defined in header '<stdint.h>'; did you forget to '#include <stdint.h>'?
+  +++ |+#include <stdint.h>
+    1 | #ifndef RUNNING_AVERAGE_H
+../Core/Src/running_average.c:15:1: warning: useless type name in empty declaration
+   15 | } RunningAverage;
+      | ^
+../Core/Src/running_average.c:17:48: error: unknown type name 'uint32_t'
+   17 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter)
+      |                                                ^~~~~~~~
+../Core/Src/running_average.c:2:1: note: 'uint32_t' is defined in header '<stdint.h>'; did you forget to '#include <stdint.h>'?
+    1 | #include "running_average.h"
+  +++ |+#include <stdint.h>
+    2 | /*
+../Core/Src/running_average.c: In function 'RA_update':
+../Core/Src/running_average.c:27:14: error: unknown type name 'uint32_t'
+   27 |         for (uint32_t i = 0; i < filter->window_size - 1; i++) {
+      |              ^~~~~~~~
+../Core/Src/running_average.c:27:14: note: 'uint32_t' is defined in header '<stdint.h>'; did you forget to '#include <stdint.h>'?
+../Core/Src/running_average.c:28:36: error: subscripted value is neither array nor pointer nor vector
+   28 |                 filter->data_buffer[i] = filter->data_buffer[i + 1];
+      |                                    ^
+../Core/Src/running_average.c:28:61: error: subscripted value is neither array nor pointer nor vector
+   28 |                 filter->data_buffer[i] = filter->data_buffer[i + 1];
+      |                                                             ^
+../Core/Src/running_average.c:32:28: error: subscripted value is neither array nor pointer nor vector
+   32 |         filter->data_buffer[filter->window_size - 1] = *(filter->data_input_address);
+      |                            ^
+../Core/Src/running_average.c:36:14: error: unknown type name 'uint32_t'
+   36 |         for (uint32_t i = 0; i < filter->window_size; i++) {
+      |              ^~~~~~~~
+../Core/Src/running_average.c:36:14: note: 'uint32_t' is defined in header '<stdint.h>'; did you forget to '#include <stdint.h>'?
+../Core/Src/running_average.c:37:43: error: subscripted value is neither array nor pointer nor vector
+   37 |                 sum += filter->data_buffer[i];
+      |                                           ^
+make: *** [Core/Src/subdir.mk:52: Core/Src/running_average.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:254:15: warning: unused variable 'parsecheck' [-Wunused-variable]
+  254 |       uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |               ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:333:9: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  333 |     "G,%d,%d,%d,%f,%f,%f \r\n",
+      |        ~^
+      |         |
+      |         int
+      |        %ld
+  334 |     GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~~
+      |     |
+      |     uint32_t {aka long unsigned int}
+../Core/Src/main.c:342:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  342 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "I,%f,%f,%f,%f,%f,%f,%d \r\n", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                                  ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                                  |
+      |                                                                          int                                                                                                int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:350:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  350 |     "B,%f,%ld,%d \r\n",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  351 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:455:5: warning: implicit declaration of function 'IIR_LPF_1st_Init' [-Wimplicit-function-declaration]
+  455 |     IIR_LPF_1st_Init(&accel_x_filter, cutoff, sample_rate);
+      |     ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:455:23: error: 'accel_x_filter' undeclared (first use in this function)
+  455 |     IIR_LPF_1st_Init(&accel_x_filter, cutoff, sample_rate);
+      |                       ^~~~~~~~~~~~~~
+../Core/Src/main.c:455:23: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:456:23: error: 'accel_y_filter' undeclared (first use in this function)
+  456 |     IIR_LPF_1st_Init(&accel_y_filter, cutoff, sample_rate);
+      |                       ^~~~~~~~~~~~~~
+../Core/Src/main.c:457:23: error: 'accel_z_filter' undeclared (first use in this function)
+  457 |     IIR_LPF_1st_Init(&accel_z_filter, cutoff, sample_rate);
+      |                       ^~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:52: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:18:44 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+In file included from ../Core/Src/running_average.c:1:
+../Core/Inc/running_average.h:8:9: error: unknown type name 'uint32_t'
+    8 |         uint32_t window_size;
+      |         ^~~~~~~~
+../Core/Inc/running_average.h:11:48: error: unknown type name 'uint32_t'
+   11 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter)
+      |                                                ^~~~~~~~
+../Core/Inc/running_average.h:1:1: note: 'uint32_t' is defined in header '<stdint.h>'; did you forget to '#include <stdint.h>'?
+  +++ |+#include <stdint.h>
+    1 | #ifndef RUNNING_AVERAGE_H
+../Core/Src/running_average.c:15:1: warning: useless type name in empty declaration
+   15 | } RunningAverage;
+      | ^
+../Core/Src/running_average.c:17:48: error: unknown type name 'uint32_t'
+   17 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter)
+      |                                                ^~~~~~~~
+../Core/Src/running_average.c:2:1: note: 'uint32_t' is defined in header '<stdint.h>'; did you forget to '#include <stdint.h>'?
+    1 | #include "running_average.h"
+  +++ |+#include <stdint.h>
+    2 | /*
+../Core/Src/running_average.c: In function 'RA_update':
+../Core/Src/running_average.c:27:14: error: unknown type name 'uint32_t'
+   27 |         for (uint32_t i = 0; i < filter->window_size - 1; i++) {
+      |              ^~~~~~~~
+../Core/Src/running_average.c:27:14: note: 'uint32_t' is defined in header '<stdint.h>'; did you forget to '#include <stdint.h>'?
+../Core/Src/running_average.c:28:36: error: subscripted value is neither array nor pointer nor vector
+   28 |                 filter->data_buffer[i] = filter->data_buffer[i + 1];
+      |                                    ^
+../Core/Src/running_average.c:28:61: error: subscripted value is neither array nor pointer nor vector
+   28 |                 filter->data_buffer[i] = filter->data_buffer[i + 1];
+      |                                                             ^
+../Core/Src/running_average.c:32:28: error: subscripted value is neither array nor pointer nor vector
+   32 |         filter->data_buffer[filter->window_size - 1] = *(filter->data_input_address);
+      |                            ^
+../Core/Src/running_average.c:36:14: error: unknown type name 'uint32_t'
+   36 |         for (uint32_t i = 0; i < filter->window_size; i++) {
+      |              ^~~~~~~~
+../Core/Src/running_average.c:36:14: note: 'uint32_t' is defined in header '<stdint.h>'; did you forget to '#include <stdint.h>'?
+../Core/Src/running_average.c:37:43: error: subscripted value is neither array nor pointer nor vector
+   37 |                 sum += filter->data_buffer[i];
+      |                                           ^
+make: *** [Core/Src/subdir.mk:52: Core/Src/running_average.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:254:15: warning: unused variable 'parsecheck' [-Wunused-variable]
+  254 |       uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |               ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:333:9: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  333 |     "G,%d,%d,%d,%f,%f,%f \r\n",
+      |        ~^
+      |         |
+      |         int
+      |        %ld
+  334 |     GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~~
+      |     |
+      |     uint32_t {aka long unsigned int}
+../Core/Src/main.c:342:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  342 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "I,%f,%f,%f,%f,%f,%f,%d \r\n", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                                  ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                                  |
+      |                                                                          int                                                                                                int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:350:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  350 |     "B,%f,%ld,%d \r\n",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  351 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:19:23 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+In file included from ../Core/Src/running_average.c:1:
+../Core/Inc/running_average.h:8:9: error: unknown type name 'uint32_t'
+    8 |         uint32_t window_size;
+      |         ^~~~~~~~
+../Core/Inc/running_average.h:11:48: error: unknown type name 'uint32_t'
+   11 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter)
+      |                                                ^~~~~~~~
+../Core/Inc/running_average.h:1:1: note: 'uint32_t' is defined in header '<stdint.h>'; did you forget to '#include <stdint.h>'?
+  +++ |+#include <stdint.h>
+    1 | #ifndef RUNNING_AVERAGE_H
+In file included from ../Core/Src/running_average.c:2:
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:74:33: error: unknown type name 'size_t'
+   74 | void    arc4random_buf (void *, size_t);
+      |                                 ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:23:1: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+   22 | #include <alloca.h>
+  +++ |+#include <stddef.h>
+   23 | #endif
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:87:24: error: unknown type name 'size_t'
+   87 |                        size_t __nmemb,
+      |                        ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:87:24: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:88:24: error: unknown type name 'size_t'
+   88 |                        size_t __size,
+      |                        ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:88:24: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:109:30: error: unknown type name 'size_t'
+  109 | int     mblen (const char *, size_t);
+      |                              ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:109:30: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:110:50: error: unknown type name 'size_t'
+  110 | int     _mblen_r (struct _reent *, const char *, size_t, _mbstate_t *);
+      |                                                  ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:110:50: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:111:62: error: unknown type name 'size_t'
+  111 | int     mbtowc (wchar_t *__restrict, const char *__restrict, size_t);
+      |                                                              ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:111:62: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:112:82: error: unknown type name 'size_t'
+  112 | int     _mbtowc_r (struct _reent *, wchar_t *__restrict, const char *__restrict, size_t, _mbstate_t *);
+      |                                                                                  ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:112:82: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:115:1: error: unknown type name 'size_t'
+  115 | size_t  mbstowcs (wchar_t *__restrict, const char *__restrict, size_t);
+      | ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:115:1: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:115:64: error: unknown type name 'size_t'
+  115 | size_t  mbstowcs (wchar_t *__restrict, const char *__restrict, size_t);
+      |                                                                ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:115:64: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:116:1: error: unknown type name 'size_t'
+  116 | size_t  _mbstowcs_r (struct _reent *, wchar_t *__restrict, const char *__restrict, size_t, _mbstate_t *);
+      | ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:116:1: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:116:84: error: unknown type name 'size_t'
+  116 | size_t  _mbstowcs_r (struct _reent *, wchar_t *__restrict, const char *__restrict, size_t, _mbstate_t *);
+      |                                                                                    ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:116:84: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:117:1: error: unknown type name 'size_t'
+  117 | size_t  wcstombs (char *__restrict, const wchar_t *__restrict, size_t);
+      | ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:117:1: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:117:64: error: unknown type name 'size_t'
+  117 | size_t  wcstombs (char *__restrict, const wchar_t *__restrict, size_t);
+      |                                                                ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:117:64: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:118:1: error: unknown type name 'size_t'
+  118 | size_t  _wcstombs_r (struct _reent *, char *__restrict, const wchar_t *__restrict, size_t, _mbstate_t *);
+      | ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:118:1: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:118:84: error: unknown type name 'size_t'
+  118 | size_t  _wcstombs_r (struct _reent *, char *__restrict, const wchar_t *__restrict, size_t, _mbstate_t *);
+      |                                                                                    ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:118:84: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:143:30: error: unknown type name 'size_t'
+  143 | void    qsort (void *__base, size_t __nmemb, size_t __size, __compar_fn_t _compar);
+      |                              ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:143:30: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:143:46: error: unknown type name 'size_t'
+  143 | void    qsort (void *__base, size_t __nmemb, size_t __size, __compar_fn_t _compar);
+      |                                              ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:143:46: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:145:26: error: unknown type name 'size_t'
+  145 | void    *realloc(void *, size_t) __result_use_check __alloc_size(2) _NOTHROW;
+      |                          ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:145:26: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:147:31: error: unknown type name 'size_t'
+  147 | void    *reallocarray(void *, size_t, size_t) __result_use_check __alloc_size2(2, 3);
+      |                               ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:147:31: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:147:39: error: unknown type name 'size_t'
+  147 | void    *reallocarray(void *, size_t, size_t) __result_use_check __alloc_size2(2, 3);
+      |                                       ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:147:39: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:148:27: error: unknown type name 'size_t'
+  148 | void    *reallocf(void *, size_t) __result_use_check __alloc_size(2);
+      |                           ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:148:27: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:208:47: error: unknown type name 'size_t'
+  208 | void *  _reallocf_r (struct _reent *, void *, size_t);
+      |                                               ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:208:47: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:259:38: error: unknown type name 'size_t'
+  259 | char *  initstate (unsigned, char *, size_t);
+      |                                      ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:259:38: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:290:34: error: unknown type name 'size_t'
+  290 | int     posix_memalign (void **, size_t, size_t) __nonnull((1))
+      |                                  ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:290:34: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:290:42: error: unknown type name 'size_t'
+  290 | int     posix_memalign (void **, size_t, size_t) __nonnull((1))
+      |                                          ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:290:42: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:296:37: error: unknown type name 'size_t'
+  296 | void *  _malloc_r (struct _reent *, size_t) _NOTHROW;
+      |                                     ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:296:37: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:297:37: error: unknown type name 'size_t'
+  297 | void *  _calloc_r (struct _reent *, size_t, size_t) _NOTHROW;
+      |                                     ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:297:37: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:297:45: error: unknown type name 'size_t'
+  297 | void *  _calloc_r (struct _reent *, size_t, size_t) _NOTHROW;
+      |                                             ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:297:45: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:299:46: error: unknown type name 'size_t'
+  299 | void *  _realloc_r (struct _reent *, void *, size_t) _NOTHROW;
+      |                                              ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:299:46: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:314:32: error: unknown type name 'size_t'
+  314 | void    qsort_r (void *__base, size_t __nmemb, size_t __size, void *__thunk, int (*_compar)(void *, const void *, const void *))
+      |                                ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:314:32: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:314:48: error: unknown type name 'size_t'
+  314 | void    qsort_r (void *__base, size_t __nmemb, size_t __size, void *__thunk, int (*_compar)(void *, const void *, const void *))
+      |                                                ^~~~~~
+C:\ST\STM32CubeIDE_1.19.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/stdlib.h:314:48: note: 'size_t' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+../Core/Src/running_average.c:15:9: error: unknown type name 'uint32_t'
+   15 |         uint32_t window_size;
+      |         ^~~~~~~~
+../Core/Src/running_average.c:16:3: error: conflicting types for 'RunningAverage'; have 'struct <anonymous>'
+   16 | } RunningAverage;
+      |   ^~~~~~~~~~~~~~
+../Core/Inc/running_average.h:9:3: note: previous declaration of 'RunningAverage' with type 'RunningAverage'
+    9 | } RunningAverage;
+      |   ^~~~~~~~~~~~~~
+../Core/Src/running_average.c:18:48: error: unknown type name 'uint32_t'
+   18 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter)
+      |                                                ^~~~~~~~
+../Core/Src/running_average.c:3:1: note: 'uint32_t' is defined in header '<stdint.h>'; did you forget to '#include <stdint.h>'?
+    2 | #include "stdlib.h"
+  +++ |+#include <stdint.h>
+    3 | /*
+../Core/Src/running_average.c: In function 'RA_update':
+../Core/Src/running_average.c:28:14: error: unknown type name 'uint32_t'
+   28 |         for (uint32_t i = 0; i < filter->window_size - 1; i++) {
+      |              ^~~~~~~~
+../Core/Src/running_average.c:28:14: note: 'uint32_t' is defined in header '<stdint.h>'; did you forget to '#include <stdint.h>'?
+../Core/Src/running_average.c:29:36: error: subscripted value is neither array nor pointer nor vector
+   29 |                 filter->data_buffer[i] = filter->data_buffer[i + 1];
+      |                                    ^
+../Core/Src/running_average.c:29:61: error: subscripted value is neither array nor pointer nor vector
+   29 |                 filter->data_buffer[i] = filter->data_buffer[i + 1];
+      |                                                             ^
+../Core/Src/running_average.c:33:28: error: subscripted value is neither array nor pointer nor vector
+   33 |         filter->data_buffer[filter->window_size - 1] = *(filter->data_input_address);
+      |                            ^
+../Core/Src/running_average.c:37:14: error: unknown type name 'uint32_t'
+   37 |         for (uint32_t i = 0; i < filter->window_size; i++) {
+      |              ^~~~~~~~
+../Core/Src/running_average.c:37:14: note: 'uint32_t' is defined in header '<stdint.h>'; did you forget to '#include <stdint.h>'?
+../Core/Src/running_average.c:38:43: error: subscripted value is neither array nor pointer nor vector
+   38 |                 sum += filter->data_buffer[i];
+      |                                           ^
+make: *** [Core/Src/subdir.mk:52: Core/Src/running_average.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:19:43 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+In file included from ../Core/Src/running_average.c:1:
+../Core/Inc/running_average.h:8:9: error: unknown type name 'uint32_t'
+    8 |         uint32_t window_size;
+      |         ^~~~~~~~
+../Core/Inc/running_average.h:11:48: error: unknown type name 'uint32_t'
+   11 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter)
+      |                                                ^~~~~~~~
+../Core/Inc/running_average.h:1:1: note: 'uint32_t' is defined in header '<stdint.h>'; did you forget to '#include <stdint.h>'?
+  +++ |+#include <stdint.h>
+    1 | #ifndef RUNNING_AVERAGE_H
+In file included from ../Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f3xx.h:133,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h:29,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f3xx_hal_conf.h:200,
+                 from ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/running_average.c:2:
+../Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303x8.h:121:3: warning: data definition has no type or storage class
+  121 | } IRQn_Type;
+      |   ^~~~~~~~~
+../Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303x8.h:121:3: warning: type defaults to 'int' in declaration of 'IRQn_Type' [-Wimplicit-int]
+In file included from ../Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303x8.h:127:
+../Drivers/CMSIS/Include/core_cm4.h:1688:39: error: expected declaration specifiers or '...' before 'IRQn_Type'
+ 1688 | __STATIC_INLINE void __NVIC_EnableIRQ(IRQn_Type IRQn)
+      |                                       ^~~~~~~~~
+../Drivers/CMSIS/Include/core_cm4.h:1705:46: error: expected declaration specifiers or '...' before 'IRQn_Type'
+ 1705 | __STATIC_INLINE uint32_t __NVIC_GetEnableIRQ(IRQn_Type IRQn)
+      |                                              ^~~~~~~~~
+../Drivers/CMSIS/Include/core_cm4.h:1724:40: error: expected declaration specifiers or '...' before 'IRQn_Type'
+ 1724 | __STATIC_INLINE void __NVIC_DisableIRQ(IRQn_Type IRQn)
+      |                                        ^~~~~~~~~
+../Drivers/CMSIS/Include/core_cm4.h:1743:47: error: expected declaration specifiers or '...' before 'IRQn_Type'
+ 1743 | __STATIC_INLINE uint32_t __NVIC_GetPendingIRQ(IRQn_Type IRQn)
+      |                                               ^~~~~~~~~
+../Drivers/CMSIS/Include/core_cm4.h:1762:43: error: expected declaration specifiers or '...' before 'IRQn_Type'
+ 1762 | __STATIC_INLINE void __NVIC_SetPendingIRQ(IRQn_Type IRQn)
+      |                                           ^~~~~~~~~
+../Drivers/CMSIS/Include/core_cm4.h:1777:45: error: expected declaration specifiers or '...' before 'IRQn_Type'
+ 1777 | __STATIC_INLINE void __NVIC_ClearPendingIRQ(IRQn_Type IRQn)
+      |                                             ^~~~~~~~~
+../Drivers/CMSIS/Include/core_cm4.h:1794:43: error: expected declaration specifiers or '...' before 'IRQn_Type'
+ 1794 | __STATIC_INLINE uint32_t __NVIC_GetActive(IRQn_Type IRQn)
+      |                                           ^~~~~~~~~
+../Drivers/CMSIS/Include/core_cm4.h:1816:41: error: expected declaration specifiers or '...' before 'IRQn_Type'
+ 1816 | __STATIC_INLINE void __NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)
+      |                                         ^~~~~~~~~
+../Drivers/CMSIS/Include/core_cm4.h:1838:45: error: expected declaration specifiers or '...' before 'IRQn_Type'
+ 1838 | __STATIC_INLINE uint32_t __NVIC_GetPriority(IRQn_Type IRQn)
+      |                                             ^~~~~~~~~
+../Drivers/CMSIS/Include/core_cm4.h:1913:39: error: expected declaration specifiers or '...' before 'IRQn_Type'
+ 1913 | __STATIC_INLINE void __NVIC_SetVector(IRQn_Type IRQn, uint32_t vector)
+      |                                       ^~~~~~~~~
+../Drivers/CMSIS/Include/core_cm4.h:1928:43: error: expected declaration specifiers or '...' before 'IRQn_Type'
+ 1928 | __STATIC_INLINE uint32_t __NVIC_GetVector(IRQn_Type IRQn)
+      |                                           ^~~~~~~~~
+../Drivers/CMSIS/Include/core_cm4.h: In function 'SysTick_Config':
+../Drivers/CMSIS/Include/core_cm4.h:1621:39: warning: implicit declaration of function '__NVIC_SetPriority'; did you mean 'NVIC_SetPriority'? [-Wimplicit-function-declaration]
+ 1621 |   #define NVIC_SetPriority            __NVIC_SetPriority
+      |                                       ^~~~~~~~~~~~~~~~~~
+../Drivers/CMSIS/Include/core_cm4.h:2030:3: note: in expansion of macro 'NVIC_SetPriority'
+ 2030 |   NVIC_SetPriority (SysTick_IRQn, (1UL << __NVIC_PRIO_BITS) - 1UL); /* set Priority for Systick Interrupt */
+      |   ^~~~~~~~~~~~~~~~
+../Drivers/CMSIS/Include/core_cm4.h:2030:21: error: 'SysTick_IRQn' undeclared (first use in this function); did you mean 'SysTick_Type'?
+ 2030 |   NVIC_SetPriority (SysTick_IRQn, (1UL << __NVIC_PRIO_BITS) - 1UL); /* set Priority for Systick Interrupt */
+      |                     ^~~~~~~~~~~~
+      |                     SysTick_Type
+../Drivers/CMSIS/Include/core_cm4.h:2030:21: note: each undeclared identifier is reported only once for each function it appears in
+In file included from ../Core/Inc/stm32f3xx_hal_conf.h:216:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_cortex.h: At top level:
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_cortex.h:260:27: error: expected declaration specifiers or '...' before 'IRQn_Type'
+  260 | void HAL_NVIC_SetPriority(IRQn_Type IRQn, uint32_t PreemptPriority, uint32_t SubPriority);
+      |                           ^~~~~~~~~
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_cortex.h:261:25: error: expected declaration specifiers or '...' before 'IRQn_Type'
+  261 | void HAL_NVIC_EnableIRQ(IRQn_Type IRQn);
+      |                         ^~~~~~~~~
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_cortex.h:262:26: error: expected declaration specifiers or '...' before 'IRQn_Type'
+  262 | void HAL_NVIC_DisableIRQ(IRQn_Type IRQn);
+      |                          ^~~~~~~~~
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_cortex.h:279:27: error: expected declaration specifiers or '...' before 'IRQn_Type'
+  279 | void HAL_NVIC_GetPriority(IRQn_Type IRQn, uint32_t PriorityGroup, uint32_t* pPreemptPriority, uint32_t* pSubPriority);
+      |                           ^~~~~~~~~
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_cortex.h:280:33: error: expected declaration specifiers or '...' before 'IRQn_Type'
+  280 | uint32_t HAL_NVIC_GetPendingIRQ(IRQn_Type IRQn);
+      |                                 ^~~~~~~~~
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_cortex.h:281:29: error: expected declaration specifiers or '...' before 'IRQn_Type'
+  281 | void HAL_NVIC_SetPendingIRQ(IRQn_Type IRQn);
+      |                             ^~~~~~~~~
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_cortex.h:282:31: error: expected declaration specifiers or '...' before 'IRQn_Type'
+  282 | void HAL_NVIC_ClearPendingIRQ(IRQn_Type IRQn);
+      |                               ^~~~~~~~~
+../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_cortex.h:283:29: error: expected declaration specifiers or '...' before 'IRQn_Type'
+  283 | uint32_t HAL_NVIC_GetActive(IRQn_Type IRQn);
+      |                             ^~~~~~~~~
+../Core/Src/running_average.c:16:3: error: conflicting types for 'RunningAverage'; have 'struct <anonymous>'
+   16 | } RunningAverage;
+      |   ^~~~~~~~~~~~~~
+../Core/Inc/running_average.h:9:3: note: previous declaration of 'RunningAverage' with type 'RunningAverage'
+    9 | } RunningAverage;
+      |   ^~~~~~~~~~~~~~
+../Core/Src/running_average.c: In function 'RA_update':
+../Core/Src/running_average.c:29:36: error: subscripted value is neither array nor pointer nor vector
+   29 |                 filter->data_buffer[i] = filter->data_buffer[i + 1];
+      |                                    ^
+../Core/Src/running_average.c:29:61: error: subscripted value is neither array nor pointer nor vector
+   29 |                 filter->data_buffer[i] = filter->data_buffer[i + 1];
+      |                                                             ^
+../Core/Src/running_average.c:33:28: error: subscripted value is neither array nor pointer nor vector
+   33 |         filter->data_buffer[filter->window_size - 1] = *(filter->data_input_address);
+      |                            ^
+../Core/Src/running_average.c:38:43: error: subscripted value is neither array nor pointer nor vector
+   38 |                 sum += filter->data_buffer[i];
+      |                                           ^
+make: *** [Core/Src/subdir.mk:52: Core/Src/running_average.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:20:25 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+../Core/Src/running_average.c: In function 'RA_set':
+../Core/Src/running_average.c:12:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'typedef'
+   12 | typedef struct {
+      | ^~~~~~~
+../Core/Src/running_average.c:17:3: warning: empty declaration
+   17 | } RunningAverage;
+      |   ^~~~~~~~~~~~~~
+../Core/Src/running_average.c:20:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+   20 | {
+      | ^
+../Core/Src/running_average.c:27:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+   27 | {
+      | ^
+../Core/Src/running_average.c:45: error: expected '{' at end of input
+make: *** [Core/Src/subdir.mk:52: Core/Src/running_average.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:20:38 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+../Core/Src/running_average.c: In function 'RA_set':
+../Core/Src/running_average.c:12:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'typedef'
+   12 | typedef struct {
+      | ^~~~~~~
+../Core/Src/running_average.c:17:3: warning: empty declaration
+   17 | } RunningAverage;
+      |   ^~~~~~~~~~~~~~
+../Core/Src/running_average.c:19:93: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+   19 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter){
+      |                                                                                             ^
+../Core/Src/running_average.c:26:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+   26 | {
+      | ^
+../Core/Src/running_average.c:44: error: expected '{' at end of input
+make: *** [Core/Src/subdir.mk:52: Core/Src/running_average.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:20:57 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+../Core/Src/running_average.c: In function 'RA_set':
+../Core/Src/running_average.c:12:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'typedef'
+   12 | typedef struct {
+      | ^~~~~~~
+../Core/Src/running_average.c:17:3: warning: empty declaration
+   17 | } RunningAverage;
+      |   ^~~~~~~~~~~~~~
+../Core/Src/running_average.c:19:92: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+   19 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage filter){
+      |                                                                                            ^
+../Core/Src/running_average.c:26:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+   26 | {
+      | ^
+../Core/Src/running_average.c:44: error: expected '{' at end of input
+make: *** [Core/Src/subdir.mk:52: Core/Src/running_average.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:21:01 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+../Core/Src/running_average.c: In function 'RA_set':
+../Core/Src/running_average.c:12:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'typedef'
+   12 | typedef struct {
+      | ^~~~~~~
+../Core/Src/running_average.c:19:1: error: two or more data types in declaration specifiers
+   19 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage filter){
+      | ^~~~
+../Core/Src/running_average.c:19:92: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+   19 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage filter){
+      |                                                                                            ^
+../Core/Src/running_average.c:26:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+   26 | {
+      | ^
+../Core/Src/running_average.c:44: error: expected '{' at end of input
+make: *** [Core/Src/subdir.mk:52: Core/Src/running_average.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:21:09 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+../Core/Src/running_average.c: In function 'RA_set':
+../Core/Src/running_average.c:12:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'typedef'
+   12 | typedef struct {
+      | ^~~~~~~
+../Core/Src/running_average.c:17:3: warning: empty declaration
+   17 | } RunningAverage;
+      |   ^~~~~~~~~~~~~~
+../Core/Src/running_average.c:19:92: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+   19 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage filter){
+      |                                                                                            ^
+../Core/Src/running_average.c:26:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+   26 | {
+      | ^
+../Core/Src/running_average.c:44: error: expected '{' at end of input
+make: *** [Core/Src/subdir.mk:52: Core/Src/running_average.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:23:12 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+../Core/Src/running_average.c: In function 'RA_set':
+../Core/Src/running_average.c:12:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'void'
+   12 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage filter){
+      | ^~~~
+../Core/Src/running_average.c:19:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+   19 | {
+      | ^
+../Core/Src/running_average.c:37: error: expected '{' at end of input
+make: *** [Core/Src/subdir.mk:52: Core/Src/running_average.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:23:37 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+../Core/Src/running_average.c:12:6: error: conflicting types for 'RA_set'; have 'void(double *, double *, uint32_t,  RunningAverage)' {aka 'void(double *, double *, long unsigned int,  RunningAverage)'}
+   12 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage filter){
+      |      ^~~~~~
+In file included from ../Core/Src/running_average.c:1:
+../Core/Inc/running_average.h:13:6: note: previous declaration of 'RA_set' with type 'void(double *, double *, uint32_t,  RunningAverage *)' {aka 'void(double *, double *, long unsigned int,  RunningAverage *)'}
+   13 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter);
+      |      ^~~~~~
+../Core/Src/running_average.c: In function 'RA_set':
+../Core/Src/running_average.c:13:15: error: invalid type argument of '->' (have 'RunningAverage')
+   13 |         filter->data_input_address = data_in;
+      |               ^~
+../Core/Src/running_average.c:14:15: error: invalid type argument of '->' (have 'RunningAverage')
+   14 |         filter->data_output = *data_out;
+      |               ^~
+../Core/Src/running_average.c:15:15: error: invalid type argument of '->' (have 'RunningAverage')
+   15 |         filter->window_size = window_size;
+      |               ^~
+../Core/Src/running_average.c: In function 'RA_update':
+../Core/Src/running_average.c:22:36: error: subscripted value is neither array nor pointer nor vector
+   22 |                 filter->data_buffer[i] = filter->data_buffer[i + 1];
+      |                                    ^
+../Core/Src/running_average.c:22:61: error: subscripted value is neither array nor pointer nor vector
+   22 |                 filter->data_buffer[i] = filter->data_buffer[i + 1];
+      |                                                             ^
+../Core/Src/running_average.c:26:28: error: subscripted value is neither array nor pointer nor vector
+   26 |         filter->data_buffer[filter->window_size - 1] = *(filter->data_input_address);
+      |                            ^
+../Core/Src/running_average.c:31:43: error: subscripted value is neither array nor pointer nor vector
+   31 |                 sum += filter->data_buffer[i];
+      |                                           ^
+make: *** [Core/Src/subdir.mk:52: Core/Src/running_average.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:23:49 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+../Core/Src/running_average.c: In function 'RA_update':
+../Core/Src/running_average.c:22:36: error: subscripted value is neither array nor pointer nor vector
+   22 |                 filter->data_buffer[i] = filter->data_buffer[i + 1];
+      |                                    ^
+../Core/Src/running_average.c:22:61: error: subscripted value is neither array nor pointer nor vector
+   22 |                 filter->data_buffer[i] = filter->data_buffer[i + 1];
+      |                                                             ^
+../Core/Src/running_average.c:26:28: error: subscripted value is neither array nor pointer nor vector
+   26 |         filter->data_buffer[filter->window_size - 1] = *(filter->data_input_address);
+      |                            ^
+../Core/Src/running_average.c:31:43: error: subscripted value is neither array nor pointer nor vector
+   31 |                 sum += filter->data_buffer[i];
+      |                                           ^
+make: *** [Core/Src/subdir.mk:52: Core/Src/running_average.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:24:50 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+In file included from ../Core/Src/running_average.c:1:
+../Core/Inc/running_average.h:9:9: error: expected specifier-qualifier-list before 'static'
+    9 |         static double data_buffer[window_size];
+      |         ^~~~~~
+../Core/Src/running_average.c: In function 'RA_set':
+../Core/Src/running_average.c:15:15: error: 'RunningAverage' has no member named 'window_size'
+   15 |         filter->window_size = window_size;
+      |               ^~
+../Core/Src/running_average.c: In function 'RA_update':
+../Core/Src/running_average.c:21:40: error: 'RunningAverage' has no member named 'window_size'
+   21 |         for (uint32_t i = 0; i < filter->window_size - 1; i++) {
+      |                                        ^~
+../Core/Src/running_average.c:22:23: error: 'RunningAverage' has no member named 'data_buffer'
+   22 |                 filter->data_buffer[i] = filter->data_buffer[i + 1];
+      |                       ^~
+../Core/Src/running_average.c:22:48: error: 'RunningAverage' has no member named 'data_buffer'
+   22 |                 filter->data_buffer[i] = filter->data_buffer[i + 1];
+      |                                                ^~
+../Core/Src/running_average.c:26:15: error: 'RunningAverage' has no member named 'data_buffer'
+   26 |         filter->data_buffer[filter->window_size - 1] = *(filter->data_input_address);
+      |               ^~
+../Core/Src/running_average.c:26:35: error: 'RunningAverage' has no member named 'window_size'
+   26 |         filter->data_buffer[filter->window_size - 1] = *(filter->data_input_address);
+      |                                   ^~
+../Core/Src/running_average.c:30:40: error: 'RunningAverage' has no member named 'window_size'
+   30 |         for (uint32_t i = 0; i < filter->window_size; i++) {
+      |                                        ^~
+../Core/Src/running_average.c:31:30: error: 'RunningAverage' has no member named 'data_buffer'
+   31 |                 sum += filter->data_buffer[i];
+      |                              ^~
+../Core/Src/running_average.c:33:43: error: 'RunningAverage' has no member named 'window_size'
+   33 |         filter->data_output = sum / filter->window_size;
+      |                                           ^~
+make: *** [Core/Src/subdir.mk:52: Core/Src/running_average.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:25:09 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+In file included from ../Core/Src/running_average.c:1:
+../Core/Inc/running_average.h:9:9: error: expected specifier-qualifier-list before 'static'
+    9 |         static double data_buffer[];
+      |         ^~~~~~
+../Core/Src/running_average.c: In function 'RA_set':
+../Core/Src/running_average.c:15:15: error: 'RunningAverage' has no member named 'window_size'
+   15 |         filter->window_size = window_size;
+      |               ^~
+../Core/Src/running_average.c: In function 'RA_update':
+../Core/Src/running_average.c:21:40: error: 'RunningAverage' has no member named 'window_size'
+   21 |         for (uint32_t i = 0; i < filter->window_size - 1; i++) {
+      |                                        ^~
+../Core/Src/running_average.c:22:23: error: 'RunningAverage' has no member named 'data_buffer'
+   22 |                 filter->data_buffer[i] = filter->data_buffer[i + 1];
+      |                       ^~
+../Core/Src/running_average.c:22:48: error: 'RunningAverage' has no member named 'data_buffer'
+   22 |                 filter->data_buffer[i] = filter->data_buffer[i + 1];
+      |                                                ^~
+../Core/Src/running_average.c:26:15: error: 'RunningAverage' has no member named 'data_buffer'
+   26 |         filter->data_buffer[filter->window_size - 1] = *(filter->data_input_address);
+      |               ^~
+../Core/Src/running_average.c:26:35: error: 'RunningAverage' has no member named 'window_size'
+   26 |         filter->data_buffer[filter->window_size - 1] = *(filter->data_input_address);
+      |                                   ^~
+../Core/Src/running_average.c:30:40: error: 'RunningAverage' has no member named 'window_size'
+   30 |         for (uint32_t i = 0; i < filter->window_size; i++) {
+      |                                        ^~
+../Core/Src/running_average.c:31:30: error: 'RunningAverage' has no member named 'data_buffer'
+   31 |                 sum += filter->data_buffer[i];
+      |                              ^~
+../Core/Src/running_average.c:33:43: error: 'RunningAverage' has no member named 'window_size'
+   33 |         filter->data_output = sum / filter->window_size;
+      |                                           ^~
+make: *** [Core/Src/subdir.mk:52: Core/Src/running_average.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:25:51 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+In file included from ../Core/Src/running_average.c:1:
+../Core/Inc/running_average.h:9:16: error: flexible array member not at end of struct
+    9 |         double data_buffer[];
+      |                ^~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:52: Core/Src/running_average.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:26:06 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+In file included from ../Core/Src/running_average.c:1:
+../Core/Inc/running_average.h:10:28: error: 'window_size' undeclared here (not in a function)
+   10 |         double data_buffer[window_size];
+      |                            ^~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:52: Core/Src/running_average.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:26:41 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  60464	    612	   5392	  66468	  103a4	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+21:27:58 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  60464	    612	   5392	  66468	  103a4	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+21:31:12 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+../Core/Src/running_average.c:12:6: error: conflicting types for 'RA_set'; have 'void(double *, uint32_t,  RunningAverage *)' {aka 'void(double *, long unsigned int,  RunningAverage *)'}
+   12 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter){
+      |      ^~~~~~
+In file included from ../Core/Src/running_average.c:1:
+../Core/Inc/running_average.h:13:6: note: previous declaration of 'RA_set' with type 'void(double *, double *, uint32_t,  RunningAverage *)' {aka 'void(double *, double *, long unsigned int,  RunningAverage *)'}
+   13 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter);
+      |      ^~~~~~
+make: *** [Core/Src/subdir.mk:52: Core/Src/running_average.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:258:15: warning: unused variable 'parsecheck' [-Wunused-variable]
+  258 |       uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |               ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:337:9: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  337 |     "G,%d,%d,%d,%f,%f,%f \r\n",
+      |        ~^
+      |         |
+      |         int
+      |        %ld
+  338 |     GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~~
+      |     |
+      |     uint32_t {aka long unsigned int}
+../Core/Src/main.c:346:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  346 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "I,%f,%f,%f,%f,%f,%f,%d \r\n", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                                  ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                                  |
+      |                                                                          int                                                                                                int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:354:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  354 |     "B,%f,%ld,%d \r\n",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  355 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:457:22: error: 'accely_output' undeclared (first use in this function)
+  457 |     RA_set(&accelx, &accely_output, 10, &accel.x);
+      |                      ^~~~~~~~~~~~~
+../Core/Src/main.c:457:22: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:457:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  457 |     RA_set(&accelx, &accely_output, 10, &accel.x);
+      |            ^~~~~~~
+      |            |
+      |            RunningAverage *
+In file included from ../Core/Src/main.c:44:
+../Core/Inc/running_average.h:13:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   13 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:457:41: warning: passing argument 4 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  457 |     RA_set(&accelx, &accely_output, 10, &accel.x);
+      |                                         ^~~~~~~~
+      |                                         |
+      |                                         f32 * {aka float *}
+../Core/Inc/running_average.h:13:86: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   13 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter);
+      |                                                                      ~~~~~~~~~~~~~~~~^~~~~~
+../Core/Src/main.c:458:22: error: 'accelz_output' undeclared (first use in this function)
+  458 |     RA_set(&accely, &accelz_output, 10, &accel.y);
+      |                      ^~~~~~~~~~~~~
+../Core/Src/main.c:458:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  458 |     RA_set(&accely, &accelz_output, 10, &accel.y);
+      |            ^~~~~~~
+      |            |
+      |            RunningAverage *
+../Core/Inc/running_average.h:13:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   13 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:458:41: warning: passing argument 4 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  458 |     RA_set(&accely, &accelz_output, 10, &accel.y);
+      |                                         ^~~~~~~~
+      |                                         |
+      |                                         f32 * {aka float *}
+../Core/Inc/running_average.h:13:86: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   13 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter);
+      |                                                                      ~~~~~~~~~~~~~~~~^~~~~~
+../Core/Src/main.c:459:22: error: 'accelx_output' undeclared (first use in this function)
+  459 |     RA_set(&accelz, &accelx_output, 10, &accel.z);
+      |                      ^~~~~~~~~~~~~
+../Core/Src/main.c:459:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  459 |     RA_set(&accelz, &accelx_output, 10, &accel.z);
+      |            ^~~~~~~
+      |            |
+      |            RunningAverage *
+../Core/Inc/running_average.h:13:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   13 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:459:41: warning: passing argument 4 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  459 |     RA_set(&accelz, &accelx_output, 10, &accel.z);
+      |                                         ^~~~~~~~
+      |                                         |
+      |                                         f32 * {aka float *}
+../Core/Inc/running_average.h:13:86: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   13 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter);
+      |                                                                      ~~~~~~~~~~~~~~~~^~~~~~
+make: *** [Core/Src/subdir.mk:52: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:31:29 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+../Core/Src/running_average.c:12:6: error: conflicting types for 'RA_set'; have 'void(double *, uint32_t,  RunningAverage *)' {aka 'void(double *, long unsigned int,  RunningAverage *)'}
+   12 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter){
+      |      ^~~~~~
+In file included from ../Core/Src/running_average.c:1:
+../Core/Inc/running_average.h:13:6: note: previous declaration of 'RA_set' with type 'void(double *, double *, uint32_t,  RunningAverage *)' {aka 'void(double *, double *, long unsigned int,  RunningAverage *)'}
+   13 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter);
+      |      ^~~~~~
+make: *** [Core/Src/subdir.mk:52: Core/Src/running_average.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:258:15: warning: unused variable 'parsecheck' [-Wunused-variable]
+  258 |       uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |               ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:337:9: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  337 |     "G,%d,%d,%d,%f,%f,%f \r\n",
+      |        ~^
+      |         |
+      |         int
+      |        %ld
+  338 |     GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~~
+      |     |
+      |     uint32_t {aka long unsigned int}
+../Core/Src/main.c:346:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  346 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "I,%f,%f,%f,%f,%f,%f,%d \r\n", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                                  ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                                  |
+      |                                                                          int                                                                                                int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:354:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  354 |     "B,%f,%ld,%d \r\n",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  355 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:457:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  457 |     RA_set(&accelx,10, &accel.x);
+      |            ^~~~~~~
+      |            |
+      |            RunningAverage *
+In file included from ../Core/Src/main.c:44:
+../Core/Inc/running_average.h:13:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   13 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:457:20: warning: passing argument 2 of 'RA_set' makes pointer from integer without a cast [-Wint-conversion]
+  457 |     RA_set(&accelx,10, &accel.x);
+      |                    ^~
+      |                    |
+      |                    int
+../Core/Inc/running_average.h:13:38: note: expected 'double *' but argument is of type 'int'
+   13 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter);
+      |                              ~~~~~~~~^~~~~~~~
+../Core/Src/main.c:457:24: warning: passing argument 3 of 'RA_set' makes integer from pointer without a cast [-Wint-conversion]
+  457 |     RA_set(&accelx,10, &accel.x);
+      |                        ^~~~~~~~
+      |                        |
+      |                        f32 * {aka float *}
+../Core/Inc/running_average.h:13:57: note: expected 'uint32_t' {aka 'long unsigned int'} but argument is of type 'f32 *' {aka 'float *'}
+   13 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter);
+      |                                                ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:457:5: error: too few arguments to function 'RA_set'
+  457 |     RA_set(&accelx,10, &accel.x);
+      |     ^~~~~~
+../Core/Inc/running_average.h:13:6: note: declared here
+   13 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter);
+      |      ^~~~~~
+../Core/Src/main.c:458:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  458 |     RA_set(&accely,10, &accel.y);
+      |            ^~~~~~~
+      |            |
+      |            RunningAverage *
+../Core/Inc/running_average.h:13:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   13 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:458:20: warning: passing argument 2 of 'RA_set' makes pointer from integer without a cast [-Wint-conversion]
+  458 |     RA_set(&accely,10, &accel.y);
+      |                    ^~
+      |                    |
+      |                    int
+../Core/Inc/running_average.h:13:38: note: expected 'double *' but argument is of type 'int'
+   13 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter);
+      |                              ~~~~~~~~^~~~~~~~
+../Core/Src/main.c:458:24: warning: passing argument 3 of 'RA_set' makes integer from pointer without a cast [-Wint-conversion]
+  458 |     RA_set(&accely,10, &accel.y);
+      |                        ^~~~~~~~
+      |                        |
+      |                        f32 * {aka float *}
+../Core/Inc/running_average.h:13:57: note: expected 'uint32_t' {aka 'long unsigned int'} but argument is of type 'f32 *' {aka 'float *'}
+   13 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter);
+      |                                                ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:458:5: error: too few arguments to function 'RA_set'
+  458 |     RA_set(&accely,10, &accel.y);
+      |     ^~~~~~
+../Core/Inc/running_average.h:13:6: note: declared here
+   13 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter);
+      |      ^~~~~~
+../Core/Src/main.c:459:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  459 |     RA_set(&accelz,10, &accel.z);
+      |            ^~~~~~~
+      |            |
+      |            RunningAverage *
+../Core/Inc/running_average.h:13:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   13 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:459:20: warning: passing argument 2 of 'RA_set' makes pointer from integer without a cast [-Wint-conversion]
+  459 |     RA_set(&accelz,10, &accel.z);
+      |                    ^~
+      |                    |
+      |                    int
+../Core/Inc/running_average.h:13:38: note: expected 'double *' but argument is of type 'int'
+   13 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter);
+      |                              ~~~~~~~~^~~~~~~~
+../Core/Src/main.c:459:24: warning: passing argument 3 of 'RA_set' makes integer from pointer without a cast [-Wint-conversion]
+  459 |     RA_set(&accelz,10, &accel.z);
+      |                        ^~~~~~~~
+      |                        |
+      |                        f32 * {aka float *}
+../Core/Inc/running_average.h:13:57: note: expected 'uint32_t' {aka 'long unsigned int'} but argument is of type 'f32 *' {aka 'float *'}
+   13 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter);
+      |                                                ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/main.c:459:5: error: too few arguments to function 'RA_set'
+  459 |     RA_set(&accelz,10, &accel.z);
+      |     ^~~~~~
+../Core/Inc/running_average.h:13:6: note: declared here
+   13 | void RA_set(double *data_in, double *data_out, uint32_t window_size, RunningAverage *filter);
+      |      ^~~~~~
+make: *** [Core/Src/subdir.mk:52: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:31:57 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:258:15: warning: unused variable 'parsecheck' [-Wunused-variable]
+  258 |       uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |               ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:337:9: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  337 |     "G,%d,%d,%d,%f,%f,%f \r\n",
+      |        ~^
+      |         |
+      |         int
+      |        %ld
+  338 |     GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~~
+      |     |
+      |     uint32_t {aka long unsigned int}
+../Core/Src/main.c:346:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  346 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "I,%f,%f,%f,%f,%f,%f,%d \r\n", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                                  ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                                  |
+      |                                                                          int                                                                                                int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:354:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  354 |     "B,%f,%ld,%d \r\n",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  355 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:457:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  457 |     RA_set(&accelx,10, &accel.x);
+      |            ^~~~~~~
+      |            |
+      |            RunningAverage *
+In file included from ../Core/Src/main.c:44:
+../Core/Inc/running_average.h:13:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   13 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:457:24: warning: passing argument 3 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  457 |     RA_set(&accelx,10, &accel.x);
+      |                        ^~~~~~~~
+      |                        |
+      |                        f32 * {aka float *}
+../Core/Inc/running_average.h:13:68: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   13 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |                                                    ~~~~~~~~~~~~~~~~^~~~~~
+../Core/Src/main.c:458:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  458 |     RA_set(&accely,10, &accel.y);
+      |            ^~~~~~~
+      |            |
+      |            RunningAverage *
+../Core/Inc/running_average.h:13:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   13 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:458:24: warning: passing argument 3 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  458 |     RA_set(&accely,10, &accel.y);
+      |                        ^~~~~~~~
+      |                        |
+      |                        f32 * {aka float *}
+../Core/Inc/running_average.h:13:68: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   13 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |                                                    ~~~~~~~~~~~~~~~~^~~~~~
+../Core/Src/main.c:459:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  459 |     RA_set(&accelz,10, &accel.z);
+      |            ^~~~~~~
+      |            |
+      |            RunningAverage *
+../Core/Inc/running_average.h:13:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   13 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:459:24: warning: passing argument 3 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  459 |     RA_set(&accelz,10, &accel.z);
+      |                        ^~~~~~~~
+      |                        |
+      |                        f32 * {aka float *}
+../Core/Inc/running_average.h:13:68: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   13 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |                                                    ~~~~~~~~~~~~~~~~^~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  60528	    612	   7864	  69004	  10d8c	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+21:33:29 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:262:15: warning: unused variable 'parsecheck' [-Wunused-variable]
+  262 |       uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |               ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:341:9: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  341 |     "G,%d,%d,%d,%f,%f,%f \r\n",
+      |        ~^
+      |         |
+      |         int
+      |        %ld
+  342 |     GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~~
+      |     |
+      |     uint32_t {aka long unsigned int}
+../Core/Src/main.c:350:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  350 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "I,%f,%f,%f,%f,%f,%f,%d \r\n", filtered_accel.x, filtered_accel.y, filtered_accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                                  ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                                  |
+      |                                                                          int                                                                                                int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:358:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  358 |     "B,%f,%ld,%d \r\n",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  359 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:461:13: error: 'accelx' undeclared (first use in this function); did you mean 'accel'?
+  461 |     RA_set(&accelx,10, &accel.x);
+      |             ^~~~~~
+      |             accel
+../Core/Src/main.c:461:13: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:461:24: warning: passing argument 3 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  461 |     RA_set(&accelx,10, &accel.x);
+      |                        ^~~~~~~~
+      |                        |
+      |                        f32 * {aka float *}
+In file included from ../Core/Src/main.c:44:
+../Core/Inc/running_average.h:13:68: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   13 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |                                                    ~~~~~~~~~~~~~~~~^~~~~~
+../Core/Src/main.c:462:13: error: 'accely' undeclared (first use in this function); did you mean 'accel'?
+  462 |     RA_set(&accely,10, &accel.y);
+      |             ^~~~~~
+      |             accel
+../Core/Src/main.c:462:24: warning: passing argument 3 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  462 |     RA_set(&accely,10, &accel.y);
+      |                        ^~~~~~~~
+      |                        |
+      |                        f32 * {aka float *}
+../Core/Inc/running_average.h:13:68: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   13 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |                                                    ~~~~~~~~~~~~~~~~^~~~~~
+../Core/Src/main.c:463:13: error: 'accelz' undeclared (first use in this function); did you mean 'accel'?
+  463 |     RA_set(&accelz,10, &accel.z);
+      |             ^~~~~~
+      |             accel
+../Core/Src/main.c:463:24: warning: passing argument 3 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  463 |     RA_set(&accelz,10, &accel.z);
+      |                        ^~~~~~~~
+      |                        |
+      |                        f32 * {aka float *}
+../Core/Inc/running_average.h:13:68: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   13 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |                                                    ~~~~~~~~~~~~~~~~^~~~~~
+make: *** [Core/Src/subdir.mk:52: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:34:06 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:262:15: warning: unused variable 'parsecheck' [-Wunused-variable]
+  262 |       uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |               ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:341:9: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  341 |     "G,%d,%d,%d,%f,%f,%f \r\n",
+      |        ~^
+      |         |
+      |         int
+      |        %ld
+  342 |     GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~~
+      |     |
+      |     uint32_t {aka long unsigned int}
+../Core/Src/main.c:350:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  350 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "I,%f,%f,%f,%f,%f,%f,%d \r\n", filter_accelx.data_output, filter_accely.data_output, filter_accelz.data_output, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                                                             ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                                                             |
+      |                                                                          int                                                                                                                           int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:358:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  358 |     "B,%f,%ld,%d \r\n",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  359 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:461:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  461 |     RA_set(&filter_accelx,10, &accel.x);
+      |            ^~~~~~~~~~~~~~
+      |            |
+      |            RunningAverage *
+In file included from ../Core/Src/main.c:44:
+../Core/Inc/running_average.h:13:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   13 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:461:31: warning: passing argument 3 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  461 |     RA_set(&filter_accelx,10, &accel.x);
+      |                               ^~~~~~~~
+      |                               |
+      |                               f32 * {aka float *}
+../Core/Inc/running_average.h:13:68: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   13 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |                                                    ~~~~~~~~~~~~~~~~^~~~~~
+../Core/Src/main.c:462:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  462 |     RA_set(&filter_accely,10, &accel.y);
+      |            ^~~~~~~~~~~~~~
+      |            |
+      |            RunningAverage *
+../Core/Inc/running_average.h:13:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   13 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:462:31: warning: passing argument 3 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  462 |     RA_set(&filter_accely,10, &accel.y);
+      |                               ^~~~~~~~
+      |                               |
+      |                               f32 * {aka float *}
+../Core/Inc/running_average.h:13:68: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   13 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |                                                    ~~~~~~~~~~~~~~~~^~~~~~
+../Core/Src/main.c:463:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  463 |     RA_set(&filter_accelz,10, &accel.z);
+      |            ^~~~~~~~~~~~~~
+      |            |
+      |            RunningAverage *
+../Core/Inc/running_average.h:13:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   13 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:463:31: warning: passing argument 3 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  463 |     RA_set(&filter_accelz,10, &accel.z);
+      |                               ^~~~~~~~
+      |                               |
+      |                               f32 * {aka float *}
+../Core/Inc/running_average.h:13:68: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   13 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |                                                    ~~~~~~~~~~~~~~~~^~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  60680	    612	   7856	  69148	  10e1c	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+21:35:51 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:262:15: warning: unused variable 'parsecheck' [-Wunused-variable]
+  262 |       uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |               ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:341:9: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  341 |     "G,%d,%d,%d,%f,%f,%f \r\n",
+      |        ~^
+      |         |
+      |         int
+      |        %ld
+  342 |     GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~~
+      |     |
+      |     uint32_t {aka long unsigned int}
+../Core/Src/main.c:350:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  350 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "I,%f,%f,%f,%f,%f,%f,%d \r\n", filter_accelx.data_output, filter_accely.data_output, filter_accelz.data_output, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                                                             ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                                                             |
+      |                                                                          int                                                                                                                           int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:358:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  358 |     "B,%f,%ld,%d \r\n",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  359 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:461:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  461 |     RA_set(&filter_accelx,10, &accel.x);
+      |            ^~~~~~~~~~~~~~
+      |            |
+      |            RunningAverage *
+In file included from ../Core/Src/main.c:44:
+../Core/Inc/running_average.h:15:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:461:31: warning: passing argument 3 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  461 |     RA_set(&filter_accelx,10, &accel.x);
+      |                               ^~~~~~~~
+      |                               |
+      |                               f32 * {aka float *}
+../Core/Inc/running_average.h:15:68: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |                                                    ~~~~~~~~~~~~~~~~^~~~~~
+../Core/Src/main.c:462:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  462 |     RA_set(&filter_accely,10, &accel.y);
+      |            ^~~~~~~~~~~~~~
+      |            |
+      |            RunningAverage *
+../Core/Inc/running_average.h:15:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:462:31: warning: passing argument 3 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  462 |     RA_set(&filter_accely,10, &accel.y);
+      |                               ^~~~~~~~
+      |                               |
+      |                               f32 * {aka float *}
+../Core/Inc/running_average.h:15:68: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |                                                    ~~~~~~~~~~~~~~~~^~~~~~
+../Core/Src/main.c:463:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  463 |     RA_set(&filter_accelz,10, &accel.z);
+      |            ^~~~~~~~~~~~~~
+      |            |
+      |            RunningAverage *
+../Core/Inc/running_average.h:15:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:463:31: warning: passing argument 3 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  463 |     RA_set(&filter_accelz,10, &accel.z);
+      |                               ^~~~~~~~
+      |                               |
+      |                               f32 * {aka float *}
+../Core/Inc/running_average.h:15:68: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |                                                    ~~~~~~~~~~~~~~~~^~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+C:/ST/STM32CubeIDE_1.19.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: NAV_BOX.elf section `.bss' will not fit in region `RAM'
+C:/ST/STM32CubeIDE_1.19.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: region `RAM' overflowed by 5784 bytes
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:92: NAV_BOX.elf] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:36:19 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:262:15: warning: unused variable 'parsecheck' [-Wunused-variable]
+  262 |       uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |               ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:341:9: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  341 |     "G,%d,%d,%d,%f,%f,%f \r\n",
+      |        ~^
+      |         |
+      |         int
+      |        %ld
+  342 |     GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~~
+      |     |
+      |     uint32_t {aka long unsigned int}
+../Core/Src/main.c:350:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  350 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "I,%f,%f,%f,%f,%f,%f,%d \r\n", filter_accelx.data_output, filter_accely.data_output, filter_accelz.data_output, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                                                             ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                                                             |
+      |                                                                          int                                                                                                                           int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:358:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  358 |     "B,%f,%ld,%d \r\n",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  359 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:461:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  461 |     RA_set(&filter_accelx,10, &accel.x);
+      |            ^~~~~~~~~~~~~~
+      |            |
+      |            RunningAverage *
+In file included from ../Core/Src/main.c:44:
+../Core/Inc/running_average.h:15:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:461:31: warning: passing argument 3 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  461 |     RA_set(&filter_accelx,10, &accel.x);
+      |                               ^~~~~~~~
+      |                               |
+      |                               f32 * {aka float *}
+../Core/Inc/running_average.h:15:68: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |                                                    ~~~~~~~~~~~~~~~~^~~~~~
+../Core/Src/main.c:462:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  462 |     RA_set(&filter_accely,10, &accel.y);
+      |            ^~~~~~~~~~~~~~
+      |            |
+      |            RunningAverage *
+../Core/Inc/running_average.h:15:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:462:31: warning: passing argument 3 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  462 |     RA_set(&filter_accely,10, &accel.y);
+      |                               ^~~~~~~~
+      |                               |
+      |                               f32 * {aka float *}
+../Core/Inc/running_average.h:15:68: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |                                                    ~~~~~~~~~~~~~~~~^~~~~~
+../Core/Src/main.c:463:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  463 |     RA_set(&filter_accelz,10, &accel.z);
+      |            ^~~~~~~~~~~~~~
+      |            |
+      |            RunningAverage *
+../Core/Inc/running_average.h:15:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:463:31: warning: passing argument 3 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  463 |     RA_set(&filter_accelz,10, &accel.z);
+      |                               ^~~~~~~~
+      |                               |
+      |                               f32 * {aka float *}
+../Core/Inc/running_average.h:15:68: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |                                                    ~~~~~~~~~~~~~~~~^~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+C:/ST/STM32CubeIDE_1.19.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: NAV_BOX.elf section `.bss' will not fit in region `RAM'
+C:/ST/STM32CubeIDE_1.19.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344/tools/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: region `RAM' overflowed by 5784 bytes
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:92: NAV_BOX.elf] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+21:36:30 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:262:15: warning: unused variable 'parsecheck' [-Wunused-variable]
+  262 |       uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |               ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:341:9: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  341 |     "G,%d,%d,%d,%f,%f,%f \r\n",
+      |        ~^
+      |         |
+      |         int
+      |        %ld
+  342 |     GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~~
+      |     |
+      |     uint32_t {aka long unsigned int}
+../Core/Src/main.c:350:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  350 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "I,%f,%f,%f,%f,%f,%f,%d \r\n", filter_accelx.data_output, filter_accely.data_output, filter_accelz.data_output, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                                                             ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                                                             |
+      |                                                                          int                                                                                                                           int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:358:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  358 |     "B,%f,%ld,%d \r\n",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  359 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:461:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  461 |     RA_set(&filter_accelx,10, &accel.x);
+      |            ^~~~~~~~~~~~~~
+      |            |
+      |            RunningAverage *
+In file included from ../Core/Src/main.c:44:
+../Core/Inc/running_average.h:15:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:461:31: warning: passing argument 3 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  461 |     RA_set(&filter_accelx,10, &accel.x);
+      |                               ^~~~~~~~
+      |                               |
+      |                               f32 * {aka float *}
+../Core/Inc/running_average.h:15:68: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |                                                    ~~~~~~~~~~~~~~~~^~~~~~
+../Core/Src/main.c:462:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  462 |     RA_set(&filter_accely,10, &accel.y);
+      |            ^~~~~~~~~~~~~~
+      |            |
+      |            RunningAverage *
+../Core/Inc/running_average.h:15:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:462:31: warning: passing argument 3 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  462 |     RA_set(&filter_accely,10, &accel.y);
+      |                               ^~~~~~~~
+      |                               |
+      |                               f32 * {aka float *}
+../Core/Inc/running_average.h:15:68: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |                                                    ~~~~~~~~~~~~~~~~^~~~~~
+../Core/Src/main.c:463:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  463 |     RA_set(&filter_accelz,10, &accel.z);
+      |            ^~~~~~~~~~~~~~
+      |            |
+      |            RunningAverage *
+../Core/Inc/running_average.h:15:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:463:31: warning: passing argument 3 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  463 |     RA_set(&filter_accelz,10, &accel.z);
+      |                               ^~~~~~~~
+      |                               |
+      |                               f32 * {aka float *}
+../Core/Inc/running_average.h:15:68: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |                                                    ~~~~~~~~~~~~~~~~^~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  60680	    612	   7856	  69148	  10e1c	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
+21:36:44 **** Incremental Build of configuration Debug for project NAV_BOX ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/running_average.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/running_average.d" -MT"Core/Src/running_average.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/running_average.o"
+../Core/Src/main.c: In function 'parse_gps_data':
+../Core/Src/main.c:262:15: warning: unused variable 'parsecheck' [-Wunused-variable]
+  262 |       uint8_t parsecheck = UBX_ParseNavSolFrame(rx_buffer, sizeof(rx_buffer), &rawData, &solData);
+      |               ^~~~~~~~~~
+../Core/Src/main.c: In function 'sd_store':
+../Core/Src/main.c:341:9: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  341 |     "G,%d,%d,%d,%f,%f,%f \r\n",
+      |        ~^
+      |         |
+      |         int
+      |        %ld
+  342 |     GPS_timeStamp, solData.gpsFix, solData.numSV, solData.latitude_deg, solData.longitude_deg, solData.height_m
+      |     ~~~~~~~~~~~~~
+      |     |
+      |     uint32_t {aka long unsigned int}
+../Core/Src/main.c:350:74: warning: format '%d' expects argument of type 'int', but argument 10 has type 'int32_t' {aka 'long int'} [-Wformat=]
+  350 |     snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "I,%f,%f,%f,%f,%f,%f,%d \r\n", filter_accelx.data_output, filter_accely.data_output, filter_accelz.data_output, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+      |                                                                         ~^                                                                                                                             ~~~~~~~~~~~~~~~~
+      |                                                                          |                                                                                                                             |
+      |                                                                          int                                                                                                                           int32_t {aka long int}
+      |                                                                         %ld
+../Core/Src/main.c:358:16: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  358 |     "B,%f,%ld,%d \r\n",
+      |               ~^
+      |                |
+      |                int
+      |               %ld
+  359 |     temperature, pressure, BMP180_time);
+      |                            ~~~~~~~~~~~
+      |                            |
+      |                            uint32_t {aka long unsigned int}
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:461:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  461 |     RA_set(&filter_accelx,10, &accel.x);
+      |            ^~~~~~~~~~~~~~
+      |            |
+      |            RunningAverage *
+In file included from ../Core/Src/main.c:44:
+../Core/Inc/running_average.h:15:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:461:31: warning: passing argument 3 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  461 |     RA_set(&filter_accelx,10, &accel.x);
+      |                               ^~~~~~~~
+      |                               |
+      |                               f32 * {aka float *}
+../Core/Inc/running_average.h:15:68: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |                                                    ~~~~~~~~~~~~~~~~^~~~~~
+../Core/Src/main.c:462:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  462 |     RA_set(&filter_accely,10, &accel.y);
+      |            ^~~~~~~~~~~~~~
+      |            |
+      |            RunningAverage *
+../Core/Inc/running_average.h:15:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:462:31: warning: passing argument 3 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  462 |     RA_set(&filter_accely,10, &accel.y);
+      |                               ^~~~~~~~
+      |                               |
+      |                               f32 * {aka float *}
+../Core/Inc/running_average.h:15:68: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |                                                    ~~~~~~~~~~~~~~~~^~~~~~
+../Core/Src/main.c:463:12: warning: passing argument 1 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  463 |     RA_set(&filter_accelz,10, &accel.z);
+      |            ^~~~~~~~~~~~~~
+      |            |
+      |            RunningAverage *
+../Core/Inc/running_average.h:15:21: note: expected 'double *' but argument is of type 'RunningAverage *'
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |             ~~~~~~~~^~~~~~~
+../Core/Src/main.c:463:31: warning: passing argument 3 of 'RA_set' from incompatible pointer type [-Wincompatible-pointer-types]
+  463 |     RA_set(&filter_accelz,10, &accel.z);
+      |                               ^~~~~~~~
+      |                               |
+      |                               f32 * {aka float *}
+../Core/Inc/running_average.h:15:68: note: expected 'RunningAverage *' but argument is of type 'f32 *' {aka 'float *'}
+   15 | void RA_set(double *data_in, uint32_t window_size, RunningAverage *filter);
+      |                                                    ~~~~~~~~~~~~~~~~^~~~~~
+arm-none-eabi-g++ -o "NAV_BOX.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Admin\Documents\NoordungLabs\NAV_BOX_tofNlnd\NAV_BOX\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NAV_BOX.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: NAV_BOX.elf
+ 
+arm-none-eabi-size  NAV_BOX.elf 
+arm-none-eabi-objdump -h -S NAV_BOX.elf  > "NAV_BOX.list"
+   text	   data	    bss	    dec	    hex	filename
+  60680	    612	  11600	  72892	  11cbc	NAV_BOX.elf
+Finished building: default.size.stdout
+ 
+Finished building: NAV_BOX.list
+ 
