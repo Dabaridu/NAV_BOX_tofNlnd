@@ -9,3 +9,5 @@ GPS_timeStamp
 bno.dma_data_ready
 sd_status
 solData
+d_checker
+debug

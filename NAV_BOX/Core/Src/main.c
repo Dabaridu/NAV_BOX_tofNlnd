@@ -264,12 +264,12 @@ void parse_gps_data(){
 		//----------------------FLAGS----------------------
       //clear flag for recieving new GPS data
       gps_dma_data_ready = false;
-      sd_gps_store_flag = true; // Set flag to store GPS data to SD card
+      // sd_gps_store_flag = true; // Set flag to store GPS data to SD card
       to_send_gps_nslp_flag = true; //set flag to send gps data via NSLP
 
-		// if(GPS_nslp_data.fixType != 0){ // Only consider valid GPS fixes for fusion
-		// 	return;
-		// }
+		if(GPS_nslp_data.fixType != 0){ // Only consider valid GPS fixes
+			sd_gps_store_flag = true; // Set flag to store GPS data to SD card
+		}
 	}
 }
 

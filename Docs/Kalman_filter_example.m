@@ -58,7 +58,7 @@ ylabel('Velocity');
 title('KF3 Estimated Velocity and Acceleration');
 
 subplot(2,1,2);
-plot(t, x_hat(3,:), 'k-', 'LineWidth', 2);
+plot(t, x_hat(3,:), 'y-', 'LineWidth', 2);
 grid on;
 xlabel('Time (s)');
 ylabel('Acceleration');
