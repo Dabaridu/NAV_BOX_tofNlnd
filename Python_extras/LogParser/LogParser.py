@@ -13,6 +13,7 @@ records.
 
 from __future__ import annotations
 
+import argparse
 import csv
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -211,14 +212,65 @@ def parse_log(file_path: str | Path) -> ParsedLog:
     return LogParser(file_path).parse()
 
 
-if __name__ == "__main__":
-    default_path = Path(__file__).with_name("DATA_LOG")
-    result = parse_log(default_path)
+ACC_LIMIT = 160.0    # m/s^2, above the BNO055's 16 g range -> cannot be a real reading
+ANGLE_LIMIT = 180.0  # deg
 
+
+def clean_bno(bno: BNO) -> tuple[BNO, int]:
+    """Plot-time clean-up only, the log file itself is never modified.
+
+    The BNO055 I2C read sometimes returns a byte with bit 7 read as 0 (e.g. +327.68 m/s^2, +2048 deg,
+    or -1.28 m/s^2 / -8 deg). Rows with impossible values are dropped, then a 3-sample median removes
+    the remaining single-sample jumps. Note: gx, gy, gz hold the Euler angles pitch, roll, yaw.
+    """
+    ok = (
+        (np.abs(bno.ax) < ACC_LIMIT) & (np.abs(bno.ay) < ACC_LIMIT) & (np.abs(bno.az) < ACC_LIMIT)
+        & (np.abs(bno.gx) <= ANGLE_LIMIT) & (np.abs(bno.gy) <= ANGLE_LIMIT)
+        & (bno.gz >= 0.0) & (bno.gz <= 360.0)
+    )
+    dropped = int((~ok).sum())
+
+    def median3(values: np.ndarray) -> np.ndarray:
+        return np.median(np.stack([values[:-2], values[1:-1], values[2:]]), axis=0)
+
+    kept = {name: getattr(bno, name)[ok] for name in ("ax", "ay", "az", "gx", "gy", "gz", "timestamp")}
+    if len(kept["timestamp"]) < 3:
+        return bno, dropped
+    cleaned = BNO(
+        ax=median3(kept["ax"]), ay=median3(kept["ay"]), az=median3(kept["az"]),
+        gx=median3(kept["gx"]), gy=median3(kept["gy"]), gz=median3(kept["gz"]),
+        timestamp=kept["timestamp"][1:-1],
+    )
+    return cleaned, dropped
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Plot a NAV_BOX DATA_LOG file.")
+    parser.add_argument("path", nargs="?", help="log file to plot (default: last DATA_LOG* by name next to this script)")
+    parser.add_argument("--clean", action="store_true",
+                        help="plot-time only: drop impossible IMU rows (>160 m/s^2, >180 deg) and apply a "
+                             "3-sample median; the log file stays raw")
+    parser.add_argument("--save", metavar="PNG", help="also save the figure to this file")
+    args = parser.parse_args()
+
+    if args.path:
+        log_path = Path(args.path)
+    else:
+        candidates = sorted(Path(__file__).parent.glob("DATA_LOG*"), key=lambda p: p.name)
+        if not candidates:
+            parser.error("no DATA_LOG* file next to the script, pass a path")
+        log_path = candidates[-1]
+    result = parse_log(log_path)
+
+    print(f"Log: {log_path}")
     print(f"GPS records: {len(result.gps.timestamp)}")
     print(f"BNO records: {len(result.bno.timestamp)}")
     print(f"BMP records: {len(result.bmp.timestamp)}")
     print(f"Unknown rows: {len(result.unknown)}")
+
+    if args.clean:
+        result.bno, dropped = clean_bno(result.bno)
+        print(f"--clean: dropped {dropped} impossible IMU rows, 3-sample median applied (plot only)")
 
     plt.figure(figsize=(14, 10))
     
@@ -297,6 +349,12 @@ if __name__ == "__main__":
 
 
 
+    try:
+        plt.gcf().canvas.manager.set_window_title(f"{log_path.name} - {'cleaned' if args.clean else 'raw'}")
+    except Exception:
+        pass
+    if args.save:
+        plt.savefig(args.save, dpi=90)
     plt.show()
 
     

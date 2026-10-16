@@ -41,7 +41,6 @@
 //homebrewed libraries
 #include "nslp_packets.h"
 #include "sd_black_box.h"
-#include "running_average.h"
 
 //#include <math.h>
 
@@ -97,16 +96,12 @@ bno055_vec3_t filtered_accel;
 bno055_vec4_t quat;
 bno055_euler_t euler;
 
-int32_t BNO055_timeStamp;
+int32_t BNO055_timeStamp; //timestamp of the frame that was last parsed
+uint32_t bno_i2c_errors; //failed BNO055 I2C transactions (frame skipped, nothing to log), for debugging
 
 bool to_send_imu_nslp_flag = false;
 
 //-------------------------------BNO055---------------------------------------------
-//-------------------------------FILTER---------------------------------------------
-RunningAverage filter_accelx;
-RunningAverage filter_accely;
-RunningAverage filter_accelz;
-//-------------------------------FILTER---------------------------------------------
 
 //-------------------------------GPS------------------------------------------------
 #define rx_buffer_size 60 //GPS uart 1 recieve NAV-SOL packed size
@@ -158,20 +153,7 @@ static void MX_SPI1_Init(void);
 /* USER CODE BEGIN PFP */
 
 //----------------------------------INTERUPTS FUNCTIONS---------------------------------------------
-void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c) {
-    if (hi2c->Instance == I2C1) {
-    	BNO055_timeStamp = HAL_GetTick();
-        bno.dma_data_ready = true;
-    }
-}
-
-void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c) {
-    if (hi2c->Instance == I2C1) {
-        // I2C error occurred, restart the DMA read
-        bno.dma_data_ready = false;
-        // Optionally, you can add a counter here to track errors
-    }
-}
+//The BNO055 is read with blocking I2C transactions (see bno_read_frame), no I2C DMA callbacks are needed.
 
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart) {
 	nslp_uart_error_handler(huart);
@@ -208,28 +190,50 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
 
 //------------------------------USER FUNCTIONS------------------------------
 
-void parse_bno055_data(){
-//On I2C dma memCplt set set dma_data_ready flag to parse data from register and restart recieve from BNI055
+/*
+  BNO055 read: one blocking 2-byte transaction per 16-bit value (euler + linear accel).
 
-	if (bno.dma_data_ready) {
+  Reading the output registers as one 45-byte burst (the old DMA read) returned bit 7 of some bytes
+  as 0 in 3-6 % of the frames (registers 0x1C, 0x2A, 0x2C, e.g. +327.68 m/s^2, +2048 deg, -8 deg).
+  Neither I2C speed, filters, pull-ups, DMA vs polling nor activity of the other peripherals changed that,
+  but 1- and 2-byte transactions gave 0 errors in > 17000 frames. Burst sizes of 6 bytes or more are not clean.
+  Offsets are relative to BNO_ACC_DATA_X_LSB (index into bno.rx_buf, same layout the bno055_get_* getters use).
+*/
+static const uint8_t bno_word_offset[] = {
+	18, //euler heading (yaw)
+	20, //euler roll
+	22, //euler pitch
+	32, //linear accel x
+	34, //linear accel y
+	36  //linear accel z
+};
 
-		bno055_get_linear_acc(&bno, &accel);
-		
-		RA_update(&filter_accelx);
-    RA_update(&filter_accely);
-    RA_update(&filter_accelz);
-
-		bno055_get_euler(&bno, &euler);
-		bno055_get_quaternion(&bno, &quat); //orientation
-
-		//block dma_data_ready untill I2C rxCpltCallback is executed
-		//and send dma_read_instruction to BNO055 returns I2C error in the HAL is buissy or read incorectly
-		bno055_start_dma_read(&bno);
-
-		to_send_imu_nslp_flag = true;
-
-    sd_bno_store_flag = true; // Set flag to store BNO055 data to SD card
+static bool bno_read_frame(void){
+	for (uint32_t i = 0; i < sizeof(bno_word_offset); i++) {
+		uint8_t off = bno_word_offset[i];
+		if (HAL_I2C_Mem_Read(&hi2c1, bno.addr, (uint16_t)(BNO_ACC_DATA_X_LSB + off), I2C_MEMADD_SIZE_8BIT, &bno.rx_buf[off], 2, 100) != HAL_OK) {
+			return false;
+		}
 	}
+	return true;
+}
+
+void parse_bno055_data(){
+//Data acquisition only: every frame is stored exactly as the BNO055 delivered it, no filtering or rejection
+
+	if (!bno_read_frame()) {
+		bno_i2c_errors++; //I2C transaction failed (HAL resets the bus state itself), nothing valid to log this pass
+		return;
+	}
+
+	BNO055_timeStamp = HAL_GetTick(); //time the frame was read
+
+	bno055_get_linear_acc(&bno, &accel);
+	bno055_get_euler(&bno, &euler);
+
+	to_send_imu_nslp_flag = true;
+
+	sd_bno_store_flag = true; // Set flag to store BNO055 data to SD card
 }
 
 void poll_n_parse_bmp180_data(){
@@ -239,8 +243,9 @@ void poll_n_parse_bmp180_data(){
 
   if (HAL_GetTick() - lastBMP180Time > BMP180_interval){
 
-      temperature = BMP180_GetRawTemperature();
-      pressure = BMP180_GetPressure();
+      //hi2c1 is shared with the BNO055, both are blocking transactions from this main loop so they never overlap
+      temperature = BMP180_GetTemperature(); //degrees Celsius
+      pressure = BMP180_GetPressure(); //Pascal
 
       lastBMP180Time = HAL_GetTick();
       BMP180_time = lastBMP180Time;
@@ -264,12 +269,8 @@ void parse_gps_data(){
 		//----------------------FLAGS----------------------
       //clear flag for recieving new GPS data
       gps_dma_data_ready = false;
-      // sd_gps_store_flag = true; // Set flag to store GPS data to SD card
+      sd_gps_store_flag = true; // Set flag to store GPS data to SD card (every packet, with or without a fix)
       to_send_gps_nslp_flag = true; //set flag to send gps data via NSLP
-
-		if(GPS_nslp_data.fixType != 0){ // Only consider valid GPS fixes
-			sd_gps_store_flag = true; // Set flag to store GPS data to SD card
-		}
 	}
 }
 
@@ -288,9 +289,9 @@ void nslp_transmit_packets(){
   GPS_nslp_data.time = GPS_timeStamp;
 
 // Copy filtered accelerometer data to transmission structure
-  BNO055_nslp_data_a.ax = filter_accelx.data_output;
-  BNO055_nslp_data_a.ay = filter_accely.data_output;
-  BNO055_nslp_data_a.az = filter_accelz.data_output;
+  BNO055_nslp_data_a.ax = accel.x;
+  BNO055_nslp_data_a.ay = accel.y;
+  BNO055_nslp_data_a.az = accel.z;
   BNO055_nslp_data_a.time = BNO055_timeStamp;
 
   BNO055_nslp_data_g.gx = euler.pitch;
@@ -347,7 +348,7 @@ void sd_store(){
 
   if(sd_bno_store_flag == true){
     sd_bno_store_flag = false;
-    snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "I,%f,%f,%f,%f,%f,%f,%d \r\n", filter_accelx.data_output, filter_accely.data_output, filter_accelz.data_output, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
+    snprintf(sd_bno_buffer, sizeof(sd_bno_buffer), "I,%f,%f,%f,%f,%f,%f,%d \r\n", accel.x, accel.y, accel.z, euler.pitch, euler.roll, euler.yaw, BNO055_timeStamp);
     //%I,Ax,Ay,Az,Gx,Gy,Gz,Timestamp
     check = sd_card_write((const uint8_t *)sd_bno_buffer, strlen(sd_bno_buffer));
   }
@@ -436,7 +437,19 @@ int main(void)
     BMP180_Init(&hi2c1);
   	BMP180_SetOversampling(BMP180_STANDARD); //BMP180_LOW, BMP180_STANDARD, BMP180_HIGH, BMP180_ULTRA,
 	// Update calibration data. Must be called once before entering main loop.
+	/*
+	  The first I2C transaction after a reset sometimes fails and BMP180_ReadReg() then returns an
+	  uninitialised byte (seen as a wrong AC1 on 2 of 6 boots -> pressure off by ~16 kPa for the whole run).
+	  Discard a warm-up read, then read until two consecutive reads are identical.
+	*/
 	  BMP180_UpdateCalibrationData();
+	  for (int attempt = 0; attempt < 10; attempt++) {
+	    BMP180_EEPROM previous_cal = _bmp180_eeprom;
+	    BMP180_UpdateCalibrationData();
+	    if (memcmp(&previous_cal, &_bmp180_eeprom, sizeof(previous_cal)) == 0) {
+	      break;
+	    }
+	  }
 
 	//-----------innitialize BNO055 DMA on I2C------------
     bno.i2c = &hi2c1;
@@ -453,14 +466,8 @@ int main(void)
       }
     }
 
-  //Set BNO055 units and start first DMA read
+  //Set BNO055 units
     bno055_set_unit(&bno, BNO_TEMP_UNIT_C, BNO_GYR_UNIT_DPS, BNO_ACC_UNITSEL_M_S2, BNO_EUL_UNIT_DEG);
-    bno055_start_dma_read(&bno);
-
-  //innitialize the filters for the accelerometer data
-    RA_set(&filter_accelx,10, &accel.x);
-    RA_set(&filter_accely,10, &accel.y);
-    RA_set(&filter_accelz,10, &accel.z);
 
   //------------------------TEST SD CARD WRITE------------------------
     //test_sd_card_write(&huart2);
